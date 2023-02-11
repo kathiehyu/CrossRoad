@@ -1,7 +1,9 @@
 package com.example.crosstheroad;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     private Button start;
+
 
 
     @Override
@@ -21,6 +24,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openConfiguration();
+            }
+        });
+
+
+        Button exit = (Button) findViewById(R.id.Exit);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                System.exit(0);
+
             }
         });
 
