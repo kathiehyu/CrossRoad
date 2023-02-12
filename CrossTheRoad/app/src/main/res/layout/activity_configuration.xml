@@ -22,7 +22,8 @@
         android:hint="Enter your name"
         android:singleLine="true"
         android:imeOptions="actionDone"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_marginVertical="0dp"/>
 
     <Button
         android:id="@+id/Continue"
@@ -31,6 +32,44 @@
         android:layout_marginTop="558dp"
         android:text="continue"
         android:textSize="40sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/character"
+        android:text="Please Select Your Character:"
+        android:textSize="25dp"
+        android:layout_below="@+id/playername"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="30dp"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Select_Character"
+        android:orientation="horizontal"
+        android:layout_below="@+id/character"
+        android:layout_marginVertical="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+
+        <RadioButton
+            android:id="@+id/character1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/character_1"/>
+        <RadioButton
+            android:id="@+id/character2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/c2"/>
+        <RadioButton
+            android:id="@+id/character3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/character_3"/>
+
+    </RadioGroup>
 
 
 </RelativeLayout>
