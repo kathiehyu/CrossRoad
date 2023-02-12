@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 public class Configuration extends AppCompatActivity {
     private Button conti;
+    protected static String editName;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -36,7 +37,7 @@ public class Configuration extends AppCompatActivity {
 
     public boolean checkName() {
         EditText name = (EditText) findViewById(R.id.playername);
-        String editName = name.getText().toString();
+        editName = name.getText().toString();
         if (editName.isBlank()) {
             return false;
         }
