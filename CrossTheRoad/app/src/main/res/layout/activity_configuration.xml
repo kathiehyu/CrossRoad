@@ -12,12 +12,25 @@
         android:src="@drawable/backgound2"
         android:scaleType="centerCrop"/>
 
-    <Button
-        android:id="@+id/Continue"
+    <EditText
+        android:id="@+id/playername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="158dp"
+        android:textSize="40sp"
+        android:layout_centerHorizontal="true"
+        android:hint="Enter your name"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/Continue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="558dp"
         android:text="continue"
-        android:textSize="40sp"/>
+        android:textSize="40sp" />
 
 
 </RelativeLayout>

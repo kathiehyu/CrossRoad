@@ -9,6 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * This class will start the welcome screen (activity_main.xml) and display Start button
+ * When you click Start, it'll call the configuration screen.
+ */
 public class MainActivity extends AppCompatActivity {
     private Button start;
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class Configuration extends AppCompatActivity {
     private Button conti;
@@ -21,7 +22,9 @@ public class Configuration extends AppCompatActivity {
         conti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openConfiguration();
+                if (checkName()) {
+                    openConfiguration();
+                }
             }
         });
     }
@@ -31,5 +34,13 @@ public class Configuration extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public boolean checkName() {
+        EditText name = (EditText) findViewById(R.id.playername);
+        String editName = name.getText().toString();
+        if (editName.isBlank()) {
+            return false;
+        }
+        return true;
+    }
 
 }
