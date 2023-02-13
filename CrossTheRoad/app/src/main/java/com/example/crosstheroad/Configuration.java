@@ -60,7 +60,7 @@ public class Configuration extends AppCompatActivity {
             public void onClick(View view) {
                 EditText name = (EditText) findViewById(R.id.playername);
                 editName = name.getText().toString();
-                if (editName.length() == 0) {
+                if (editName.isBlank()) {
                     Toast.makeText(Configuration.this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
                 }
                 if (difficultyButton == null) {
@@ -69,7 +69,7 @@ public class Configuration extends AppCompatActivity {
                 if (charButton == null) {
                     Toast.makeText(Configuration.this, "Please choose a character", Toast.LENGTH_SHORT).show();
                 }
-                if (editName.length() != 0 && !(difficultyButton == null) && !(charButton == null)) {
+                if (!editName.isBlank() && !(difficultyButton == null) && !(charButton == null)) {
                     openConfiguration();
                 }
             }

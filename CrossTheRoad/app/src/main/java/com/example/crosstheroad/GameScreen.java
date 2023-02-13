@@ -14,6 +14,7 @@ import android.widget.TextView;
  * player name and character sprite, chosen difficulty.
  */
 public class GameScreen extends AppCompatActivity {
+    protected static int points;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,10 @@ public class GameScreen extends AppCompatActivity {
         String diff = (String) Configuration.difficultyButton.getText();
         TextView displayDiff = findViewById(R.id.difficultyDisplay);
         displayDiff.setText(diff);
+
+        //display beginning points
+        TextView pointsDisplay = findViewById(R.id.pointsDisplay);
+        pointsDisplay.setText(Integer.toString(points));
 
         //display number of lives
         TextView numLives = findViewById(R.id.lives);
