@@ -15,6 +15,7 @@ public class Configuration extends AppCompatActivity {
     private Button conti;
     protected static String editName;
     protected static RadioButton difficultyButton;
+    protected static RadioButton charButton;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -28,6 +29,14 @@ public class Configuration extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int difficulty = difficultyC.getCheckedRadioButtonId();
                 difficultyButton = findViewById(difficultyC.getCheckedRadioButtonId());
+            }
+        });
+
+        RadioGroup charac = findViewById(R.id.Select_Character);
+        charac.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                charButton = findViewById(charac.getCheckedRadioButtonId());
             }
         });
 
@@ -50,7 +59,7 @@ public class Configuration extends AppCompatActivity {
     public boolean checkName() {
         EditText name = (EditText) findViewById(R.id.playername);
         editName = name.getText().toString();
-        if (editName.isBlank() || difficultyButton == null) {
+        if (editName.isBlank() || difficultyButton == null || charButton == null) {
             return false;
         }
         return true;
