@@ -86,7 +86,7 @@
             android:layout_height="100dp"
             android:button="@null"
             android:layout_margin="10dp"
-            android:foreground="@drawable/character_1" />
+            android:foreground="@drawable/character_1"/>
         <RadioButton
             android:id="@+id/character2"
             android:layout_width="100dp"
