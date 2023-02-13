@@ -26,8 +26,10 @@
                 android:textSize="35sp"
                 android:layout_margin="10dp">
             </TextView>
+
+<!--            filler -->
             <FrameLayout
-                android:layout_width="100dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"/>
 
             <TextView
@@ -36,18 +38,17 @@
                 android:id="@+id/lives"
                 android:text="lives"
                 android:textSize="35sp"
-                android:gravity="right"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="right"
                 android:layout_margin="10dp">
             </TextView>
-
             <ImageView
                 android:id="@+id/heart"
                 android:layout_width="60dp"
-                android:layout_marginTop="10dp"
-                android:layout_height="45dp"
-                android:src="@drawable/pixel_heart">
-            </ImageView>
-
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:src="@drawable/pixel_heart"></ImageView>
 
         </LinearLayout>
 
