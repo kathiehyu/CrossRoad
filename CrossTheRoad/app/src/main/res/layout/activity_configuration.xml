@@ -20,17 +20,18 @@
         android:imeOptions="actionDone"
         android:layout_marginBottom="10dp"
         android:gravity="center"/>
-    <TextView
+    
+  <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:gravity="center"
         android:layout_gravity="center"
-        android:text="Choose your Difficulty"
-        android:textSize="40sp" />
-
-    <RadioGroup
+        android:text="Choose Your Difficulty"
+        android:textSize="30dp" />
+  
+  <RadioGroup
         android:layout_width="wrap_content"
         android:id="@+id/difficultyChoice"
         android:layout_height="wrap_content"
@@ -100,7 +101,6 @@
             android:button="@null"
             android:layout_margin="10dp"
             android:foreground="@drawable/character_3"/>
-
     </RadioGroup>
 
     <Button
@@ -110,4 +110,6 @@
         android:text="continue"
         android:layout_margin="10dp"
         android:textSize="40sp" />
+
 </LinearLayout>
+
