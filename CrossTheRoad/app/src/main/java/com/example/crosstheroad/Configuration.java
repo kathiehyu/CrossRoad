@@ -64,8 +64,8 @@ public class Configuration extends AppCompatActivity {
         });
     }
 
-    public void openConfiguration (){
-        Intent intent = new Intent (this, GameScreen.class);
+    public void openConfiguration() {
+        Intent intent = new Intent(this, GameScreen.class);
         startActivity(intent);
     }
 

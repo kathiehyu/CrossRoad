@@ -13,24 +13,24 @@ public class GameView extends SurfaceView implements Runnable {
 
     @Override
     public void run() {
-        while (isPlaying){
-
+        while (isPlaying) {
+            isPlaying = true;
         }
 
     }
 
 
-    public void resume(){
+    public void resume() {
         thread = new Thread(this);
         thread.start();
 
     }
 
-    public void pause(){
+    public void pause() {
         try {
             isPlaying = false;
             thread.join();
-        } catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
