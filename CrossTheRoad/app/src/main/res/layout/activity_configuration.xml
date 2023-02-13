@@ -28,7 +28,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:text="Choose your Difficulty"
-        android:textSize="40sp" />
+        android:textSize="30dp" />
   
   <RadioGroup
         android:layout_width="wrap_content"
