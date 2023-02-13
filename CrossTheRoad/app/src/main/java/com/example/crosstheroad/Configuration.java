@@ -58,13 +58,9 @@ public class Configuration extends AppCompatActivity {
         conti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (checkName()) {
-//                    openConfiguration();
-//                }
                 EditText name = (EditText) findViewById(R.id.playername);
                 editName = name.getText().toString();
-                if (editName.isBlank()) {
-                    System.out.println("here");
+                if (editName.length() == 0) {
                     Toast.makeText(Configuration.this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
                 }
                 if (difficultyButton == null) {
@@ -73,6 +69,9 @@ public class Configuration extends AppCompatActivity {
                 if (charButton == null) {
                     Toast.makeText(Configuration.this, "Please choose a character", Toast.LENGTH_SHORT).show();
                 }
+                if (editName.length() != 0 && !(difficultyButton == null) && !(charButton == null)) {
+                    openConfiguration();
+                }
             }
         });
     }
@@ -80,15 +79,6 @@ public class Configuration extends AppCompatActivity {
     public void openConfiguration() {
         Intent intent = new Intent(this, GameScreen.class);
         startActivity(intent);
-    }
-
-    public boolean checkName() {
-        EditText name = (EditText) findViewById(R.id.playername);
-        editName = name.getText().toString();
-        if (editName.isBlank() || difficultyButton == null || charButton == null) {
-            return false;
-        }
-        return true;
     }
 
 }
