@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class Configuration extends AppCompatActivity {
     private Button conti;
@@ -57,8 +58,20 @@ public class Configuration extends AppCompatActivity {
         conti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkName()) {
-                    openConfiguration();
+//                if (checkName()) {
+//                    openConfiguration();
+//                }
+                EditText name = (EditText) findViewById(R.id.playername);
+                editName = name.getText().toString();
+                if (editName.isBlank()) {
+                    System.out.println("here");
+                    Toast.makeText(Configuration.this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
+                }
+                if (difficultyButton == null) {
+                    Toast.makeText(Configuration.this, "Please choose a difficulty", Toast.LENGTH_SHORT).show();
+                }
+                if (charButton == null) {
+                    Toast.makeText(Configuration.this, "Please choose a character", Toast.LENGTH_SHORT).show();
                 }
             }
         });
