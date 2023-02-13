@@ -1,36 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/backgound2"
     tools:context=".MainActivity">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/backgound2"
-        android:scaleType="centerCrop"/>
 
     <EditText
         android:id="@+id/playername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="158dp"
         android:textSize="40sp"
         android:layout_centerHorizontal="true"
         android:hint="Enter your name"
         android:singleLine="true"
         android:imeOptions="actionDone"
         android:gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="Choose your Difficulty"
+        android:textSize="40sp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:id="@+id/difficultyChoice"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:id="@+id/eas"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="easy"></RadioButton>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:id="@+id/med"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="medium"></RadioButton>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:id="@+id/hard"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="hard"></RadioButton>
+    </RadioGroup>
 
     <Button
         android:id="@+id/Continue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="558dp"
         android:text="continue"
         android:textSize="40sp" />
-
-
-</RelativeLayout>
+</LinearLayout>
