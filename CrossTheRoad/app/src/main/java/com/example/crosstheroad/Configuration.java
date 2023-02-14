@@ -61,13 +61,16 @@ public class Configuration extends AppCompatActivity {
                 EditText name = (EditText) findViewById(R.id.playername);
                 editName = name.getText().toString();
                 if (editName.isBlank()) {
-                    Toast.makeText(Configuration.this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Configuration.this,
+                            "Name cannot be empty", Toast.LENGTH_SHORT).show();
                 }
                 if (difficultyButton == null) {
-                    Toast.makeText(Configuration.this, "Please choose a difficulty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Configuration.this,
+                            "Please choose a difficulty", Toast.LENGTH_SHORT).show();
                 }
                 if (charButton == null) {
-                    Toast.makeText(Configuration.this, "Please choose a character", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Configuration.this,
+                            "Please choose a character", Toast.LENGTH_SHORT).show();
                 }
                 if (!editName.isBlank() && !(difficultyButton == null) && !(charButton == null)) {
                     openConfiguration();
