@@ -39,9 +39,19 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+        Button testing = findViewById(R.id.testing);
+        testing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGameActivity();
+            }
+        });
     }
 
+    private void openGameActivity() {
+        Intent intent =new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
     public void openConfiguration() {
         Intent intent = new Intent(this, Configuration.class);
         startActivity(intent);

@@ -2,8 +2,10 @@ package com.example.crosstheroad;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,5 +61,6 @@ public class GameScreen extends AppCompatActivity {
             charact.setImageDrawable(Configuration.charButton
                     .getResources().getDrawable(R.drawable.character_3));
         }
+
     }
 }
