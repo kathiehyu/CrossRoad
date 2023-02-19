@@ -36,6 +36,12 @@
         android:layout_below="@id/Start"
         android:textSize="48sp"
         android:id="@+id/Exit"/>
+<!--    for our use: to see the bitmap without-->
+<!--    having to go through all the pages-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/testing"/>
 
 
 </RelativeLayout>
