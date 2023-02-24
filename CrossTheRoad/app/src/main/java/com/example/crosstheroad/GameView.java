@@ -1,40 +1,34 @@
 package com.example.crosstheroad;
 
-import android.content.Context;
-import android.view.SurfaceView;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class GameView extends SurfaceView implements Runnable {
-    private Thread thread;
-    private boolean isPlaying;
+import android.graphics.Point;
+import android.os.Bundle;
 
-    public GameView(Context context) {
-        super(context);
+public class GameView extends AppCompatActivity {
+    private Surface surface;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game_view);
+        Point point = new Point();
+        getWindowManager().getDefaultDisplay().getSize(point);
+        surface = new Surface(this, point.x, point.y);
+        setContentView(surface);
+
+
     }
 
     @Override
-    public void run() {
-        while (isPlaying) {
-            isPlaying = true;
-        }
-
+    protected void onPause() {
+        super.onPause();
+        surface.pause();
     }
 
-
-    public void resume() {
-        thread = new Thread(this);
-        thread.start();
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        surface.resume();
     }
-
-    public void pause() {
-        try {
-            isPlaying = false;
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
 }
