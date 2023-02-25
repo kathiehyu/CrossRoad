@@ -19,7 +19,7 @@ public class GameView extends SurfaceView implements Runnable {
 
     public GameView(Context context, int screenX, int screenY) {
         super(context);
-        background1 = new Background(getResources());
+        background1 = new Background(getResources(), super.getContext());
         this.screenX = screenX;
         this.screenY = screenY;
         paint = new Paint();
