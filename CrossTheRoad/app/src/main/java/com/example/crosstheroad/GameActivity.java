@@ -1,14 +1,22 @@
 package com.example.crosstheroad;
 
+import static com.example.crosstheroad.Background.screenX;
+import static com.example.crosstheroad.Background.screenY;
+import static com.example.crosstheroad.Background.tileLength;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -18,90 +26,96 @@ import java.io.InputStream;
  * This class will process the game's activity.
  */
 public class GameActivity extends AppCompatActivity {
-    protected static Bitmap bmap;
+    private GameView gameView;
+    private Character character = GameView.character;
 
-    // number of tiles across screen (determines size of tiles)
-    protected static int widthInTiles = 9;
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("created instance state");
+//        setContentView(R.layout.activity_game_activity);
+        Point point = new Point();
+        getWindowManager().getDefaultDisplay().getSize(point);
+
+        System.out.println("CREAETING BACKGROUND");
+        Background bg = new Background(getResources(), this);
+        Character character = new Character(MainActivity.screenX, MainActivity.screenY, getResources());
+
+        gameView = new GameView(this, point.x, point.y);
+
+
+//        setContentView(gameView);
         setContentView(R.layout.activity_game_activity);
+        BitmapDrawable bmd = new BitmapDrawable(Background.background);
+        findViewById(R.id.grid).setBackground(bmd);
 
-        DisplayMetrics display = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(display);
-        int tileLength = display.widthPixels / widthInTiles;
-//        System.out.println(display.heightPixels); //1977
-//        System.out.println(display.widthPixels); //1080
+        BitmapDrawable bmd2 = new BitmapDrawable(Character.character);
+        ImageView charDisplay = findViewById(R.id.characterDisplay);
+        charDisplay.setImageDrawable(bmd2);
+        charDisplay.setX(character.x);
+        charDisplay.setY(character.y);
 
+        findViewById(R.id.upButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveUp(character, charDisplay);
+                charDisplay.setX(character.x);
+                charDisplay.setY(character.y);
+            }
+        });
+        findViewById(R.id.downButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveDown(character, charDisplay);
+                charDisplay.setX(character.x);
+                charDisplay.setY(character.y);
+            }
+        });
+        findViewById(R.id.leftButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveLeft(character, charDisplay);
+                charDisplay.setX(character.x);
+                charDisplay.setY(character.y);
+            }
+        });
+        findViewById(R.id.rightButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveRight(character, charDisplay);
+                charDisplay.setX(character.x);
+                charDisplay.setY(character.y);
+            }
+        });
+    }
 
-        // MAP USING ARRAY OF IMAGEVIEWS: takes too long to load
-//        LinearLayout grid = findViewById(R.id.map);
-//        int id = 1000;
-//        // creating each row
-//        for (int i = 0; i < display.heightPixels / tileLength; i++) {
-//            LinearLayout row = new LinearLayout(this);
-//            row.setOrientation(LinearLayout.HORIZONTAL);
-//            row.setId(id++);
-//
-//            // creating each block/column on the row
-//            // replace R.drawable.heart with the path of the graphic for the tile
-//            // maybe use conditional so for example if i == 2 (third row) and you want it
-//            // to be a river, change this loop to have the river graphic? not sure if that
-//            // is the most efficient. maybe theres a better way
-//            for (int j = 0; i < display.widthPixels / tileLength; j++) {
-//                ImageView tile = new ImageView(this);
-//                tile.setBackground(this.getResources().getDrawable(R.drawable.heart));
-//                row.addView(tile);
-//            }
-//        }
+    private void moveUp(Character character, ImageView charDisplay) {
+        character.y -= tileLength;
+    }
+    private void moveDown(Character character, ImageView charDisplay) {
+        character.y += tileLength;
+    }
+    private void moveLeft(Character character, ImageView charDisplay) {
+        character.x -= tileLength;
+    }
+    private void moveRight(Character character, ImageView charDisplay) {
+        character.x += tileLength;
+    }
 
-        // MAP USING BITMAP
-        // what is the config? // stores each pixel with four bytes
-        ImageView grid = findViewById(R.id.grid);
-        Bitmap.Config config = Bitmap.Config.ARGB_8888;
-//        bmap = BitmapFactory.decodeResource(getResources(), R.mipmap.test);
-        int[] colors = new int[tileLength * tileLength];
-        for (int i = 0; i < colors.length; i++) {
-            colors[i] = Color.CYAN;
-        }
-        bmap = Bitmap.createBitmap(display.widthPixels, display.heightPixels, config);
-        int row = 0;
-        int col = 0;
+    @Override
+    protected void onPause() {
+        super.onPause();
+        System.out.println("PAUSING");
+        gameView.pause();
+        System.out.println("paused");
+    }
 
-        // to display correct graphics: maybe create a condition for which row you're on:
-        // to access a certain row:
-        // first pixel of the row = tileLength * number of the row
-        // then for that row, set all the tile graphics to the correct one
-        // there might be a more efficient way, thats just an idea
-
-        // display the blocks on the bitmap // for my/our reference
-        // for each row
-        for (int i = 0; i < display.widthPixels; i += tileLength) {
-
-            // for each column
-            for (int j = 0; j < display.heightPixels; j += tileLength) {
-                if ((int) (row + col) % 2 == 0 && (j + tileLength >= display.heightPixels)) {
-                    bmap.setPixels(colors, 0, tileLength, i, j, tileLength, display.heightPixels - j);
-                } else if ((int) (row + col) % 2 == 0 && (i + tileLength >= display.widthPixels)){
-                    bmap.setPixels(colors, 0, display.widthPixels - i, i, j, display.widthPixels - i, tileLength);
-                } else if ((int) (row + col) % 2 == 0) {
-                    System.out.println("i + j: " + i + j);
-                    bmap.setPixels(colors, 0, tileLength, i, j, tileLength, tileLength);
-                }
-                row++;
-                }
-            row = 0;
-            col++;
-        }
-
-        // show which tile should be the starting tile
-        int[] startColor = new int[tileLength * tileLength];
-        for (int i = 0; i < startColor.length; i ++) {
-            startColor[i] = Color.RED;
-        }
-        bmap.setPixels(startColor, 0, tileLength, tileLength * ((display.widthPixels / tileLength) / 2),
-                tileLength * (display.heightPixels / tileLength - 1), tileLength, tileLength);
-        grid.setImageBitmap(bmap);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("RESUMING");
+        gameView.resume();
+        System.out.println("resumed");
     }
 }
