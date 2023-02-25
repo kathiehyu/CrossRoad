@@ -62,5 +62,19 @@ public class GameScreen extends AppCompatActivity {
                     .getResources().getDrawable(R.drawable.character_3));
         }
 
+
+        //start game button
+        Button start = (Button) findViewById(R.id.start_game);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openConfiguration();
+            }
+        });
+
+    }
+    public void openConfiguration() {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
     }
 }
