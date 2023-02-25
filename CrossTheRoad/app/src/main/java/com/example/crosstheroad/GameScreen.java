@@ -78,7 +78,7 @@ public class GameScreen extends AppCompatActivity {
 
     }
     public void openConfiguration() {
-        Intent intent = new Intent(this, GameView.class);
+        Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
     }
 
