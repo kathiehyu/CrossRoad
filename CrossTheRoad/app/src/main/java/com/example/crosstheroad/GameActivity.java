@@ -1,5 +1,9 @@
 package com.example.crosstheroad;
 
+import static com.example.crosstheroad.Background.screenX;
+import static com.example.crosstheroad.Background.screenY;
+import static com.example.crosstheroad.Background.tileLength;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
@@ -29,6 +33,9 @@ public class GameActivity extends AppCompatActivity {
 //        setContentView(R.layout.activity_game_activity);
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
+
+        System.out.println("CREAETING BACKGROUND");
+        Background bg = new Background(getResources(), this);
 
         gameView = new GameView(this, point.x, point.y);
 

@@ -3,6 +3,10 @@ package com.example.crosstheroad;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -15,12 +19,13 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     private Button start;
     static int screenX, screenY;
-
+    static Bitmap riverBmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        riverBmap = BitmapFactory.decodeResource(getResources(), R.drawable.water_tile);
 
         start = (Button) findViewById(R.id.Start);
         start.setOnClickListener(new View.OnClickListener() {
@@ -40,13 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        Button testing = findViewById(R.id.testing);
-        testing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openGame();
-            }
-        });
 
         DisplayMetrics display = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(display);
@@ -54,10 +52,6 @@ public class MainActivity extends AppCompatActivity {
         screenY = display.heightPixels;
     }
 
-    public void openGame() {
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
-    }
     public void openConfiguration() {
         Intent intent = new Intent(this, Configuration.class);
         startActivity(intent);

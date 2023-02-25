@@ -1,20 +1,25 @@
 package com.example.crosstheroad;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
+import com.example.crosstheroad.R;
 
 public class Background {
     int x = 0, y = 0;
     static int screenX, screenY;
-    Bitmap background;
+    static Bitmap background;
     static int widthInTiles = 7;
     static int tileLength;
+    private Context context;
 
-    Background (Resources res) {
+    Background (Resources res, Context context) {
         background = createBitMap();
+        this.context = context;
 
 //        background = BitmapFactory.decodeResource(res, R.drawable.game_background);
 //        background = Bitmap.createScaledBitmap(background, screenX, screenY, false);
@@ -55,6 +60,7 @@ public class Background {
             goalColors[i] = Color.GREEN;
         }
 
+        int[][] tileColors = getColors(context);
 
         Bitmap bmap;
         bmap = Bitmap.createBitmap(screenX, screenY, config);
@@ -97,9 +103,11 @@ public class Background {
                 } else if (row > 0 && row < 6) {
                     // if rightmost tile
                     if (i + tileLength >= screenX) {
-                        bmap.setPixels(riverColors, 0, screenX - i, i, j, screenX - i, tileLength);
+                        System.out.println("length of color array: " + tileColors[2].length);
+                        bmap.setPixels(tileColors[2], 0, screenX - i, i, j, screenX - i, tileLength);
                     } else {
-                        bmap.setPixels(riverColors, 0, tileLength, i, j, tileLength, tileLength);
+                        System.out.println("length of color array: " + tileColors[2]);
+                        bmap.setPixels(tileColors[2], 0, tileLength, i, j, tileLength, tileLength);
                     }
                     // road tiles
                 } else {
@@ -126,5 +134,19 @@ public class Background {
 //        grid.setImageBitmap(bmap);
 
         return bmap;
+    }
+
+    private int[][] getColors(Context context) {
+        // 0 = safe, 1 = road, 2 = river, 3 = goal
+        Bitmap river = MainActivity.riverBmap;
+        int[][] tileColors = new int[4][];
+//        int[] riverColors = new int[Background.tileLength * Background.tileLength];
+//        river.getPixels(riverColors, 0, Background.tileLength, 0, 0,
+//                Background.tileLength, Background.tileLength);
+        int[] riverColors = new int[tileLength * tileLength];
+        river.getPixels(riverColors, 0, tileLength, 0, 0,
+                tileLength, tileLength);
+        tileColors[2] = riverColors;
+        return tileColors;
     }
 }

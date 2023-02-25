@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +21,6 @@ import android.widget.TextView;
 public class GameScreen extends AppCompatActivity {
     protected static int points;
     private Button start;
-
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -75,8 +75,8 @@ public class GameScreen extends AppCompatActivity {
                 openConfiguration();
             }
         });
-
     }
+
     public void openConfiguration() {
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
