@@ -26,15 +26,6 @@ public class GameView extends SurfaceView implements Runnable {
         character = new Character(screenX, screenY, getResources());
     }
 
-    public void pause() {
-        try {
-            isPlaying = false;
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     //control touching motion
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -103,6 +94,15 @@ public class GameView extends SurfaceView implements Runnable {
         thread = new Thread(this);
         thread.start();
     }
+  
+  public void pause() {
+        try {
+            isPlaying = false;
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -112,8 +112,6 @@ public class GameView extends SurfaceView implements Runnable {
 //        getWindowManager().getDefaultDisplay().getSize(point);
 //        surface = new Surface(this, point.x, point.y);
 //        setContentView(surface);
-//
-//
 //    }
 
 }
