@@ -16,6 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,6 +29,7 @@ import java.io.InputStream;
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
     private Character character = GameView.character;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
