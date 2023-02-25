@@ -1,12 +1,16 @@
 package com.example.crosstheroad;
 
 import android.content.Context;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 
 public class GameView extends SurfaceView implements Runnable {
 //    private Surface surface;
@@ -15,7 +19,27 @@ public class GameView extends SurfaceView implements Runnable {
     int screenX, screenY;
     private Paint paint;
     private Background background1;
-    private Character character;
+    static Character character;
+
+    public GameView(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        LayoutInflater lf = LayoutInflater.from(context);
+        ViewGroup vg = new ViewGroup(context) {
+            @Override
+            protected void onLayout(boolean b, int i, int i1, int i2, int i3) {
+                //
+            }
+        };
+        vg.addView(this);
+        View v = lf.inflate(R.layout.activity_game_activity, vg);
+        // butterknife bind?
+        System.out.println("Creating GameView");
+        background1 = new Background(getResources(), super.getContext());
+        this.screenX = screenX;
+        this.screenY = screenY;
+        paint = new Paint();
+        character = new Character(screenX, screenY, getResources());
+    }
 
     public GameView(Context context, int screenX, int screenY) {
         super(context);

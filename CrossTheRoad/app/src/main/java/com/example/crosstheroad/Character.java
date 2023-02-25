@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 
 public class Character {
     int x, y, width, height;
-    private Bitmap character;
+    static Bitmap character;
 
     public boolean goingUp = false;
     public boolean goingDown = false;
@@ -31,7 +31,7 @@ public class Character {
         width = tileLength;
         height = tileLength;
 
-        character = Bitmap.createScaledBitmap(character, width, height, false);
+        character = Bitmap.createScaledBitmap(character, tileLength, tileLength, false);
 
         // starting position
         x = tileLength * ((screenX / tileLength) / 2);

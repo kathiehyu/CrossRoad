@@ -7,6 +7,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.Button;
+
 import com.example.crosstheroad.R;
 
 public class Background {
@@ -103,10 +106,8 @@ public class Background {
                 } else if (row > 0 && row < 6) {
                     // if rightmost tile
                     if (i + tileLength >= screenX) {
-                        System.out.println("length of color array: " + tileColors[2].length);
                         bmap.setPixels(tileColors[2], 0, screenX - i, i, j, screenX - i, tileLength);
                     } else {
-                        System.out.println("length of color array: " + tileColors[2]);
                         bmap.setPixels(tileColors[2], 0, tileLength, i, j, tileLength, tileLength);
                     }
                     // road tiles

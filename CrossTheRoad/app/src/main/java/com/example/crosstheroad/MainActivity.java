@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
@@ -25,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        riverBmap = BitmapFactory.decodeResource(getResources(), R.drawable.water_tile);
+        riverBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.water_tile);
+        assert (riverBmap != null);
 
         start = (Button) findViewById(R.id.Start);
         start.setOnClickListener(new View.OnClickListener() {
