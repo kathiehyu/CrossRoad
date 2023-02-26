@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     static Bitmap riverBmap;
     static Bitmap grassBmap;
     static Bitmap sandBmap;
+    static Bitmap roadBmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         riverBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.water_tile);
         grassBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.grass_tile);
         sandBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.sand_tile);
+        roadBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.road1);
         assert (riverBmap != null);
 
         start = (Button) findViewById(R.id.Start);
