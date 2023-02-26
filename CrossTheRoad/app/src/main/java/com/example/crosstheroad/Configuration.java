@@ -25,15 +25,16 @@ public class Configuration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
+        //difficulty level
         RadioGroup difficultyC = findViewById(R.id.difficultyChoice);
         difficultyC.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int difficulty = difficultyC.getCheckedRadioButtonId();
                 difficultyButton = findViewById(difficultyC.getCheckedRadioButtonId());
             }
         });
 
+        //character
         RadioGroup charac = findViewById(R.id.Select_Character);
         charac.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -54,29 +55,51 @@ public class Configuration extends AppCompatActivity {
             }
         });
 
+        //display error message
         conti = (Button) findViewById(R.id.Continue);
         conti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText name = (EditText) findViewById(R.id.playername);
                 editName = name.getText().toString();
-                if (editName.isBlank()) {
+                if (verifyName(editName) == false) {
                     Toast.makeText(Configuration.this,
-                            "Name cannot be empty", Toast.LENGTH_SHORT).show();
+                            "Name cannot be empty or white space", Toast.LENGTH_SHORT).show();
                 }
-                if (difficultyButton == null) {
+                if (difficultyLevel(difficultyButton) == false) {
                     Toast.makeText(Configuration.this,
                             "Please choose a difficulty", Toast.LENGTH_SHORT).show();
                 }
-                if (charButton == null) {
+                if (characterChoice(charButton) == false) {
                     Toast.makeText(Configuration.this,
                             "Please choose a character", Toast.LENGTH_SHORT).show();
                 }
-                if (!editName.isBlank() && !(difficultyButton == null) && !(charButton == null)) {
+                if (verifyName(editName) == true && difficultyLevel(difficultyButton) == true && characterChoice(charButton) == true) {
                     openConfiguration();
                 }
             }
         });
+    }
+
+    public static boolean verifyName(String name) {
+        if (name.isBlank()) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean difficultyLevel(RadioButton button) {
+        if (button == null) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean characterChoice(RadioButton button) {
+        if (button == null) {
+            return false;
+        }
+        return true;
     }
 
     public void openConfiguration() {
