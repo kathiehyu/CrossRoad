@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Configuration extends AppCompatActivity {
@@ -19,11 +20,18 @@ public class Configuration extends AppCompatActivity {
     protected static RadioButton difficultyButton;
     protected static RadioButton charButton;
 
+    private TextView name;
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
+        //get player name from UI
+        name = (TextView) findViewById(R.id.playername);
+        editName = name.getText().toString();
+
 
         //difficulty level
         RadioGroup difficultyC = findViewById(R.id.difficultyChoice);
@@ -81,9 +89,18 @@ public class Configuration extends AppCompatActivity {
         });
     }
 
-    public static boolean verifyName(String name) {
-        if (name.isBlank()) {
-            return false;
+    public static boolean verifyName(String test) {
+        if (test == editName){
+            if (editName.isBlank()){
+                return false;
+            }
+            return true;
+        }
+        else{
+            editName = test;
+            if (editName.isBlank()) {
+                return false;
+            }
         }
         return true;
     }
