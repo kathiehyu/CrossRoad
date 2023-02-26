@@ -22,12 +22,16 @@ public class MainActivity extends AppCompatActivity {
     private Button start;
     static int screenX, screenY;
     static Bitmap riverBmap;
+    static Bitmap grassBmap;
+    static Bitmap sandBmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         riverBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.water_tile);
+        grassBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.grass_tile);
+        sandBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.sand_tile);
         assert (riverBmap != null);
 
         start = (Button) findViewById(R.id.Start);

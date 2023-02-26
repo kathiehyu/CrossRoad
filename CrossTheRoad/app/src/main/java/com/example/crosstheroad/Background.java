@@ -43,25 +43,25 @@ public class Background {
 //        bmap = BitmapFactory.decodeResource(getResources(), R.mipmap.test);
 
         // creating cyan checkerboard for tile visualization
-        int[] riverColors = new int[tileLength * tileLength];
-        for (int i = 0; i < riverColors.length; i++) {
-            riverColors[i] = Color.BLUE;
-        }
-
-        int[] safeColors = new int[tileLength * tileLength];
-        for (int i = 0; i < safeColors.length; i++) {
-            safeColors[i] = Color.YELLOW;
-        }
-
-        int[] roadColors = new int[tileLength * tileLength];
-        for (int i = 0; i < roadColors.length; i++) {
-            roadColors[i] = Color.BLACK;
-        }
-
-        int[] goalColors = new int[tileLength * tileLength];
-        for (int i = 0; i < goalColors.length; i++) {
-            goalColors[i] = Color.GREEN;
-        }
+//        int[] riverColors = new int[tileLength * tileLength];
+//        for (int i = 0; i < riverColors.length; i++) {
+//            riverColors[i] = Color.BLUE;
+//        }
+//
+//        int[] safeColors = new int[tileLength * tileLength];
+//        for (int i = 0; i < safeColors.length; i++) {
+//            safeColors[i] = Color.YELLOW;
+//        }
+//
+//        int[] roadColors = new int[tileLength * tileLength];
+//        for (int i = 0; i < roadColors.length; i++) {
+//            roadColors[i] = Color.BLACK;
+//        }
+//
+//        int[] goalColors = new int[tileLength * tileLength];
+//        for (int i = 0; i < goalColors.length; i++) {
+//            goalColors[i] = Color.GREEN;
+//        }
 
         int[][] tileColors = getColors(context);
 
@@ -87,20 +87,20 @@ public class Background {
                 if (row == 0) {
                     // if rightmost tile
                     if (i + tileLength >= screenX) {
-                        bmap.setPixels(goalColors, 0, screenX - i, i, j, screenX - i, tileLength);
+                        bmap.setPixels(tileColors[3], 0, screenX - i, i, j, screenX - i, tileLength);
                     } else {
-                        bmap.setPixels(goalColors, 0, tileLength, i, j, tileLength, tileLength);
+                        bmap.setPixels(tileColors[3], 0, tileLength, i, j, tileLength, tileLength);
                     }
                     // safe tiles
                 } else if (row == 6 || row == 11 || row == 12) {
                     if (j + tileLength >= screenY && i + tileLength >= screenX) {
-                        bmap.setPixels(safeColors, 0, screenX - i, i, j, screenX - i, screenY - j);
+                        bmap.setPixels(tileColors[0], 0, screenX - i, i, j, screenX - i, screenY - j);
                     } else if (j + tileLength >= screenY) {
-                        bmap.setPixels(safeColors, 0, tileLength, i, j, tileLength, screenY - j);
+                        bmap.setPixels(tileColors[0], 0, tileLength, i, j, tileLength, screenY - j);
                     } else if (i + tileLength >= screenX){
-                        bmap.setPixels(safeColors, 0, screenX - i, i, j, screenX - i, tileLength);
+                        bmap.setPixels(tileColors[0], 0, screenX - i, i, j, screenX - i, tileLength);
                     } else {
-                        bmap.setPixels(safeColors, 0, tileLength, i, j, tileLength, tileLength);
+                        bmap.setPixels(tileColors[0], 0, tileLength, i, j, tileLength, tileLength);
                     }
                     // river tiles
                 } else if (row > 0 && row < 6) {
@@ -114,9 +114,9 @@ public class Background {
                 } else {
                     // if rightmost tile
                     if (i + tileLength >= screenX) {
-                        bmap.setPixels(roadColors, 0, screenX - i, i, j, screenX - i, tileLength);
+                        bmap.setPixels(tileColors[1], 0, screenX - i, i, j, screenX - i, tileLength);
                     } else {
-                        bmap.setPixels(roadColors, 0, tileLength, i, j, tileLength, tileLength);
+                        bmap.setPixels(tileColors[1], 0, tileLength, i, j, tileLength, tileLength);
                     }
                 }
                 row++;
@@ -140,14 +140,44 @@ public class Background {
     private int[][] getColors(Context context) {
         // 0 = safe, 1 = road, 2 = river, 3 = goal
         Bitmap river = MainActivity.riverBmap;
+        Bitmap safe = MainActivity.sandBmap;
+        Bitmap grass = MainActivity.grassBmap;
         int[][] tileColors = new int[4][];
-//        int[] riverColors = new int[Background.tileLength * Background.tileLength];
-//        river.getPixels(riverColors, 0, Background.tileLength, 0, 0,
-//                Background.tileLength, Background.tileLength);
+        int[] safeColors = new int[tileLength * tileLength];
+        safe.getPixels(safeColors, 0, tileLength, 0, 0,
+                tileLength, tileLength);
+        tileColors[0] = safeColors;
+
+        int row = 1;
+
+        int[] roadColors = new int[tileLength * tileLength];
+        System.out.println(tileLength);
+        System.out.println(tileLength / 5);
+        for (int i = 0; i < roadColors.length; i++) {
+            System.out.println();
+                // if first or last five rows       // and 3/5 of the tile, from the center
+//            && (i > ((tileLength / 5) * row) && (i < ((tileLength / 5) * 4 * row)))
+            if ( (row < 17 || row > (tileLength - 17)) ) {
+                roadColors[i] = Color.BLACK;
+            } else {
+                roadColors[i] = Color.WHITE;
+            }
+            row++;
+        }
+        tileColors[1] = roadColors;
+
         int[] riverColors = new int[tileLength * tileLength];
         river.getPixels(riverColors, 0, tileLength, 0, 0,
                 tileLength, tileLength);
         tileColors[2] = riverColors;
+
+        int[] goalColors = new int[tileLength * tileLength];
+        grass.getPixels(goalColors, 0, tileLength, 0, 0,
+                tileLength, tileLength);
+        tileColors[3] = goalColors;
+//        int[] riverColors = new int[Background.tileLength * Background.tileLength];
+//        river.getPixels(riverColors, 0, Background.tileLength, 0, 0,
+//                Background.tileLength, Background.tileLength);
         return tileColors;
     }
 }

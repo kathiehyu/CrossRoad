@@ -62,47 +62,56 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 moveUp(character, charDisplay);
-                charDisplay.setX(character.x);
-                charDisplay.setY(character.y);
             }
         });
         findViewById(R.id.downButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 moveDown(character, charDisplay);
-                charDisplay.setX(character.x);
-                charDisplay.setY(character.y);
             }
         });
         findViewById(R.id.leftButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 moveLeft(character, charDisplay);
-                charDisplay.setX(character.x);
-                charDisplay.setY(character.y);
             }
         });
         findViewById(R.id.rightButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 moveRight(character, charDisplay);
-                charDisplay.setX(character.x);
-                charDisplay.setY(character.y);
             }
         });
     }
 
     private void moveUp(Character character, ImageView charDisplay) {
-        character.y -= tileLength;
+        if (character.y - tileLength >= 0) {
+            character.y -= tileLength;
+            charDisplay.setX(character.x);
+            charDisplay.setY(character.y);
+        }
     }
     private void moveDown(Character character, ImageView charDisplay) {
-        character.y += tileLength;
+
+        if (character.y + tileLength + tileLength <= MainActivity.screenY){
+            character.y += tileLength;
+            charDisplay.setX(character.x);
+            charDisplay.setY(character.y);
+        }
     }
     private void moveLeft(Character character, ImageView charDisplay) {
-        character.x -= tileLength;
+        if (character.x - tileLength >= 0) {
+            character.x -= tileLength;
+            charDisplay.setX(character.x);
+            charDisplay.setY(character.y);
+        }
     }
     private void moveRight(Character character, ImageView charDisplay) {
-        character.x += tileLength;
+        if (character.x + tileLength + tileLength <= MainActivity.screenX){
+            character.x += tileLength;
+            charDisplay.setX(character.x);
+            charDisplay.setY(character.y);
+        }
     }
 
     @Override
