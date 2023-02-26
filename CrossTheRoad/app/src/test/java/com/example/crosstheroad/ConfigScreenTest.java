@@ -8,13 +8,16 @@ import android.widget.RadioButton;
  * This class check for edge cases in configuration class
  */
 public class ConfigScreenTest {
-    String name = "";
+
     @Test
-    public void blankName() {assertFalse(Configuration.verifyName(name));}
+    public void checkName(){
+        String test = "";
+        assertFalse(Configuration.verifyName(test));
+    }
 
     String name1 = " ";
     @Test
-    public void spaceName() {assertFalse(Configuration.verifyName(name));}
+    public void spaceName() {assertFalse(Configuration.verifyName(name1));}
 
     String name2 = "123";
     @Test
