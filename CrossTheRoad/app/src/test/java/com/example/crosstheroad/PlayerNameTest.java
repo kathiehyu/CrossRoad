@@ -7,7 +7,7 @@ import android.widget.RadioButton;
 /**
  * This class check for edge cases in configuration class
  */
-public class ConfigScreenTest {
+public class PlayerNameTest {
 
     @Test
     public void checkName(){
@@ -30,12 +30,4 @@ public class ConfigScreenTest {
     String name4 = "Tam";
     @Test
     public void testNameNormal() {assertTrue(Configuration.verifyName(name4));}
-
-    RadioButton button1 = null;
-    @Test
-    public void testDifficulty() {assertFalse(Configuration.difficultyLevel(button1));}
-
-    RadioButton button2 = null;
-    @Test
-    public void testCharacter() {assertFalse(Configuration.characterChoice(button2));}
 }
