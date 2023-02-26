@@ -96,7 +96,7 @@ public class Configuration extends AppCompatActivity {
             }
             return true;
         }
-        else{
+        else {
             editName = test;
             if (editName.isBlank()) {
                 return false;

@@ -4,12 +4,10 @@ import static org.junit.Assert.*;
 
 import android.widget.RadioButton;
 
-
 /**
  * This class check for edge cases in configuration class
  */
 public class ConfigScreenTest {
-
 
     @Test
     public void checkName(){
