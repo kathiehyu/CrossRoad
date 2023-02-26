@@ -142,6 +142,7 @@ public class Background {
         Bitmap river = MainActivity.riverBmap;
         Bitmap safe = MainActivity.sandBmap;
         Bitmap grass = MainActivity.grassBmap;
+        Bitmap road = MainActivity.roadBmap;
         int[][] tileColors = new int[4][];
         int[] safeColors = new int[tileLength * tileLength];
         safe.getPixels(safeColors, 0, tileLength, 0, 0,
@@ -151,19 +152,7 @@ public class Background {
         int row = 1;
 
         int[] roadColors = new int[tileLength * tileLength];
-        System.out.println(tileLength);
-        System.out.println(tileLength / 5);
-        for (int i = 0; i < roadColors.length; i++) {
-            System.out.println();
-                // if first or last five rows       // and 3/5 of the tile, from the center
-//            && (i > ((tileLength / 5) * row) && (i < ((tileLength / 5) * 4 * row)))
-            if ( (row < 17 || row > (tileLength - 17)) ) {
-                roadColors[i] = Color.BLACK;
-            } else {
-                roadColors[i] = Color.WHITE;
-            }
-            row++;
-        }
+        road.getPixels(roadColors, 0, tileLength, 0, 0, tileLength, tileLength);
         tileColors[1] = roadColors;
 
         int[] riverColors = new int[tileLength * tileLength];
