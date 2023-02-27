@@ -1,77 +1,32 @@
 package com.example.crosstheroad;
 
 import android.content.Context;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
-import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class GameView extends SurfaceView implements Runnable {
-//    private Surface surface;
+    //    private Surface surface;
     private Thread thread;
     private boolean isPlaying;
-    private static int x = 0, y = 0;
+
     private Paint paint;
     private Background background1;
-    static Character character;
-
-//    public GameView(Context context, AttributeSet attributeSet) {
-//        super(context, attributeSet);
-//        LayoutInflater lf = LayoutInflater.from(context);
-//        ViewGroup vg = new ViewGroup(context) {
-//            @Override
-//            protected void onLayout(boolean b, int i, int i1, int i2, int i3) {
-//                //
-//            }
-//        };
-//        vg.addView(this);
-//        View v = lf.inflate(R.layout.activity_game_activity, vg);
-//        // butterknife bind?
-//        System.out.println("Creating GameView");
-//        background1 = new Background(getResources(), super.getContext());
-//        this.screenX = screenX;
-//        this.screenY = screenY;
-//        paint = new Paint();
-//        character = new Character(screenX, screenY, getResources());
-//    }
+    private static Character character;
 
     public GameView(Context context) {
         super(context);
         background1 = new Background(getResources());
         paint = new Paint();
-        character = new Character(x, y, getResources());
+        character = new Character(Movement.getCharX(), Movement.getCharY(), getResources());
     }
 
     public static int getCharX() {
-        return x;
+        return Movement.getCharX();
     }
 
-    public static int getCharY () {
-        return y;
-    }
-
-    public static  void setCharX(int xIn) {
-        if (validateMovement(xIn, y)) {
-            x = xIn;
-        } // else : don't change x
-    }
-
-    public static void setCharY(int yIn) {
-        if (validateMovement(x, yIn)) {
-            y = yIn;
-        }
-    }
-
-    private static boolean validateMovement(int x, int y) {
-        return !(x + Background.tileLength >= MainActivity.screenX ||
-                y + Background.tileLength >= MainActivity.screenY ||
-                x < 0 || y < 0);
+    public static int getCharY() {
+        return Movement.getCharY();
     }
 
     @Override
@@ -89,20 +44,19 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     private void update() {
-
+        //
     }
 
     private void draw() {
         if (getHolder().getSurface().isValid()) {
             Canvas canvas = getHolder().lockCanvas();
-            canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
+            canvas.drawBitmap(background1.getBackground(),
+                    background1.getX(), background1.getY(), paint);
 
 
             System.out.println("trying to draw character");
             assert Character.getChar() != null;
-            System.out.println("x: " + Integer.toString(x));
-            System.out.println("y: " + Integer.toString(y));
-            canvas.drawBitmap(Character.getChar(), x, y, paint);
+            canvas.drawBitmap(Character.getChar(), Movement.getCharX(), Movement.getCharY(), paint);
 
             getHolder().unlockCanvasAndPost(canvas);
         }
@@ -118,14 +72,12 @@ public class GameView extends SurfaceView implements Runnable {
 
 
     protected void resume() {
-//        super.onResume();
-//        surface.resume();
         isPlaying = true;
         thread = new Thread(this);
         thread.start();
     }
   
-  public void pause() {
+    public void pause() {
         try {
             isPlaying = false;
             thread.join();
@@ -134,14 +86,8 @@ public class GameView extends SurfaceView implements Runnable {
         }
     }
 
-//        @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_game_view);
-//        Point point = new Point();
-//        getWindowManager().getDefaultDisplay().getSize(point);
-//        surface = new Surface(this, point.x, point.y);
-//        setContentView(surface);
-//    }
+    public static Character getCharacter() {
+        return character;
+    }
 
 }
