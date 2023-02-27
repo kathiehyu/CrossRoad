@@ -13,14 +13,16 @@ public class InYBoundsTest {
     public void setUp() {
         screenWidth = 1080;
         screenHeight = 1920;
+        MainActivity.setScreenX(screenWidth);
+        MainActivity.setScreenY(screenHeight);
     }
 
     @Test
     public void testCharacterStaysInYBounds() {
-        GameView.setCharY(-100);
+        Movement.setCharY(-100);
         assert gameView.getCharY() >= 0;
 
-        GameView.setCharY(2000);
+        Movement.setCharY(2000);
         assert gameView.getCharY() < 1920;
     }
 }

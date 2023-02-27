@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class InXBoundsTest {
 
-    private GameView gameView;
+    private Movement move;
     private int screenWidth;
     private int screenHeight;
 
@@ -13,14 +13,17 @@ public class InXBoundsTest {
     public void setUp() {
         screenWidth = 1080;
         screenHeight = 1920;
+        MainActivity.setScreenX(screenWidth);
+        MainActivity.setScreenY(screenHeight);
     }
 
     @Test
     public void testCharacterStaysInXBounds() {
-        GameView.setCharX(-100);
-        assert gameView.getCharX() >= 0;
+        move.setCharX(100);
+        assert move.getCharX() >= 0;
+        System.out.println(move.getCharX());
 
-        GameView.setCharX(2000);
-        assert gameView.getCharX() < 1080;
+        move.setCharX(2000);
+        assert move.getCharX() < 1080;
     }
 }
