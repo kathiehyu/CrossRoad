@@ -32,10 +32,10 @@ public class GameScreen extends AppCompatActivity {
 
         // display name
         TextView displayName = findViewById(R.id.playerName);
-        displayName.setText(Configuration.editName);
+        displayName.setText(Configuration.inputName);
 
         // display difficulty
-        String diff = (String) Configuration.difficultyButton.getText();
+        String diff = (String) Configuration.selectedDifficulty.getText();
         TextView displayDiff = findViewById(R.id.difficultyDisplay);
         displayDiff.setText(diff);
 
@@ -47,11 +47,11 @@ public class GameScreen extends AppCompatActivity {
         TextView numLives = findViewById(R.id.lives);
         View inflatedView = getLayoutInflater().inflate(R.layout.activity_configuration, null);
 
-        if (checkDifferentLife(Configuration.difficultyButton.getId(),
+        if (checkDifferentLife(Configuration.selectedDifficulty.getId(),
                 inflatedView.findViewById(R.id.eas).getId())){
             numLives.setText("1");
         }
-        else if (checkDifferentLife(Configuration.difficultyButton.getId(),
+        else if (checkDifferentLife(Configuration.selectedDifficulty.getId(),
                 inflatedView.findViewById(R.id.med).getId())) {
             numLives.setText("2");
         }
