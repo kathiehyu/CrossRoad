@@ -10,10 +10,10 @@ import android.widget.RadioButton;
  * Class checks when a non-null button is clicked for choosing a difficulty
  */
 public class NonNullDifficultyTest {
-    RadioButton rb1 = new RadioButton(Configuration.getContext());
+    private Configuration configurationActivity;
     @Test
     public void nonNullButton() {
-        rb1.setChecked(true);
-        assertTrue(Configuration.difficultyLevel(rb1));
+        RadioButton button = new RadioButton(configurationActivity);
+        assertTrue(Configuration.difficultyLevel(button));
     }
 }
