@@ -18,11 +18,9 @@ public class Background {
     static Bitmap background;
     static int widthInTiles = 7;
     static int tileLength;
-    private Context context;
 
-    Background (Resources res, Context context) {
+    Background (Resources res) {
         background = createBitMap();
-        this.context = context;
 
 //        background = BitmapFactory.decodeResource(res, R.drawable.game_background);
 //        background = Bitmap.createScaledBitmap(background, screenX, screenY, false);
@@ -36,6 +34,7 @@ public class Background {
 
         // number of tiles across screen (determines size of tiles)
         tileLength = screenX / widthInTiles;
+        System.out.println("TILELENGTH: " + tileLength);
 
         // MAP USING BITMAP
 //        ImageView grid = findViewById(R.id.grid);
@@ -63,7 +62,7 @@ public class Background {
 //            goalColors[i] = Color.GREEN;
 //        }
 
-        int[][] tileColors = getColors(context);
+        int[][] tileColors = getColors();
 
         Bitmap bmap;
         bmap = Bitmap.createBitmap(screenX, screenY, config);
@@ -137,7 +136,7 @@ public class Background {
         return bmap;
     }
 
-    private int[][] getColors(Context context) {
+    private int[][] getColors() {
         // 0 = safe, 1 = road, 2 = river, 3 = goal
         Bitmap river = MainActivity.riverBmap;
         Bitmap safe = MainActivity.sandBmap;

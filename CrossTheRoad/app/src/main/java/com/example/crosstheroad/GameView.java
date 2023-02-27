@@ -37,12 +37,12 @@ public class GameView extends SurfaceView implements Runnable {
 
     public GameView(Context context) {
         super(context);
-        background1 = new Background(getResources(), super.getContext());
+        background1 = new Background(getResources());
         paint = new Paint();
         character = new Character(x, y, getResources());
     }
 
-    public int getCharX() {
+    public static int getCharX() {
         return x;
     }
 
@@ -50,15 +50,15 @@ public class GameView extends SurfaceView implements Runnable {
         return y;
     }
 
-    public void setCharX(int x) {
-        if (validateMovement(x, y)) {
-            this.x = x;
+    public static  void setCharX(int xIn) {
+        if (validateMovement(xIn, y)) {
+            x = xIn;
         } // else : don't change x
     }
 
-    public void setCharY(int y) {
-        if (validateMovement(x, y)) {
-            this.y = y;
+    public static void setCharY(int yIn) {
+        if (validateMovement(x, yIn)) {
+            y = yIn;
         }
     }
 
