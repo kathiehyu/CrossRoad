@@ -56,7 +56,7 @@ public class GameView extends SurfaceView implements Runnable {
         return y;
     }
 
-    public static void setCharX(int xIn) {
+    public static  void setCharX(int xIn) {
         if (validateMovement(xIn, y)) {
             x = xIn;
         } // else : don't change x
@@ -71,7 +71,7 @@ public class GameView extends SurfaceView implements Runnable {
     private static boolean validateMovement(int x, int y) {
         return !(x + Background.tileLength >= MainActivity.screenX ||
                 y + Background.tileLength >= MainActivity.screenY ||
-                x <= 0 || y <= 0);
+                x < 0 || y < 0);
     }
 
     @Override
