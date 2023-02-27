@@ -18,8 +18,8 @@ public class Character {
             character = BitmapFactory.decodeResource(res, R.drawable.character_3);
         }
 
-        character = Bitmap.createScaledBitmap(character, Background.tileLength,
-                Background.tileLength, false);
+        character = Bitmap.createScaledBitmap(character, Background.getTileLength(),
+                Background.getTileLength(), false);
     }
 
     public static Bitmap getChar() {

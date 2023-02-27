@@ -16,12 +16,12 @@ import android.widget.Button;
  */
 public class MainActivity extends AppCompatActivity {
     private Button start;
-    static int screenX;
-    static int screenY;
-    static Bitmap riverBmap;
-    static Bitmap grassBmap;
-    static Bitmap sandBmap;
-    static Bitmap roadBmap;
+    private static int screenX;
+    private static int screenY;
+    private static Bitmap riverBmap;
+    private static Bitmap grassBmap;
+    private static Bitmap sandBmap;
+    private static Bitmap roadBmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,5 +61,37 @@ public class MainActivity extends AppCompatActivity {
     public void openConfiguration() {
         Intent intent = new Intent(this, Configuration.class);
         startActivity(intent);
+    }
+
+    public static int getScreenX() {
+        return screenX;
+    }
+
+    public static int getScreenY() {
+        return screenY;
+    }
+
+    public static Bitmap getGrassBmap() {
+        return grassBmap;
+    }
+
+    public static Bitmap getRiverBmap() {
+        return riverBmap;
+    }
+
+    public static Bitmap getRoadBmap() {
+        return roadBmap;
+    }
+
+    public static Bitmap getSandBmap() {
+        return sandBmap;
+    }
+
+    public static void setScreenX(int screenX) {
+        MainActivity.screenX = screenX;
+    }
+
+    public static void setScreenY(int screenY) {
+        MainActivity.screenY = screenY;
     }
 }

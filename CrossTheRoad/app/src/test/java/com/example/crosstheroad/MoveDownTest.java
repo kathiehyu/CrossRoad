@@ -1,12 +1,23 @@
 package com.example.crosstheroad;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class MoveDownTest {
+    private Movement move;
+    int tileLength;
+    @Before
+    public void setUp() {
+        int screenWidth = 1080;
+        int screenHeight = 1920;
+        MainActivity.setScreenX(screenWidth);
+        MainActivity.setScreenY(screenHeight);
+        tileLength = screenWidth / Background.getWidthInTiles();
+    }
     @Test
     public void moveDownTest() {
-        GameView.setCharY(500);
-        GameView.setCharY(500 + Background.tileLength);
-        assert GameView.getCharY() == 500 + Background.tileLength;
+        move.setCharY(500);
+        move.setCharY(500 + tileLength);
+        assert move.getCharY() == 500 + tileLength;
     }
 }

@@ -1,9 +1,5 @@
 package com.example.crosstheroad;
 
-import static com.example.crosstheroad.Background.screenX;
-import static com.example.crosstheroad.Background.screenY;
-import static com.example.crosstheroad.Background.tileLength;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -21,7 +17,8 @@ import android.widget.LinearLayout;
  */
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
-    private Character character = GameView.character;
+    private Movement movePosition;
+    private Character character = GameView.getCharacter();
 
 
     @SuppressLint("MissingInflatedId")
@@ -30,14 +27,6 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         System.out.println("created instance state");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //        setContentView(R.layout.activity_game_activity);
-        //        Point point = new Point();
-        //        getWindowManager().getDefaultDisplay().getSize(point);
-
-        //        System.out.println("CREATING BACKGROUND");
-        //        Background bg = new Background(getResources(), this);
-        //        Character character = new Character(MainActivity.screenX,
-        //        MainActivity.screenY, getResources());
 
         FrameLayout game = new FrameLayout(this);
         gameView = new GameView(this);
@@ -62,20 +51,21 @@ public class GameActivity extends AppCompatActivity {
         right.setText("RIGHT");
 
         //         starting position
-        int x = Background.tileLength * ((screenX / Background.tileLength) / 2);
-        int y = Background.tileLength * (screenY / Background.tileLength - 1);
-        gameView.setCharX(x);
-        gameView.setCharY(y);
+        int x = Background.getTileLength()
+                * (Background.getScreenX() / Background.getTileLength() / 2);
+        int y = Background.getTileLength()
+                * (Background.getScreenY() / Background.getTileLength() - 1);
+        movePosition.setCharX(x);
+        movePosition.setCharY(y);
 
         FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(
                 ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
-        //        frameParams.gravity = Gravity.START;
+
         game.setLayoutParams(frameParams);
 
         LinearLayout.LayoutParams gridParams = new LinearLayout.LayoutParams(
                 ViewPager.LayoutParams.MATCH_PARENT, ViewPager.LayoutParams.MATCH_PARENT);
-        //        gridParams.setGravity(Gravity.START);
-        //        gridParams.gravity = Gravity.START;
+
         buttons.setLayoutParams(gridParams);
 
         buttons.addView(up);
@@ -89,95 +79,35 @@ public class GameActivity extends AppCompatActivity {
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameView.setCharY(gameView.getCharY() - tileLength);
+                movePosition.setCharY(gameView.getCharY()
+                        - Background.getTileLength());
             }
         });
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameView.setCharY(gameView.getCharY() + tileLength);
+                movePosition.setCharY(gameView.getCharY()
+                        + Background.getTileLength());
             }
         });
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameView.setCharX(gameView.getCharX() - tileLength);
+                movePosition.setCharX(gameView.getCharX()
+                        - Background.getTileLength());
             }
         });
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameView.setCharX(gameView.getCharX() + tileLength);
+                movePosition.setCharX(gameView.getCharX()
+                        + Background.getTileLength());
             }
         });
 
         setContentView(game);
-        //        setContentView(gameView);
-        //        setContentView(R.layout.activity_game_activity);
-        //        BitmapDrawable bmd = new BitmapDrawable(Background.background);
-        //        findViewById(R.id.grid).setBackground(bmd);
-
-        //        BitmapDrawable bmd2 = new BitmapDrawable(Character.character);
-        //        ImageView charDisplay = findViewById(R.id.characterDisplay);
-        //        charDisplay.setImageDrawable(bmd2);
-        //        charDisplay.setX(character.x);
-        //        charDisplay.setY(character.y);
-
-        //        findViewById(R.id.upButton).setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View view) {
-        //                moveUp(character, charDisplay);
-        //            }
-        //        });
-        //        findViewById(R.id.downButton).setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View view) {
-        //                moveDown(character, charDisplay);
-        //            }
-        //        });
-        //        findViewById(R.id.leftButton).setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View view) {
-        //                moveLeft(character, charDisplay);
-        //            }
-        //        });
-        //        findViewById(R.id.rightButton).setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View view) {
-        //                moveRight(character, charDisplay);
-        //            }
-        //        });
     }
 
-    //    private void moveUp(Character character, ImageView charDisplay) {
-    //        if (character.y - tileLength >= 0) {
-    //            character.y -= tileLength;
-    //            charDisplay.setX(character.x);
-    //            charDisplay.setY(character.y);
-    //        }
-    //    }
-    //    private void moveDown(Character character, ImageView charDisplay) {
-    //
-    //        if (character.y + tileLength + tileLength <= MainActivity.screenY){
-    //            character.y += tileLength;
-    //            charDisplay.setX(character.x);
-    //            charDisplay.setY(character.y);
-    //        }
-    //    }
-    //    private void moveLeft(Character character, ImageView charDisplay) {
-    //        if (character.x - tileLength >= 0) {
-    //            character.x -= tileLength;
-    //            charDisplay.setX(character.x);
-    //            charDisplay.setY(character.y);
-    //        }
-    //    }
-    //    private void moveRight(Character character, ImageView charDisplay) {
-    //        if (character.x + tileLength + tileLength <= MainActivity.screenX){
-    //            character.x += tileLength;
-    //            charDisplay.setX(character.x);
-    //            charDisplay.setY(character.y);
-    //        }
-    //    }
 
     @Override
     protected void onPause() {

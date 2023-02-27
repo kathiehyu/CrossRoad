@@ -69,15 +69,15 @@ public class Configuration extends AppCompatActivity {
             public void onClick(View view) {
                 EditText name = (EditText) findViewById(R.id.playername);
                 inputName = name.getText().toString();
-                if (verifyName(inputName)) {
+                if (!verifyName(inputName)) {
                     Toast.makeText(Configuration.this,
                             "Name cannot be empty or white space", Toast.LENGTH_SHORT).show();
                 }
-                if (difficultyLevel(selectedDifficulty)) {
+                if (!difficultyLevel(selectedDifficulty)) {
                     Toast.makeText(Configuration.this,
                             "Please choose a difficulty", Toast.LENGTH_SHORT).show();
                 }
-                if (characterChoice(charButton)) {
+                if (!characterChoice(charButton)) {
                     Toast.makeText(Configuration.this,
                             "Please choose a character", Toast.LENGTH_SHORT).show();
                 }
@@ -91,16 +91,22 @@ public class Configuration extends AppCompatActivity {
 
     public static boolean verifyName(String test) {
         if (test == inputName) {
-            if (inputName.isBlank()) {
+            if (inputName == null) {
+                return false;
+            } else if (inputName.isBlank()) {
                 return false;
             }
             return true;
         } else {
             inputName = test;
-            if (inputName.isBlank()) {
+            if (inputName == null) {
+                return false;
+            } else if (inputName.isBlank()) {
                 return false;
             }
-            if (test.isBlank()) {
+            if (test == null) {
+                return false;
+            } else if (test.isBlank()) {
                 return false;
             }
             return true;
