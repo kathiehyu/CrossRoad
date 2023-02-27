@@ -33,7 +33,7 @@ import java.io.InputStream;
  * This class will process the game's activity.
  */
 public class GameActivity extends AppCompatActivity {
-    private GameView gameView;
+    private static GameView gameView;
     private Character character = GameView.character;
 
 
@@ -99,25 +99,25 @@ public class GameActivity extends AppCompatActivity {
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameView.setCharY(gameView.getCharY() - tileLength);
+                moveUp();
             }
         });
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameView.setCharY(gameView.getCharY() + tileLength);
+                moveDown();
             }
         });
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameView.setCharX(gameView.getCharX() - tileLength);
+                moveLeft();
             }
         });
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameView.setCharX(gameView.getCharX() + tileLength);
+                moveRight();
             }
         });
 
@@ -157,6 +157,22 @@ public class GameActivity extends AppCompatActivity {
 //                moveRight(character, charDisplay);
 //            }
 //        });
+    }
+
+    public static void moveUp() {
+        gameView.setCharY(gameView.getCharY() - tileLength);
+    }
+
+    public static void moveDown() {
+        gameView.setCharY(gameView.getCharY() + tileLength);
+    }
+
+    public static void moveLeft() {
+        gameView.setCharX(gameView.getCharX() - tileLength);
+    }
+
+    public static void moveRight() {
+        gameView.setCharX(gameView.getCharX() + tileLength);
     }
 
 //    private void moveUp(Character character, ImageView charDisplay) {
