@@ -9,11 +9,7 @@ import android.widget.RadioButton;
  */
 public class ConfigScreenTest {
 
-<<<<<<< Updated upstream
-=======
-
     // unit Test 1: check name
->>>>>>> Stashed changes
     @Test
     public void checkEmtpyName(){
         String test = "";
