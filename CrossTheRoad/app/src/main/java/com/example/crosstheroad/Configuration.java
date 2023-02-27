@@ -90,6 +90,7 @@ public class Configuration extends AppCompatActivity {
     }
 
     public static boolean verifyName(String test) {
+<<<<<<< Updated upstream
         if (test == editName){
             if (editName.isBlank()){
                 return false;
@@ -101,6 +102,10 @@ public class Configuration extends AppCompatActivity {
             if (editName.isBlank()) {
                 return false;
             }
+=======
+        if (test.isBlank()) {
+            return false;
+>>>>>>> Stashed changes
         }
         return true;
     }

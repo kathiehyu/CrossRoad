@@ -21,12 +21,15 @@ import android.widget.TextView;
 public class GameScreen extends AppCompatActivity {
     protected static int points;
     private Button start;
+    private static int idEasy;
+    private static int idMed;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
+
         // display name
         TextView displayName = findViewById(R.id.playerName);
         displayName.setText(Configuration.editName);
@@ -43,14 +46,17 @@ public class GameScreen extends AppCompatActivity {
         //display number of lives
         TextView numLives = findViewById(R.id.lives);
         View inflatedView = getLayoutInflater().inflate(R.layout.activity_configuration, null);
-        if (Configuration.difficultyButton.getId()
-                == (inflatedView.findViewById(R.id.eas).getId())) {
-            numLives.setText("3");
-        } else if (Configuration.difficultyButton.getId()
-                == (inflatedView.findViewById(R.id.med)).getId()) {
-            numLives.setText("2");
-        } else {
+
+        if (checkDifferentLife(Configuration.difficultyButton.getId(),
+                inflatedView.findViewById(R.id.eas).getId())){
             numLives.setText("1");
+        }
+        else if (checkDifferentLife(Configuration.difficultyButton.getId(),
+                inflatedView.findViewById(R.id.med).getId())) {
+            numLives.setText("2");
+        }
+        else {
+            numLives.setText("3");
         }
 
         //display character sprite
@@ -66,7 +72,6 @@ public class GameScreen extends AppCompatActivity {
                     .getResources().getDrawable(R.drawable.character_3));
         }
 
-
         //start game button
         start = (Button) findViewById(R.id.start_game);
         start.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +85,13 @@ public class GameScreen extends AppCompatActivity {
     public void openConfiguration() {
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
+    }
+
+    public static boolean checkDifferentLife(int id1, int id2){
+        if (id1 == id2){
+            return true;
+        }
+        return false;
     }
 
 }
