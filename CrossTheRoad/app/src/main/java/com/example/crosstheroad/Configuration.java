@@ -69,19 +69,20 @@ public class Configuration extends AppCompatActivity {
             public void onClick(View view) {
                 EditText name = (EditText) findViewById(R.id.playername);
                 inputName = name.getText().toString();
-                if (verifyName(inputName) == false) {
+                if (verifyName(inputName)) {
                     Toast.makeText(Configuration.this,
                             "Name cannot be empty or white space", Toast.LENGTH_SHORT).show();
                 }
-                if (difficultyLevel(selectedDifficulty) == false) {
+                if (difficultyLevel(selectedDifficulty)) {
                     Toast.makeText(Configuration.this,
                             "Please choose a difficulty", Toast.LENGTH_SHORT).show();
                 }
-                if (characterChoice(charButton) == false) {
+                if (characterChoice(charButton)) {
                     Toast.makeText(Configuration.this,
                             "Please choose a character", Toast.LENGTH_SHORT).show();
                 }
-                if (verifyName(inputName) && difficultyLevel(selectedDifficulty) && characterChoice(charButton)) {
+                if (verifyName(inputName) && difficultyLevel(selectedDifficulty)
+                        && characterChoice(charButton)) {
                     openConfiguration();
                 }
             }
@@ -89,13 +90,12 @@ public class Configuration extends AppCompatActivity {
     }
 
     public static boolean verifyName(String test) {
-        if (test == inputName){
-            if (inputName.isBlank()){
+        if (test == inputName) {
+            if (inputName.isBlank()) {
                 return false;
             }
             return true;
-        }
-        else {
+        } else {
             inputName = test;
             if (inputName.isBlank()) {
                 return false;
@@ -112,8 +112,7 @@ public class Configuration extends AppCompatActivity {
     }
 
     public static boolean characterChoice(RadioButton button) {
-        return (button != null);
-    }
+        return (button != null); }
 
     public void openConfiguration() {
         Intent intent = new Intent(this, GameScreen.class);

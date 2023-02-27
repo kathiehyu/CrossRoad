@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,14 +46,12 @@ public class GameScreen extends AppCompatActivity {
         View inflatedView = getLayoutInflater().inflate(R.layout.activity_configuration, null);
 
         if (checkDifferentLife(Configuration.selectedDifficulty.getId(),
-                inflatedView.findViewById(R.id.eas).getId())){
+                inflatedView.findViewById(R.id.eas).getId())) {
             numLives.setText("1");
-        }
-        else if (checkDifferentLife(Configuration.selectedDifficulty.getId(),
+        } else if (checkDifferentLife(Configuration.selectedDifficulty.getId(),
                 inflatedView.findViewById(R.id.med).getId())) {
             numLives.setText("2");
-        }
-        else {
+        } else {
             numLives.setText("3");
         }
 
@@ -87,8 +83,8 @@ public class GameScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public static boolean checkDifferentLife(int id1, int id2){
-        if (id1 == id2){
+    public static boolean checkDifferentLife(int id1, int id2) {
+        if (id1 == id2) {
             return true;
         }
         return false;

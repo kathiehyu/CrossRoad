@@ -1,45 +1,39 @@
 package com.example.crosstheroad;
 
 import android.content.Context;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
-import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class GameView extends SurfaceView implements Runnable {
-//    private Surface surface;
+    //    private Surface surface;
     private Thread thread;
     private boolean isPlaying;
-    private int x = 0, y = 0;
+    private int x = 0;
+    private int y = 0;
     private Paint paint;
     private Background background1;
     static Character character;
 
-//    public GameView(Context context, AttributeSet attributeSet) {
-//        super(context, attributeSet);
-//        LayoutInflater lf = LayoutInflater.from(context);
-//        ViewGroup vg = new ViewGroup(context) {
-//            @Override
-//            protected void onLayout(boolean b, int i, int i1, int i2, int i3) {
-//                //
-//            }
-//        };
-//        vg.addView(this);
-//        View v = lf.inflate(R.layout.activity_game_activity, vg);
-//        // butterknife bind?
-//        System.out.println("Creating GameView");
-//        background1 = new Background(getResources(), super.getContext());
-//        this.screenX = screenX;
-//        this.screenY = screenY;
-//        paint = new Paint();
-//        character = new Character(screenX, screenY, getResources());
-//    }
+    //    public GameView(Context context, AttributeSet attributeSet) {
+    //        super(context, attributeSet);
+    //        LayoutInflater lf = LayoutInflater.from(context);
+    //        ViewGroup vg = new ViewGroup(context) {
+    //            @Override
+    //            protected void onLayout(boolean b, int i, int i1, int i2, int i3) {
+    //                //
+    //            }
+    //        };
+    //        vg.addView(this);
+    //        View v = lf.inflate(R.layout.activity_game_activity, vg);
+    //        // butterknife bind?
+    //        System.out.println("Creating GameView");
+    //        background1 = new Background(getResources(), super.getContext());
+    //        this.screenX = screenX;
+    //        this.screenY = screenY;
+    //        paint = new Paint();
+    //        character = new Character(screenX, screenY, getResources());
+    //    }
 
     public GameView(Context context) {
         super(context);
@@ -52,7 +46,7 @@ public class GameView extends SurfaceView implements Runnable {
         return x;
     }
 
-    public int getCharY () {
+    public int getCharY() {
         return y;
     }
 
@@ -69,9 +63,9 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     private boolean validateMovement(int x, int y) {
-        return !(x + Background.tileLength >= MainActivity.screenX ||
-                y + Background.tileLength >= MainActivity.screenY ||
-                x < 0 || y < 0);
+        return !(x + Background.tileLength >= MainActivity.screenX
+                || y + Background.tileLength >= MainActivity.screenY
+                || x < 0 || y < 0);
     }
 
     @Override
@@ -118,14 +112,14 @@ public class GameView extends SurfaceView implements Runnable {
 
 
     protected void resume() {
-//        super.onResume();
-//        surface.resume();
+        //        super.onResume();
+        //        surface.resume();
         isPlaying = true;
         thread = new Thread(this);
         thread.start();
     }
   
-  public void pause() {
+    public void pause() {
         try {
             isPlaying = false;
             thread.join();
@@ -134,14 +128,14 @@ public class GameView extends SurfaceView implements Runnable {
         }
     }
 
-//        @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_game_view);
-//        Point point = new Point();
-//        getWindowManager().getDefaultDisplay().getSize(point);
-//        surface = new Surface(this, point.x, point.y);
-//        setContentView(surface);
-//    }
+    //        @Override
+    //    protected void onCreate(Bundle savedInstanceState) {
+    //        super.onCreate(savedInstanceState);
+    //        setContentView(R.layout.activity_game_view);
+    //        Point point = new Point();
+    //        getWindowManager().getDefaultDisplay().getSize(point);
+    //        surface = new Surface(this, point.x, point.y);
+    //        setContentView(surface);
+    //    }
 
 }

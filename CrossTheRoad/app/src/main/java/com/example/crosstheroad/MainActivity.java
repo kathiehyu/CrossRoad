@@ -16,7 +16,8 @@ import android.widget.Button;
  */
 public class MainActivity extends AppCompatActivity {
     private Button start;
-    static int screenX, screenY;
+    static int screenX;
+    static int screenY;
     static Bitmap riverBmap;
     static Bitmap grassBmap;
     static Bitmap sandBmap;
