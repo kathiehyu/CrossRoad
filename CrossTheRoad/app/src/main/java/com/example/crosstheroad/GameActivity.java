@@ -84,7 +84,7 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    private void moveUp(Character character, ImageView charDisplay) {
+    void moveUp(Character character, ImageView charDisplay) {
         if (character.y - tileLength >= 0) {
             character.y -= tileLength;
             charDisplay.setX(character.x);
