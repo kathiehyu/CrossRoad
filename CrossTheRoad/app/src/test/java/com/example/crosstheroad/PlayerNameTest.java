@@ -9,25 +9,25 @@ import android.widget.RadioButton;
  */
 public class PlayerNameTest {
 
+    // unit Test 1: check name
     @Test
-    public void checkName(){
+    public void checkEmtpyName(){
         String test = "";
         assertFalse(Configuration.verifyName(test));
     }
-
-    String name1 = " ";
     @Test
-    public void spaceName() {assertFalse(Configuration.verifyName(name1));}
-
-    String name2 = "123";
+    public void checkNameWithWhiteSpace() {
+        String test = " ";
+        assertFalse(Configuration.verifyName(test));}
     @Test
-    public void testNameNumber() {assertTrue(Configuration.verifyName(name2));}
+    public void checkNamewithNull() {
+        String test = null;
+        assertFalse(Configuration.verifyName(test));
+    }
 
-    String name3 = "!@#";
     @Test
-    public void testNameSpecialCharacter() {assertTrue(Configuration.verifyName(name3));}
-
-    String name4 = "Tam";
-    @Test
-    public void testNameNormal() {assertTrue(Configuration.verifyName(name4));}
+    public void testNameNormal() {
+        String name4 = "Tam";
+        assertTrue(Configuration.verifyName(name4));
+    }
 }

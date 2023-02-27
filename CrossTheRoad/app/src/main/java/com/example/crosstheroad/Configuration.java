@@ -16,10 +16,9 @@ import android.widget.Toast;
 
 public class Configuration extends AppCompatActivity {
     private Button conti;
-    protected static String editName;
-    protected static RadioButton difficultyButton;
+    protected static String inputName;
+    protected static RadioButton selectedDifficulty;
     protected static RadioButton charButton;
-
     private TextView name;
 
 
@@ -30,7 +29,7 @@ public class Configuration extends AppCompatActivity {
         setContentView(R.layout.activity_configuration);
         //get player name from UI
         name = (TextView) findViewById(R.id.playername);
-        editName = name.getText().toString();
+        inputName = name.getText().toString();
 
 
         //difficulty level
@@ -38,7 +37,7 @@ public class Configuration extends AppCompatActivity {
         difficultyC.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                difficultyButton = findViewById(difficultyC.getCheckedRadioButtonId());
+                selectedDifficulty = findViewById(difficultyC.getCheckedRadioButtonId());
             }
         });
 
@@ -69,12 +68,12 @@ public class Configuration extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 EditText name = (EditText) findViewById(R.id.playername);
-                editName = name.getText().toString();
-                if (verifyName(editName) == false) {
+                inputName = name.getText().toString();
+                if (verifyName(inputName) == false) {
                     Toast.makeText(Configuration.this,
                             "Name cannot be empty or white space", Toast.LENGTH_SHORT).show();
                 }
-                if (difficultyLevel(difficultyButton) == false) {
+                if (difficultyLevel(selectedDifficulty) == false) {
                     Toast.makeText(Configuration.this,
                             "Please choose a difficulty", Toast.LENGTH_SHORT).show();
                 }
@@ -82,7 +81,7 @@ public class Configuration extends AppCompatActivity {
                     Toast.makeText(Configuration.this,
                             "Please choose a character", Toast.LENGTH_SHORT).show();
                 }
-                if (verifyName(editName) == true && difficultyLevel(difficultyButton) == true && characterChoice(charButton) == true) {
+                if (verifyName(inputName) && difficultyLevel(selectedDifficulty) && characterChoice(charButton)) {
                     openConfiguration();
                 }
             }
@@ -90,33 +89,30 @@ public class Configuration extends AppCompatActivity {
     }
 
     public static boolean verifyName(String test) {
-        if (test == editName){
-            if (editName.isBlank()){
+        if (test == inputName){
+            if (inputName.isBlank()){
                 return false;
             }
             return true;
         }
         else {
-            editName = test;
-            if (editName.isBlank()) {
+            inputName = test;
+            if (inputName.isBlank()) {
                 return false;
             }
+            if (test.isBlank()) {
+                return false;
+            }
+            return true;
         }
-        return true;
     }
 
     public static boolean difficultyLevel(RadioButton button) {
-        if (button == null) {
-            return false;
-        }
-        return true;
+        return (button != null);
     }
 
     public static boolean characterChoice(RadioButton button) {
-        if (button == null) {
-            return false;
-        }
-        return true;
+        return (button != null);
     }
 
     public void openConfiguration() {
