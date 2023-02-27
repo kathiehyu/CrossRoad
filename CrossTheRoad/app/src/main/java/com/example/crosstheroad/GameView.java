@@ -16,51 +16,62 @@ public class GameView extends SurfaceView implements Runnable {
 //    private Surface surface;
     private Thread thread;
     private boolean isPlaying;
-    int screenX, screenY;
+    private int x = 0, y = 0;
     private Paint paint;
     private Background background1;
     static Character character;
 
-    public GameView(Context context, AttributeSet attributeSet) {
-        super(context, attributeSet);
-        LayoutInflater lf = LayoutInflater.from(context);
-        ViewGroup vg = new ViewGroup(context) {
-            @Override
-            protected void onLayout(boolean b, int i, int i1, int i2, int i3) {
-                //
-            }
-        };
-        vg.addView(this);
-        View v = lf.inflate(R.layout.activity_game_activity, vg);
-        // butterknife bind?
-        System.out.println("Creating GameView");
-        background1 = new Background(getResources(), super.getContext());
-        this.screenX = screenX;
-        this.screenY = screenY;
-        paint = new Paint();
-        character = new Character(screenX, screenY, getResources());
-    }
+//    public GameView(Context context, AttributeSet attributeSet) {
+//        super(context, attributeSet);
+//        LayoutInflater lf = LayoutInflater.from(context);
+//        ViewGroup vg = new ViewGroup(context) {
+//            @Override
+//            protected void onLayout(boolean b, int i, int i1, int i2, int i3) {
+//                //
+//            }
+//        };
+//        vg.addView(this);
+//        View v = lf.inflate(R.layout.activity_game_activity, vg);
+//        // butterknife bind?
+//        System.out.println("Creating GameView");
+//        background1 = new Background(getResources(), super.getContext());
+//        this.screenX = screenX;
+//        this.screenY = screenY;
+//        paint = new Paint();
+//        character = new Character(screenX, screenY, getResources());
+//    }
 
-    public GameView(Context context, int screenX, int screenY) {
+    public GameView(Context context) {
         super(context);
         background1 = new Background(getResources(), super.getContext());
-        this.screenX = screenX;
-        this.screenY = screenY;
         paint = new Paint();
-        character = new Character(screenX, screenY, getResources());
+        character = new Character(x, y, getResources());
     }
 
-    //control touching motion
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()){
-            case MotionEvent.ACTION_UP:
-                character.goingUp = true;
-            case MotionEvent.ACTION_DOWN:
-                character.goingDown = true;
-        }
+    public int getCharX() {
+        return x;
+    }
 
-        return true;
+    public int getCharY () {
+        return y;
+    }
+
+    public void setCharX(int x) {
+        if (validateMovement(x, y)) {
+            this.x = x;
+        } // else : don't change x
+    }
+
+    public void setCharY(int y) {
+        if (validateMovement(x, y)) {
+            this.y = y;
+        }
+    }
+
+    private boolean validateMovement(int x, int y) {
+        return !(x + Background.tileLength >= MainActivity.screenX ||
+                y + Background.tileLength >= MainActivity.screenY ||
+                x < 0 || y < 0);
     }
 
     @Override
@@ -78,18 +89,7 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     private void update() {
-        if (character.goingUp){
-            character.y -= Background.tileLength;
-        }
-        if (character.goingDown) {
-            character.y += Background.tileLength;
-        }
-        if (character.y < 0){
-            character.y = 0;
-        }
-        if (character.y > screenY - character.height){
-            character.y = screenY - character.height;
-        }
+
     }
 
     private void draw() {
@@ -97,7 +97,13 @@ public class GameView extends SurfaceView implements Runnable {
             Canvas canvas = getHolder().lockCanvas();
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
 
-            canvas.drawBitmap(character.getChar(), character.x, character.y, paint);
+
+            System.out.println("trying to draw character");
+            assert Character.getChar() != null;
+            System.out.println("x: " + Integer.toString(x));
+            System.out.println("y: " + Integer.toString(y));
+            canvas.drawBitmap(Character.getChar(), x, y, paint);
+
             getHolder().unlockCanvasAndPost(canvas);
         }
     }
