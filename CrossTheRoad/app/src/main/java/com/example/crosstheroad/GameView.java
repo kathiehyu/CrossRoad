@@ -1,66 +1,32 @@
 package com.example.crosstheroad;
 
 import android.content.Context;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
-import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class GameView extends SurfaceView implements Runnable {
-//    private Surface surface;
+    //    private Surface surface;
     private Thread thread;
     private boolean isPlaying;
-    int screenX, screenY;
+
     private Paint paint;
     private Background background1;
-    static Character character;
+    private static Character character;
 
-    public GameView(Context context, AttributeSet attributeSet) {
-        super(context, attributeSet);
-        LayoutInflater lf = LayoutInflater.from(context);
-        ViewGroup vg = new ViewGroup(context) {
-            @Override
-            protected void onLayout(boolean b, int i, int i1, int i2, int i3) {
-                //
-            }
-        };
-        vg.addView(this);
-        View v = lf.inflate(R.layout.activity_game_activity, vg);
-        // butterknife bind?
-        System.out.println("Creating GameView");
-        background1 = new Background(getResources(), super.getContext());
-        this.screenX = screenX;
-        this.screenY = screenY;
-        paint = new Paint();
-        character = new Character(screenX, screenY, getResources());
-    }
-
-    public GameView(Context context, int screenX, int screenY) {
+    public GameView(Context context) {
         super(context);
-        background1 = new Background(getResources(), super.getContext());
-        this.screenX = screenX;
-        this.screenY = screenY;
+        background1 = new Background(getResources());
         paint = new Paint();
-        character = new Character(screenX, screenY, getResources());
+        character = new Character(Movement.getCharX(), Movement.getCharY(), getResources());
     }
 
-    //control touching motion
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()){
-            case MotionEvent.ACTION_UP:
-                character.goingUp = true;
-            case MotionEvent.ACTION_DOWN:
-                character.goingDown = true;
-        }
+    public static int getCharX() {
+        return Movement.getCharX();
+    }
 
-        return true;
+    public static int getCharY() {
+        return Movement.getCharY();
     }
 
     @Override
@@ -78,26 +44,20 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     private void update() {
-        if (character.goingUp){
-            character.y -= Background.tileLength;
-        }
-        if (character.goingDown) {
-            character.y += Background.tileLength;
-        }
-        if (character.y < 0){
-            character.y = 0;
-        }
-        if (character.y > screenY - character.height){
-            character.y = screenY - character.height;
-        }
+        //
     }
 
     private void draw() {
         if (getHolder().getSurface().isValid()) {
             Canvas canvas = getHolder().lockCanvas();
-            canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
+            canvas.drawBitmap(background1.getBackground(),
+                    background1.getX(), background1.getY(), paint);
 
-            canvas.drawBitmap(character.getChar(), character.x, character.y, paint);
+
+            System.out.println("trying to draw character");
+            assert Character.getChar() != null;
+            canvas.drawBitmap(Character.getChar(), Movement.getCharX(), Movement.getCharY(), paint);
+
             getHolder().unlockCanvasAndPost(canvas);
         }
     }
@@ -112,14 +72,12 @@ public class GameView extends SurfaceView implements Runnable {
 
 
     protected void resume() {
-//        super.onResume();
-//        surface.resume();
         isPlaying = true;
         thread = new Thread(this);
         thread.start();
     }
   
-  public void pause() {
+    public void pause() {
         try {
             isPlaying = false;
             thread.join();
@@ -128,14 +86,8 @@ public class GameView extends SurfaceView implements Runnable {
         }
     }
 
-//        @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_game_view);
-//        Point point = new Point();
-//        getWindowManager().getDefaultDisplay().getSize(point);
-//        surface = new Surface(this, point.x, point.y);
-//        setContentView(surface);
-//    }
+    public static Character getCharacter() {
+        return character;
+    }
 
 }

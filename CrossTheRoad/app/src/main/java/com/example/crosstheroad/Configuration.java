@@ -11,29 +11,37 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Configuration extends AppCompatActivity {
     private Button conti;
-    protected static String editName;
-    protected static RadioButton difficultyButton;
+    protected static String inputName;
+    protected static RadioButton selectedDifficulty;
     protected static RadioButton charButton;
+    private TextView name;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
+        //get player name from UI
+        name = (TextView) findViewById(R.id.playername);
+        inputName = name.getText().toString();
 
+
+        //difficulty level
         RadioGroup difficultyC = findViewById(R.id.difficultyChoice);
         difficultyC.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int difficulty = difficultyC.getCheckedRadioButtonId();
-                difficultyButton = findViewById(difficultyC.getCheckedRadioButtonId());
+                selectedDifficulty = findViewById(difficultyC.getCheckedRadioButtonId());
             }
         });
 
+        //character
         RadioGroup charac = findViewById(R.id.Select_Character);
         charac.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -54,30 +62,63 @@ public class Configuration extends AppCompatActivity {
             }
         });
 
+        //display error message
         conti = (Button) findViewById(R.id.Continue);
         conti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText name = (EditText) findViewById(R.id.playername);
-                editName = name.getText().toString();
-                if (editName.isBlank()) {
+                inputName = name.getText().toString();
+                if (!verifyName(inputName)) {
                     Toast.makeText(Configuration.this,
-                            "Name cannot be empty", Toast.LENGTH_SHORT).show();
+                            "Name cannot be empty or white space", Toast.LENGTH_SHORT).show();
                 }
-                if (difficultyButton == null) {
+                if (!difficultyLevel(selectedDifficulty)) {
                     Toast.makeText(Configuration.this,
                             "Please choose a difficulty", Toast.LENGTH_SHORT).show();
                 }
-                if (charButton == null) {
+                if (!characterChoice(charButton)) {
                     Toast.makeText(Configuration.this,
                             "Please choose a character", Toast.LENGTH_SHORT).show();
                 }
-                if (!editName.isBlank() && !(difficultyButton == null) && !(charButton == null)) {
+                if (verifyName(inputName) && difficultyLevel(selectedDifficulty)
+                        && characterChoice(charButton)) {
                     openConfiguration();
                 }
             }
         });
     }
+
+    public static boolean verifyName(String test) {
+        if (test == inputName) {
+            if (inputName == null) {
+                return false;
+            } else if (inputName.isBlank()) {
+                return false;
+            }
+            return true;
+        } else {
+            inputName = test;
+            if (inputName == null) {
+                return false;
+            } else if (inputName.isBlank()) {
+                return false;
+            }
+            if (test == null) {
+                return false;
+            } else if (test.isBlank()) {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    public static boolean difficultyLevel(RadioButton button) {
+        return (button != null);
+    }
+
+    public static boolean characterChoice(RadioButton button) {
+        return (button != null); }
 
     public void openConfiguration() {
         Intent intent = new Intent(this, GameScreen.class);

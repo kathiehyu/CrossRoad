@@ -5,10 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -20,14 +16,21 @@ import android.widget.Button;
  */
 public class MainActivity extends AppCompatActivity {
     private Button start;
-    static int screenX, screenY;
-    static Bitmap riverBmap;
+    private static int screenX;
+    private static int screenY;
+    private static Bitmap riverBmap;
+    private static Bitmap grassBmap;
+    private static Bitmap sandBmap;
+    private static Bitmap roadBmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         riverBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.water_tile);
+        grassBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.grass_tile);
+        sandBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.sand_tile);
+        roadBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.road1);
         assert (riverBmap != null);
 
         start = (Button) findViewById(R.id.Start);
@@ -58,5 +61,37 @@ public class MainActivity extends AppCompatActivity {
     public void openConfiguration() {
         Intent intent = new Intent(this, Configuration.class);
         startActivity(intent);
+    }
+
+    public static int getScreenX() {
+        return screenX;
+    }
+
+    public static int getScreenY() {
+        return screenY;
+    }
+
+    public static Bitmap getGrassBmap() {
+        return grassBmap;
+    }
+
+    public static Bitmap getRiverBmap() {
+        return riverBmap;
+    }
+
+    public static Bitmap getRoadBmap() {
+        return roadBmap;
+    }
+
+    public static Bitmap getSandBmap() {
+        return sandBmap;
+    }
+
+    public static void setScreenX(int screenX) {
+        MainActivity.screenX = screenX;
+    }
+
+    public static void setScreenY(int screenY) {
+        MainActivity.screenY = screenY;
     }
 }

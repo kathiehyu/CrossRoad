@@ -1,69 +1,66 @@
 package com.example.crosstheroad;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.util.DisplayMetrics;
-import android.view.View;
-import android.widget.Button;
 
-import com.example.crosstheroad.R;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 public class Background {
-    int x = 0, y = 0;
-    static int screenX, screenY;
-    static Bitmap background;
-    static int widthInTiles = 7;
-    static int tileLength;
-    private Context context;
+    private int x = 0;
+    private int y = 0;
+    private static int screenX;
+    private static int screenY;
+    private static Bitmap background;
 
-    Background (Resources res, Context context) {
+    // change to make blocks smaller/larger (should be an odd number
+    // so the character stays in the middle of the screen)
+    private static int widthInTiles = 7;
+    private static int tileLength;
+
+    // row numbers for each of the 'tiles'
+    private static List<Integer> riverRows = Arrays.asList(1, 2, 3, 4, 5);
+    private static List<Integer> safeRows = Arrays.asList(6, 11, 12);
+    private static List<Integer> goalRows = Arrays.asList(0);
+    private static  List<Integer> roadRows = Arrays.asList(6, 7, 8, 9, 10);
+
+    public static List<Integer> getRiverRows() {
+        return riverRows;
+    }
+
+    public static List<Integer> getSafeRows() {
+        return safeRows;
+    }
+
+    public static List<Integer> getGoalRows() {
+        return goalRows;
+    }
+
+    public static List<Integer> getRoadRows() {
+        return roadRows;
+    }
+
+    Background(Resources res) {
         background = createBitMap();
-        this.context = context;
 
-//        background = BitmapFactory.decodeResource(res, R.drawable.game_background);
-//        background = Bitmap.createScaledBitmap(background, screenX, screenY, false);
     }
 
     private Bitmap createBitMap() {
 
         // size of screen
-        screenX = MainActivity.screenX;
-        screenY = MainActivity.screenY;
+        screenX = MainActivity.getScreenX();
+        screenY = MainActivity.getScreenY();
 
         // number of tiles across screen (determines size of tiles)
         tileLength = screenX / widthInTiles;
+        System.out.println("TILELENGTH: " + tileLength);
 
         // MAP USING BITMAP
-//        ImageView grid = findViewById(R.id.grid);
         Bitmap.Config config = Bitmap.Config.ARGB_8888;
-//        bmap = BitmapFactory.decodeResource(getResources(), R.mipmap.test);
 
-        // creating cyan checkerboard for tile visualization
-        int[] riverColors = new int[tileLength * tileLength];
-        for (int i = 0; i < riverColors.length; i++) {
-            riverColors[i] = Color.BLUE;
-        }
-
-        int[] safeColors = new int[tileLength * tileLength];
-        for (int i = 0; i < safeColors.length; i++) {
-            safeColors[i] = Color.YELLOW;
-        }
-
-        int[] roadColors = new int[tileLength * tileLength];
-        for (int i = 0; i < roadColors.length; i++) {
-            roadColors[i] = Color.BLACK;
-        }
-
-        int[] goalColors = new int[tileLength * tileLength];
-        for (int i = 0; i < goalColors.length; i++) {
-            goalColors[i] = Color.GREEN;
-        }
-
-        int[][] tileColors = getColors(context);
+        int[][] tileColors = getColors();
 
         Bitmap bmap;
         bmap = Bitmap.createBitmap(screenX, screenY, config);
@@ -84,39 +81,50 @@ public class Background {
             // for each column
             for (int j = 0; j < screenY; j += tileLength) {
                 // first row: goal
-                if (row == 0) {
+                if (goalRows.contains(row)) {
                     // if rightmost tile
                     if (i + tileLength >= screenX) {
-                        bmap.setPixels(goalColors, 0, screenX - i, i, j, screenX - i, tileLength);
+                        bmap.setPixels(tileColors[3], 0,
+                                screenX - i, i, j, screenX - i, tileLength);
                     } else {
-                        bmap.setPixels(goalColors, 0, tileLength, i, j, tileLength, tileLength);
+                        bmap.setPixels(tileColors[3], 0,
+                                tileLength, i, j, tileLength, tileLength);
                     }
                     // safe tiles
-                } else if (row == 6 || row == 11 || row == 12) {
+                } else if (safeRows.contains(row)) {
                     if (j + tileLength >= screenY && i + tileLength >= screenX) {
-                        bmap.setPixels(safeColors, 0, screenX - i, i, j, screenX - i, screenY - j);
+                        bmap.setPixels(tileColors[0], 0,
+                                screenX - i, i, j, screenX - i,
+                                screenY - j);
                     } else if (j + tileLength >= screenY) {
-                        bmap.setPixels(safeColors, 0, tileLength, i, j, tileLength, screenY - j);
-                    } else if (i + tileLength >= screenX){
-                        bmap.setPixels(safeColors, 0, screenX - i, i, j, screenX - i, tileLength);
+                        bmap.setPixels(tileColors[0], 0,
+                                tileLength, i, j, tileLength, screenY - j);
+                    } else if (i + tileLength >= screenX) {
+                        bmap.setPixels(tileColors[0], 0,
+                                screenX - i, i, j, screenX - i, tileLength);
                     } else {
-                        bmap.setPixels(safeColors, 0, tileLength, i, j, tileLength, tileLength);
+                        bmap.setPixels(tileColors[0], 0,
+                                tileLength, i, j, tileLength, tileLength);
                     }
                     // river tiles
-                } else if (row > 0 && row < 6) {
+                } else if (riverRows.contains(row)) {
                     // if rightmost tile
                     if (i + tileLength >= screenX) {
-                        bmap.setPixels(tileColors[2], 0, screenX - i, i, j, screenX - i, tileLength);
+                        bmap.setPixels(tileColors[2], 0,
+                                screenX - i, i, j, screenX - i, tileLength);
                     } else {
-                        bmap.setPixels(tileColors[2], 0, tileLength, i, j, tileLength, tileLength);
+                        bmap.setPixels(tileColors[2], 0,
+                                tileLength, i, j, tileLength, tileLength);
                     }
                     // road tiles
                 } else {
                     // if rightmost tile
                     if (i + tileLength >= screenX) {
-                        bmap.setPixels(roadColors, 0, screenX - i, i, j, screenX - i, tileLength);
+                        bmap.setPixels(tileColors[1], 0,
+                                screenX - i, i, j, screenX - i, tileLength);
                     } else {
-                        bmap.setPixels(roadColors, 0, tileLength, i, j, tileLength, tileLength);
+                        bmap.setPixels(tileColors[1], 0,
+                                tileLength, i, j, tileLength, tileLength);
                     }
                 }
                 row++;
@@ -127,27 +135,72 @@ public class Background {
 
         // show which tile should be the starting tile
         int[] startColor = new int[tileLength * tileLength];
-        for (int i = 0; i < startColor.length; i ++) {
+        for (int i = 0; i < startColor.length; i++) {
             startColor[i] = Color.RED;
         }
-        bmap.setPixels(startColor, 0, tileLength, tileLength * ((screenX / tileLength) / 2),
+        bmap.setPixels(startColor, 0, tileLength,
+                tileLength * ((screenX / tileLength) / 2),
                 tileLength * (screenY / tileLength - 1), tileLength, tileLength);
-//        grid.setImageBitmap(bmap);
 
         return bmap;
     }
 
-    private int[][] getColors(Context context) {
+    private int[][] getColors() {
         // 0 = safe, 1 = road, 2 = river, 3 = goal
-        Bitmap river = MainActivity.riverBmap;
+        Bitmap river = MainActivity.getRiverBmap();
+        Bitmap safe = MainActivity.getSandBmap();
+        Bitmap grass = MainActivity.getGrassBmap();
+        Bitmap road = MainActivity.getRoadBmap();
         int[][] tileColors = new int[4][];
-//        int[] riverColors = new int[Background.tileLength * Background.tileLength];
-//        river.getPixels(riverColors, 0, Background.tileLength, 0, 0,
-//                Background.tileLength, Background.tileLength);
+        int[] safeColors = new int[tileLength * tileLength];
+        safe.getPixels(safeColors, 0, tileLength, 0, 0,
+                tileLength, tileLength);
+        tileColors[0] = safeColors;
+
+        int row = 1;
+
+        int[] roadColors = new int[tileLength * tileLength];
+        road.getPixels(roadColors, 0, tileLength,
+                0, 0, tileLength, tileLength);
+        tileColors[1] = roadColors;
+
         int[] riverColors = new int[tileLength * tileLength];
         river.getPixels(riverColors, 0, tileLength, 0, 0,
                 tileLength, tileLength);
         tileColors[2] = riverColors;
+
+        int[] goalColors = new int[tileLength * tileLength];
+        grass.getPixels(goalColors, 0, tileLength, 0, 0,
+                tileLength, tileLength);
+        tileColors[3] = goalColors;
         return tileColors;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public static int getScreenX() {
+        return screenX;
+    }
+
+    public static int getScreenY() {
+        return screenY;
+    }
+
+    public Bitmap getBackground() {
+        return background;
+    }
+
+    public static int getWidthInTiles() {
+        return widthInTiles;
+    }
+
+    public static int getTileLength() {
+        return tileLength;
     }
 }
