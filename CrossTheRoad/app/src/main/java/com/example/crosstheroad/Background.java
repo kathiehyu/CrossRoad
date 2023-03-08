@@ -3,13 +3,9 @@ package com.example.crosstheroad;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-<<<<<<< HEAD
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-=======
->>>>>>> c0713ee88952187338626cac7c8e63c69030dd5d
 
 public class Background {
     private int x = 0;
@@ -17,7 +13,6 @@ public class Background {
     private static int screenX;
     private static int screenY;
     private static Bitmap background;
-<<<<<<< HEAD
 
     // change to make blocks smaller/larger (should be an odd number
     // so the character stays in the middle of the screen)
@@ -28,7 +23,7 @@ public class Background {
     private static List<Integer> riverRows = Arrays.asList(1, 2, 3, 4, 5);
     private static List<Integer> safeRows = Arrays.asList(6, 11, 12);
     private static List<Integer> goalRows = Arrays.asList(0);
-    private static  List<Integer> roadRows = Arrays.asList(6, 7, 8, 9, 10);
+    private static  List<Integer> roadRows = Arrays.asList(7, 8, 9, 10);
 
     public static List<Integer> getRiverRows() {
         return riverRows;
@@ -46,14 +41,8 @@ public class Background {
         return roadRows;
     }
 
-=======
-    private static int widthInTiles = 7;
-    private static int tileLength;
-
->>>>>>> c0713ee88952187338626cac7c8e63c69030dd5d
     Background(Resources res) {
         background = createBitMap();
-
     }
 
     private Bitmap createBitMap() {

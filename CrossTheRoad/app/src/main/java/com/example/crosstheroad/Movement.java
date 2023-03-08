@@ -22,7 +22,7 @@ public class Movement {
         return y;
     }
 
-    private static boolean validateMovement(int x, int y) {
+    public static boolean validateMovement(int x, int y) {
         return !(x + Background.getTileLength() >= MainActivity.getScreenX()
                 || y + Background.getTileLength() >= MainActivity.getScreenY()
                 || x < 0 || y < 0);
