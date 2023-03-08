@@ -57,12 +57,6 @@ public class GameActivity extends AppCompatActivity {
         down.setWidth(200);
         down.setText("DOWN");
 
-        left.setWidth(200);
-        left.setText("LEFT");
-
-        right.setWidth(200);
-        right.setText("RIGHT");
-
         //         starting position
         int x = Background.getTileLength()
                 * (Background.getScreenX() / Background.getTileLength() / 2);
@@ -80,7 +74,6 @@ public class GameActivity extends AppCompatActivity {
                 ViewPager.LayoutParams.MATCH_PARENT, ViewPager.LayoutParams.MATCH_PARENT);
 
         buttons.setLayoutParams(gridParams);
-
         buttons.addView(up);
         buttons.addView(down);
         buttons.addView(left);
