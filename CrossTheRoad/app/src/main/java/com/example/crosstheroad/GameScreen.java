@@ -17,6 +17,7 @@ import android.widget.TextView;
  * player name and character sprite, chosen difficulty.
  */
 public class GameScreen extends AppCompatActivity {
+    // future implementation: change to high score?
     protected static int points;
     private Button start;
     private static int idEasy;

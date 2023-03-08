@@ -3,6 +3,9 @@ package com.example.crosstheroad;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 public class Background {
     private int x = 0;
@@ -10,12 +13,36 @@ public class Background {
     private static int screenX;
     private static int screenY;
     private static Bitmap background;
+
+    // change to make blocks smaller/larger (should be an odd number
+    // so the character stays in the middle of the screen)
     private static int widthInTiles = 7;
     private static int tileLength;
 
+    // row numbers for each of the 'tiles'
+    private static List<Integer> riverRows = Arrays.asList(1, 2, 3, 4, 5);
+    private static List<Integer> safeRows = Arrays.asList(6, 11, 12);
+    private static List<Integer> goalRows = Arrays.asList(0);
+    private static  List<Integer> roadRows = Arrays.asList(7, 8, 9, 10);
+
+    public static List<Integer> getRiverRows() {
+        return riverRows;
+    }
+
+    public static List<Integer> getSafeRows() {
+        return safeRows;
+    }
+
+    public static List<Integer> getGoalRows() {
+        return goalRows;
+    }
+
+    public static List<Integer> getRoadRows() {
+        return roadRows;
+    }
+
     Background(Resources res) {
         background = createBitMap();
-
     }
 
     private Bitmap createBitMap() {
@@ -52,7 +79,7 @@ public class Background {
             // for each column
             for (int j = 0; j < screenY; j += tileLength) {
                 // first row: goal
-                if (row == 0) {
+                if (goalRows.contains(row)) {
                     // if rightmost tile
                     if (i + tileLength >= screenX) {
                         bmap.setPixels(tileColors[3], 0,
@@ -62,7 +89,7 @@ public class Background {
                                 tileLength, i, j, tileLength, tileLength);
                     }
                     // safe tiles
-                } else if (row == 6 || row == 11 || row == 12) {
+                } else if (safeRows.contains(row)) {
                     if (j + tileLength >= screenY && i + tileLength >= screenX) {
                         bmap.setPixels(tileColors[0], 0,
                                 screenX - i, i, j, screenX - i,
@@ -78,7 +105,7 @@ public class Background {
                                 tileLength, i, j, tileLength, tileLength);
                     }
                     // river tiles
-                } else if (row > 0 && row < 6) {
+                } else if (riverRows.contains(row)) {
                     // if rightmost tile
                     if (i + tileLength >= screenX) {
                         bmap.setPixels(tileColors[2], 0,

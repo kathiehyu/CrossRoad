@@ -5,12 +5,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * This class will process the game's activity.
@@ -18,10 +20,16 @@ import android.widget.LinearLayout;
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
     private Movement movePosition;
-    private Character character = GameView.getCharacter();
+    private static int score;
+    private static int currentRow;
+    private static int highestRow;
+    private TextView scoreDisplay;
+    private int riverScore = 5;
+    private int roadScore = 6;
+    private int safeScore = 3;
+    private int goalScore = 8;
 
-
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +39,15 @@ public class GameActivity extends AppCompatActivity {
         FrameLayout game = new FrameLayout(this);
         gameView = new GameView(this);
         // GridLayout buttons = new GridLayout(this);
+        LinearLayout scoreContainer = new LinearLayout(this);
+        score = 0;
+        currentRow = 11;
+        highestRow = 11;
+        scoreDisplay = new TextView(this);
+        scoreDisplay.setId(R.id.reservedNamedID);
+        scoreDisplay.setTextSize(50);
+        scoreContainer.addView(scoreDisplay);
+
         LinearLayout buttons = new LinearLayout(this);
 
         Button up = new Button(this);
@@ -38,17 +55,7 @@ public class GameActivity extends AppCompatActivity {
         Button left = new Button(this);
         Button right = new Button(this);
 
-        up.setWidth(200);
-        up.setText("UP");
-
-        down.setWidth(200);
-        down.setText("DOWN");
-
-        left.setWidth(200);
-        left.setText("LEFT");
-
-        right.setWidth(200);
-        right.setText("RIGHT");
+        configureButtons(up, down, left, right);
 
         //         starting position
         int x = Background.getTileLength()
@@ -67,27 +74,53 @@ public class GameActivity extends AppCompatActivity {
                 ViewPager.LayoutParams.MATCH_PARENT, ViewPager.LayoutParams.MATCH_PARENT);
 
         buttons.setLayoutParams(gridParams);
-
         buttons.addView(up);
         buttons.addView(down);
         buttons.addView(left);
         buttons.addView(right);
+        buttons.setGravity(Gravity.BOTTOM);
 
         game.addView(gameView);
+        game.addView(scoreContainer);
         game.addView(buttons);
+
+        setContentView(game);
+        // crashes the app??? cries
+        scoreDisplay.setText(Integer.toString(score));
+    }
+
+    private void configureButtons(Button up, Button down, Button left, Button right) {
+        up.setWidth(150);
+        up.setText("UP");
+
+        down.setWidth(150);
+        down.setText("DOWN");
+
+        left.setWidth(150);
+        left.setText("LEFT");
+
+        right.setWidth(150);
+        right.setText("RIGHT");
 
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                movePosition.setCharY(gameView.getCharY()
-                        - Background.getTileLength());
+                int y = gameView.getCharY() - Background.getTileLength();
+                movePosition.setCharY(y);
+                if (Movement.validateMovement(gameView.getCharX(), y)) {
+                    currentRow--;
+                    updateScore();
+                }
             }
         });
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                movePosition.setCharY(gameView.getCharY()
-                        + Background.getTileLength());
+                int y = gameView.getCharY() + Background.getTileLength();
+                movePosition.setCharY(y);
+                if (Movement.validateMovement(gameView.getCharX(), y)) {
+                    currentRow++;
+                }
             }
         });
         left.setOnClickListener(new View.OnClickListener() {
@@ -104,10 +137,28 @@ public class GameActivity extends AppCompatActivity {
                         + Background.getTileLength());
             }
         });
-
-        setContentView(game);
     }
 
+    private int updateScore() {
+        System.out.println("CURRENT ROW: " + Integer.toString(currentRow));
+        System.out.println("HIGHEST ROW: " + Integer.toString(highestRow));
+        if (currentRow < highestRow) {
+            // find what row you just passed (what row you are on)
+            if (Background.getRiverRows().contains(currentRow)) {
+                score += riverScore;
+            } else if (Background.getRoadRows().contains(currentRow)) {
+                score += roadScore;
+            } else if (Background.getSafeRows().contains(currentRow)) {
+                score += safeScore;
+            } else if (Background.getGoalRows().contains(currentRow)) {
+                score += goalScore;
+            }
+            highestRow = currentRow;
+            scoreDisplay.setText(Integer.toString(score));
+        }
+        System.out.println("SCORE: " + Integer.toString(score));
+        return score;
+    }
 
     @Override
     protected void onPause() {
