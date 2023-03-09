@@ -3,6 +3,7 @@ package com.example.crosstheroad;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -18,21 +19,19 @@ public class MainActivity extends AppCompatActivity {
     private Button start;
     private static int screenX;
     private static int screenY;
-    private static Bitmap riverBmap;
-    private static Bitmap grassBmap;
-    private static Bitmap sandBmap;
-    private static Bitmap roadBmap;
+    private static Resources resources;
+
+    public static Resources getMAResources() {
+        return resources;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        riverBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.water_tile);
-        grassBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.grass_tile);
-        sandBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.sand_tile);
-        roadBmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.road1);
-        assert (riverBmap != null);
+        resources = this.getResources();
 
+        // create start button
         start = (Button) findViewById(R.id.Start);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        // create exit button
         Button exit = (Button) findViewById(R.id.Exit);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        setDimenstions();
+    }
 
+    private void setDimenstions() {
         DisplayMetrics display = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(display);
         screenX = display.widthPixels;
@@ -69,22 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static int getScreenY() {
         return screenY;
-    }
-
-    public static Bitmap getGrassBmap() {
-        return grassBmap;
-    }
-
-    public static Bitmap getRiverBmap() {
-        return riverBmap;
-    }
-
-    public static Bitmap getRoadBmap() {
-        return roadBmap;
-    }
-
-    public static Bitmap getSandBmap() {
-        return sandBmap;
     }
 
     public static void setScreenX(int screenX) {
