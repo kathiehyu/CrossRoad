@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Configuration extends AppCompatActivity {
-    private Button conti;
     protected static String inputName;
     protected static RadioButton selectedDifficulty;
     protected static RadioButton charButton;
@@ -63,7 +62,7 @@ public class Configuration extends AppCompatActivity {
         });
 
         //display error message
-        conti = (Button) findViewById(R.id.Continue);
+        Button conti = (Button) findViewById(R.id.Continue);
         conti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +82,7 @@ public class Configuration extends AppCompatActivity {
                 }
                 if (verifyName(inputName) && difficultyLevel(selectedDifficulty)
                         && characterChoice(charButton)) {
-                    openConfiguration();
+                    openGameScreen();
                 }
             }
         });
@@ -120,7 +119,7 @@ public class Configuration extends AppCompatActivity {
     public static boolean characterChoice(RadioButton button) {
         return (button != null); }
 
-    public void openConfiguration() {
+    public void openGameScreen() {
         Intent intent = new Intent(this, GameScreen.class);
         startActivity(intent);
     }

@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * This class will process the game's activity.
+ * This class will process the gameContainer's activity.
  */
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
@@ -32,16 +32,15 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("created instance state");
+        System.out.println("Successfully created GameActivity");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        FrameLayout game = new FrameLayout(this);
+        FrameLayout gameContainer = new FrameLayout(this);
         gameView = new GameView(this);
-        // GridLayout buttons = new GridLayout(this);
         LinearLayout scoreContainer = new LinearLayout(this);
-        score = 0;
-        currentRow = 11;
-        highestRow = 11;
+
+        setStartConditions();
+
         scoreDisplay = new TextView(this);
         scoreDisplay.setId(R.id.reservedNamedID);
         scoreDisplay.setTextSize(50);
@@ -56,18 +55,10 @@ public class GameActivity extends AppCompatActivity {
 
         configureButtons(up, down, left, right);
 
-        //         starting position
-        int x = Background.getTileLength()
-                * (MainActivity.getScreenX() / Background.getTileLength() / 2);
-        int y = Background.getTileLength()
-                * (MainActivity.getScreenY() / Background.getTileLength() - 1);
-        Movement.setCharX(x);
-        Movement.setCharY(y);
-
         FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(
                 ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
 
-        game.setLayoutParams(frameParams);
+        gameContainer.setLayoutParams(frameParams);
 
         LinearLayout.LayoutParams gridParams = new LinearLayout.LayoutParams(
                 ViewPager.LayoutParams.MATCH_PARENT, ViewPager.LayoutParams.MATCH_PARENT);
@@ -79,13 +70,26 @@ public class GameActivity extends AppCompatActivity {
         buttons.addView(right);
         buttons.setGravity(Gravity.BOTTOM);
 
-        game.addView(gameView);
-        game.addView(scoreContainer);
-        game.addView(buttons);
+        gameContainer.addView(gameView);
+        gameContainer.addView(scoreContainer);
+        gameContainer.addView(buttons);
 
-        setContentView(game);
+        setContentView(gameContainer);
         // crashes the app??? cries
         scoreDisplay.setText(Integer.toString(score));
+    }
+
+    private void setStartConditions() {
+        int x = Background.getTileLength()
+                * (MainActivity.getScreenX() / Background.getTileLength() / 2);
+        int y = Background.getTileLength()
+                * (MainActivity.getScreenY() / Background.getTileLength() - 1);
+        Movement.setCharX(x);
+        Movement.setCharY(y);
+
+        score = 0;
+        currentRow = 11;
+        highestRow = 11;
     }
 
     private void configureButtons(Button up, Button down, Button left, Button right) {

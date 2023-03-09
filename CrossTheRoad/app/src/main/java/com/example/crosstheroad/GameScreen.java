@@ -46,6 +46,7 @@ public class GameScreen extends AppCompatActivity {
         TextView numLives = findViewById(R.id.lives);
         View inflatedView = getLayoutInflater().inflate(R.layout.activity_configuration, null);
 
+        // set numLives
         if (checkDifferentLife(Configuration.selectedDifficulty.getId(),
                 inflatedView.findViewById(R.id.eas).getId())) {
             numLives.setText("1");
@@ -74,12 +75,12 @@ public class GameScreen extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openConfiguration();
+                openGameActivity();
             }
         });
     }
 
-    public void openConfiguration() {
+    public void openGameActivity() {
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
     }

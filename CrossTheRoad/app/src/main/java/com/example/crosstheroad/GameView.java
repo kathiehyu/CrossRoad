@@ -18,7 +18,7 @@ public class GameView extends SurfaceView implements Runnable {
         super(context);
         background1 = new Background();
         paint = new Paint();
-        character = new Character(Movement.getCharX(), Movement.getCharY(), getResources());
+        character = new Character(getResources());
     }
 
     public static int getCharX() {
