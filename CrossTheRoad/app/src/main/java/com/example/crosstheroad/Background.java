@@ -15,14 +15,14 @@ public class Background {
 
     // change to make blocks smaller/larger (should be an odd number
     // so the character stays in the middle of the screen)
-    private static int widthInTiles = 7;
+    private static int widthInTiles = 9;
     private static int tileLength;
 
     // row numbers for each of the 'tiles'
-    private static List<Integer> riverRows = Arrays.asList(1, 2, 3, 4, 5);
-    private static List<Integer> safeRows = Arrays.asList(6, 11, 12);
+    private static List<Integer> riverRows = Arrays.asList(1, 2, 3, 4, 5, 6);
+    private static List<Integer> safeRows = Arrays.asList(7, 10, 14, 15, 16);
     private static List<Integer> goalRows = Arrays.asList(0);
-    private static  List<Integer> roadRows = Arrays.asList(7, 8, 9, 10);
+    private static  List<Integer> roadRows = Arrays.asList( 8, 9, 11, 12, 13);
 
     public static List<Integer> getRiverRows() {
         return riverRows;
@@ -109,7 +109,7 @@ public class Background {
                                 tileLength, i, j, tileLength, tileLength);
                     }
                     // road tiles
-                } else {
+                } else if (roadRows.contains(row)){
                     // if rightmost tile
                     if (i + tileLength >= screenX) {
                         bmap.setPixels(tileColors[1], 0,
