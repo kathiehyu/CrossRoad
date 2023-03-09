@@ -19,7 +19,6 @@ import android.widget.TextView;
  */
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
-    private Movement movePosition;
     private static int score;
     private static int currentRow;
     private static int highestRow;
@@ -59,11 +58,11 @@ public class GameActivity extends AppCompatActivity {
 
         //         starting position
         int x = Background.getTileLength()
-                * (Background.getScreenX() / Background.getTileLength() / 2);
+                * (MainActivity.getScreenX() / Background.getTileLength() / 2);
         int y = Background.getTileLength()
-                * (Background.getScreenY() / Background.getTileLength() - 1);
-        movePosition.setCharX(x);
-        movePosition.setCharY(y);
+                * (MainActivity.getScreenY() / Background.getTileLength() - 1);
+        Movement.setCharX(x);
+        Movement.setCharY(y);
 
         FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(
                 ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
@@ -106,7 +105,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int y = gameView.getCharY() - Background.getTileLength();
-                movePosition.setCharY(y);
+                Movement.setCharY(y);
                 if (Movement.validateMovement(gameView.getCharX(), y)) {
                     currentRow--;
                     updateScore();
@@ -117,7 +116,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int y = gameView.getCharY() + Background.getTileLength();
-                movePosition.setCharY(y);
+                Movement.setCharY(y);
                 if (Movement.validateMovement(gameView.getCharX(), y)) {
                     currentRow++;
                 }
@@ -126,14 +125,14 @@ public class GameActivity extends AppCompatActivity {
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                movePosition.setCharX(gameView.getCharX()
+                Movement.setCharX(gameView.getCharX()
                         - Background.getTileLength());
             }
         });
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                movePosition.setCharX(gameView.getCharX()
+                Movement.setCharX(gameView.getCharX()
                         + Background.getTileLength());
             }
         });
