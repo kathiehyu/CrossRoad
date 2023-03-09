@@ -20,8 +20,6 @@ public class GameScreen extends AppCompatActivity {
     // future implementation: change to high score?
     protected static int points;
     private Button start;
-    private static int idEasy;
-    private static int idMed;
 
     @SuppressLint("MissingInflatedId")
     @Override
