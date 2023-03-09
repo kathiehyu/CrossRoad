@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory;
 public class Character {
     private static Bitmap character;
 
-    Character(int screenX, int screenY, Resources res) {
+    Character(Resources res) {
 
         // getting the character that will display
         if (Configuration.charButton.getId() == R.id.character1) {
