@@ -87,6 +87,27 @@ public class GameActivity extends AppCompatActivity {
         gameContainer.addView(james.graphic);
         jamesAnimation(james);
 
+        //Meowth
+        Meowth meowth = new Meowth(getResources(), this, 6000, MainActivity.getScreenX() + 250);
+        gameContainer.addView(meowth.graphic);
+        meowthAnimation(meowth);
+
+
+        //Pikachu
+        Pikachu pikachu = new Pikachu(getResources(), this, 6000, MainActivity.getScreenX() + 500);
+        gameContainer.addView(pikachu.graphic);
+        pikachuAnimation(pikachu);
+
+        //Pokeball
+        PokemonBall pokemonBall = new PokemonBall(getResources(), this, 6000, MainActivity.getScreenX() + 100);
+        gameContainer.addView(pokemonBall.graphic);
+        pokemonBallAnimation(pokemonBall);
+
+        //Grookey
+        Grookey grookey = new Grookey(getResources(), this, 6000, MainActivity.getScreenX() + 400);
+        gameContainer.addView(grookey.graphic);
+        grookeyAnimation(grookey);
+
 
 
         setContentView(gameContainer);
@@ -107,6 +128,38 @@ public class GameActivity extends AppCompatActivity {
         animator.setDuration(james.duration);
         animator.start();
     }
+
+    //Meowth animation
+    private void meowthAnimation(Meowth meowth) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(meowth.graphic, "translationX", 1300f);
+        animator.setDuration(meowth.duration);
+        animator.start();
+    }
+
+    //Pikachu animation
+    private void pikachuAnimation(Pikachu pikachu) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(pikachu.graphic, "translationX", 1300f);
+        animator.setDuration(pikachu.duration);
+        animator.start();
+    }
+
+    //Pokeball animation
+    private void pokemonBallAnimation(PokemonBall pokemonBall) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(pokemonBall.graphic, "translationX", 1300f);
+        animator.setDuration(pokemonBall.duration);
+        animator.start();
+    }
+
+    //Grookey animation
+    private void grookeyAnimation(Grookey grookey) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(grookey.graphic, "translationX", 1300f);
+        animator.setDuration(grookey.duration);
+        animator.start();
+    }
+
+
+
+
 
 
 
