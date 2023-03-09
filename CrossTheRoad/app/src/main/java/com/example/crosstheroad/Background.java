@@ -2,6 +2,7 @@ package com.example.crosstheroad;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -10,8 +11,6 @@ import java.util.List;
 public class Background {
     private int x = 0;
     private int y = 0;
-    private static int screenX;
-    private static int screenY;
     private static Bitmap background;
 
     // change to make blocks smaller/larger (should be an odd number
@@ -41,39 +40,34 @@ public class Background {
         return roadRows;
     }
 
-    Background(Resources res) {
-        background = createBitMap();
+    Background() {
+        // size of screen
+        int screenX = MainActivity.getScreenX();
+        int screenY = MainActivity.getScreenY();
+        background = createBitMap(screenX, screenY);
     }
 
-    private Bitmap createBitMap() {
-
-        // size of screen
-        screenX = MainActivity.getScreenX();
-        screenY = MainActivity.getScreenY();
-
-        // number of tiles across screen (determines size of tiles)
-        tileLength = screenX / widthInTiles;
-        System.out.println("TILELENGTH: " + tileLength);
+    private Bitmap createBitMap(int screenX, int screenY) {
 
         // MAP USING BITMAP
         Bitmap.Config config = Bitmap.Config.ARGB_8888;
 
-        int[][] tileColors = getColors();
-
         Bitmap bmap;
         bmap = Bitmap.createBitmap(screenX, screenY, config);
+
+        setTileDisplay(bmap, screenX, screenY);
+//        showStartTile(bmap, screenX, screenY);
+
+        return bmap;
+    }
+
+    private void setTileDisplay(Bitmap bmap, int screenX, int screenY) {
+        tileLength = screenX / widthInTiles;
+        System.out.println("TILELENGTH: " + tileLength);
+
+        int[][] tileColors = getColors();
+
         int row = 0;
-        int col = 0;
-
-        // to display correct graphics: maybe create a condition for which row you're on:
-        // to access a certain row:
-        // first pixel of the row = tileLength * number of the row
-        // then for that row, set all the tile graphics to the correct one
-        // there might be a more efficient way, thats just an idea
-
-
-        // display the blocks on the bitmap // for my/our reference
-        // for each row
         for (int i = 0; i < screenX; i += tileLength) {
 
             // for each column
@@ -128,10 +122,10 @@ public class Background {
                 row++;
             }
             row = 0;
-            col++;
         }
+    }
 
-        // show which tile should be the starting tile
+    private void showStartTile(Bitmap bmap, int screenX, int screenY) {
         int[] startColor = new int[tileLength * tileLength];
         for (int i = 0; i < startColor.length; i++) {
             startColor[i] = Color.RED;
@@ -139,23 +133,22 @@ public class Background {
         bmap.setPixels(startColor, 0, tileLength,
                 tileLength * ((screenX / tileLength) / 2),
                 tileLength * (screenY / tileLength - 1), tileLength, tileLength);
-
-        return bmap;
     }
 
     private int[][] getColors() {
         // 0 = safe, 1 = road, 2 = river, 3 = goal
-        Bitmap river = MainActivity.getRiverBmap();
-        Bitmap safe = MainActivity.getSandBmap();
-        Bitmap grass = MainActivity.getGrassBmap();
-        Bitmap road = MainActivity.getRoadBmap();
+        Resources r = MainActivity.getMAResources();
+        Bitmap river = BitmapFactory.decodeResource(r, R.drawable.water_tile);
+        Bitmap grass = BitmapFactory.decodeResource(r, R.drawable.grass_tile);
+        Bitmap safe = BitmapFactory.decodeResource(r, R.drawable.sand_tile);
+        Bitmap road = BitmapFactory.decodeResource(r, R.drawable.road1);
+
         int[][] tileColors = new int[4][];
+
         int[] safeColors = new int[tileLength * tileLength];
         safe.getPixels(safeColors, 0, tileLength, 0, 0,
                 tileLength, tileLength);
         tileColors[0] = safeColors;
-
-        int row = 1;
 
         int[] roadColors = new int[tileLength * tileLength];
         road.getPixels(roadColors, 0, tileLength,
@@ -171,6 +164,7 @@ public class Background {
         grass.getPixels(goalColors, 0, tileLength, 0, 0,
                 tileLength, tileLength);
         tileColors[3] = goalColors;
+
         return tileColors;
     }
 
@@ -180,14 +174,6 @@ public class Background {
 
     public int getY() {
         return y;
-    }
-
-    public static int getScreenX() {
-        return screenX;
-    }
-
-    public static int getScreenY() {
-        return screenY;
     }
 
     public Bitmap getBackground() {
