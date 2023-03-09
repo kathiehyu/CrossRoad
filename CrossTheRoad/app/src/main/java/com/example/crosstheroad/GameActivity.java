@@ -103,7 +103,7 @@ public class GameActivity extends AppCompatActivity {
         int x = Background.getTileLength()
                 * (MainActivity.getScreenX() / Background.getTileLength() / 2);
         int y = Background.getTileLength()
-                * (MainActivity.getScreenY() / Background.getTileLength() - 1);
+                * (MainActivity.getScreenY() / Background.getTileLength() - 2);
         Movement.setCharX(x);
         Movement.setCharY(y);
 

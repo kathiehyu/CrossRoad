@@ -19,7 +19,7 @@ public class Jessie extends RoadObstacle {
         ImageView graphic = new ImageView(super.context);
 //        graphic.setMaxWidth(Background.getTileLength() + 100);
 //        graphic.setMaxHeight(Background.getTileLength());
-        FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(Background.getTileLength() + 50, Background.getTileLength(), Gravity.LEFT);
+        FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(Background.getTileLength(), Background.getTileLength(), Gravity.LEFT);
 
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(super.r.getDrawable(R.drawable.jessie));
