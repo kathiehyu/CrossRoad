@@ -3,6 +3,7 @@ package com.example.crosstheroad;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -74,10 +75,29 @@ public class GameActivity extends AppCompatActivity {
         gameContainer.addView(scoreContainer);
         gameContainer.addView(buttons);
 
+        System.out.println("CREATING WATERBALL");
+        Jessie wb1 = new Jessie(getResources(), this, 6000, MainActivity.getScreenX());
+        System.out.println("WATERBALL CREATED");
+
+        System.out.println(wb1.graphic.getWidth());
+        gameContainer.addView(wb1.graphic);
+        animation(wb1);
+
         setContentView(gameContainer);
         // crashes the app??? cries
         scoreDisplay.setText(Integer.toString(score));
     }
+
+    private void animation(Jessie wb) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(wb.graphic, "translationX", 1300f);
+        animator.setDuration(wb.duration);
+        animator.start();
+        System.out.println("ANIMATOR STARTED");
+    }
+
+//    private void setTranslationX(int x) {
+//        MainActivity.getScreenX();
+//    }
 
     private void setStartConditions() {
         int x = Background.getTileLength()
