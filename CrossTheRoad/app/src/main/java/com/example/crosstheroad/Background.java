@@ -19,10 +19,10 @@ public class Background {
     private static int tileLength;
 
     // row numbers for each of the 'tiles'
-    private static List<Integer> riverRows = Arrays.asList(1, 2, 3, 4, 5, 6);
-    private static List<Integer> safeRows = Arrays.asList(7, 10, 14, 15, 16);
+    private static List<Integer> riverRows = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+    private static List<Integer> safeRows = Arrays.asList(8, 14, 15, 16);
     private static List<Integer> goalRows = Arrays.asList(0);
-    private static  List<Integer> roadRows = Arrays.asList( 8, 9, 11, 12, 13);
+    private static  List<Integer> roadRows = Arrays.asList(9, 10, 11, 12, 13);
 
     public static List<Integer> getRiverRows() {
         return riverRows;
