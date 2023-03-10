@@ -75,93 +75,12 @@ public class GameActivity extends AppCompatActivity {
         gameContainer.addView(scoreContainer);
         gameContainer.addView(buttons);
 
-
-        //Jessie
-        Jessie wb1 = new Jessie(getResources(), this, 6000, MainActivity.getScreenX());
-        System.out.println(wb1.graphic.getWidth());
-        gameContainer.addView(wb1.graphic);
-        jessieAnimation(wb1);
-
-        //James
-        James james = new James(getResources(), this, 6000, MainActivity.getScreenX() + 100);
-        gameContainer.addView(james.graphic);
-        jamesAnimation(james);
-
-        //Meowth
-        Meowth meowth = new Meowth(getResources(), this, 6000, MainActivity.getScreenX() + 250);
-        gameContainer.addView(meowth.graphic);
-        meowthAnimation(meowth);
-
-
-        //Pikachu
-        Pikachu pikachu = new Pikachu(getResources(), this, 6000, MainActivity.getScreenX() + 500);
-        gameContainer.addView(pikachu.graphic);
-        pikachuAnimation(pikachu);
-
-        //Pokeball
-        PokemonBall pokemonBall = new PokemonBall(getResources(), this, 6000, MainActivity.getScreenX() + 100);
-        gameContainer.addView(pokemonBall.graphic);
-        pokemonBallAnimation(pokemonBall);
-
-        //Grookey
-        Grookey grookey = new Grookey(getResources(), this, 6000, MainActivity.getScreenX() + 400);
-        gameContainer.addView(grookey.graphic);
-        grookeyAnimation(grookey);
-
-
+        createRoadObstacles(gameContainer);
 
         setContentView(gameContainer);
         // crashes the app??? cries
         scoreDisplay.setText(Integer.toString(score));
     }
-    //Jessie Animation??
-    private void jessieAnimation(Jessie wb) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(wb.graphic, "translationX", 1300f);
-        animator.setDuration(wb.duration);
-        animator.start();
-        System.out.println("ANIMATOR STARTED");
-    }
-
-    //James animation
-    private void jamesAnimation(James james) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(james.graphic, "translationX", 1300f);
-        animator.setDuration(james.duration);
-        animator.start();
-    }
-
-    //Meowth animation
-    private void meowthAnimation(Meowth meowth) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(meowth.graphic, "translationX", 1300f);
-        animator.setDuration(meowth.duration);
-        animator.start();
-    }
-
-    //Pikachu animation
-    private void pikachuAnimation(Pikachu pikachu) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(pikachu.graphic, "translationX", 1300f);
-        animator.setDuration(pikachu.duration);
-        animator.start();
-    }
-
-    //Pokeball animation
-    private void pokemonBallAnimation(PokemonBall pokemonBall) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(pokemonBall.graphic, "translationX", 1300f);
-        animator.setDuration(pokemonBall.duration);
-        animator.start();
-    }
-
-    //Grookey animation
-    private void grookeyAnimation(Grookey grookey) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(grookey.graphic, "translationX", 1300f);
-        animator.setDuration(grookey.duration);
-        animator.start();
-    }
-
-
-
-
-
-
 
     private void setStartConditions() {
         int x = Background.getTileLength()
@@ -174,6 +93,35 @@ public class GameActivity extends AppCompatActivity {
         score = 0;
         currentRow = 11;
         highestRow = 11;
+    }
+
+    private void createRoadObstacles(FrameLayout gameContainer) {
+        //Jessie
+        Jessie jessie = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
+        System.out.println(jessie.graphic.getWidth());
+        gameContainer.addView(jessie.graphic);
+        jessie.setAnimation();
+
+        //James
+        James james = new James(getResources(), this, 6000, Background.getTileLength() * 10);
+        gameContainer.addView(james.graphic);
+        james.setAnimation();
+
+        //Meowth
+        Meowth meowth = new Meowth(getResources(), this, 6000, Background.getTileLength() * 11);
+        gameContainer.addView(meowth.graphic);
+        meowth.setAnimation();
+
+
+        //Wobuffet
+        Wobuffet wobuffet = new Wobuffet(getResources(), this, 4000, Background.getTileLength() * 12);
+        gameContainer.addView(wobuffet.graphic);
+        wobuffet.setAnimation();
+
+        //Grookey
+        Grookey grookey = new Grookey(getResources(), this, 3000, Background.getTileLength() * 13);
+        gameContainer.addView(grookey.graphic);
+        grookey.setAnimation();
     }
 
     private void configureButtons(Button up, Button down, Button left, Button right) {

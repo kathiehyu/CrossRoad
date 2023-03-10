@@ -1,4 +1,5 @@
 package com.example.crosstheroad;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.Gravity;
@@ -8,7 +9,7 @@ public class Grookey extends RoadObstacle {
     Grookey (Resources r, Context context, int duration, int y) {
         super(r, context, duration);
         setGraphic();
-        graphic.setX(-Background.getTileLength());
+//        graphic.setX(-Background.getTileLength());
         graphic.setY(y);
     }
 
@@ -20,5 +21,12 @@ public class Grookey extends RoadObstacle {
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(super.r.getDrawable(R.drawable.grookey));
         super.graphic = graphic;
+    }
+
+    @Override
+    public void setAnimation() {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(this.graphic, "translationX", (float) MainActivity.getScreenX(),(float) -MainActivity.getScreenX());
+        animator.setDuration(this.duration);
+        animator.start();
     }
 }

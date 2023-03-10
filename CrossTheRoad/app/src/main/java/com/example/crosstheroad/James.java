@@ -1,5 +1,6 @@
 package com.example.crosstheroad;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.Gravity;
@@ -9,17 +10,26 @@ public class James extends RoadObstacle {
     James (Resources r, Context context, int duration, int y) {
         super(r, context, duration);
         setGraphic();
-        graphic.setX(-Background.getTileLength());
+//        graphic.setX(-Background.getTileLength());
         graphic.setY(y);
     }
 
     @Override
     void setGraphic() {
         ImageView graphic = new ImageView(super.context);
-        FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(Background.getTileLength(),
+        FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(Background.getTileLength() * 2,
                                                 Background.getTileLength(), Gravity.RIGHT);
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(super.r.getDrawable(R.drawable.james));
         super.graphic = graphic;
+    }
+
+    //James animation
+    @Override
+    public void setAnimation() {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(this.graphic, "translationX",
+                (float) MainActivity.getScreenX(),(float) -MainActivity.getScreenX());
+        animator.setDuration(this.duration);
+        animator.start();
     }
 }
