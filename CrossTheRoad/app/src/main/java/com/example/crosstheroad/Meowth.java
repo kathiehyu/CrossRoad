@@ -1,4 +1,5 @@
 package com.example.crosstheroad;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.Gravity;
@@ -8,7 +9,7 @@ public class Meowth extends RoadObstacle {
     Meowth (Resources r, Context context, int duration, int y) {
         super(r, context, duration);
         setGraphic();
-        graphic.setX(-Background.getTileLength());
+//        graphic.setX(-Background.getTileLength());
         graphic.setY(y);
     }
 
@@ -20,6 +21,13 @@ public class Meowth extends RoadObstacle {
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(super.r.getDrawable(R.drawable.meowth));
         super.graphic = graphic;
+    }
+
+    @Override
+    public void setAnimation() {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(this.graphic, "translationX", 1300f);
+        animator.setDuration(this.duration);
+        animator.start();
     }
 }
 
