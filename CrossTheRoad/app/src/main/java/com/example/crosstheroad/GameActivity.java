@@ -91,8 +91,8 @@ public class GameActivity extends AppCompatActivity {
         Movement.setCharY(y);
 
         score = 0;
-        currentRow = 11;
-        highestRow = 11;
+        currentRow = 15;
+        highestRow = 15;
     }
 
     private void createRoadObstacles(FrameLayout gameContainer) {
@@ -178,16 +178,31 @@ public class GameActivity extends AppCompatActivity {
         System.out.println("CURRENT ROW: " + Integer.toString(currentRow));
         System.out.println("HIGHEST ROW: " + Integer.toString(highestRow));
         if (currentRow < highestRow) {
-            // find what row you just passed (what row you are on)
-            if (Background.getRiverRows().contains(currentRow)) {
-                score += riverScore;
-            } else if (Background.getRoadRows().contains(currentRow)) {
-                score += roadScore;
-            } else if (Background.getSafeRows().contains(currentRow)) {
-                score += safeScore;
-            } else if (Background.getGoalRows().contains(currentRow)) {
-                score += goalScore;
+
+            if (currentRow == 9) {
+                score += 4;
+            } else if (currentRow == 10) {
+                score += 3;
+            } else if (currentRow == 11) {
+                score += 1;
+            } else if (currentRow == 12) {
+                score += 1;
+            } else if (currentRow == 13) {
+                score += 2;
             }
+
+
+            // find what row you just passed (what row you are on)
+            //if (Background.getRiverRows().contains(currentRow)) {
+            //    score += riverScore;
+            //}
+            //else if (Background.getRoadRows().contains(currentRow)) {
+               // score += roadScore;
+            //} else if (Background.getSafeRows().contains(currentRow)) {
+            //      score += safeScore;
+          //  } else if (Background.getGoalRows().contains(currentRow)) {
+            //     score += goalScore;
+          //  }
             highestRow = currentRow;
             scoreDisplay.setText(Integer.toString(score));
         }
