@@ -1,6 +1,7 @@
 package com.example.crosstheroad;
 
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.Gravity;
@@ -31,5 +32,7 @@ public class James extends RoadObstacle {
                 (float) MainActivity.getScreenX(),(float) -MainActivity.getScreenX());
         animator.setDuration(this.duration);
         animator.start();
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.setRepeatMode(ValueAnimator.RESTART);
     }
 }
