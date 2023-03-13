@@ -86,7 +86,7 @@ public class GameActivity extends AppCompatActivity {
         int x = Background.getTileLength()
                 * (MainActivity.getScreenX() / Background.getTileLength() / 2);
         int y = Background.getTileLength()
-                * (MainActivity.getScreenY() / Background.getTileLength() - 2);
+                * (MainActivity.getScreenY() / Background.getTileLength() - 1);
         Movement.setCharX(x);
         Movement.setCharY(y);
 
@@ -180,15 +180,17 @@ public class GameActivity extends AppCompatActivity {
         if (currentRow < highestRow) {
 
             if (currentRow == 9) {
-                score += 4;
+                score += 1; // safe tiles
             } else if (currentRow == 10) {
-                score += 3;
+                score += 6; // Jessi
             } else if (currentRow == 11) {
-                score += 1;
+                score += 5; // James
             } else if (currentRow == 12) {
-                score += 1;
+                score += 3; // Meowth
             } else if (currentRow == 13) {
-                score += 2;
+                score += 3; // Wobuffet
+            } else if (currentRow == 14) {
+                score += 4; // Grookey
             }
 
 
