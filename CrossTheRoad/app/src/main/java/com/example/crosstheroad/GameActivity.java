@@ -20,13 +20,11 @@ import android.widget.TextView;
  */
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
-    private static int score;
-    private static int currentRow;
-    private static int highestRow;
+    private static int score = 0;
+    private static int currentRow = 15;
+    private static int highestRow = 15;
     private TextView scoreDisplay;
-    private int riverScore = 5;
-    private int roadScore = 6;
-    private int safeScore = 3;
+    private static int safeScore = 1;
     private int goalScore = 8;
 
     @SuppressLint({"MissingInflatedId", "ResourceType"})
@@ -140,20 +138,19 @@ public class GameActivity extends AppCompatActivity {
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int y = gameView.getCharY() - Background.getTileLength();
-                Movement.setCharY(y);
-                if (Movement.validateMovement(gameView.getCharX(), y)) {
+                boolean checkMoveUp = Movement.moveUp();
+                if (checkMoveUp) {
                     currentRow--;
                     updateScore();
+                    scoreDisplay.setText(Integer.toString(score));
                 }
             }
         });
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int y = gameView.getCharY() + Background.getTileLength();
-                Movement.setCharY(y);
-                if (Movement.validateMovement(gameView.getCharX(), y)) {
+                boolean checkMoveDown = Movement.moveDown();
+                if (checkMoveDown) {
                     currentRow++;
                 }
             }
@@ -161,26 +158,24 @@ public class GameActivity extends AppCompatActivity {
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Movement.setCharX(gameView.getCharX()
-                        - Background.getTileLength());
+                Movement.moveLeft();
             }
         });
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Movement.setCharX(gameView.getCharX()
-                        + Background.getTileLength());
+                Movement.moveRight();
             }
         });
     }
 
-    private int updateScore() {
+    public static int updateScore() {
         System.out.println("CURRENT ROW: " + Integer.toString(currentRow));
         System.out.println("HIGHEST ROW: " + Integer.toString(highestRow));
         if (currentRow < highestRow) {
 
             if (currentRow == 9) {
-                score += 1; // safe tiles
+                score += safeScore; // safe tiles
             } else if (currentRow == 10) {
                 score += 6; // Jessi
             } else if (currentRow == 11) {
@@ -193,23 +188,27 @@ public class GameActivity extends AppCompatActivity {
                 score += 4; // Grookey
             }
 
-
-            // find what row you just passed (what row you are on)
-            //if (Background.getRiverRows().contains(currentRow)) {
-            //    score += riverScore;
-            //}
-            //else if (Background.getRoadRows().contains(currentRow)) {
-               // score += roadScore;
-            //} else if (Background.getSafeRows().contains(currentRow)) {
-            //      score += safeScore;
-          //  } else if (Background.getGoalRows().contains(currentRow)) {
-            //     score += goalScore;
-          //  }
             highestRow = currentRow;
-            scoreDisplay.setText(Integer.toString(score));
+            //scoreDisplay.setText(Integer.toString(score));
         }
         System.out.println("SCORE: " + Integer.toString(score));
         return score;
+    }
+
+    /**
+     * This method returns the current score
+     * @return current score
+     */
+    public static int getScore() {
+        return score;
+    }
+
+    /**
+     * This method sets the current row
+     * @param row current row
+     */
+    public static void setCurrentRow(int row) {
+        currentRow = row;
     }
 
     @Override
