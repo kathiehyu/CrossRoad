@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class Sprint3Test7 {
+public class Sprint3Test8 {
     /***
-     * Test if the updated score equals the actual score at beginning of game
+     * Test if the updated score equals the actual score
      */
     @Test
     public void testUpdateScore() {
