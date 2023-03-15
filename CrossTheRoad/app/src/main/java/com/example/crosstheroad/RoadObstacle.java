@@ -9,7 +9,7 @@ import android.widget.ImageView;
 public abstract class RoadObstacle {
     // the higher the duration, the slower the obstacle
     protected int duration;
-    protected ImageView graphic;
+    public ImageView graphic;
     protected Resources r;
     protected Context context;
     RoadObstacle(Resources r, Context context, int duration) {

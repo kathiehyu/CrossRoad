@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 public class Jessie extends RoadObstacle {
-    Jessie(Resources r, Context context, int duration, int y) {
+    public Jessie(Resources r, Context context, int duration, int y) {
         super(r, context, duration);
         setGraphic();
 //        graphic.setX(-Background.getTileLength());
@@ -17,7 +17,7 @@ public class Jessie extends RoadObstacle {
     }
 
     @Override
-    protected void setGraphic() {
+    public void setGraphic() {
         ImageView graphic = new ImageView(super.context);
         FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(Background.getTileLength() * 3, Background.getTileLength(), Gravity.LEFT);
 
