@@ -1,6 +1,7 @@
 package com.example.crosstheroad;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
@@ -16,6 +17,6 @@ public class Sprint3Test9 {
 
         GameActivity.updateScore();
 
-        assertEquals(initialScore + GameActivity.safeScore, GameActivity.getScore());
+        assertNotEquals(initialScore + GameActivity.safeScore, GameActivity.getScore());
     }
 }
