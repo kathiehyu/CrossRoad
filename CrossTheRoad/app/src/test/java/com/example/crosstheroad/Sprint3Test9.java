@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class Sprint3Test9 {
     /***
-     * Test if the updated score equals the actual score
+     * Test whether the score variable is updated correctly or not
      */
     @Test
     public void testUpdateScore() {
