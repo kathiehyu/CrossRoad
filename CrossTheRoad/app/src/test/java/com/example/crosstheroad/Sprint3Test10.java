@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 
 import org.junit.Test;
 
+
 public class Sprint3Test10 {
     /***
      * current row 8 and highest row 15 so char on safe tile, checks if expected score equals the actual score

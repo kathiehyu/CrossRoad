@@ -12,6 +12,7 @@ public class Sprint3Test11 {
      * tests that the characterChoice method returns false when passed a null argument
      */
 
+
     @Test
     public void testCharacterChoice() {
         assertFalse(Configuration.characterChoice(null));
