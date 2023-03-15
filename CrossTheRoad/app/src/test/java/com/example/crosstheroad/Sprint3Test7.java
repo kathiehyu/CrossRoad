@@ -10,7 +10,7 @@ public class Sprint3Test7 {
      */
     @Test
     public void testUpdateScore() {
-        GameActivity.currentRow = 8;
+        GameActivity.setCurrentRow(8);
         int expectedScore = 0;
         int actualScore = GameActivity.updateScore();
         assertEquals(expectedScore, actualScore);
