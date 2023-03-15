@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import com.example.crosstheroad.GameActivity;
 
-public class Sprint3Test6 {
+public class Sprint3Test6{
     /***
      * Test the initial score
      */
