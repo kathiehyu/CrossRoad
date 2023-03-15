@@ -24,7 +24,7 @@ public class GameActivity extends AppCompatActivity {
     public static int currentRow = 15;
     public static int highestRow = 15;
     private TextView scoreDisplay;
-    private static int safeScore = 1;
+    static int safeScore = 1;
     private int goalScore = 8;
 
     @SuppressLint({"MissingInflatedId", "ResourceType"})
