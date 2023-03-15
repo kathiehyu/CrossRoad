@@ -84,7 +84,7 @@ public class GameActivity extends AppCompatActivity {
         int x = Background.getTileLength()
                 * (MainActivity.getScreenX() / Background.getTileLength() / 2);
         int y = Background.getTileLength()
-                * (MainActivity.getScreenY() / Background.getTileLength() - 1);
+                * (MainActivity.getScreenY() / Background.getTileLength() - 2);
         Movement.setCharX(x);
         Movement.setCharY(y);
 
@@ -96,30 +96,78 @@ public class GameActivity extends AppCompatActivity {
     private void createRoadObstacles(FrameLayout gameContainer) {
         //Jessie
         Jessie jessie = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
-        System.out.println(jessie.graphic.getWidth());
         gameContainer.addView(jessie.graphic);
-        jessie.setAnimation();
+        jessie.setAnimation(0);
+
+        //Jessie2
+        Jessie jessie2 = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
+        gameContainer.addView(jessie2.graphic);
+        jessie2.setAnimation(3000);
+
+
 
         //James
         James james = new James(getResources(), this, 6000, Background.getTileLength() * 10);
         gameContainer.addView(james.graphic);
-        james.setAnimation();
+        james.setAnimation(0);
+
+        //James2
+        James james2 = new James(getResources(), this, 6000, Background.getTileLength() * 10);
+        gameContainer.addView(james2.graphic);
+        james2.setAnimation(2000);
+
+
+
 
         //Meowth
-        Meowth meowth = new Meowth(getResources(), this, 6000, Background.getTileLength() * 11);
+        Meowth meowth = new Meowth(getResources(), this, 3000, Background.getTileLength() * 11);
         gameContainer.addView(meowth.graphic);
-        meowth.setAnimation();
+        meowth.setAnimation(0);
+
+        //Meowth2
+        Meowth meowth2 = new Meowth(getResources(), this, 3000, Background.getTileLength() * 11);
+        gameContainer.addView(meowth2.graphic);
+        meowth2.setAnimation(3000);
+
+
+
 
 
         //Wobuffet
-        Wobuffet wobuffet = new Wobuffet(getResources(), this, 4000, Background.getTileLength() * 12);
+        Wobuffet wobuffet = new Wobuffet(getResources(), this, 6000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet.graphic);
-        wobuffet.setAnimation();
+        wobuffet.setAnimation(1000);
+
+        //Wobuffet2
+        Wobuffet wobuffet2 = new Wobuffet(getResources(), this, 6000, Background.getTileLength() * 12);
+        gameContainer.addView(wobuffet2.graphic);
+        wobuffet2.setAnimation(1500);
+
+        //Wobuffet3
+        Wobuffet wobuffet3 = new Wobuffet(getResources(), this, 6000, Background.getTileLength() * 12);
+        gameContainer.addView(wobuffet3.graphic);
+        wobuffet3.setAnimation(2000);
+
+
+
+
 
         //Grookey
-        Grookey grookey = new Grookey(getResources(), this, 3000, Background.getTileLength() * 13);
+        Grookey grookey = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
         gameContainer.addView(grookey.graphic);
-        grookey.setAnimation();
+        grookey.setAnimation(0);
+
+        //Grookey2
+        Grookey grookey2 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
+        gameContainer.addView(grookey2.graphic);
+        grookey2.setAnimation(1000);
+
+        //Grookey3
+        Grookey grookey3 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
+        gameContainer.addView(grookey3.graphic);
+        grookey3.setAnimation(2000);
+
+
     }
 
     private void configureButtons(Button up, Button down, Button left, Button right) {
@@ -174,22 +222,19 @@ public class GameActivity extends AppCompatActivity {
         System.out.println("HIGHEST ROW: " + Integer.toString(highestRow));
         if (currentRow < highestRow) {
 
-            if (currentRow == 9) {
-                score += safeScore; // safe tiles
-            } else if (currentRow == 10) {
-                score += 6; // Jessi
+            if (currentRow == 10) {
+                score += 4; // Jessi
             } else if (currentRow == 11) {
-                score += 5; // James
+                score += 3; // James
             } else if (currentRow == 12) {
-                score += 3; // Meowth
+                score += 1; // Meowth
             } else if (currentRow == 13) {
-                score += 3; // Wobuffet
+                score += 1; // Wobuffet
             } else if (currentRow == 14) {
-                score += 4; // Grookey
+                score += 2; // Grookey
             }
 
             highestRow = currentRow;
-            //scoreDisplay.setText(Integer.toString(score));
         }
         System.out.println("SCORE: " + Integer.toString(score));
         return score;

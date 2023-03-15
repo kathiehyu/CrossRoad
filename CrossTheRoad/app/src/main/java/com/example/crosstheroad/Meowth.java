@@ -25,9 +25,10 @@ public class Meowth extends RoadObstacle {
     }
 
     @Override
-    public void setAnimation() {
+    public void setAnimation(int x) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(this.graphic, "translationX", (float) -MainActivity.getScreenX(),(float) MainActivity.getScreenX());
         animator.setDuration(this.duration);
+        animator.setStartDelay(x);
         animator.start();
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
