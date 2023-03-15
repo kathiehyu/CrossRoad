@@ -136,17 +136,17 @@ public class GameActivity extends AppCompatActivity {
         //Wobuffet
         Wobuffet wobuffet = new Wobuffet(getResources(), this, 6000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet.graphic);
-        wobuffet.setAnimation(1000);
+        wobuffet.setAnimation(0);
 
         //Wobuffet2
         Wobuffet wobuffet2 = new Wobuffet(getResources(), this, 6000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet2.graphic);
-        wobuffet2.setAnimation(1500);
+        wobuffet2.setAnimation(500);
 
         //Wobuffet3
         Wobuffet wobuffet3 = new Wobuffet(getResources(), this, 6000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet3.graphic);
-        wobuffet3.setAnimation(2000);
+        wobuffet3.setAnimation(1000);
 
 
 
