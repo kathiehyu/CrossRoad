@@ -21,8 +21,8 @@ import android.widget.TextView;
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
     private static int score = 0;
-    private static int currentRow = 15;
-    private static int highestRow = 15;
+    public static int currentRow = 15;
+    public static int highestRow = 15;
     private TextView scoreDisplay;
     private static int safeScore = 1;
     private int goalScore = 8;

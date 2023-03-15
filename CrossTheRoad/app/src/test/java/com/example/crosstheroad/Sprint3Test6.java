@@ -1,22 +1,17 @@
 package com.example.crosstheroad;
-import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import com.example.crosstheroad.GameActivity;
 
-public class Sprint3Test5 {
-    @Before
-    public void setRow13() {
-        GameActivity.setCurrentRow(14);
-        GameActivity.updateScore();
-        GameActivity.setCurrentRow(13);
-        GameActivity.updateScore();
-    }
-
+public class Sprint3Test6{
+    /***
+     * Test the initial score
+     */
     @Test
-    public void moveDownFromRow13to12() {
-        GameActivity.setCurrentRow(12);
-        assertEquals(7, GameActivity.getScore());
+    public void testUpdateScore() {
+        // Test the initial score
+        int initialScore = GameActivity.updateScore();
+        assertEquals(0, initialScore);
     }
 }
