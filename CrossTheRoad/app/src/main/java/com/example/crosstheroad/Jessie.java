@@ -29,7 +29,7 @@ public class Jessie extends RoadObstacle {
     //Jessie Animation??
     @Override
     public void setAnimation(int x) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(this.graphic, "translationX", (float) -MainActivity.getScreenX(),(float) MainActivity.getScreenX());
+        ObjectAnimator animator = ObjectAnimator.ofFloat(this.graphic, "translationX", (float) -MainActivity.getScreenX() + 500,(float) MainActivity.getScreenX() + 500);
         animator.setDuration(this.duration);
         animator.setStartDelay(x);
         animator.start();
