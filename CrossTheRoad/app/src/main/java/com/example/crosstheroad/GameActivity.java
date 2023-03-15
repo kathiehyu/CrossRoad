@@ -2,13 +2,10 @@ package com.example.crosstheroad;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-
-import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -21,10 +18,11 @@ import android.widget.TextView;
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
     private static int score = 0;
-    public static int currentRow = 15;
-    public static int highestRow = 15;
+    private static int currentRow = 15;
+
+    private static int highestRow = 15;
     private TextView scoreDisplay;
-    static int safeScore = 1;
+    private static int safeScore = 1;
     private int goalScore = 8;
 
     @SuppressLint({"MissingInflatedId", "ResourceType"})
@@ -96,24 +94,24 @@ public class GameActivity extends AppCompatActivity {
     private void createRoadObstacles(FrameLayout gameContainer) {
         //Jessie
         Jessie jessie = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
-        gameContainer.addView(jessie.graphic);
+        gameContainer.addView(jessie.getGraphic());
         jessie.setAnimation(0);
 
         //Jessie2
         Jessie jessie2 = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
-        gameContainer.addView(jessie2.graphic);
+        gameContainer.addView(jessie2.getGraphic());
         jessie2.setAnimation(3000);
 
 
 
         //James
         James james = new James(getResources(), this, 6000, Background.getTileLength() * 10);
-        gameContainer.addView(james.graphic);
+        gameContainer.addView(james.getGraphic());
         james.setAnimation(0);
 
         //James2
         James james2 = new James(getResources(), this, 6000, Background.getTileLength() * 10);
-        gameContainer.addView(james2.graphic);
+        gameContainer.addView(james2.getGraphic());
         james2.setAnimation(2000);
 
 
@@ -121,12 +119,12 @@ public class GameActivity extends AppCompatActivity {
 
         //Meowth
         Meowth meowth = new Meowth(getResources(), this, 3000, Background.getTileLength() * 11);
-        gameContainer.addView(meowth.graphic);
+        gameContainer.addView(meowth.getGraphic());
         meowth.setAnimation(0);
 
         //Meowth2
         Meowth meowth2 = new Meowth(getResources(), this, 3000, Background.getTileLength() * 11);
-        gameContainer.addView(meowth2.graphic);
+        gameContainer.addView(meowth2.getGraphic());
         meowth2.setAnimation(3000);
 
 
@@ -134,37 +132,36 @@ public class GameActivity extends AppCompatActivity {
 
 
         //Wobuffet
-        Wobuffet wobuffet = new Wobuffet(getResources(), this, 6000, Background.getTileLength() * 12);
-        gameContainer.addView(wobuffet.graphic);
+        Wobuffet wobuffet = new Wobuffet(getResources(), this,
+                6000, Background.getTileLength() * 12);
+        gameContainer.addView(wobuffet.getGraphic());
         wobuffet.setAnimation(0);
 
         //Wobuffet2
-        Wobuffet wobuffet2 = new Wobuffet(getResources(), this, 6000, Background.getTileLength() * 12);
-        gameContainer.addView(wobuffet2.graphic);
+        Wobuffet wobuffet2 = new Wobuffet(getResources(), this,
+                6000, Background.getTileLength() * 12);
+        gameContainer.addView(wobuffet2.getGraphic());
         wobuffet2.setAnimation(500);
 
         //Wobuffet3
-        Wobuffet wobuffet3 = new Wobuffet(getResources(), this, 6000, Background.getTileLength() * 12);
-        gameContainer.addView(wobuffet3.graphic);
+        Wobuffet wobuffet3 = new Wobuffet(getResources(), this,
+                6000, Background.getTileLength() * 12);
+        gameContainer.addView(wobuffet3.getGraphic());
         wobuffet3.setAnimation(1000);
-
-
-
-
 
         //Grookey
         Grookey grookey = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
-        gameContainer.addView(grookey.graphic);
+        gameContainer.addView(grookey.getGraphic());
         grookey.setAnimation(0);
 
         //Grookey2
         Grookey grookey2 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
-        gameContainer.addView(grookey2.graphic);
+        gameContainer.addView(grookey2.getGraphic());
         grookey2.setAnimation(1000);
 
         //Grookey3
         Grookey grookey3 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
-        gameContainer.addView(grookey3.graphic);
+        gameContainer.addView(grookey3.getGraphic());
         grookey3.setAnimation(2000);
 
 
@@ -270,5 +267,13 @@ public class GameActivity extends AppCompatActivity {
         System.out.println("RESUMING");
         gameView.resume();
         System.out.println("resumed");
+    }
+
+    public static int getSafeScore() {
+        return safeScore;
+    }
+
+    public static void setHighestRow(int highestRow) {
+        GameActivity.highestRow = highestRow;
     }
 }
