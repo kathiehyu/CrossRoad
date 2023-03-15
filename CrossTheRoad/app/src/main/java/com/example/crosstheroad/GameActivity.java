@@ -272,4 +272,8 @@ public class GameActivity extends AppCompatActivity {
     public static int getSafeScore() {
         return safeScore;
     }
+
+    public static void setHighestRow(int highestRow) {
+        GameActivity.highestRow = highestRow;
+    }
 }
