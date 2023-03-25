@@ -54,7 +54,7 @@ public class GameView extends SurfaceView implements Runnable {
                     background1.getX(), background1.getY(), paint);
 
 
-            System.out.println("trying to draw character");
+            //System.out.println("trying to draw character");
             assert Character.getChar() != null;
             canvas.drawBitmap(Character.getChar(), Movement.getCharX(), Movement.getCharY(), paint);
 

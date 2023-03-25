@@ -47,12 +47,12 @@ public class GameScreen extends AppCompatActivity {
         // set numLives
         if (checkDifferentLife(Configuration.selectedDifficulty.getId(),
                 inflatedView.findViewById(R.id.eas).getId())) {
-            numLives.setText("1");
+            numLives.setText("3");
         } else if (checkDifferentLife(Configuration.selectedDifficulty.getId(),
                 inflatedView.findViewById(R.id.med).getId())) {
             numLives.setText("2");
         } else {
-            numLives.setText("3");
+            numLives.setText("1");
         }
 
         //display character sprite

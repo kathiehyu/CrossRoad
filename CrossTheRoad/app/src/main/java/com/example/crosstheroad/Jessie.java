@@ -3,6 +3,7 @@ package com.example.crosstheroad;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.view.Gravity;
 import android.widget.FrameLayout;
@@ -36,7 +37,9 @@ public class Jessie extends RoadObstacle {
         animator.setDuration(this.duration);
         animator.setStartDelay(x);
         animator.start();
+
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
     }
+
 }
