@@ -10,23 +10,26 @@ public class Wobuffet extends RoadObstacle {
     Wobuffet(Resources r, Context context, int duration, int y) {
         super(r, context, duration);
         setGraphic();
-//        graphic.setX(-Background.getTileLength());
-        graphic.setY(y);
+        getGraphic().setY(y);
     }
 
     @Override
     void setGraphic() {
         ImageView graphic = new ImageView(super.context);
-        FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(Background.getTileLength(),
+        FrameLayout.LayoutParams frameParams = new
+                FrameLayout.LayoutParams(Background.getTileLength(),
                 Background.getTileLength(), Gravity.LEFT);
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(super.r.getDrawable(R.drawable.wobbuffet));
-        super.graphic = graphic;
+        super.setGraphic1(graphic);
     }
 
     @Override
     public void setAnimation(int x) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(this.graphic, "translationX", (float) -MainActivity.getScreenX() + 500,(float) MainActivity.getScreenX() + 500);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(this.getGraphic(),
+                "translationX",
+                (float) -MainActivity.getScreenX() + 500,
+                (float) MainActivity.getScreenX() + 500);
         animator.setDuration(this.duration);
         animator.setStartDelay(x);
         animator.start();

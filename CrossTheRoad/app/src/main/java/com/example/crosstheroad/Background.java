@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 public class Background {
@@ -56,8 +55,6 @@ public class Background {
         bmap = Bitmap.createBitmap(screenX, screenY, config);
 
         setTileDisplay(bmap, screenX, screenY);
-//        showStartTile(bmap, screenX, screenY);
-
         return bmap;
     }
 
@@ -109,7 +106,7 @@ public class Background {
                                 tileLength, i, j, tileLength, tileLength);
                     }
                     // road tiles
-                } else if (roadRows.contains(row)){
+                } else if (roadRows.contains(row)) {
                     // if rightmost tile
                     if (i + tileLength >= screenX) {
                         bmap.setPixels(tileColors[1], 0,
