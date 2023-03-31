@@ -19,14 +19,21 @@ import android.widget.TextView;
  */
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
+<<<<<<< Updated upstream
     private static int score;
     private static int currentRow;
+=======
+    private static int score = 0;
+
+>>>>>>> Stashed changes
     private static int highestRow;
     private TextView scoreDisplay;
     private int riverScore = 5;
     private int roadScore = 6;
     private int safeScore = 3;
     private int goalScore = 8;
+
+    private static Movement movement;
 
     @SuppressLint({"MissingInflatedId", "ResourceType"})
     @Override
@@ -38,6 +45,8 @@ public class GameActivity extends AppCompatActivity {
         FrameLayout gameContainer = new FrameLayout(this);
         gameView = new GameView(this);
         LinearLayout scoreContainer = new LinearLayout(this);
+
+        movement = gameView.getMovement();
 
         setStartConditions();
 
@@ -83,6 +92,7 @@ public class GameActivity extends AppCompatActivity {
         int x = Background.getTileLength()
                 * (MainActivity.getScreenX() / Background.getTileLength() / 2);
         int y = Background.getTileLength()
+<<<<<<< Updated upstream
                 * (MainActivity.getScreenY() / Background.getTileLength() - 1);
         Movement.setCharX(x);
         Movement.setCharY(y);
@@ -90,6 +100,91 @@ public class GameActivity extends AppCompatActivity {
         score = 0;
         currentRow = 11;
         highestRow = 11;
+=======
+                * (MainActivity.getScreenY() / Background.getTileLength() - 2);
+        movement.setCharX(x);
+        movement.setCharY(y);
+
+        score = 0;
+        movement.setRow(15);
+        highestRow = 15;
+    }
+
+    private void createRoadObstacles(FrameLayout gameContainer) {
+        //Jessie
+        Jessie jessie = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
+        gameContainer.addView(jessie.getGraphic());
+        jessie.setAnimation(0);
+
+        //Jessie2
+        Jessie jessie2 = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
+        gameContainer.addView(jessie2.getGraphic());
+        jessie2.setAnimation(3000);
+
+
+
+        //James
+        James james = new James(getResources(), this, 6000, Background.getTileLength() * 10);
+        gameContainer.addView(james.getGraphic());
+        james.setAnimation(0);
+
+        //James2
+        James james2 = new James(getResources(), this, 6000, Background.getTileLength() * 10);
+        gameContainer.addView(james2.getGraphic());
+        james2.setAnimation(2000);
+
+
+
+
+        //Meowth
+        Meowth meowth = new Meowth(getResources(), this, 3000, Background.getTileLength() * 11);
+        gameContainer.addView(meowth.getGraphic());
+        meowth.setAnimation(0);
+
+        //Meowth2
+        Meowth meowth2 = new Meowth(getResources(), this, 3000, Background.getTileLength() * 11);
+        gameContainer.addView(meowth2.getGraphic());
+        meowth2.setAnimation(3000);
+
+
+
+
+
+        //Wobuffet
+        Wobuffet wobuffet = new Wobuffet(getResources(), this,
+                6000, Background.getTileLength() * 12);
+        gameContainer.addView(wobuffet.getGraphic());
+        wobuffet.setAnimation(0);
+
+        //Wobuffet2
+        Wobuffet wobuffet2 = new Wobuffet(getResources(), this,
+                6000, Background.getTileLength() * 12);
+        gameContainer.addView(wobuffet2.getGraphic());
+        wobuffet2.setAnimation(500);
+
+        //Wobuffet3
+        Wobuffet wobuffet3 = new Wobuffet(getResources(), this,
+                6000, Background.getTileLength() * 12);
+        gameContainer.addView(wobuffet3.getGraphic());
+        wobuffet3.setAnimation(1000);
+
+        //Grookey
+        Grookey grookey = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
+        gameContainer.addView(grookey.getGraphic());
+        grookey.setAnimation(0);
+
+        //Grookey2
+        Grookey grookey2 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
+        gameContainer.addView(grookey2.getGraphic());
+        grookey2.setAnimation(1000);
+
+        //Grookey3
+        Grookey grookey3 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
+        gameContainer.addView(grookey3.getGraphic());
+        grookey3.setAnimation(2000);
+
+
+>>>>>>> Stashed changes
     }
 
     private void configureButtons(Button up, Button down, Button left, Button right) {
@@ -108,10 +203,16 @@ public class GameActivity extends AppCompatActivity {
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+<<<<<<< Updated upstream
                 int y = gameView.getCharY() - Background.getTileLength();
                 Movement.setCharY(y);
                 if (Movement.validateMovement(gameView.getCharX(), y)) {
                     currentRow--;
+=======
+                boolean checkMoveUp = movement.moveUp();
+                if (checkMoveUp) {
+                    movement.setRow(movement.getRow() - 1);
+>>>>>>> Stashed changes
                     updateScore();
                 }
             }
@@ -119,29 +220,44 @@ public class GameActivity extends AppCompatActivity {
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+<<<<<<< Updated upstream
                 int y = gameView.getCharY() + Background.getTileLength();
                 Movement.setCharY(y);
                 if (Movement.validateMovement(gameView.getCharX(), y)) {
                     currentRow++;
+=======
+                boolean checkMoveDown = movement.moveDown();
+                if (checkMoveDown) {
+                    movement.setRow(movement.getRow() + 1);
+>>>>>>> Stashed changes
                 }
             }
         });
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+<<<<<<< Updated upstream
                 Movement.setCharX(gameView.getCharX()
                         - Background.getTileLength());
+=======
+                movement.moveLeft();
+>>>>>>> Stashed changes
             }
         });
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+<<<<<<< Updated upstream
                 Movement.setCharX(gameView.getCharX()
                         + Background.getTileLength());
+=======
+                movement.moveRight();
+>>>>>>> Stashed changes
             }
         });
     }
 
+<<<<<<< Updated upstream
     private int updateScore() {
         System.out.println("CURRENT ROW: " + Integer.toString(currentRow));
         System.out.println("HIGHEST ROW: " + Integer.toString(highestRow));
@@ -158,11 +274,42 @@ public class GameActivity extends AppCompatActivity {
             }
             highestRow = currentRow;
             scoreDisplay.setText(Integer.toString(score));
+=======
+    public static int updateScore() {
+        System.out.println("CURRENT ROW: " + Integer.toString(movement.getRow()));
+        System.out.println("HIGHEST ROW: " + Integer.toString(highestRow));
+        if (movement.getRow() < highestRow) {
+
+            if (movement.getRow() == 10) {
+                score += 4; // Jessi
+            } else if (movement.getRow() == 11) {
+                score += 3; // James
+            } else if (movement.getRow() == 12) {
+                score += 1; // Meowth
+            } else if (movement.getRow() == 13) {
+                score += 1; // Wobuffet
+            } else if (movement.getRow() == 14) {
+                score += 2; // Grookey
+            }
+
+            highestRow = movement.getRow();
+>>>>>>> Stashed changes
         }
         System.out.println("SCORE: " + Integer.toString(score));
         return score;
     }
 
+<<<<<<< Updated upstream
+=======
+    /**
+     * This method returns the current score
+     * @return current score
+     */
+    public static int getScore() {
+        return score;
+    }
+
+>>>>>>> Stashed changes
     @Override
     protected void onPause() {
         super.onPause();
