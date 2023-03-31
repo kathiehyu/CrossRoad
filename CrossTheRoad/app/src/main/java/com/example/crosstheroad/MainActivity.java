@@ -50,17 +50,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        setDimenstions();
+        setDimensions();
     }
 
-    private void setDimenstions() {
+    private void setDimensions() {
         DisplayMetrics display = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(display);
         screenX = display.widthPixels;
         screenY = display.heightPixels;
     }
 
-    public void openConfiguration() {
+    private void openConfiguration() {
         Intent intent = new Intent(this, Configuration.class);
         startActivity(intent);
     }

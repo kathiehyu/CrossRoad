@@ -1,11 +1,6 @@
 package com.example.crosstheroad;
 
 public class Movement {
-<<<<<<< Updated upstream
-    private static int x = 0;
-    private static int y = 0;
-    public static  void setCharX(int xIn) {
-=======
     private int x = 0;
     private int y = 0;
     private int tileLength = Background.getTileLength();
@@ -21,7 +16,6 @@ public class Movement {
     }
 
     public void setCharX(int xIn) {
->>>>>>> Stashed changes
         if (validateMovement(xIn, y)) {
             x = xIn;
         } // else : don't change x
@@ -40,13 +34,7 @@ public class Movement {
         return this.y;
     }
 
-<<<<<<< Updated upstream
-    public static boolean validateMovement(int x, int y) {
-        return !(x + Background.getTileLength() >= MainActivity.getScreenX()
-                || y + Background.getTileLength() >= MainActivity.getScreenY()
-                || x < 0 || y < 0);
-    }
-=======
+
     public boolean validateMovement(int x, int y) {
         return !(x + this.tileLength > MainActivity.getScreenX()
                 || y + this.tileLength >= MainActivity.getScreenY()
@@ -116,5 +104,4 @@ public class Movement {
         }
         return false;
     }
->>>>>>> Stashed changes
 }

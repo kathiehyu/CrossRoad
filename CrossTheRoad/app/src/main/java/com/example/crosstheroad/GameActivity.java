@@ -2,12 +2,10 @@ package com.example.crosstheroad;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -19,18 +17,12 @@ import android.widget.TextView;
  */
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
-<<<<<<< Updated upstream
-    private static int score;
-    private static int currentRow;
-=======
     private static int score = 0;
 
->>>>>>> Stashed changes
     private static int highestRow;
+
     private TextView scoreDisplay;
-    private int riverScore = 5;
-    private int roadScore = 6;
-    private int safeScore = 3;
+    private static int safeScore = 1;
     private int goalScore = 8;
 
     private static Movement movement;
@@ -83,6 +75,8 @@ public class GameActivity extends AppCompatActivity {
         gameContainer.addView(scoreContainer);
         gameContainer.addView(buttons);
 
+        createRoadObstacles(gameContainer);
+
         setContentView(gameContainer);
         // crashes the app??? cries
         scoreDisplay.setText(Integer.toString(score));
@@ -92,16 +86,8 @@ public class GameActivity extends AppCompatActivity {
         int x = Background.getTileLength()
                 * (MainActivity.getScreenX() / Background.getTileLength() / 2);
         int y = Background.getTileLength()
-<<<<<<< Updated upstream
-                * (MainActivity.getScreenY() / Background.getTileLength() - 1);
-        Movement.setCharX(x);
-        Movement.setCharY(y);
-
-        score = 0;
-        currentRow = 11;
-        highestRow = 11;
-=======
                 * (MainActivity.getScreenY() / Background.getTileLength() - 2);
+
         movement.setCharX(x);
         movement.setCharY(y);
 
@@ -182,9 +168,6 @@ public class GameActivity extends AppCompatActivity {
         Grookey grookey3 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
         gameContainer.addView(grookey3.getGraphic());
         grookey3.setAnimation(2000);
-
-
->>>>>>> Stashed changes
     }
 
     private void configureButtons(Button up, Button down, Button left, Button right) {
@@ -203,78 +186,36 @@ public class GameActivity extends AppCompatActivity {
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< Updated upstream
-                int y = gameView.getCharY() - Background.getTileLength();
-                Movement.setCharY(y);
-                if (Movement.validateMovement(gameView.getCharX(), y)) {
-                    currentRow--;
-=======
                 boolean checkMoveUp = movement.moveUp();
                 if (checkMoveUp) {
                     movement.setRow(movement.getRow() - 1);
->>>>>>> Stashed changes
                     updateScore();
+                    scoreDisplay.setText(Integer.toString(score));
                 }
             }
         });
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< Updated upstream
-                int y = gameView.getCharY() + Background.getTileLength();
-                Movement.setCharY(y);
-                if (Movement.validateMovement(gameView.getCharX(), y)) {
-                    currentRow++;
-=======
                 boolean checkMoveDown = movement.moveDown();
                 if (checkMoveDown) {
                     movement.setRow(movement.getRow() + 1);
->>>>>>> Stashed changes
                 }
             }
         });
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< Updated upstream
-                Movement.setCharX(gameView.getCharX()
-                        - Background.getTileLength());
-=======
                 movement.moveLeft();
->>>>>>> Stashed changes
             }
         });
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< Updated upstream
-                Movement.setCharX(gameView.getCharX()
-                        + Background.getTileLength());
-=======
                 movement.moveRight();
->>>>>>> Stashed changes
             }
         });
     }
-
-<<<<<<< Updated upstream
-    private int updateScore() {
-        System.out.println("CURRENT ROW: " + Integer.toString(currentRow));
-        System.out.println("HIGHEST ROW: " + Integer.toString(highestRow));
-        if (currentRow < highestRow) {
-            // find what row you just passed (what row you are on)
-            if (Background.getRiverRows().contains(currentRow)) {
-                score += riverScore;
-            } else if (Background.getRoadRows().contains(currentRow)) {
-                score += roadScore;
-            } else if (Background.getSafeRows().contains(currentRow)) {
-                score += safeScore;
-            } else if (Background.getGoalRows().contains(currentRow)) {
-                score += goalScore;
-            }
-            highestRow = currentRow;
-            scoreDisplay.setText(Integer.toString(score));
-=======
     public static int updateScore() {
         System.out.println("CURRENT ROW: " + Integer.toString(movement.getRow()));
         System.out.println("HIGHEST ROW: " + Integer.toString(highestRow));
@@ -293,14 +234,11 @@ public class GameActivity extends AppCompatActivity {
             }
 
             highestRow = movement.getRow();
->>>>>>> Stashed changes
         }
         System.out.println("SCORE: " + Integer.toString(score));
         return score;
     }
 
-<<<<<<< Updated upstream
-=======
     /**
      * This method returns the current score
      * @return current score
@@ -309,7 +247,6 @@ public class GameActivity extends AppCompatActivity {
         return score;
     }
 
->>>>>>> Stashed changes
     @Override
     protected void onPause() {
         super.onPause();
@@ -324,5 +261,13 @@ public class GameActivity extends AppCompatActivity {
         System.out.println("RESUMING");
         gameView.resume();
         System.out.println("resumed");
+    }
+
+    public static int getSafeScore() {
+        return safeScore;
+    }
+
+    public static void setHighestRow(int highestRow) {
+        GameActivity.highestRow = highestRow;
     }
 }
