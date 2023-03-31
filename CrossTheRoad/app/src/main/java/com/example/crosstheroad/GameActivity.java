@@ -18,12 +18,14 @@ import android.widget.TextView;
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
     private static int score = 0;
-    private static int currentRow = 15;
 
-    private static int highestRow = 15;
+    private static int highestRow;
+
     private TextView scoreDisplay;
     private static int safeScore = 1;
     private int goalScore = 8;
+
+    private static Movement movement;
 
     @SuppressLint({"MissingInflatedId", "ResourceType"})
     @Override
@@ -35,6 +37,8 @@ public class GameActivity extends AppCompatActivity {
         FrameLayout gameContainer = new FrameLayout(this);
         gameView = new GameView(this);
         LinearLayout scoreContainer = new LinearLayout(this);
+
+        movement = gameView.getMovement();
 
         setStartConditions();
 
@@ -83,11 +87,12 @@ public class GameActivity extends AppCompatActivity {
                 * (MainActivity.getScreenX() / Background.getTileLength() / 2);
         int y = Background.getTileLength()
                 * (MainActivity.getScreenY() / Background.getTileLength() - 2);
-        Movement.setCharX(x);
-        Movement.setCharY(y);
+
+        movement.setCharX(x);
+        movement.setCharY(y);
 
         score = 0;
-        currentRow = 15;
+        movement.setRow(15);
         highestRow = 15;
     }
 
@@ -163,8 +168,6 @@ public class GameActivity extends AppCompatActivity {
         Grookey grookey3 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
         gameContainer.addView(grookey3.getGraphic());
         grookey3.setAnimation(2000);
-
-
     }
 
     private void configureButtons(Button up, Button down, Button left, Button right) {
@@ -183,9 +186,9 @@ public class GameActivity extends AppCompatActivity {
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean checkMoveUp = Movement.moveUp();
+                boolean checkMoveUp = movement.moveUp();
                 if (checkMoveUp) {
-                    currentRow--;
+                    movement.setRow(movement.getRow() - 1);
                     updateScore();
                     scoreDisplay.setText(Integer.toString(score));
                 }
@@ -194,44 +197,43 @@ public class GameActivity extends AppCompatActivity {
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean checkMoveDown = Movement.moveDown();
+                boolean checkMoveDown = movement.moveDown();
                 if (checkMoveDown) {
-                    currentRow++;
+                    movement.setRow(movement.getRow() + 1);
                 }
             }
         });
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Movement.moveLeft();
+                movement.moveLeft();
             }
         });
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Movement.moveRight();
+                movement.moveRight();
             }
         });
     }
-
     public static int updateScore() {
-        System.out.println("CURRENT ROW: " + Integer.toString(currentRow));
+        System.out.println("CURRENT ROW: " + Integer.toString(movement.getRow()));
         System.out.println("HIGHEST ROW: " + Integer.toString(highestRow));
-        if (currentRow < highestRow) {
+        if (movement.getRow() < highestRow) {
 
-            if (currentRow == 10) {
+            if (movement.getRow() == 10) {
                 score += 4; // Jessi
-            } else if (currentRow == 11) {
+            } else if (movement.getRow() == 11) {
                 score += 3; // James
-            } else if (currentRow == 12) {
+            } else if (movement.getRow() == 12) {
                 score += 1; // Meowth
-            } else if (currentRow == 13) {
+            } else if (movement.getRow() == 13) {
                 score += 1; // Wobuffet
-            } else if (currentRow == 14) {
+            } else if (movement.getRow() == 14) {
                 score += 2; // Grookey
             }
 
-            highestRow = currentRow;
+            highestRow = movement.getRow();
         }
         System.out.println("SCORE: " + Integer.toString(score));
         return score;
@@ -243,14 +245,6 @@ public class GameActivity extends AppCompatActivity {
      */
     public static int getScore() {
         return score;
-    }
-
-    /**
-     * This method sets the current row
-     * @param row current row
-     */
-    public static void setCurrentRow(int row) {
-        currentRow = row;
     }
 
     @Override
