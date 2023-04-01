@@ -260,7 +260,7 @@ public class GameActivity extends AppCompatActivity {
                 if (checkMoveUp) {
                     movement.setRow(movement.getRow() - 1);
                     if (movement.getRow() == 8) {
-                        setStartConditions();
+                        setStartConditions(true);
                     }
                     updateScore();
                     scoreDisplay.setText(Integer.toString(score));
