@@ -29,6 +29,12 @@ public class GameActivity extends AppCompatActivity {
     private GameView gameView;
     private static int score = 0;
 
+    private static int gameScore;
+
+    public static int getGameScore() {
+        return gameScore;
+    }
+
     private static int lives = GameScreen.getLives();
 
     private static int highestRow;
@@ -144,7 +150,7 @@ public class GameActivity extends AppCompatActivity {
                 System.out.println("LIVES CHANGED");
                 System.out.println(livesDisplay.getText());
                 System.out.println((livesDisplay.getText().charAt(0) == '0'));
-                if (lives == 0) {
+                if (lives <= 0) {
                     System.out.println("ATTEMPTING TO START GAME OVER");
                     Intent intent = new Intent (context, GameOverScreen.class);
                     startActivity(intent);
@@ -164,6 +170,7 @@ public class GameActivity extends AppCompatActivity {
         movement.setCharX(x);
         movement.setCharY(y);
 
+        gameScore = score;
         score = 0;
         movement.setRow(15);
         highestRow = 15;
