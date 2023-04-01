@@ -20,7 +20,7 @@ public class GameOverScreen extends AppCompatActivity {
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGameActivity();
+                openConfiguration();
             }
         });
 
@@ -35,8 +35,8 @@ public class GameOverScreen extends AppCompatActivity {
         });
     }
 
-    private void openGameActivity() {
-        Intent intent = new Intent(this, GameActivity.class);
+    private void openConfiguration() {
+        Intent intent = new Intent(this, Configuration.class);
         startActivity(intent);
     }
 }
