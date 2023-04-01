@@ -19,17 +19,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.LinkedList;
+
 /**
  * This class will process the gameContainer's activity.
  */
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
     private static int score = 0;
-    private static int currentRow = 15;
 
-    private static int highestRow = 15;
+    private int lives = GameScreen.getLives();
+
+    private static int highestRow;
+
     private TextView scoreDisplay;
 
+
+    private static Movement movement;
+
+    public static Movement getMovement() {
+        return movement;
+    }
 
     @SuppressLint({"MissingInflatedId", "ResourceType"})
     @Override
@@ -42,12 +52,24 @@ public class GameActivity extends AppCompatActivity {
         gameView = new GameView(this);
         LinearLayout scoreContainer = new LinearLayout(this);
 
+        movement = gameView.getMovement();
+
         setStartConditions();
 
         scoreDisplay = new TextView(this);
-        scoreDisplay.setId(R.id.reservedNamedID);
+        scoreDisplay.setId(R.id.reservedScoreID);
         scoreDisplay.setTextSize(50);
+
+        TextView livesDisplay = new TextView(this);
+        livesDisplay.setId(R.id.reservedLivesID);
+        livesDisplay.setTextSize(50);
+
+        View filler = new View(this);
+
         scoreContainer.addView(scoreDisplay);
+//        scoreContainer.addView(filler);
+        scoreContainer.addView(livesDisplay);
+        scoreContainer.setOrientation(LinearLayout.HORIZONTAL);
 
         LinearLayout buttons = new LinearLayout(this);
 
@@ -82,22 +104,25 @@ public class GameActivity extends AppCompatActivity {
         setContentView(gameContainer);
         // crashes the app??? cries
         scoreDisplay.setText(Integer.toString(score));
+        livesDisplay.setText(Integer.toString(lives));
     }
 
-    private void setStartConditions() {
+    public static void setStartConditions() {
         int x = Background.getTileLength()
                 * (MainActivity.getScreenX() / Background.getTileLength() / 2);
         int y = Background.getTileLength()
                 * (MainActivity.getScreenY() / Background.getTileLength() - 2);
-        Movement.setCharX(x);
-        Movement.setCharY(y);
+
+        System.out.println("SETTING TO START CONDITIONS");
+        movement.setCharX(x);
+        movement.setCharY(y);
 
         score = 0;
-        currentRow = 15;
+        movement.setRow(15);
         highestRow = 15;
     }
 
-    private void createRoadObstacles(FrameLayout gameContainer) {
+    public void createJessies(FrameLayout gameContainer) {
         //Jessie
         Jessie jessie = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
         gameContainer.addView(jessie.getGraphic());
@@ -121,21 +146,28 @@ public class GameActivity extends AppCompatActivity {
         }
 
         //Jessie2
-        Jessie jessie2 = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
+        Jessie jessie2 = new Jessie(getResources(), this, 5000,Background.getTileLength() * 9);
         gameContainer.addView(jessie2.getGraphic());
         jessie2.setAnimation(3000);
+    }
 
-
+    private void createRoadObstacles(FrameLayout gameContainer) {
+        createJessies(gameContainer);
 
         //James
-        James james = new James(getResources(), this, 6000, Background.getTileLength() * 10);
+        James james = new James(getResources(), this, 6000, MainActivity.getScreenX(), Background.getTileLength() * 10);
         gameContainer.addView(james.getGraphic());
         james.setAnimation(0);
 
         //James2
-        James james2 = new James(getResources(), this, 6000, Background.getTileLength() * 10);
+        James james2 = new James(getResources(), this, 6000, MainActivity.getScreenX() - 500, Background.getTileLength() * 10);
         gameContainer.addView(james2.getGraphic());
-        james2.setAnimation(2000);
+        james2.setAnimation(1300);
+
+        //James3
+        James james3 = new James(getResources(), this, 6000, MainActivity.getScreenX() - 500, Background.getTileLength() * 10);
+        gameContainer.addView(james3.getGraphic());
+        james3.setAnimation(2600);
 
 
 
@@ -164,13 +196,13 @@ public class GameActivity extends AppCompatActivity {
         Wobuffet wobuffet2 = new Wobuffet(getResources(), this,
                 6000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet2.getGraphic());
-        wobuffet2.setAnimation(500);
+        wobuffet2.setAnimation(900);
 
         //Wobuffet3
         Wobuffet wobuffet3 = new Wobuffet(getResources(), this,
                 6000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet3.getGraphic());
-        wobuffet3.setAnimation(1000);
+        wobuffet3.setAnimation(1800);
 
         //Grookey
         Grookey grookey = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
@@ -180,14 +212,15 @@ public class GameActivity extends AppCompatActivity {
         //Grookey2
         Grookey grookey2 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
         gameContainer.addView(grookey2.getGraphic());
-        grookey2.setAnimation(1000);
+        grookey2.setAnimation(1200);
 
         //Grookey3
         Grookey grookey3 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
         gameContainer.addView(grookey3.getGraphic());
-        grookey3.setAnimation(2000);
 
+        grookey3.setAnimation(2400);
         openGameOver();
+
     }
 
     private void configureButtons(Button up, Button down, Button left, Button right) {
@@ -206,55 +239,58 @@ public class GameActivity extends AppCompatActivity {
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean checkMoveUp = Movement.moveUp();
+                boolean checkMoveUp = movement.moveUp();
                 if (checkMoveUp) {
-                    currentRow--;
+                    movement.setRow(movement.getRow() - 1);
                     updateScore();
                     scoreDisplay.setText(Integer.toString(score));
                 }
+//                System.out.println("CHECKING COLLISIONS");
+//                if (movement.checkCollision()) {
+//                    setStartConditions();
+//                }
             }
         });
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean checkMoveDown = Movement.moveDown();
+                boolean checkMoveDown = movement.moveDown();
                 if (checkMoveDown) {
-                    currentRow++;
+                    movement.setRow(movement.getRow() + 1);
                 }
             }
         });
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Movement.moveLeft();
+                movement.moveLeft();
             }
         });
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Movement.moveRight();
+                movement.moveRight();
             }
         });
     }
-
     public static int updateScore() {
-        System.out.println("CURRENT ROW: " + Integer.toString(currentRow));
+        System.out.println("CURRENT ROW: " + Integer.toString(movement.getRow()));
         System.out.println("HIGHEST ROW: " + Integer.toString(highestRow));
-        if (currentRow < highestRow) {
+        if (movement.getRow() < highestRow) {
 
-            if (currentRow == 10) {
+            if (movement.getRow() == 10) {
                 score += 4; // Jessi
-            } else if (currentRow == 11) {
+            } else if (movement.getRow() == 11) {
                 score += 3; // James
-            } else if (currentRow == 12) {
+            } else if (movement.getRow() == 12) {
                 score += 1; // Meowth
-            } else if (currentRow == 13) {
+            } else if (movement.getRow() == 13) {
                 score += 1; // Wobuffet
-            } else if (currentRow == 14) {
+            } else if (movement.getRow() == 14) {
                 score += 2; // Grookey
             }
 
-            highestRow = currentRow;
+            highestRow = movement.getRow();
         }
         System.out.println("SCORE: " + Integer.toString(score));
         return score;
@@ -266,14 +302,6 @@ public class GameActivity extends AppCompatActivity {
      */
     public static int getScore() {
         return score;
-    }
-
-    /**
-     * This method sets the current row
-     * @param row current row
-     */
-    public static void setCurrentRow(int row) {
-        currentRow = row;
     }
 
     public void openGameOver() {

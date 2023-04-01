@@ -26,6 +26,5 @@ public abstract class RoadObstacle {
 
     abstract void setGraphic();
 
-
     public abstract void setAnimation(int x);
 }

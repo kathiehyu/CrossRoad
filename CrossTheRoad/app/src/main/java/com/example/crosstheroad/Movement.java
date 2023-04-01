@@ -1,31 +1,43 @@
 package com.example.crosstheroad;
 
 public class Movement {
-    private static int x = 0;
-    private static int y = 0;
-    private static int tileLength = Background.getTileLength();
-    public static  void setCharX(int xIn) {
+    private int x = 0;
+    private int y = 0;
+    private int tileLength = Background.getTileLength();
+
+    private int row;
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setCharX(int xIn) {
         if (validateMovement(xIn, y)) {
             x = xIn;
         } // else : don't change x
     }
 
-    public static void setCharY(int yIn) {
+    public void setCharY(int yIn) {
         if (validateMovement(x, yIn)) {
             y = yIn;
         }
     }
-    public static int getCharX() {
-        return x;
+    public int getCharX() {
+        return this.x;
     }
 
-    public static int getCharY() {
-        return y;
+    public int getCharY() {
+        return this.y;
     }
 
-    public static boolean validateMovement(int x, int y) {
-        return !(x + tileLength > MainActivity.getScreenX()
-                || y + tileLength >= MainActivity.getScreenY()
+
+    public boolean validateMovement(int x, int y) {
+        return !(x + this.tileLength > MainActivity.getScreenX()
+                || y + this.tileLength >= MainActivity.getScreenY()
                 || x < 0 || y < 0);
     }
 
@@ -33,10 +45,10 @@ public class Movement {
      * This method moves the character 1 tile up if not out of bound.
      * @return true if moved
      */
-    public static boolean moveUp() {
-        int newY = y - tileLength;
-        if (validateMovement(x, newY)) {
-            y = newY;
+    public boolean moveUp() {
+        int newY = this.y - this.tileLength;
+        if (validateMovement(this.x, newY)) {
+            this.y = newY;
             return true;
         }
         return false;
@@ -46,10 +58,10 @@ public class Movement {
      * This method moves the character 1 tile down if not out of bound.
      * @return true if moved
      */
-    public static boolean moveDown() {
-        int newY = y + tileLength;
-        if (validateMovement(x, newY)) {
-            y = newY;
+    public boolean moveDown() {
+        int newY = this.y + this.tileLength;
+        if (validateMovement(this.x, newY)) {
+            this.y = newY;
             return true;
         }
         return false;
@@ -59,10 +71,10 @@ public class Movement {
      * This method moves the character 1 tile to the left if not out of bound.
      * @return true if moved
      */
-    public static boolean moveLeft() {
-        int newX = x - tileLength;
-        if (validateMovement(newX, y)) {
-            x = newX;
+    public boolean moveLeft() {
+        int newX = this.x - this.tileLength;
+        if (validateMovement(newX, this.y)) {
+            this.x = newX;
             return true;
         }
         return false;
@@ -72,10 +84,10 @@ public class Movement {
      * This method moves the character 1 tile to the right if not out of bound.
      * @return true if moved
      */
-    public static boolean moveRight() {
-        int newX = x + tileLength;
-        if (validateMovement(newX, y)) {
-            x = newX;
+    public boolean moveRight() {
+        int newX = this.x + this.tileLength;
+        if (validateMovement(newX, this.y)) {
+            this.x = newX;
             return true;
         }
         return false;
