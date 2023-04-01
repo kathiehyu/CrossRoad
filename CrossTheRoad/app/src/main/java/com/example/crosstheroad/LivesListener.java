@@ -1,2 +1,5 @@
-package com.example.crosstheroad;public interface LivesListener {
+package com.example.crosstheroad;
+
+public interface LivesListener {
+    public void onNoLives();
 }
