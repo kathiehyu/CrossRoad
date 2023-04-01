@@ -92,16 +92,4 @@ public class Movement {
         }
         return false;
     }
-
-    public boolean collision(int x, int y) {
-        int leftBound = this.x;
-        int rightBound = this.x + tileLength;
-        int upBound = this.y;
-        int downBound = this.y + tileLength;
-        // it has to be on the same row in order for there to be a collision
-        if (y > upBound && y < downBound && x > leftBound && x < rightBound) {
-            return true;
-        }
-        return false;
-    }
 }
