@@ -77,7 +77,7 @@ public class GameActivity extends AppCompatActivity {
 
         movement = gameView.getMovement();
 
-        setStartConditions();
+        setStartConditions(false);
 
         scoreDisplay = new TextView(this);
         scoreDisplay.setId(R.id.reservedScoreID);
@@ -134,7 +134,7 @@ public class GameActivity extends AppCompatActivity {
         return context;
     }
 
-    public static void setStartConditions() {
+    public void setStartConditions(boolean loseLife) {
         int x = Background.getTileLength()
                 * (MainActivity.getScreenX() / Background.getTileLength() / 2);
         int y = Background.getTileLength()
@@ -147,6 +147,9 @@ public class GameActivity extends AppCompatActivity {
         score = 0;
         movement.setRow(15);
         highestRow = 15;
+        if (loseLife) {
+            removeLife();
+        }
     }
 
     public void createJessies(FrameLayout gameContainer) {
@@ -315,7 +318,8 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
-        lives.set(lives.get() - 1);
+        int newVal = lives.get() - 1;
+        lives.set(newVal);
 //        lives--;
 //        if (lives == -1) {
 //            GameOverScreen gameOver = new GameOverScreen();
