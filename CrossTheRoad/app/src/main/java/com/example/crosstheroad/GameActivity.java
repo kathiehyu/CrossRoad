@@ -1,14 +1,21 @@
 package com.example.crosstheroad;
 
+import static android.os.SystemClock.uptimeMillis;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,8 +33,7 @@ public class GameActivity extends AppCompatActivity {
     private static int highestRow;
 
     private TextView scoreDisplay;
-    private static int safeScore = 1;
-    private int goalScore = 8;
+
 
     private static Movement movement;
 
@@ -120,7 +126,24 @@ public class GameActivity extends AppCompatActivity {
         //Jessie
         Jessie jessie = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
         gameContainer.addView(jessie.getGraphic());
+
         jessie.setAnimation(0);
+
+        ImageView imgview = jessie.getGraphic();
+        int[] location = new int[2];
+        imgview.getLocationOnScreen(location);
+        if (location[0] == 20) {
+            openGameOver();
+        }
+        Bitmap bmap=((BitmapDrawable)imgview.getDrawable()).getBitmap();
+        System.out.println("jessie");
+        if (bmap != null) {
+            System.out.println("check collision");
+            Bitmap charac = GameView.getCharacter().getChar();
+            if (Collision.isCollisionDetected(charac, Movement.getCharX(), Movement.getCharY(), bmap, location[0], location[1])) {
+                openGameOver();
+            }
+        }
 
         //Jessie2
         Jessie jessie2 = new Jessie(getResources(), this, 5000,Background.getTileLength() * 9);
@@ -194,7 +217,10 @@ public class GameActivity extends AppCompatActivity {
         //Grookey3
         Grookey grookey3 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
         gameContainer.addView(grookey3.getGraphic());
+
         grookey3.setAnimation(2400);
+        openGameOver();
+
     }
 
     private void configureButtons(Button up, Button down, Button left, Button right) {
@@ -278,6 +304,11 @@ public class GameActivity extends AppCompatActivity {
         return score;
     }
 
+    public void openGameOver() {
+        Intent intent = new Intent(this, GameOver.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -294,11 +325,4 @@ public class GameActivity extends AppCompatActivity {
         System.out.println("resumed");
     }
 
-    public static int getSafeScore() {
-        return safeScore;
-    }
-
-    public static void setHighestRow(int highestRow) {
-        GameActivity.highestRow = highestRow;
-    }
 }
