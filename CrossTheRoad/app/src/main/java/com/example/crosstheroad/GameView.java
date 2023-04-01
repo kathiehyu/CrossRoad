@@ -14,19 +14,14 @@ public class GameView extends SurfaceView implements Runnable {
     private Background background1;
     private static Character character;
 
+    private Movement movement;
+
     public GameView(Context context) {
         super(context);
         background1 = new Background();
         paint = new Paint();
         character = new Character(getResources());
-    }
-
-    public static int getCharX() {
-        return Movement.getCharX();
-    }
-
-    public static int getCharY() {
-        return Movement.getCharY();
+        movement = new Movement();
     }
 
     @Override
@@ -56,7 +51,7 @@ public class GameView extends SurfaceView implements Runnable {
 
             System.out.println("trying to draw character");
             assert Character.getChar() != null;
-            canvas.drawBitmap(Character.getChar(), Movement.getCharX(), Movement.getCharY(), paint);
+            canvas.drawBitmap(Character.getChar(), movement.getCharX(), movement.getCharY(), paint);
 
             getHolder().unlockCanvasAndPost(canvas);
         }
@@ -90,4 +85,7 @@ public class GameView extends SurfaceView implements Runnable {
         return character;
     }
 
+    public Movement getMovement() {
+        return movement;
+    }
 }

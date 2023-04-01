@@ -6,6 +6,8 @@ import static org.junit.Assert.*;
 import android.widget.RadioButton;
 public class Sprint1And2Test {
 
+    private Movement movement = new Movement();
+
     /***
      * This test checks that a character has been chosen
      */
@@ -60,11 +62,11 @@ public class Sprint1And2Test {
     private GameView gameView;
     @Test
     public void testCharacterStaysInYBounds() {
-        Movement.setCharY(-100);
-        assert gameView.getCharY() >= 0;
+        movement.setCharY(-100);
+        assert movement.getCharY() >= 0;
 
-        Movement.setCharY(2000);
-        assert gameView.getCharY() < 1920;
+        movement.setCharY(2000);
+        assert movement.getCharY() < 1920;
     }
 
     /***
