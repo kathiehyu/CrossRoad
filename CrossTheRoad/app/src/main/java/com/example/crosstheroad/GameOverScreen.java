@@ -45,7 +45,7 @@ public class GameOverScreen extends AppCompatActivity {
     }
 
     private void openGameActivity() {
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, Configuration.class);
         startActivity(intent);
     }
 }
