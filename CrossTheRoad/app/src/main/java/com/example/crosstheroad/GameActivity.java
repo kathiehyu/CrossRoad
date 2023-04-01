@@ -34,12 +34,11 @@ public class GameActivity extends AppCompatActivity {
     public static int getGameScore() {
         return gameScore;
     }
-
-    private static int lives = GameScreen.getLives();
+    private static int lives;
 
     private static int highestRow;
 
-    private TextView scoreDisplay;
+    private static TextView scoreDisplay;
     private static TextView livesDisplay;
     private static int safeScore = 1;
     private int goalScore = 8;
@@ -61,6 +60,7 @@ public class GameActivity extends AppCompatActivity {
         System.out.println("Successfully created GameActivity");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         context = GameActivity.this;
+        lives = GameScreen.getLives();
 
 
         FrameLayout gameContainer = new FrameLayout(this);
@@ -172,6 +172,9 @@ public class GameActivity extends AppCompatActivity {
 
         gameScore = score;
         score = 0;
+        if (scoreDisplay != null) {
+            scoreDisplay.setText(Integer.toString(0));
+        }
         movement.setRow(15);
         highestRow = 15;
         if (loseLife) {
@@ -286,7 +289,6 @@ public class GameActivity extends AppCompatActivity {
                         setStartConditions(true);
                     }
                     updateScore();
-                    scoreDisplay.setText(Integer.toString(score));
                 }
 //                System.out.println("CHECKING COLLISIONS");
 //                if (movement.checkCollision()) {
@@ -334,6 +336,7 @@ public class GameActivity extends AppCompatActivity {
             highestRow = movement.getRow();
         }
         System.out.println("SCORE: " + Integer.toString(score));
+        scoreDisplay.setText(Integer.toString(score));
         return score;
     }
 
