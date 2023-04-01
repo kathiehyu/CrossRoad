@@ -12,9 +12,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -74,13 +76,22 @@ public class GameActivity extends AppCompatActivity {
         FrameLayout filler = new FrameLayout(this);
         FrameLayout.LayoutParams p = new FrameLayout.LayoutParams(
                 ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
-        p.width = 100;
+        p.width = 750;
         filler.setLayoutParams(p);
+
+        ImageView heart = new ImageView(this);
+        heart.setBackgroundResource(R.drawable.pixel_heart);
+        LinearLayout.LayoutParams heartLayout = new LinearLayout.LayoutParams(ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
+        heartLayout.width = 125;
+        heartLayout.height = 125;
+        heart.setLayoutParams(heartLayout);
+
 
 
         scoreContainer.addView(scoreDisplay);
         scoreContainer.addView(filler);
         scoreContainer.addView(livesDisplay);
+        scoreContainer.addView(heart);
         scoreContainer.setOrientation(LinearLayout.HORIZONTAL);
 
         LinearLayout buttons = new LinearLayout(this);
