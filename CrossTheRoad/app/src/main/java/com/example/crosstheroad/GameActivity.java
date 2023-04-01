@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -25,13 +27,7 @@ public class GameActivity extends AppCompatActivity {
     private GameView gameView;
     private static int score = 0;
 
-//    private static int lives = GameScreen.getLives();
-//
-//    public void setLives(int num) {
-//        lives = num;
-//    }
-
-    private Lives lives = new Lives();
+    private static int lives = GameScreen.getLives();
 
     private static int highestRow;
 
@@ -56,20 +52,8 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         System.out.println("Successfully created GameActivity");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        context = getApplicationContext();
         context = GameActivity.this;
 
-
-//        Handler handler = new Handler(Looper.getMainLooper());
-//        handler.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (lives <= 0) {
-//                    Intent intent = new Intent (GameActivity.this, GameOverScreen.class);
-//                    startActivity(intent);
-//                }
-//            }
-//        });
 
         FrameLayout gameContainer = new FrameLayout(this);
         gameView = new GameView(this);
@@ -127,11 +111,31 @@ public class GameActivity extends AppCompatActivity {
         setContentView(gameContainer);
         // crashes the app??? cries
         scoreDisplay.setText(Integer.toString(score));
-        livesDisplay.setText(Integer.toString(lives.get()));
-    }
+        livesDisplay.setText(Integer.toString(lives));
+        livesDisplay.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-    public static Context getAppContext() {
-        return context;
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                System.out.println("LIVES CHANGED");
+                System.out.println(livesDisplay.getText());
+                System.out.println((livesDisplay.getText().charAt(0) == '0'));
+                if (livesDisplay.getText().charAt(0) == '0') {
+                    System.out.println("ATTEMPTING TO START GAME OVER");
+                    Intent intent = new Intent (context, GameOverScreen.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
     }
 
     public void setStartConditions(boolean loseLife) {
@@ -308,24 +312,8 @@ public class GameActivity extends AppCompatActivity {
 
     public void removeLife() {
         System.out.println("REMOVING LIFE");
-        lives.setListener(new LivesListener() {
-            @Override
-            public void onNoLives() {
-                System.out.printf("NUMBER OF LIVES: %d\n", lives.get());
-                if (lives.get() <= 0) {
-                    Intent intent = new Intent (context, GameOverScreen.class);
-                    startActivity(intent);
-                }
-            }
-        });
-        int newVal = lives.get() - 1;
-        lives.set(newVal);
-//        lives--;
-//        if (lives == -1) {
-//            GameOverScreen gameOver = new GameOverScreen();
-//            return;
-//        }
-        livesDisplay.setText(Integer.toString(lives.get()));
+        lives--;
+        livesDisplay.setText(Integer.toString(lives));
     }
 
     /**
@@ -361,6 +349,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public int getLives() {
-        return lives.get();
+        return lives;
     }
 }
