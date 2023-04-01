@@ -12,9 +12,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,6 +28,12 @@ import java.util.LinkedList;
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
     private static int score = 0;
+
+    private static int gameScore;
+
+    public static int getGameScore() {
+        return gameScore;
+    }
 
     private static int lives = GameScreen.getLives();
 
@@ -71,11 +79,25 @@ public class GameActivity extends AppCompatActivity {
         livesDisplay.setId(R.id.reservedLivesID);
         livesDisplay.setTextSize(50);
 
-        View filler = new View(this);
+        FrameLayout filler = new FrameLayout(this);
+        FrameLayout.LayoutParams p = new FrameLayout.LayoutParams(
+                ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
+        p.width = 750;
+        filler.setLayoutParams(p);
+
+        ImageView heart = new ImageView(this);
+        heart.setBackgroundResource(R.drawable.pixel_heart);
+        LinearLayout.LayoutParams heartLayout = new LinearLayout.LayoutParams(ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
+        heartLayout.width = 125;
+        heartLayout.height = 125;
+        heart.setLayoutParams(heartLayout);
+
+
 
         scoreContainer.addView(scoreDisplay);
-//        scoreContainer.addView(filler);
+        scoreContainer.addView(filler);
         scoreContainer.addView(livesDisplay);
+        scoreContainer.addView(heart);
         scoreContainer.setOrientation(LinearLayout.HORIZONTAL);
 
         LinearLayout buttons = new LinearLayout(this);
@@ -128,7 +150,7 @@ public class GameActivity extends AppCompatActivity {
                 System.out.println("LIVES CHANGED");
                 System.out.println(livesDisplay.getText());
                 System.out.println((livesDisplay.getText().charAt(0) == '0'));
-                if (livesDisplay.getText().charAt(0) == '0') {
+                if (lives <= 0) {
                     System.out.println("ATTEMPTING TO START GAME OVER");
                     Intent intent = new Intent (context, GameOverScreen.class);
                     startActivity(intent);
@@ -148,6 +170,7 @@ public class GameActivity extends AppCompatActivity {
         movement.setCharX(x);
         movement.setCharY(y);
 
+        gameScore = score;
         score = 0;
         movement.setRow(15);
         highestRow = 15;

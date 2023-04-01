@@ -23,13 +23,13 @@ public class GameOverScreen extends AppCompatActivity {
 
         //display final score
         TextView pointsDisplay = findViewById(R.id.finalScoreDisplay);
-        pointsDisplay.setText(Integer.toString(GameActivity.getScore()));
+        pointsDisplay.setText(Integer.toString(GameActivity.getGameScore()));
 
         Button restart = (Button) findViewById(R.id.restart_game);
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGameActivity();
+                openConfiguration();
             }
         });
 
@@ -44,7 +44,7 @@ public class GameOverScreen extends AppCompatActivity {
         });
     }
 
-    private void openGameActivity() {
+    private void openConfiguration() {
         Intent intent = new Intent(this, Configuration.class);
         startActivity(intent);
     }
