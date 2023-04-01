@@ -2,7 +2,7 @@ package com.example.crosstheroad;
 
 public class Lives implements LivesListener {
     private LivesListener listener;
-    private int lives;
+    private int lives = GameScreen.getLives();
     public int get() {
         System.out.println(lives);
         return lives;
