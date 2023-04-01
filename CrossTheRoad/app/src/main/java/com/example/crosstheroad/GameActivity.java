@@ -158,12 +158,12 @@ public class GameActivity extends AppCompatActivity {
 
     public void createJessies(FrameLayout gameContainer) {
         //Jessie
-        Jessie jessie = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
+        Jessie jessie = new Jessie(getResources(), this, 7000, Background.getTileLength() * 9);
         gameContainer.addView(jessie.getGraphic());
         jessie.setAnimation(0);
 
         //Jessie2
-        Jessie jessie2 = new Jessie(getResources(), this, 5000,Background.getTileLength() * 9);
+        Jessie jessie2 = new Jessie(getResources(), this, 7000,Background.getTileLength() * 9);
         gameContainer.addView(jessie2.getGraphic());
         jessie2.setAnimation(3000);
     }
@@ -172,30 +172,33 @@ public class GameActivity extends AppCompatActivity {
         createJessies(gameContainer);
 
         //James
-        James james = new James(getResources(), this, 6000, MainActivity.getScreenX(), Background.getTileLength() * 10);
+        James james = new James(getResources(), this, 8000, MainActivity.getScreenX(), Background.getTileLength() * 10);
         gameContainer.addView(james.getGraphic());
         james.setAnimation(0);
 
         //James2
-        James james2 = new James(getResources(), this, 6000, MainActivity.getScreenX() - 500, Background.getTileLength() * 10);
+        James james2 = new James(getResources(), this, 8000, MainActivity.getScreenX() - 500, Background.getTileLength() * 10);
         gameContainer.addView(james2.getGraphic());
-        james2.setAnimation(1520);
+
+        james2.setAnimation(4000);
+
 
         //James3
-        James james3 = new James(getResources(), this, 6000, MainActivity.getScreenX() - 500, Background.getTileLength() * 10);
+        James james3 = new James(getResources(), this, 8000, MainActivity.getScreenX() - 500, Background.getTileLength() * 10);
         gameContainer.addView(james3.getGraphic());
-        james3.setAnimation(3040);
+        james3.setAnimation(8000);
+
 
 
 
 
         //Meowth
-        Meowth meowth = new Meowth(getResources(), this, 3000, Background.getTileLength() * 11);
+        Meowth meowth = new Meowth(getResources(), this, 6000, Background.getTileLength() * 11);
         gameContainer.addView(meowth.getGraphic());
         meowth.setAnimation(0);
 
         //Meowth2
-        Meowth meowth2 = new Meowth(getResources(), this, 3000, Background.getTileLength() * 11);
+        Meowth meowth2 = new Meowth(getResources(), this, 6000, Background.getTileLength() * 11);
         gameContainer.addView(meowth2.getGraphic());
         meowth2.setAnimation(3000);
 
@@ -205,36 +208,36 @@ public class GameActivity extends AppCompatActivity {
 
         //Wobuffet
         Wobuffet wobuffet = new Wobuffet(getResources(), this,
-                6000, Background.getTileLength() * 12);
+                11000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet.getGraphic());
         wobuffet.setAnimation(0);
 
         //Wobuffet2
         Wobuffet wobuffet2 = new Wobuffet(getResources(), this,
-                6000, Background.getTileLength() * 12);
+                11000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet2.getGraphic());
-        wobuffet2.setAnimation(900);
+        wobuffet2.setAnimation(1500);
 
         //Wobuffet3
         Wobuffet wobuffet3 = new Wobuffet(getResources(), this,
-                6000, Background.getTileLength() * 12);
+                11000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet3.getGraphic());
-        wobuffet3.setAnimation(1800);
+        wobuffet3.setAnimation(3000);
 
         //Grookey
-        Grookey grookey = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
+        Grookey grookey = new Grookey(getResources(), this, 10000, Background.getTileLength() * 13);
         gameContainer.addView(grookey.getGraphic());
         grookey.setAnimation(0);
 
         //Grookey2
-        Grookey grookey2 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
+        Grookey grookey2 = new Grookey(getResources(), this, 10000, Background.getTileLength() * 13);
         gameContainer.addView(grookey2.getGraphic());
-        grookey2.setAnimation(1200);
+        grookey2.setAnimation(2000);
 
         //Grookey3
-        Grookey grookey3 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
+        Grookey grookey3 = new Grookey(getResources(), this, 10000, Background.getTileLength() * 13);
         gameContainer.addView(grookey3.getGraphic());
-        grookey3.setAnimation(2400);
+        grookey3.setAnimation(4000);
     }
 
     private void configureButtons(Button up, Button down, Button left, Button right) {
@@ -256,6 +259,9 @@ public class GameActivity extends AppCompatActivity {
                 boolean checkMoveUp = movement.moveUp();
                 if (checkMoveUp) {
                     movement.setRow(movement.getRow() - 1);
+                    if (movement.getRow() == 8) {
+                        setStartConditions();
+                    }
                     updateScore();
                     scoreDisplay.setText(Integer.toString(score));
                 }
@@ -288,8 +294,6 @@ public class GameActivity extends AppCompatActivity {
         });
     }
     public static int updateScore() {
-        System.out.println("CURRENT ROW: " + Integer.toString(movement.getRow()));
-        System.out.println("HIGHEST ROW: " + Integer.toString(highestRow));
         if (movement.getRow() < highestRow) {
 
             if (movement.getRow() == 10) {
@@ -310,11 +314,13 @@ public class GameActivity extends AppCompatActivity {
         return score;
     }
 
+
     public void removeLife() {
         System.out.println("REMOVING LIFE");
         lives--;
         livesDisplay.setText(Integer.toString(lives));
     }
+
 
     /**
      * This method returns the current score
