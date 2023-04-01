@@ -71,10 +71,15 @@ public class GameActivity extends AppCompatActivity {
         livesDisplay.setId(R.id.reservedLivesID);
         livesDisplay.setTextSize(50);
 
-        View filler = new View(this);
+        FrameLayout filler = new FrameLayout(this);
+        FrameLayout.LayoutParams p = new FrameLayout.LayoutParams(
+                ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
+        p.width = 100;
+        filler.setLayoutParams(p);
+
 
         scoreContainer.addView(scoreDisplay);
-//        scoreContainer.addView(filler);
+        scoreContainer.addView(filler);
         scoreContainer.addView(livesDisplay);
         scoreContainer.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -128,7 +133,7 @@ public class GameActivity extends AppCompatActivity {
                 System.out.println("LIVES CHANGED");
                 System.out.println(livesDisplay.getText());
                 System.out.println((livesDisplay.getText().charAt(0) == '0'));
-                if (livesDisplay.getText().charAt(0) == '0') {
+                if (lives == 0) {
                     System.out.println("ATTEMPTING TO START GAME OVER");
                     Intent intent = new Intent (context, GameOverScreen.class);
                     startActivity(intent);
