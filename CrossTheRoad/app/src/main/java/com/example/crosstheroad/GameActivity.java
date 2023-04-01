@@ -3,7 +3,13 @@ package com.example.crosstheroad;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -21,15 +27,20 @@ public class GameActivity extends AppCompatActivity {
     private GameView gameView;
     private static int score = 0;
 
-    private int lives = GameScreen.getLives();
+    private static int lives = GameScreen.getLives();
 
     private static int highestRow;
 
     private TextView scoreDisplay;
+    private static TextView livesDisplay;
     private static int safeScore = 1;
     private int goalScore = 8;
 
+    private String packageName;
+
     private static Movement movement;
+
+    private static Context context;
 
     public static Movement getMovement() {
         return movement;
@@ -41,6 +52,8 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         System.out.println("Successfully created GameActivity");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        context = GameActivity.this;
+
 
         FrameLayout gameContainer = new FrameLayout(this);
         gameView = new GameView(this);
@@ -48,13 +61,13 @@ public class GameActivity extends AppCompatActivity {
 
         movement = gameView.getMovement();
 
-        setStartConditions();
+        setStartConditions(false);
 
         scoreDisplay = new TextView(this);
         scoreDisplay.setId(R.id.reservedScoreID);
         scoreDisplay.setTextSize(50);
 
-        TextView livesDisplay = new TextView(this);
+        livesDisplay = new TextView(this);
         livesDisplay.setId(R.id.reservedLivesID);
         livesDisplay.setTextSize(50);
 
@@ -99,9 +112,33 @@ public class GameActivity extends AppCompatActivity {
         // crashes the app??? cries
         scoreDisplay.setText(Integer.toString(score));
         livesDisplay.setText(Integer.toString(lives));
+        livesDisplay.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                System.out.println("LIVES CHANGED");
+                System.out.println(livesDisplay.getText());
+                System.out.println((livesDisplay.getText().charAt(0) == '0'));
+                if (livesDisplay.getText().charAt(0) == '0') {
+                    System.out.println("ATTEMPTING TO START GAME OVER");
+                    Intent intent = new Intent (context, GameOverScreen.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
     }
 
-    public static void setStartConditions() {
+    public void setStartConditions(boolean loseLife) {
         int x = Background.getTileLength()
                 * (MainActivity.getScreenX() / Background.getTileLength() / 2);
         int y = Background.getTileLength()
@@ -114,6 +151,9 @@ public class GameActivity extends AppCompatActivity {
         score = 0;
         movement.setRow(15);
         highestRow = 15;
+        if (loseLife) {
+            removeLife();
+        }
     }
 
     public void createJessies(FrameLayout gameContainer) {
@@ -139,12 +179,12 @@ public class GameActivity extends AppCompatActivity {
         //James2
         James james2 = new James(getResources(), this, 6000, MainActivity.getScreenX() - 500, Background.getTileLength() * 10);
         gameContainer.addView(james2.getGraphic());
-        james2.setAnimation(1300);
+        james2.setAnimation(1520);
 
         //James3
         James james3 = new James(getResources(), this, 6000, MainActivity.getScreenX() - 500, Background.getTileLength() * 10);
         gameContainer.addView(james3.getGraphic());
-        james3.setAnimation(2600);
+        james3.setAnimation(3040);
 
 
 
@@ -270,6 +310,12 @@ public class GameActivity extends AppCompatActivity {
         return score;
     }
 
+    public void removeLife() {
+        System.out.println("REMOVING LIFE");
+        lives--;
+        livesDisplay.setText(Integer.toString(lives));
+    }
+
     /**
      * This method returns the current score
      * @return current score
@@ -300,5 +346,9 @@ public class GameActivity extends AppCompatActivity {
 
     public static void setHighestRow(int highestRow) {
         GameActivity.highestRow = highestRow;
+    }
+
+    public int getLives() {
+        return lives;
     }
 }

@@ -3,6 +3,7 @@ package com.example.crosstheroad;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.view.Gravity;
 import android.view.animation.LinearInterpolator;
@@ -45,6 +46,7 @@ public class Jessie extends RoadObstacle {
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
+                GameActivity game = new GameActivity();
                 float charLeftBound = GameActivity.getMovement().getCharX();
                 float charRightBound = GameActivity.getMovement().getCharX() + Background.getTileLength();
                 float obstacleLeftBound = getGraphic().getX();
@@ -52,13 +54,15 @@ public class Jessie extends RoadObstacle {
                 if (GameActivity.getMovement().getRow() == 10 &&
                         ((charLeftBound > obstacleLeftBound && charLeftBound < obstacleRightBound)
                 || (charRightBound > obstacleLeftBound && charRightBound < obstacleRightBound))) {
-                    GameActivity.setStartConditions();
+                    game.setStartConditions(true);
                 }
             }
         });
         animator.setStartDelay(x);
         animator.start();
+
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
     }
+
 }
