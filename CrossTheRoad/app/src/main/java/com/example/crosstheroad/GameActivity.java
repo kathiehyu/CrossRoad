@@ -12,6 +12,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.LinkedList;
+
 /**
  * This class will process the gameContainer's activity.
  */
@@ -26,6 +28,12 @@ public class GameActivity extends AppCompatActivity {
     private int goalScore = 8;
 
     private static Movement movement;
+
+    public static Movement getMovement() {
+        return movement;
+    }
+
+    private static LinkedList<Jessie> createdJessies = new LinkedList<>();
 
     @SuppressLint({"MissingInflatedId", "ResourceType"})
     @Override
@@ -82,12 +90,13 @@ public class GameActivity extends AppCompatActivity {
         scoreDisplay.setText(Integer.toString(score));
     }
 
-    private void setStartConditions() {
+    public static void setStartConditions() {
         int x = Background.getTileLength()
                 * (MainActivity.getScreenX() / Background.getTileLength() / 2);
         int y = Background.getTileLength()
                 * (MainActivity.getScreenY() / Background.getTileLength() - 2);
 
+        System.out.println("SETTING TO START CONDITIONS");
         movement.setCharX(x);
         movement.setCharY(y);
 
@@ -96,7 +105,7 @@ public class GameActivity extends AppCompatActivity {
         highestRow = 15;
     }
 
-    private void createRoadObstacles(FrameLayout gameContainer) {
+    public void createJessies(FrameLayout gameContainer) {
         //Jessie
         Jessie jessie = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
         gameContainer.addView(jessie.getGraphic());
@@ -106,6 +115,10 @@ public class GameActivity extends AppCompatActivity {
         Jessie jessie2 = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
         gameContainer.addView(jessie2.getGraphic());
         jessie2.setAnimation(3000);
+    }
+
+    private void createRoadObstacles(FrameLayout gameContainer) {
+       createJessies(gameContainer);
 
 
 
@@ -192,6 +205,10 @@ public class GameActivity extends AppCompatActivity {
                     updateScore();
                     scoreDisplay.setText(Integer.toString(score));
                 }
+//                System.out.println("CHECKING COLLISIONS");
+//                if (movement.checkCollision()) {
+//                    setStartConditions();
+//                }
             }
         });
         down.setOnClickListener(new View.OnClickListener() {
