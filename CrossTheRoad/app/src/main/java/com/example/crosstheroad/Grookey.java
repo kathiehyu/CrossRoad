@@ -42,7 +42,7 @@ public class Grookey extends RoadObstacle {
                 float obstacleLeftBound = getGraphic().getX();
                 float obstacleRightBound = getGraphic().getX() + Background.getTileLength();
                 if (GameActivity.getMovement().getRow() == 14 &&
-                        ((charLeftBound > charLeftBound && charLeftBound < obstacleRightBound)
+                        ((charLeftBound > obstacleLeftBound && charLeftBound < obstacleRightBound)
                                 || (charRightBound > obstacleLeftBound && charRightBound < obstacleRightBound))) {
                     GameActivity.setStartConditions();
                 }

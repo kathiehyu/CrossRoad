@@ -48,9 +48,9 @@ public class Jessie extends RoadObstacle {
                 float charLeftBound = GameActivity.getMovement().getCharX();
                 float charRightBound = GameActivity.getMovement().getCharX() + Background.getTileLength();
                 float obstacleLeftBound = getGraphic().getX();
-                float obstacleRightBound = getGraphic().getX() + Background.getTileLength() * 4;
+                float obstacleRightBound = getGraphic().getX() + Background.getTileLength() * 3;
                 if (GameActivity.getMovement().getRow() == 10 &&
-                        ((charLeftBound > charLeftBound && charLeftBound < obstacleRightBound)
+                        ((charLeftBound > obstacleLeftBound && charLeftBound < obstacleRightBound)
                 || (charRightBound > obstacleLeftBound && charRightBound < obstacleRightBound))) {
                     GameActivity.setStartConditions();
                 }
