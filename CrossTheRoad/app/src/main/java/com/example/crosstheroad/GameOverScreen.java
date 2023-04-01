@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,11 +17,19 @@ public class GameOverScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
 
+        // display name
+        TextView displayName = findViewById(R.id.endGameName);
+        displayName.setText(Configuration.inputName);
+
+        //display final score
+        TextView pointsDisplay = findViewById(R.id.finalScoreDisplay);
+        pointsDisplay.setText(Integer.toString(GameActivity.getGameScore()));
+
         Button restart = (Button) findViewById(R.id.restart_game);
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGameActivity();
+                openConfiguration();
             }
         });
 
@@ -35,8 +44,8 @@ public class GameOverScreen extends AppCompatActivity {
         });
     }
 
-    private void openGameActivity() {
-        Intent intent = new Intent(this, GameActivity.class);
+    private void openConfiguration() {
+        Intent intent = new Intent(this, Configuration.class);
         startActivity(intent);
     }
 }
