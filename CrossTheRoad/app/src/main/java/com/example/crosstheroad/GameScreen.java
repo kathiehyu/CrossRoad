@@ -17,7 +17,12 @@ import android.widget.TextView;
  * player name and character sprite, chosen difficulty.
  */
 public class GameScreen extends AppCompatActivity {
+
     // future implementation: change to high score?
+    private static int lives;
+    public static int getLives() {
+        return lives;
+    }
     protected static int points;
     private Button start;
 
@@ -47,13 +52,15 @@ public class GameScreen extends AppCompatActivity {
         // set numLives
         if (checkDifferentLife(Configuration.selectedDifficulty.getId(),
                 inflatedView.findViewById(R.id.eas).getId())) {
-            numLives.setText("3");
+            lives = 3;
         } else if (checkDifferentLife(Configuration.selectedDifficulty.getId(),
                 inflatedView.findViewById(R.id.med).getId())) {
-            numLives.setText("2");
+            lives = 2;
         } else {
-            numLives.setText("1");
+            lives = 1;
         }
+
+        numLives.setText(Integer.toString(lives));
 
         //display character sprite
         ImageView charact = findViewById(R.id.chosenChar);

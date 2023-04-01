@@ -21,6 +21,8 @@ public class GameActivity extends AppCompatActivity {
     private GameView gameView;
     private static int score = 0;
 
+    private int lives = GameScreen.getLives();
+
     private static int highestRow;
 
     private TextView scoreDisplay;
@@ -32,8 +34,6 @@ public class GameActivity extends AppCompatActivity {
     public static Movement getMovement() {
         return movement;
     }
-
-    private static LinkedList<Jessie> createdJessies = new LinkedList<>();
 
     @SuppressLint({"MissingInflatedId", "ResourceType"})
     @Override
@@ -51,9 +51,19 @@ public class GameActivity extends AppCompatActivity {
         setStartConditions();
 
         scoreDisplay = new TextView(this);
-        scoreDisplay.setId(R.id.reservedNamedID);
+        scoreDisplay.setId(R.id.reservedScoreID);
         scoreDisplay.setTextSize(50);
+
+        TextView livesDisplay = new TextView(this);
+        livesDisplay.setId(R.id.reservedLivesID);
+        livesDisplay.setTextSize(50);
+
+        View filler = new View(this);
+
         scoreContainer.addView(scoreDisplay);
+//        scoreContainer.addView(filler);
+        scoreContainer.addView(livesDisplay);
+        scoreContainer.setOrientation(LinearLayout.HORIZONTAL);
 
         LinearLayout buttons = new LinearLayout(this);
 
@@ -88,6 +98,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(gameContainer);
         // crashes the app??? cries
         scoreDisplay.setText(Integer.toString(score));
+        livesDisplay.setText(Integer.toString(lives));
     }
 
     public static void setStartConditions() {
