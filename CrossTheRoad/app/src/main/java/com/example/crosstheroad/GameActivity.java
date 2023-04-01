@@ -112,25 +112,28 @@ public class GameActivity extends AppCompatActivity {
         jessie.setAnimation(0);
 
         //Jessie2
-        Jessie jessie2 = new Jessie(getResources(), this, 5000, Background.getTileLength() * 9);
+        Jessie jessie2 = new Jessie(getResources(), this, 5000,Background.getTileLength() * 9);
         gameContainer.addView(jessie2.getGraphic());
         jessie2.setAnimation(3000);
     }
 
     private void createRoadObstacles(FrameLayout gameContainer) {
-       createJessies(gameContainer);
-
-
+        createJessies(gameContainer);
 
         //James
-        James james = new James(getResources(), this, 6000, Background.getTileLength() * 10);
+        James james = new James(getResources(), this, 6000, MainActivity.getScreenX(), Background.getTileLength() * 10);
         gameContainer.addView(james.getGraphic());
         james.setAnimation(0);
 
         //James2
-        James james2 = new James(getResources(), this, 6000, Background.getTileLength() * 10);
+        James james2 = new James(getResources(), this, 6000, MainActivity.getScreenX() - 500, Background.getTileLength() * 10);
         gameContainer.addView(james2.getGraphic());
-        james2.setAnimation(2000);
+        james2.setAnimation(1300);
+
+        //James3
+        James james3 = new James(getResources(), this, 6000, MainActivity.getScreenX() - 500, Background.getTileLength() * 10);
+        gameContainer.addView(james3.getGraphic());
+        james3.setAnimation(2600);
 
 
 
@@ -159,13 +162,13 @@ public class GameActivity extends AppCompatActivity {
         Wobuffet wobuffet2 = new Wobuffet(getResources(), this,
                 6000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet2.getGraphic());
-        wobuffet2.setAnimation(500);
+        wobuffet2.setAnimation(900);
 
         //Wobuffet3
         Wobuffet wobuffet3 = new Wobuffet(getResources(), this,
                 6000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet3.getGraphic());
-        wobuffet3.setAnimation(1000);
+        wobuffet3.setAnimation(1800);
 
         //Grookey
         Grookey grookey = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
@@ -175,12 +178,12 @@ public class GameActivity extends AppCompatActivity {
         //Grookey2
         Grookey grookey2 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
         gameContainer.addView(grookey2.getGraphic());
-        grookey2.setAnimation(1000);
+        grookey2.setAnimation(1200);
 
         //Grookey3
         Grookey grookey3 = new Grookey(getResources(), this, 5000, Background.getTileLength() * 13);
         gameContainer.addView(grookey3.getGraphic());
-        grookey3.setAnimation(2000);
+        grookey3.setAnimation(2400);
     }
 
     private void configureButtons(Button up, Button down, Button left, Button right) {

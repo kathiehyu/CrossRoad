@@ -5,6 +5,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.Gravity;
+import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -14,11 +15,11 @@ import java.util.LinkedList;
 
 public class Jessie extends RoadObstacle {
 
-
     public Jessie(Resources r, Context context, int duration, int y) {
         super(r, context, duration);
         setGraphic();
         getGraphic().setY(y);
+        getGraphic().setX(-500);
     }
 
     @Override
@@ -40,21 +41,22 @@ public class Jessie extends RoadObstacle {
                 "translationX", (float) -MainActivity.getScreenX() + 500,
                 (float) MainActivity.getScreenX() + 500);
         animator.setDuration(this.duration);
-        animator.setStartDelay(x);
+        animator.setInterpolator(new LinearInterpolator());
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
                 float charLeftBound = GameActivity.getMovement().getCharX();
                 float charRightBound = GameActivity.getMovement().getCharX() + Background.getTileLength();
                 float obstacleLeftBound = getGraphic().getX();
-                float obstacleRighttBound = getGraphic().getX() + Background.getTileLength() * 3;
+                float obstacleRightBound = getGraphic().getX() + Background.getTileLength() * 4;
                 if (GameActivity.getMovement().getRow() == 10 &&
-                        ((charLeftBound > charLeftBound && charLeftBound < obstacleRighttBound)
-                || (charRightBound > obstacleLeftBound && charRightBound < obstacleRighttBound))) {
+                        ((charLeftBound > charLeftBound && charLeftBound < obstacleRightBound)
+                || (charRightBound > obstacleLeftBound && charRightBound < obstacleRightBound))) {
                     GameActivity.setStartConditions();
                 }
             }
         });
+        animator.setStartDelay(x);
         animator.start();
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
