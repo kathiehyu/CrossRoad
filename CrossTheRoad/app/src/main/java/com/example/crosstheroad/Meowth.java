@@ -39,12 +39,15 @@ public class Meowth extends RoadObstacle {
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
                 GameActivity game = new GameActivity();
                 float charLeftBound = GameActivity.getMovement().getCharX();
-                float charRightBound = GameActivity.getMovement().getCharX() + Background.getTileLength();
+                float charRightBound = GameActivity.getMovement().getCharX()
+                        + Background.getTileLength();
                 float obstacleLeftBound = getGraphic().getX();
                 float obstacleRightBound = getGraphic().getX() + Background.getTileLength();
-                if (GameActivity.getMovement().getRow() == 12 &&
-                        ((charLeftBound > obstacleLeftBound && charLeftBound < obstacleRightBound)
-                                || (charRightBound > obstacleLeftBound && charRightBound < obstacleRightBound))) {
+                if (GameActivity.getMovement().getRow() == 12
+                        && ((charLeftBound > obstacleLeftBound
+                                && charLeftBound < obstacleRightBound)
+                                || (charRightBound > obstacleLeftBound
+                        && charRightBound < obstacleRightBound))) {
                     game.setStartConditions(true);
                 }
             }
