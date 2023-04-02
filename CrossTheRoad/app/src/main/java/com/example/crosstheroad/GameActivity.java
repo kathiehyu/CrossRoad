@@ -6,13 +6,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -20,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.LinkedList;
 
 /**
  * This class will process the gameContainer's activity.
@@ -87,7 +83,9 @@ public class GameActivity extends AppCompatActivity {
 
         ImageView heart = new ImageView(this);
         heart.setBackgroundResource(R.drawable.pixel_heart);
-        LinearLayout.LayoutParams heartLayout = new LinearLayout.LayoutParams(ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams heartLayout =
+                new LinearLayout.LayoutParams(ViewPager.LayoutParams.WRAP_CONTENT,
+                ViewPager.LayoutParams.WRAP_CONTENT);
         heartLayout.width = 125;
         heartLayout.height = 125;
         heart.setLayoutParams(heartLayout);
@@ -152,7 +150,7 @@ public class GameActivity extends AppCompatActivity {
                 System.out.println((livesDisplay.getText().charAt(0) == '0'));
                 if (lives <= 0) {
                     System.out.println("ATTEMPTING TO START GAME OVER");
-                    Intent intent = new Intent (context, GameOverScreen.class);
+                    Intent intent = new Intent(context, GameOverScreen.class);
                     startActivity(intent);
                 }
             }
@@ -189,7 +187,7 @@ public class GameActivity extends AppCompatActivity {
         jessie.setAnimation(0);
 
         //Jessie2
-        Jessie jessie2 = new Jessie(getResources(), this, 7000,Background.getTileLength() * 9);
+        Jessie jessie2 = new Jessie(getResources(), this, 7000, Background.getTileLength() * 9);
         gameContainer.addView(jessie2.getGraphic());
         jessie2.setAnimation(3000);
     }
@@ -198,19 +196,22 @@ public class GameActivity extends AppCompatActivity {
         createJessies(gameContainer);
 
         //James
-        James james = new James(getResources(), this, 8000, MainActivity.getScreenX(), Background.getTileLength() * 10);
+        James james = new James(getResources(), this, 8000, MainActivity.getScreenX(),
+                Background.getTileLength() * 10);
         gameContainer.addView(james.getGraphic());
         james.setAnimation(0);
 
         //James2
-        James james2 = new James(getResources(), this, 8000, MainActivity.getScreenX() - 500, Background.getTileLength() * 10);
+        James james2 = new James(getResources(), this, 8000, MainActivity.getScreenX() - 500,
+                Background.getTileLength() * 10);
         gameContainer.addView(james2.getGraphic());
 
         james2.setAnimation(4000);
 
 
         //James3
-        James james3 = new James(getResources(), this, 8000, MainActivity.getScreenX() - 500, Background.getTileLength() * 10);
+        James james3 = new James(getResources(), this, 8000, MainActivity.getScreenX() - 500,
+                Background.getTileLength() * 10);
         gameContainer.addView(james3.getGraphic());
         james3.setAnimation(8000);
 
@@ -251,17 +252,20 @@ public class GameActivity extends AppCompatActivity {
         wobuffet3.setAnimation(3000);
 
         //Grookey
-        Grookey grookey = new Grookey(getResources(), this, 10000, Background.getTileLength() * 13);
+        Grookey grookey = new Grookey(getResources(), this, 10000,
+                Background.getTileLength() * 13);
         gameContainer.addView(grookey.getGraphic());
         grookey.setAnimation(0);
 
         //Grookey2
-        Grookey grookey2 = new Grookey(getResources(), this, 10000, Background.getTileLength() * 13);
+        Grookey grookey2 = new Grookey(getResources(), this, 10000,
+                Background.getTileLength() * 13);
         gameContainer.addView(grookey2.getGraphic());
         grookey2.setAnimation(2000);
 
         //Grookey3
-        Grookey grookey3 = new Grookey(getResources(), this, 10000, Background.getTileLength() * 13);
+        Grookey grookey3 = new Grookey(getResources(), this, 10000,
+                Background.getTileLength() * 13);
         gameContainer.addView(grookey3.getGraphic());
         grookey3.setAnimation(4000);
     }
@@ -290,10 +294,6 @@ public class GameActivity extends AppCompatActivity {
                     }
                     updateScore();
                 }
-//                System.out.println("CHECKING COLLISIONS");
-//                if (movement.checkCollision()) {
-//                    setStartConditions();
-//                }
             }
         });
         down.setOnClickListener(new View.OnClickListener() {
