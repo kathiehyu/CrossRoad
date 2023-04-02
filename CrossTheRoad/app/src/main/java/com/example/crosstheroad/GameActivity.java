@@ -383,4 +383,47 @@ public class GameActivity extends AppCompatActivity {
     public int getLives() {
         return lives;
     }
+
+    /**
+     * ==================================================
+     * THESE METHODS ARE MADE FOR UNIT TESTS PURPOSE ONLY
+     * ==================================================
+     */
+
+    public static boolean checkWaterTile (int life1, int life2){
+        if (life1 == life2){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean checkVehicleCollision (int life1, int life2){
+        if (life1 == life2){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean checkRespawned (int x, int y) {
+        if (x == 0 && y == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean checkRespawnedScore(int score){
+        if (score == GameActivity.getScore()){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean checkKeepMaxScore (int score) {
+        if (score  == GameActivity.getGameScore()){
+            return true;
+        }
+        return false;
+    }
+
+
 }
