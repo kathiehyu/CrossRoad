@@ -55,6 +55,7 @@ public class Background {
         bmap = Bitmap.createBitmap(screenX, screenY, config);
 
         setTileDisplay(bmap, screenX, screenY);
+        //showStartTile(bmap, screenX, screenY);
         return bmap;
     }
 
