@@ -85,7 +85,7 @@ public class GameActivity extends AppCompatActivity {
         heart.setBackgroundResource(R.drawable.pixel_heart);
         LinearLayout.LayoutParams heartLayout =
                 new LinearLayout.LayoutParams(ViewPager.LayoutParams.WRAP_CONTENT,
-                ViewPager.LayoutParams.WRAP_CONTENT);
+                        ViewPager.LayoutParams.WRAP_CONTENT);
         heartLayout.width = 125;
         heartLayout.height = 125;
         heart.setLayoutParams(heartLayout);
@@ -388,42 +388,49 @@ public class GameActivity extends AppCompatActivity {
      * ==================================================
      * THESE METHODS ARE MADE FOR UNIT TESTS PURPOSE ONLY
      * ==================================================
+     * @param life1 life before hit.
+     * @param life2 life after hit.
+     * @return boolean.
      */
 
-    public static boolean checkWaterTile (int life1, int life2){
-        if (life1 == life2){
+    public static boolean checkWaterTile(int life1, int life2) {
+        if (life1 == life2) {
             return true;
         }
         return false;
     }
 
-    public static boolean checkVehicleCollision (int life1, int life2){
-        if (life1 == life2){
+    public static boolean checkVehicleCollision(int life1, int life2) {
+        if (life1 == life2) {
             return true;
         }
         return false;
     }
 
-    public static boolean checkRespawned (int x, int y) {
+    public static boolean checkRespawned(int x, int y) {
         if (x == 0 && y == 0) {
             return true;
         }
         return false;
     }
 
-    public static boolean checkRespawnedScore(int score){
-        if (score == GameActivity.getScore()){
+    public static boolean checkRespawnedScore(int score) {
+        if (score == GameActivity.getScore()) {
             return true;
         }
         return false;
     }
 
-    public static boolean checkKeepMaxScore (int score) {
-        if (score  == GameActivity.getGameScore()){
+    public static boolean checkKeepMaxScore(int score) {
+        if (score  == GameActivity.getGameScore()) {
             return true;
         }
         return false;
     }
-
-
+    public static void setScore(int newScore) {
+        score = newScore;
+    }
+    public static int getLatestScore() {
+        return score;
+    }
 }
