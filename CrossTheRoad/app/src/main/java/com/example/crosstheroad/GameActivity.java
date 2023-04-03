@@ -36,10 +36,6 @@ public class GameActivity extends AppCompatActivity {
 
     private static TextView scoreDisplay;
     private static TextView livesDisplay;
-    private static int safeScore = 1;
-    private int goalScore = 8;
-
-    private String packageName;
 
     private static Movement movement;
 
@@ -148,7 +144,7 @@ public class GameActivity extends AppCompatActivity {
                 System.out.println("LIVES CHANGED");
                 System.out.println(livesDisplay.getText());
                 System.out.println((livesDisplay.getText().charAt(0) == '0'));
-                if (GameOver()) {
+                if (lives <= 0) {
                     System.out.println("ATTEMPTING TO START GAME OVER");
                     Intent intent = new Intent(context, GameOverScreen.class);
                     startActivity(intent);
@@ -335,7 +331,7 @@ public class GameActivity extends AppCompatActivity {
 
             highestRow = movement.getRow();
         }
-        System.out.println("SCORE: " + Integer.toString(score));
+        System.out.println("SCORE: " + (score));
         scoreDisplay.setText(Integer.toString(score));
         return score;
     }
@@ -424,22 +420,22 @@ public class GameActivity extends AppCompatActivity {
         return false;
     }
 
-    public static boolean checkObstacleColliding(int charX, int obstacleX){
-        if (charX == obstacleX){
+    public static boolean checkObstacleColliding(int charX, int obstacleX) {
+        if (charX == obstacleX) {
             return true;
         }
         return false;
     }
 
-    public static boolean checkWaterTileColliding(int water, int charY){
-        if (water == charY){
+    public static boolean checkWaterTileColliding(int water, int charY) {
+        if (water == charY) {
             return true;
         }
         return false;
     }
 
-    public static boolean checkZeroLife(int life){
-        if (life > 0){
+    public static boolean checkZeroLife(int life) {
+        if (life > 0) {
             return true;
         }
         return false;
@@ -450,16 +446,6 @@ public class GameActivity extends AppCompatActivity {
     }
     public static int getLatestScore() {
         return score;
-    }
-
-
-  
-  
-    public static boolean GameOver() {
-        if (lives <= 0) {
-            return true;
-        }
-        return false;
     }
 
 }
