@@ -36,6 +36,7 @@ public class GameScreen extends AppCompatActivity {
         TextView displayName = findViewById(R.id.playerName);
         displayName.setText(Configuration.inputName);
 
+
         // display difficulty
         String diff = (String) Configuration.selectedDifficulty.getText();
         TextView displayDiff = findViewById(R.id.difficultyDisplay);

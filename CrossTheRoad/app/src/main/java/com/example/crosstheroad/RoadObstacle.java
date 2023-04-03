@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.widget.ImageView;
 
-public abstract class RoadObstacle {
+public abstract class RoadObstacle extends Obstacle {
     // the higher the duration, the slower the obstacle
     protected int duration;
     private ImageView graphic;
