@@ -423,6 +423,28 @@ public class GameActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    public static boolean checkObstacleColliding(int charX, int obstacleX){
+        if (charX == obstacleX){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean checkWaterTileColliding(int water, int charY){
+        if (water == charY){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean checkZeroLife(int life){
+        if (life > 0){
+            return true;
+        }
+        return false;
+    }
+
     public static void setScore(int newScore) {
         score = newScore;
     }
@@ -430,10 +452,14 @@ public class GameActivity extends AppCompatActivity {
         return score;
     }
 
+
+  
+  
     public static boolean GameOver() {
         if (lives <= 0) {
             return true;
         }
         return false;
     }
+
 }
