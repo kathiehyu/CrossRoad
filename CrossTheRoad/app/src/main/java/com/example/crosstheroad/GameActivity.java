@@ -148,7 +148,7 @@ public class GameActivity extends AppCompatActivity {
                 System.out.println("LIVES CHANGED");
                 System.out.println(livesDisplay.getText());
                 System.out.println((livesDisplay.getText().charAt(0) == '0'));
-                if (lives <= 0) {
+                if (GameOver()) {
                     System.out.println("ATTEMPTING TO START GAME OVER");
                     Intent intent = new Intent(context, GameOverScreen.class);
                     startActivity(intent);
@@ -372,16 +372,12 @@ public class GameActivity extends AppCompatActivity {
         System.out.println("resumed");
     }
 
-    public static int getSafeScore() {
-        return safeScore;
-    }
-
-    public static void setHighestRow(int highestRow) {
-        GameActivity.highestRow = highestRow;
-    }
-
     public int getLives() {
         return lives;
+    }
+
+    public void setLives(int num) {
+        lives = num;
     }
 
     /**
@@ -432,5 +428,12 @@ public class GameActivity extends AppCompatActivity {
     }
     public static int getLatestScore() {
         return score;
+    }
+
+    public static boolean GameOver() {
+        if (lives <= 0) {
+            return true;
+        }
+        return false;
     }
 }
