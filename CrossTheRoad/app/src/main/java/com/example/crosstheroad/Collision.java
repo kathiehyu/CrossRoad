@@ -12,19 +12,20 @@ public class Collision {
      * @param bitmap2 Second bitmap.
      * @param x2 x-position of bitmap2 on screen.
      * @param y2 y-position of bitmap2 on screen.
+     * @return boolean whether or not tile is filled.
      */
     public static boolean isCollisionDetected(Bitmap bitmap1, int x1, int y1,
                                               Bitmap bitmap2, int x2, int y2) {
 
-        Rect bounds1 = new Rect(x1, y1, x1+bitmap1.getWidth(), y1+bitmap1.getHeight());
-        Rect bounds2 = new Rect(x2, y2, x2+bitmap2.getWidth(), y2+bitmap2.getHeight());
+        Rect bounds1 = new Rect(x1, y1, x1 + bitmap1.getWidth(), y1 + bitmap1.getHeight());
+        Rect bounds2 = new Rect(x2, y2, x2 + bitmap2.getWidth(), y2 + bitmap2.getHeight());
 
         if (Rect.intersects(bounds1, bounds2)) {
             Rect collisionBounds = getCollisionBounds(bounds1, bounds2);
             for (int i = collisionBounds.left; i < collisionBounds.right; i++) {
                 for (int j = collisionBounds.top; j < collisionBounds.bottom; j++) {
-                    int bitmap1Pixel = bitmap1.getPixel(i-x1, j-y1);
-                    int bitmap2Pixel = bitmap2.getPixel(i-x2, j-y2);
+                    int bitmap1Pixel = bitmap1.getPixel(i - x1, j - y1);
+                    int bitmap2Pixel = bitmap2.getPixel(i - x2, j - y2);
                     if (isFilled(bitmap1Pixel) && isFilled(bitmap2Pixel)) {
                         return true;
                     }

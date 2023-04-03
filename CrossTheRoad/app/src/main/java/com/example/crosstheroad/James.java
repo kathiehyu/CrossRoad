@@ -45,12 +45,15 @@ public class James extends RoadObstacle {
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
                 GameActivity game = new GameActivity();
                 float charLeftBound = GameActivity.getMovement().getCharX();
-                float charRightBound = GameActivity.getMovement().getCharX() + Background.getTileLength();
+                float charRightBound = GameActivity.getMovement().getCharX()
+                        + Background.getTileLength();
                 float obstacleLeftBound = getGraphic().getX();
                 float obstacleRightBound = getGraphic().getX() + Background.getTileLength() * 2;
-                if (GameActivity.getMovement().getRow() == 11 &&
-                        ((charLeftBound > obstacleLeftBound && charLeftBound < obstacleRightBound)
-                                || (charRightBound > obstacleLeftBound && charRightBound < obstacleRightBound))) {
+                if (GameActivity.getMovement().getRow() == 11
+                        && ((charLeftBound > obstacleLeftBound
+                        && charLeftBound < obstacleRightBound)
+                                || (charRightBound > obstacleLeftBound
+                        && charRightBound < obstacleRightBound))) {
                     game.setStartConditions(true);
                 }
             }
