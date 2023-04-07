@@ -35,6 +35,7 @@ public class Wobuffet extends RoadObstacle {
                 (float) -MainActivity.getScreenX() + 500,
                 (float) MainActivity.getScreenX() + 500);
         animator.setDuration(this.duration);
+        this.animator = animator;
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
