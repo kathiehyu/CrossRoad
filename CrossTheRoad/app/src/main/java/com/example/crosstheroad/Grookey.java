@@ -13,8 +13,6 @@ public class Grookey extends RoadObstacle {
     Grookey(Resources r, Context context, int duration, int row, int length) {
         super(r, context, duration, row, length);
         setGraphic();
-        getGraphic().setY(Background.getTileLength() * (row - 1));
-        getGraphic().setX(MainActivity.getScreenX() + 500);
     }
 
     @Override
@@ -25,6 +23,8 @@ public class Grookey extends RoadObstacle {
                 Background.getTileLength(), Gravity.RIGHT);
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(super.r.getDrawable(R.drawable.grookey));
+        graphic.setY(Background.getTileLength() * (row - 1));
+        graphic.setX(MainActivity.getScreenX() + 500);
         super.graphic = graphic;
     }
 }

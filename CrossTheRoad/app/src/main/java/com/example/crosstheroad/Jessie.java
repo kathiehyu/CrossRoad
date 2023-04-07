@@ -15,8 +15,6 @@ public class Jessie extends RoadObstacle {
     public Jessie(Resources r, Context context, int duration, int row, int length) {
         super(r, context, duration, row, length);
         setGraphic();
-        getGraphic().setY(Background.getTileLength() * (row - 1));
-        getGraphic().setX(-500);
     }
 
     @Override
@@ -28,6 +26,8 @@ public class Jessie extends RoadObstacle {
 
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(super.r.getDrawable(R.drawable.jessie));
+        graphic.setY(Background.getTileLength() * (row - 1));
+        graphic.setX(-500);
         super.graphic = graphic;
     }
 }

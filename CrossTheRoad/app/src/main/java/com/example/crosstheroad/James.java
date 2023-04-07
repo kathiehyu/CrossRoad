@@ -17,8 +17,6 @@ public class James extends RoadObstacle {
     James(Resources r, Context context, int duration, int row, int length) {
         super(r, context, duration, row, length);
         setGraphic();
-        getGraphic().setY(Background.getTileLength() * (row - 1));
-        getGraphic().setX(MainActivity.getScreenX() + 500);
     }
 
     @Override
@@ -29,6 +27,8 @@ public class James extends RoadObstacle {
                                                 Background.getTileLength(), Gravity.RIGHT);
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(super.r.getDrawable(R.drawable.james));
+        graphic.setY(Background.getTileLength() * (row - 1));
+        graphic.setX(MainActivity.getScreenX() + 500);
         super.graphic = graphic;
     }
 }
