@@ -183,13 +183,13 @@ public class GameActivity extends AppCompatActivity {
 
     public void createJessies(FrameLayout gameContainer) {
         //Jessie
-        Jessie jessie = new Jessie(getResources(), this, 7000, Background.getTileLength() * 9);
+        Jessie jessie = new Jessie(getResources(), this, 7000, 10, 3);
         gameContainer.addView(jessie.getGraphic());
         jessie.setAnimation(0);
         obstacles.add(jessie);
 
         //Jessie2
-        Jessie jessie2 = new Jessie(getResources(), this, 7000, Background.getTileLength() * 9);
+        Jessie jessie2 = new Jessie(getResources(), this, 7000, 10, 3);
         gameContainer.addView(jessie2.getGraphic());
         jessie2.setAnimation(3000);
         obstacles.add(jessie2);
@@ -197,85 +197,94 @@ public class GameActivity extends AppCompatActivity {
 
     public void createJames(FrameLayout gameContainer) {
         //James
-        James james = new James(getResources(), this, 8000, MainActivity.getScreenX(),
-                Background.getTileLength() * 10);
+        James james = new James(getResources(), this, 8000, 11, 2);
         gameContainer.addView(james.getGraphic());
         james.setAnimation(0);
+        james.getAnimator().setFloatValues((float)  MainActivity.getScreenX() - 500, (float) -MainActivity.getScreenX() - 500);
         obstacles.add(james);
 
         //James2
-        James james2 = new James(getResources(), this, 8000, MainActivity.getScreenX() - 500,
-                Background.getTileLength() * 10);
+        James james2 = new James(getResources(), this, 8000, 11, 2);
         gameContainer.addView(james2.getGraphic());
         james2.setAnimation(4000);
+        james2.getAnimator().setFloatValues((float)  MainActivity.getScreenX() - 500, (float) -MainActivity.getScreenX() - 500);
         obstacles.add(james2);
 
 
         //James3
-        James james3 = new James(getResources(), this, 8000, MainActivity.getScreenX() - 500,
-                Background.getTileLength() * 10);
+        James james3 = new James(getResources(), this, 8000, 11, 2);
         gameContainer.addView(james3.getGraphic());
         james3.setAnimation(8000);
+        james3.getAnimator().setFloatValues((float)  MainActivity.getScreenX() - 500, (float) -MainActivity.getScreenX() - 500);
         obstacles.add(james3);
     }
 
     public void createMeowths(FrameLayout gameContainer) {
         //Meowth
-        Meowth meowth = new Meowth(getResources(), this, 6000, Background.getTileLength() * 11);
+        Meowth meowth = new Meowth(getResources(), this, 6000, 12, 1);
         gameContainer.addView(meowth.getGraphic());
         meowth.setAnimation(0);
+        meowth.getAnimator().setFloatValues((float) -MainActivity.getScreenX() + 500,
+                (float) MainActivity.getScreenX() + 500);
         obstacles.add(meowth);
 
         //Meowth2
-        Meowth meowth2 = new Meowth(getResources(), this, 6000, Background.getTileLength() * 11);
+        Meowth meowth2 = new Meowth(getResources(), this, 6000, 12, 1);
         gameContainer.addView(meowth2.getGraphic());
         meowth2.setAnimation(3000);
+        meowth2.getAnimator().setFloatValues((float) -MainActivity.getScreenX() + 500,
+                (float) MainActivity.getScreenX() + 500);
         obstacles.add(meowth2);
     }
 
     public void createWobuffets(FrameLayout gameContainer) {
         //Wobuffet
-        Wobuffet wobuffet = new Wobuffet(getResources(), this,
-                11000, Background.getTileLength() * 12);
+        Wobuffet wobuffet = new Wobuffet(getResources(), this, 11000, 13, 1);
         gameContainer.addView(wobuffet.getGraphic());
         wobuffet.setAnimation(0);
+        wobuffet.getAnimator().setFloatValues((float) -MainActivity.getScreenX() + 500,
+                (float) MainActivity.getScreenX() + 500);
         obstacles.add(wobuffet);
 
         //Wobuffet2
         Wobuffet wobuffet2 = new Wobuffet(getResources(), this,
-                11000, Background.getTileLength() * 12);
+                11000, 13, 1);
         gameContainer.addView(wobuffet2.getGraphic());
-        wobuffet2.setAnimation(1500);
+        wobuffet2.setAnimation(2200);
+        wobuffet2.getAnimator().setFloatValues((float) -MainActivity.getScreenX() + 500,
+                (float) MainActivity.getScreenX() + 500);
         obstacles.add(wobuffet2);
 
         //Wobuffet3
         Wobuffet wobuffet3 = new Wobuffet(getResources(), this,
-                11000, Background.getTileLength() * 12);
+                11000, 13, 1);
         gameContainer.addView(wobuffet3.getGraphic());
-        wobuffet3.setAnimation(3000);
+        wobuffet3.setAnimation(4400);
+        wobuffet3.getAnimator().setFloatValues((float) -MainActivity.getScreenX() + 500,
+                (float) MainActivity.getScreenX() + 500);
         obstacles.add(wobuffet3);
     }
 
     public void createGrookeys(FrameLayout gameContainer) {
         //Grookey
-        Grookey grookey = new Grookey(getResources(), this, 10000,
-                Background.getTileLength() * 13);
+        Grookey grookey = new Grookey(getResources(), this, 10000, 14, 1);
         gameContainer.addView(grookey.getGraphic());
         grookey.setAnimation(0);
+        grookey.getAnimator().setFloatValues((float) MainActivity.getScreenX() - 500, (float) -MainActivity.getScreenX() - 500);
         obstacles.add(grookey);
 
         //Grookey2
-        Grookey grookey2 = new Grookey(getResources(), this, 10000,
-                Background.getTileLength() * 13);
+        Grookey grookey2 = new Grookey(getResources(), this, 10000, 14, 1);
         gameContainer.addView(grookey2.getGraphic());
-        grookey2.setAnimation(2000);
+        grookey2.setAnimation(2200);
+        grookey2.getAnimator().setFloatValues((float) MainActivity.getScreenX() - 500, (float) -MainActivity.getScreenX() - 500);
         obstacles.add(grookey2);
 
         //Grookey3
-        Grookey grookey3 = new Grookey(getResources(), this, 10000,
-                Background.getTileLength() * 13);
+        Grookey grookey3 = new Grookey(getResources(), this, 10000, 14, 1);
         gameContainer.addView(grookey3.getGraphic());
-        grookey3.setAnimation(4000);
+        grookey3.setAnimation(4400);
+        grookey3.getAnimator().setFloatValues((float) MainActivity.getScreenX() - 500, (float) -MainActivity.getScreenX() - 500);
         obstacles.add(grookey3);
     }
 
