@@ -28,6 +28,6 @@ public class Jessie extends RoadObstacle {
 
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(super.r.getDrawable(R.drawable.jessie));
-        super.setGraphic1(graphic);
+        super.graphic = graphic;
     }
 }

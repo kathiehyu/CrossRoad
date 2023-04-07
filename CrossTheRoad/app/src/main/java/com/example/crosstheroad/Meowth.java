@@ -25,7 +25,7 @@ public class Meowth extends RoadObstacle {
                 Background.getTileLength(), Gravity.LEFT);
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(super.r.getDrawable(R.drawable.meowth));
-        super.setGraphic1(graphic);
+        super.graphic = graphic;
     }
 }
 

@@ -25,6 +25,6 @@ public class Grookey extends RoadObstacle {
                 Background.getTileLength(), Gravity.RIGHT);
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(super.r.getDrawable(R.drawable.grookey));
-        super.setGraphic1(graphic);
+        super.graphic = graphic;
     }
 }

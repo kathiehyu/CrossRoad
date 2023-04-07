@@ -29,6 +29,6 @@ public class James extends RoadObstacle {
                                                 Background.getTileLength(), Gravity.RIGHT);
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(super.r.getDrawable(R.drawable.james));
-        super.setGraphic1(graphic);
+        super.graphic = graphic;
     }
 }

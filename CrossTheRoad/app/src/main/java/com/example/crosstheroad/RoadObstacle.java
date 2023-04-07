@@ -12,10 +12,10 @@ import androidx.annotation.NonNull;
 public abstract class RoadObstacle extends Obstacle {
     // the higher the duration, the slower the obstacle
     protected int duration;
-    private ImageView graphic;
     protected Resources r;
     protected Context context;
     protected ObjectAnimator animator;
+    protected ImageView graphic;
     protected int row;
     protected int length;
     public ImageView getGraphic() {
@@ -28,10 +28,6 @@ public abstract class RoadObstacle extends Obstacle {
         this.context = context;
         this.length = Background.getTileLength() * length;
         setGraphic();
-    }
-
-    public void setGraphic1(ImageView graphic) {
-        this.graphic = graphic;
     }
 
     abstract void setGraphic();

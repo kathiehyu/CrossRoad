@@ -25,6 +25,6 @@ public class Wobuffet extends RoadObstacle {
                 Background.getTileLength(), Gravity.LEFT);
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(super.r.getDrawable(R.drawable.wobbuffet));
-        super.setGraphic1(graphic);
+        super.graphic = graphic;
     }
 }
