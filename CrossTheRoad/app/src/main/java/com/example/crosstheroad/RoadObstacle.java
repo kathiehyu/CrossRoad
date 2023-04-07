@@ -1,5 +1,6 @@
 package com.example.crosstheroad;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ public abstract class RoadObstacle extends Obstacle {
     private ImageView graphic;
     protected Resources r;
     protected Context context;
+    protected ObjectAnimator animator;
     public ImageView getGraphic() {
         return graphic;
     }
@@ -27,4 +29,8 @@ public abstract class RoadObstacle extends Obstacle {
     abstract void setGraphic();
 
     public abstract void setAnimation(int x);
+
+    public ObjectAnimator getAnimator() {
+        return animator;
+    }
 }

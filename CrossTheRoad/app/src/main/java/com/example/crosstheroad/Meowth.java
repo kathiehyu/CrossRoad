@@ -33,6 +33,7 @@ public class Meowth extends RoadObstacle {
         ObjectAnimator animator = ObjectAnimator.ofFloat(this.getGraphic(),
                 "translationX", (float) -MainActivity.getScreenX() + 500,
                 (float) MainActivity.getScreenX() + 500);
+        this.animator = animator;
         animator.setDuration(this.duration);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override

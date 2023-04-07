@@ -38,6 +38,7 @@ public class James extends RoadObstacle {
         ObjectAnimator animator = ObjectAnimator.ofFloat(this.getGraphic(), "translationX",
                 (float)  MainActivity.getScreenX() - 500,
                 (float) -MainActivity.getScreenX() - 500);
+        this.animator = animator;
         animator.setDuration(this.duration);
         animator.setInterpolator(new LinearInterpolator());
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

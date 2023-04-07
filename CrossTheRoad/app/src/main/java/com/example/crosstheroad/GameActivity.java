@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.LinkedList;
+
 
 /**
  * This class will process the gameContainer's activity.
@@ -45,6 +47,8 @@ public class GameActivity extends AppCompatActivity {
         return movement;
     }
 
+    private LinkedList<RoadObstacle> obstacles;
+
     @SuppressLint({"MissingInflatedId", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,7 @@ public class GameActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         context = GameActivity.this;
         lives = GameScreen.getLives();
+        obstacles = new LinkedList<>();
 
 
         FrameLayout gameContainer = new FrameLayout(this);
@@ -181,28 +186,29 @@ public class GameActivity extends AppCompatActivity {
         Jessie jessie = new Jessie(getResources(), this, 7000, Background.getTileLength() * 9);
         gameContainer.addView(jessie.getGraphic());
         jessie.setAnimation(0);
+        obstacles.add(jessie);
 
         //Jessie2
         Jessie jessie2 = new Jessie(getResources(), this, 7000, Background.getTileLength() * 9);
         gameContainer.addView(jessie2.getGraphic());
         jessie2.setAnimation(3000);
+        obstacles.add(jessie2);
     }
 
-    private void createRoadObstacles(FrameLayout gameContainer) {
-        createJessies(gameContainer);
-
+    public void createJames(FrameLayout gameContainer) {
         //James
         James james = new James(getResources(), this, 8000, MainActivity.getScreenX(),
                 Background.getTileLength() * 10);
         gameContainer.addView(james.getGraphic());
         james.setAnimation(0);
+        obstacles.add(james);
 
         //James2
         James james2 = new James(getResources(), this, 8000, MainActivity.getScreenX() - 500,
                 Background.getTileLength() * 10);
         gameContainer.addView(james2.getGraphic());
-
         james2.setAnimation(4000);
+        obstacles.add(james2);
 
 
         //James3
@@ -210,60 +216,75 @@ public class GameActivity extends AppCompatActivity {
                 Background.getTileLength() * 10);
         gameContainer.addView(james3.getGraphic());
         james3.setAnimation(8000);
+        obstacles.add(james3);
+    }
 
-
-
-
-
+    public void createMeowths(FrameLayout gameContainer) {
         //Meowth
         Meowth meowth = new Meowth(getResources(), this, 6000, Background.getTileLength() * 11);
         gameContainer.addView(meowth.getGraphic());
         meowth.setAnimation(0);
+        obstacles.add(meowth);
 
         //Meowth2
         Meowth meowth2 = new Meowth(getResources(), this, 6000, Background.getTileLength() * 11);
         gameContainer.addView(meowth2.getGraphic());
         meowth2.setAnimation(3000);
+        obstacles.add(meowth2);
+    }
 
-
-
-
-
+    public void createWobuffets(FrameLayout gameContainer) {
         //Wobuffet
         Wobuffet wobuffet = new Wobuffet(getResources(), this,
                 11000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet.getGraphic());
         wobuffet.setAnimation(0);
+        obstacles.add(wobuffet);
 
         //Wobuffet2
         Wobuffet wobuffet2 = new Wobuffet(getResources(), this,
                 11000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet2.getGraphic());
         wobuffet2.setAnimation(1500);
+        obstacles.add(wobuffet2);
 
         //Wobuffet3
         Wobuffet wobuffet3 = new Wobuffet(getResources(), this,
                 11000, Background.getTileLength() * 12);
         gameContainer.addView(wobuffet3.getGraphic());
         wobuffet3.setAnimation(3000);
+        obstacles.add(wobuffet3);
+    }
 
+    public void createGrookeys(FrameLayout gameContainer) {
         //Grookey
         Grookey grookey = new Grookey(getResources(), this, 10000,
                 Background.getTileLength() * 13);
         gameContainer.addView(grookey.getGraphic());
         grookey.setAnimation(0);
+        obstacles.add(grookey);
 
         //Grookey2
         Grookey grookey2 = new Grookey(getResources(), this, 10000,
                 Background.getTileLength() * 13);
         gameContainer.addView(grookey2.getGraphic());
         grookey2.setAnimation(2000);
+        obstacles.add(grookey2);
 
         //Grookey3
         Grookey grookey3 = new Grookey(getResources(), this, 10000,
                 Background.getTileLength() * 13);
         gameContainer.addView(grookey3.getGraphic());
         grookey3.setAnimation(4000);
+        obstacles.add(grookey3);
+    }
+
+    private void createRoadObstacles(FrameLayout gameContainer) {
+        createJessies(gameContainer);
+        createJames(gameContainer);
+        createMeowths(gameContainer);
+        createWobuffets(gameContainer);
+        createGrookeys(gameContainer);
     }
 
     private void configureButtons(Button up, Button down, Button left, Button right) {
@@ -336,7 +357,6 @@ public class GameActivity extends AppCompatActivity {
         return score;
     }
 
-
     public void removeLife() {
         System.out.println("REMOVING LIFE");
         lives--;
@@ -356,6 +376,9 @@ public class GameActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         System.out.println("PAUSING");
+        for (int i = 0; i < obstacles.size(); i++) {
+            obstacles.get(i).getAnimator().pause();
+        }
         gameView.pause();
         System.out.println("paused");
     }
@@ -364,6 +387,9 @@ public class GameActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         System.out.println("RESUMING");
+        for (int i = 0; i < obstacles.size(); i++) {
+            obstacles.get(i).getAnimator().resume();
+        }
         gameView.resume();
         System.out.println("resumed");
     }
