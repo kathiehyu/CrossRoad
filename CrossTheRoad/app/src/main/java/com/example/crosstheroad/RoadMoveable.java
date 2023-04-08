@@ -9,28 +9,13 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
-public abstract class RoadObstacle extends Obstacle {
+public abstract class RoadMoveable extends Moveable {
     // the higher the duration, the slower the obstacle
-    protected int duration;
-    protected Resources r;
-    protected Context context;
-    protected ObjectAnimator animator;
-    protected ImageView graphic;
-    protected int row;
-    protected int length;
-    public ImageView getGraphic() {
-        return graphic;
-    }
-    RoadObstacle(Resources r, Context context, int duration, int row, int length) {
-        this.duration = duration;
-        this.r = r;
-        this.row = row;
-        this.context = context;
-        this.length = Background.getTileLength() * length;
-        setGraphic();
+
+    RoadMoveable(Resources r, Context context, int duration, int row, int length) {
+        super(r, context, duration, row , length);
     }
 
-    abstract void setGraphic();
 
     public void setAnimation(int x) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(this.getGraphic(),
@@ -63,9 +48,5 @@ public abstract class RoadObstacle extends Obstacle {
 
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
-    }
-
-    public ObjectAnimator getAnimator() {
-        return animator;
     }
 }
