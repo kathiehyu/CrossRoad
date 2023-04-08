@@ -210,7 +210,7 @@ public class GameActivity extends AppCompatActivity {
         //James2
         James james2 = new James(getResources(), this, 8000, 11, 2, x);
         gameContainer.addView(james2.getGraphic());
-        james2.setAnimation(4000);
+        james2.setAnimation(2200);
         james2.getAnimator().setFloatValues((float)  MainActivity.getScreenX() + 500, (float) -MainActivity.getScreenX() - 500);
         moveables.add(james2);
 
@@ -218,7 +218,7 @@ public class GameActivity extends AppCompatActivity {
         //James3
         James james3 = new James(getResources(), this, 8000, 11, 2, x);
         gameContainer.addView(james3.getGraphic());
-        james3.setAnimation(8000);
+        james3.setAnimation(4400);
         james3.getAnimator().setFloatValues((float)  MainActivity.getScreenX() + 500, (float) -MainActivity.getScreenX() - 500);
         moveables.add(james3);
     }
@@ -298,7 +298,7 @@ public class GameActivity extends AppCompatActivity {
     public void createLagio(FrameLayout gameContainer) {
         int row = 2;
         int x = -500;
-        Lagio lagio = new Lagio(getResources(), this, 10000,
+        Lagio lagio = new Lagio(getResources(), this, 15000,
                 2, 1, x);
         gameContainer.addView(lagio.getGraphic());
         lagio.setAnimation(0);
@@ -306,7 +306,7 @@ public class GameActivity extends AppCompatActivity {
         moveables.add(lagio);
 
         //lagio2
-        Lagio lagio2 = new Lagio(getResources(), this, 10000,
+        Lagio lagio2 = new Lagio(getResources(), this, 15000,
                 2, 1, x);
         gameContainer.addView(lagio2.getGraphic());
         lagio2.setAnimation(2000);
@@ -314,7 +314,7 @@ public class GameActivity extends AppCompatActivity {
         moveables.add(lagio2);
 
         //lagio3
-        Lagio lagio3 = new Lagio(getResources(), this, 10000,
+        Lagio lagio3 = new Lagio(getResources(), this, 15000,
                 2, 1, x);
         gameContainer.addView(lagio3.getGraphic());
         lagio3.setAnimation(4000);
@@ -322,7 +322,7 @@ public class GameActivity extends AppCompatActivity {
         moveables.add(lagio3);
 
         //lagio4
-        Lagio lagio4 = new Lagio(getResources(), this, 10000,
+        Lagio lagio4 = new Lagio(getResources(), this, 15000,
                 2, 1, x);
         gameContainer.addView(lagio4.getGraphic());
         lagio4.setAnimation(6000);
@@ -334,24 +334,24 @@ public class GameActivity extends AppCompatActivity {
     public void createStars(FrameLayout gameContainer) {
         int row = 8;
         int x = -500;
-        Stars stars = new Stars(getResources(), this, 13000,
+        Stars stars = new Stars(getResources(), this, 15000,
                 row, 4, x);
         gameContainer.addView(stars.getGraphic());
-        stars.setAnimation(1000);
+        stars.setAnimation(0);
         moveables.add(stars);
 
         //Star2
-        Stars stars2 = new Stars(getResources(), this, 13000,
+        Stars stars2 = new Stars(getResources(), this, 15000,
                 row, 4, x);
         gameContainer.addView(stars2.getGraphic());
-        stars2.setAnimation(4000);
+        stars2.setAnimation(3000);
         moveables.add(stars2);
 
         //star3
-        Stars stars3 = new Stars(getResources(), this, 13000,
+        Stars stars3 = new Stars(getResources(), this, 15000,
                 row, 4, x);
         gameContainer.addView(stars3.getGraphic());
-        stars3.setAnimation(7000);
+        stars3.setAnimation(6000);
         moveables.add(stars3);
     }
 
@@ -382,33 +382,34 @@ public class GameActivity extends AppCompatActivity {
     public void createOctopus(FrameLayout gameContainer) {
         int row = 4;
         int x = -500;
-        Octopus octopus = new Octopus(getResources(), this, 14000,
+        Octopus octopus = new Octopus(getResources(), this, 12000,
                 row, 3, x);
         gameContainer.addView(octopus.getGraphic());
         octopus.setAnimation(0);
         moveables.add(octopus);
 
         //octopus2
-        Octopus octopus2 = new Octopus(getResources(), this, 14000,
+        Octopus octopus2 = new Octopus(getResources(), this, 12000,
                 row, 3, x);
         gameContainer.addView(octopus2.getGraphic());
-        octopus2.setAnimation(3000);
+        octopus2.setAnimation(3100);
         moveables.add(octopus2);
 
         //octopus3
-        Octopus octopus3 = new Octopus(getResources(), this, 14000,
+        Octopus octopus3 = new Octopus(getResources(), this, 12000,
                 row, 3, x);
         gameContainer.addView(octopus3.getGraphic());
-        octopus3.setAnimation(6000);
+        octopus3.setAnimation(6200);
         moveables.add(octopus3);
     }
+
     public void createLapras(FrameLayout gameContainer) {
         int row = 6;
         int x = -500;
         Lapras lapras = new Lapras(getResources(), this, 18000,
                 row, 3, x);
         gameContainer.addView(lapras.getGraphic());
-        lapras.setAnimation(250);
+        lapras.setAnimation(0);
         lapras.getAnimator().setFloatValues((float)  MainActivity.getScreenX() + 500, (float) -MainActivity.getScreenX() - 500);
         moveables.add(lapras);
 
@@ -416,7 +417,7 @@ public class GameActivity extends AppCompatActivity {
         Lapras lapras2 = new Lapras(getResources(), this, 18000,
                 row, 3, x);
         gameContainer.addView(lapras2.getGraphic());
-        lapras2.setAnimation(3250);
+        lapras2.setAnimation(3100);
         lapras2.getAnimator().setFloatValues((float)  MainActivity.getScreenX() + 500, (float) -MainActivity.getScreenX() - 500);
         moveables.add(lapras2);
 
@@ -424,7 +425,7 @@ public class GameActivity extends AppCompatActivity {
         Lapras lapras3 = new Lapras(getResources(), this, 18000,
                 row, 3, x);
         gameContainer.addView(lapras3.getGraphic());
-        lapras3.setAnimation(6250);
+        lapras3.setAnimation(6200);
         lapras3.getAnimator().setFloatValues((float)  MainActivity.getScreenX() + 500, (float) -MainActivity.getScreenX() - 500);
         moveables.add(lapras3);
 
@@ -450,17 +451,17 @@ public class GameActivity extends AppCompatActivity {
     public void createSeaHorse(FrameLayout gameContainer) {
         int row = 3;
         int x = MainActivity.getScreenX() + 500;
-        SeaHorse seaHorse = new SeaHorse(getResources(), this, 14000,
+        SeaHorse seaHorse = new SeaHorse(getResources(), this, 10000,
                 row, 4, x);
         gameContainer.addView(seaHorse.getGraphic());
-        seaHorse.setAnimation(400);
+        seaHorse.setAnimation(0);
         moveables.add(seaHorse);
 
         //seahorse2
-        SeaHorse seaHorse2 = new SeaHorse(getResources(), this, 14000,
+        SeaHorse seaHorse2 = new SeaHorse(getResources(), this, 10000,
                 row, 4, x);
         gameContainer.addView(seaHorse2.getGraphic());
-        seaHorse2.setAnimation(6400);
+        seaHorse2.setAnimation(6000);
         moveables.add(seaHorse2);
     }
 
