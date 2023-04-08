@@ -33,13 +33,25 @@ public abstract class WaterMoveable extends Moveable {
                         + Background.getTileLength();
                 float obstacleLeftBound = getGraphic().getX();
                 float obstacleRightBound = getGraphic().getX() + length;
+                float midPoint = charLeftBound + Background.getTileLength() / 2;
                 if (GameActivity.getMovement().getRow() == row
-                        && ((charLeftBound > obstacleLeftBound
-                        && charLeftBound < obstacleRightBound)
-                        || (charRightBound > obstacleLeftBound
-                        && charRightBound < obstacleRightBound))) {
-                    game.setStartConditions(true);
+                        && (((charLeftBound > obstacleLeftBound
+                        && charLeftBound < obstacleRightBound) && midPoint < obstacleRightBound))
+                        || ((charRightBound > obstacleLeftBound
+                        && charRightBound < obstacleRightBound) && midPoint > obstacleLeftBound)) {
+                    ObjectAnimator charAnimator = GameActivity.getMovement().getCharAnimator();
+                    // start animation of character?
+                    if (charAnimator == null) {
+                        GameActivity.getMovement().setCharAnimator(animator.clone());
+                        GameActivity.getMovement().getCharAnimator().start();
+                    }
                 }
+//                else if (GameActivity.getMovement().getRow() == row) {
+//                    // player is on a water tile
+//                    // remove animator
+//                    GameActivity.getMovement().setCharAnimator(null);
+//                    game.setStartConditions(true);
+//                }
             }
         });
         animator.setStartDelay(x);

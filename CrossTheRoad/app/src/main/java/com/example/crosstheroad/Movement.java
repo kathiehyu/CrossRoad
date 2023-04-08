@@ -1,9 +1,21 @@
 package com.example.crosstheroad;
 
+import android.animation.ObjectAnimator;
+
 public class Movement {
     private int x = 0;
     private int y = 0;
     private int tileLength = Background.getTileLength();
+
+    private ObjectAnimator charAnimator;
+
+    public ObjectAnimator getCharAnimator() {
+        return charAnimator;
+    }
+
+    public void setCharAnimator(ObjectAnimator oa) {
+        charAnimator = oa;
+    }
 
     private int row;
 
