@@ -158,8 +158,13 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
+
+    public void openGameWinScreen(){
+        Intent intent = new Intent(this, GameWinScreen.class);
+        startActivity(intent);
+    }
+
 
     public void setStartConditions(boolean loseLife) {
         int x = Background.getTileLength()
@@ -450,53 +455,53 @@ public class GameActivity extends AppCompatActivity {
 
 
 
-        private void configureButtons(Button up, Button down, Button left, Button right) {
-        up.setWidth(150);
-        up.setText("UP");
+    private void configureButtons(Button up, Button down, Button left, Button right) {
+    up.setWidth(150);
+    up.setText("UP");
 
-        down.setWidth(150);
-        down.setText("DOWN");
+    down.setWidth(150);
+    down.setText("DOWN");
 
-        left.setWidth(150);
-        left.setText("LEFT");
+    left.setWidth(150);
+    left.setText("LEFT");
 
-        right.setWidth(150);
-        right.setText("RIGHT");
+    right.setWidth(150);
+    right.setText("RIGHT");
 
-        up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean checkMoveUp = movement.moveUp();
-                if (checkMoveUp) {
-                    movement.setRow(movement.getRow() - 1);
-                    if (movement.getRow() == 8) {
-                        setStartConditions(true);
-                    }
-                    updateScore();
+    up.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            boolean checkMoveUp = movement.moveUp();
+            if (checkMoveUp) {
+                movement.setRow(movement.getRow() - 1);
+                if (movement.getRow() == 1) {
+                    openGameWinScreen();
                 }
+                updateScore();
             }
-        });
-        down.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean checkMoveDown = movement.moveDown();
-                if (checkMoveDown) {
-                    movement.setRow(movement.getRow() + 1);
-                }
+        }
+    });
+    down.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            boolean checkMoveDown = movement.moveDown();
+            if (checkMoveDown) {
+                movement.setRow(movement.getRow() + 1);
             }
-        });
-        left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                movement.moveLeft();
-            }
-        });
-        right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                movement.moveRight();
-            }
-        });
+        }
+    });
+    left.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            movement.moveLeft();
+        }
+    });
+    right.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            movement.moveRight();
+        }
+    });
     }
     public static int updateScore() {
         if (movement.getRow() < highestRow) {
