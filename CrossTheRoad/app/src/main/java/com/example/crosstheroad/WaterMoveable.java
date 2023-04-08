@@ -26,42 +26,58 @@ public abstract class WaterMoveable extends Moveable {
         ObjectAnimator animator = ObjectAnimator.ofFloat(this.getGraphic(),
                 "translationX", start, end);
         this.animator = animator;
-        System.out.println("THIS DURATION: " + Integer.toString(duration));
         animator.setDuration(duration);
         animator.setInterpolator(new LinearInterpolator());
         GameActivity game = new GameActivity();
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
-                float charLeftBound = GameActivity.getMovement().getCharX();
-                float charRightBound = GameActivity.getMovement().getCharX()
-                        + Background.getTileLength();
-                float obstacleLeftBound = getGraphic().getX();
-                float obstacleRightBound = getGraphic().getX() + length;
-                float midPoint = charLeftBound + Background.getTileLength() / 2;
-                if (GameActivity.getMovement().getRow() == row
-                        && ((((charLeftBound > obstacleLeftBound
-                        && charLeftBound < obstacleRightBound) && midPoint < obstacleRightBound))
-                        || ((charRightBound > obstacleLeftBound
-                        && charRightBound < obstacleRightBound) && midPoint > obstacleLeftBound))) {
-                    ObjectAnimator charAnimator = GameActivity.getMovement().getCharAnimator();
-                    System.out.println("FOUND COLLISION");
-                    System.out.println("character animator null? " + Boolean.toString(charAnimator == null));
-                    // start animation of character?
-                    if (charAnimator == null) {
-//                        charAnimator = new ObjectAnimator.ofFloat(GameActivity.getMovement().getGraphic(), "translationX", start, end);
-                        GameActivity.getMovement().setCharAnimator(animator.clone());
-//                        GameActivity.getMovement().getCharAnimator().set
-                        GameActivity.getMovement().getCharAnimator().start();
-                    }
-                } else if (GameActivity.getMovement().getRow() == row) {
-                    // player is on a water tile
-                    // remove animator
-                    GameActivity.getMovement().setCharAnimator(null);
-                    game.setStartConditions(true);
-                }
-            }
-        });
+//        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//            @Override
+//            public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
+//                float charLeftBound = GameActivity.getMovement().getCharX();
+//                float charRightBound = GameActivity.getMovement().getCharX()
+//                        + Background.getTileLength();
+//                float obstacleLeftBound = getGraphic().getX();
+//                float obstacleRightBound = getGraphic().getX() + length;
+//                float midPoint = charLeftBound + Background.getTileLength() / 2;
+////                System.out.println("LEFT COLLISION? " + Boolean.toString(((charLeftBound > obstacleLeftBound
+////                        && charLeftBound < obstacleRightBound) && midPoint < obstacleRightBound)));
+////                System.out.println("MIDPOINT? " + Boolean.toString( midPoint < obstacleRightBound));
+////                System.out.println("RIGHT COLLISION? " + Boolean.toString(((charRightBound > obstacleLeftBound
+////                        && charRightBound < obstacleRightBound) && midPoint > obstacleLeftBound)));
+////                System.out.println("MIDPOINT? " + Boolean.toString(  midPoint > obstacleLeftBound));
+//                if (GameActivity.getMovement().getRow() == row) System.out.println("COLLISION? " + Boolean.toString((midPoint < obstacleRightBound && midPoint > obstacleLeftBound)));
+//                if (GameActivity.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
+//                    ObjectAnimator charAnimator = GameActivity.getMovement().getCharAnimator();
+//                    System.out.println("FOUND COLLISION");
+//                    System.out.println("character animator null? " + Boolean.toString(charAnimator == null));
+//                    if (charRightBound > obstacleRightBound) {
+//                        System.out.println("COLLISION ON RIGHT");
+//                        GameActivity.getMovement().setCharX(Math.round(obstacleLeftBound));
+//                    } else if (charLeftBound < obstacleLeftBound) {
+//                        System.out.println("COLLISION ON LEFT");
+//                        GameActivity.getMovement().setCharX(Math.round(obstacleRightBound - Background.getTileLength()));
+//                    } else {
+//                        System.out.println("MIDDLE COLLISION");
+//                        GameActivity.getMovement().setCharX(Math.round(charLeftBound - ((charLeftBound - obstacleLeftBound) % Background.getTileLength())));
+//                    }
+//
+//                    // start animation of character?
+////                    if (charAnimator == null) {
+////                        float speed = Math.abs((end - start) / duration);
+////                        float charStart = charLeftBound - ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
+////                        float distance = Math.abs(charStart - end);
+////                        charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
+////                        charAnimator.setDuration((long) (distance / speed));
+////                        charAnimator.setInterpolator(new LinearInterpolator());
+////                        charAnimator.start();
+////                    }
+//
+//                }  else if (GameActivity.getMovement().getRow() == row) {
+//                    System.out.println("ON WATER!! AHHH!!");
+//                    // player is on a water tile
+//                    game.setStartConditions(true);
+//                }
+//            }
+//        });
         animator.setStartDelay(x);
         animator.start();
 

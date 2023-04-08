@@ -513,6 +513,8 @@ public class GameActivity extends AppCompatActivity {
         public void onClick(View view) {
             boolean checkMoveUp = movement.moveUp();
             if (checkMoveUp) {
+                // remove animator
+                GameActivity.getMovement().setCharAnimator(null);
                 movement.setRow(movement.getRow() - 1);
                 updateScore();
                 if (movement.getRow() == 1) {
@@ -526,6 +528,8 @@ public class GameActivity extends AppCompatActivity {
         public void onClick(View view) {
             boolean checkMoveDown = movement.moveDown();
             if (checkMoveDown) {
+                // remove animator
+                GameActivity.getMovement().setCharAnimator(null);
                 movement.setRow(movement.getRow() + 1);
             }
         }
@@ -533,12 +537,16 @@ public class GameActivity extends AppCompatActivity {
     left.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            // remove animator
+            GameActivity.getMovement().setCharAnimator(null);
             movement.moveLeft();
         }
     });
     right.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            // remove animator
+            GameActivity.getMovement().setCharAnimator(null);
             movement.moveRight();
         }
     });
