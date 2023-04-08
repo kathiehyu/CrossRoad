@@ -125,6 +125,7 @@ public class GameActivity extends AppCompatActivity {
 
         gameContainer.addView(gameView);
         gameContainer.addView(scoreContainer);
+        gameContainer.addView(Character.getChar());
         gameContainer.addView(buttons);
 
         createRoadmoveables(gameContainer);

@@ -18,9 +18,9 @@ public abstract class Moveable {
     protected int length;
     protected Resources r;
     protected Context context;
-    Moveable(Resources r, Context contecxt, int duration, int row, int length) {
+    Moveable(Resources r, Context context, int duration, int row, int length) {
         this.r = r;
-        this.context = contecxt;
+        this.context = context;
         this.duration = duration;
         this.row = row;
         this.length = Background.getTileLength() * length;;

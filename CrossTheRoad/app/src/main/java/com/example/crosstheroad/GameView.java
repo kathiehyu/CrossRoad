@@ -20,7 +20,7 @@ public class GameView extends SurfaceView implements Runnable {
         super(context);
         background1 = new Background();
         paint = new Paint();
-        character = new Character(getResources());
+        character = new Character(getResources(), context);
         movement = new Movement();
     }
 
@@ -51,7 +51,9 @@ public class GameView extends SurfaceView implements Runnable {
 
             //System.out.println("trying to draw character");
             assert Character.getChar() != null;
-            canvas.drawBitmap(Character.getChar(), movement.getCharX(), movement.getCharY(), paint);
+            // canvas.drawBitmap(Character.getChar(), movement.getCharX(), movement.getCharY(), paint);
+            Character.getChar().setX(movement.getCharX());
+            Character.getChar().setY(movement.getCharY());
 
             getHolder().unlockCanvasAndPost(canvas);
         }
