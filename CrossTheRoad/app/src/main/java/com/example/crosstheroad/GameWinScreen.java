@@ -17,6 +17,7 @@ public class GameWinScreen extends AppCompatActivity {
 
         //display final score
         TextView pointsDisplay = findViewById(R.id.finalScoreDisplay);
+        System.out.println("FINAL SCORE? " + Integer.toString(GameActivity.getGameScore()));
         pointsDisplay.setText(Integer.toString(GameActivity.getGameScore()));
 
         Button restart = (Button) findViewById(R.id.restart_game);

@@ -509,10 +509,10 @@ public class GameActivity extends AppCompatActivity {
             boolean checkMoveUp = movement.moveUp();
             if (checkMoveUp) {
                 movement.setRow(movement.getRow() - 1);
+                updateScore();
                 if (movement.getRow() == 1) {
                     openGameWinScreen();
                 }
-                updateScore();
             }
         }
     });
@@ -555,6 +555,7 @@ public class GameActivity extends AppCompatActivity {
 
             highestRow = movement.getRow();
         }
+        gameScore = score;
         System.out.println("SCORE: " + (score));
         scoreDisplay.setText(Integer.toString(score));
         return score;
