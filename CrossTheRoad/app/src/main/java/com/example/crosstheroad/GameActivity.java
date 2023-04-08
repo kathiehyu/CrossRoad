@@ -129,6 +129,8 @@ public class GameActivity extends AppCompatActivity {
 
         createRoadObstacles(gameContainer);
 
+        createWaterObstacles(gameContainer);
+
         setContentView(gameContainer);
         // crashes the app??? cries
         scoreDisplay.setText(Integer.toString(score));
@@ -288,6 +290,155 @@ public class GameActivity extends AppCompatActivity {
         obstacles.add(grookey3);
     }
 
+    public void createLagio(FrameLayout gameContainer) {
+        Lagio lagio = new Lagio(getResources(), this, 10000,
+                Background.getTileLength() * 1);
+        gameContainer.addView(lagio.getGraphic());
+        lagio.setAnimation(0);
+        obstacles.add(lagio);
+
+        //lagio2
+        Lagio lagio2 = new Lagio(getResources(), this, 10000,
+                Background.getTileLength() * 1);
+        gameContainer.addView(lagio2.getGraphic());
+        lagio2.setAnimation(2000);
+        obstacles.add(lagio2);
+
+        //lagio3
+        Lagio lagio3 = new Lagio(getResources(), this, 10000,
+                Background.getTileLength() * 1);
+        gameContainer.addView(lagio3.getGraphic());
+        lagio3.setAnimation(4000);
+        obstacles.add(lagio3);
+
+        //lagio4
+        Lagio lagio4 = new Lagio(getResources(), this, 10000,
+                Background.getTileLength() * 1);
+        gameContainer.addView(lagio4.getGraphic());
+        lagio4.setAnimation(6000);
+        obstacles.add(lagio4);
+
+    }
+
+    public void createStars(FrameLayout gameContainer) {
+        Stars stars = new Stars(getResources(), this, 13000,
+                Background.getTileLength() * 7);
+        gameContainer.addView(stars.getGraphic());
+        stars.setAnimation(1000);
+        obstacles.add(stars);
+
+        //Star2
+        Stars stars2 = new Stars(getResources(), this, 13000,
+                Background.getTileLength() * 7);
+        gameContainer.addView(stars2.getGraphic());
+        stars2.setAnimation(4000);
+        obstacles.add(stars2);
+
+        //star3
+        Stars stars3 = new Stars(getResources(), this, 13000,
+                Background.getTileLength() * 7);
+        gameContainer.addView(stars3.getGraphic());
+        stars3.setAnimation(7000);
+        obstacles.add(stars3);
+    }
+
+    public void createGyarados(FrameLayout gameContainer) {
+        Gyarados gyarados = new Gyarados(getResources(), this, 11000,
+                Background.getTileLength() * 6);
+        gameContainer.addView(gyarados.getGraphic());
+        gyarados.setAnimation(500);
+        obstacles.add(gyarados);
+
+        //Gyarados2
+        Gyarados gyarados2 = new Gyarados(getResources(), this, 11000,
+                Background.getTileLength() * 6);
+        gameContainer.addView(gyarados2.getGraphic());
+        gyarados2.setAnimation(4500);
+        obstacles.add(gyarados2);
+
+        //Gyarados3
+        Gyarados gyarados3 = new Gyarados(getResources(), this, 11000,
+                Background.getTileLength() * 6);
+        gameContainer.addView(gyarados3.getGraphic());
+        gyarados3.setAnimation(8500);
+        obstacles.add(gyarados3);
+    }
+
+    public void createRedGyarados(FrameLayout gameContainer) {
+        RedGyarados redGyarados = new RedGyarados(getResources(), this, 14000,
+                Background.getTileLength() * 3);
+        gameContainer.addView(redGyarados.getGraphic());
+        redGyarados.setAnimation(0);
+        obstacles.add(redGyarados);
+
+        //octopus2
+        RedGyarados redGyarados2 = new RedGyarados(getResources(), this, 14000,
+                Background.getTileLength() * 3);
+        gameContainer.addView(redGyarados2.getGraphic());
+        redGyarados2.setAnimation(3000);
+        obstacles.add(redGyarados2);
+
+        //octopus3
+        RedGyarados redGyarados3 = new RedGyarados(getResources(), this, 14000,
+                Background.getTileLength() * 3);
+        gameContainer.addView(redGyarados3.getGraphic());
+        redGyarados3.setAnimation(6000);
+        obstacles.add(redGyarados3);
+    }
+    public void createLapras(FrameLayout gameContainer) {
+        Lapras lapras = new Lapras(getResources(), this, 18000,
+                Background.getTileLength() * 5);
+        gameContainer.addView(lapras.getGraphic());
+        lapras.setAnimation(250);
+        obstacles.add(lapras);
+
+        //Lapras2
+        Lapras lapras2 = new Lapras(getResources(), this, 18000,
+                Background.getTileLength() * 5);
+        gameContainer.addView(lapras2.getGraphic());
+        lapras2.setAnimation(3250);
+        obstacles.add(lapras2);
+
+        //Lapras3
+        Lapras lapras3 = new Lapras(getResources(), this, 18000,
+                Background.getTileLength() * 5);
+        gameContainer.addView(lapras3.getGraphic());
+        lapras3.setAnimation(6250);
+        obstacles.add(lapras3);
+
+    }
+
+    public void createFish(FrameLayout gameContainer) {
+        Fish fish = new Fish(getResources(), this, 15000,
+                Background.getTileLength() * 4);
+        gameContainer.addView(fish.getGraphic());
+        fish.setAnimation(1000);
+        obstacles.add(fish);
+
+        //Fish2
+        Fish fish2 = new Fish(getResources(), this, 15000,
+                Background.getTileLength() * 4);
+        gameContainer.addView(fish2.getGraphic());
+        fish2.setAnimation(8000);
+        obstacles.add(fish2);
+
+    }
+
+    public void createSeaHorse(FrameLayout gameContainer) {
+        SeaHorse seaHorse = new SeaHorse(getResources(), this, 14000,
+                Background.getTileLength() * 2);
+        gameContainer.addView(seaHorse.getGraphic());
+        seaHorse.setAnimation(400);
+        obstacles.add(seaHorse);
+
+        //seahorse2
+        SeaHorse seaHorse2 = new SeaHorse(getResources(), this, 14000,
+                Background.getTileLength() * 2);
+        gameContainer.addView(seaHorse2.getGraphic());
+        seaHorse2.setAnimation(6400);
+        obstacles.add(seaHorse2);
+    }
+
     private void createRoadObstacles(FrameLayout gameContainer) {
         createJessies(gameContainer);
         createJames(gameContainer);
@@ -296,7 +447,19 @@ public class GameActivity extends AppCompatActivity {
         createGrookeys(gameContainer);
     }
 
-    private void configureButtons(Button up, Button down, Button left, Button right) {
+    private void createWaterObstacles(FrameLayout gameContainer) {
+        createLagio(gameContainer);
+        createStars(gameContainer);
+        createGyarados(gameContainer);
+        createRedGyarados(gameContainer);
+        createLapras(gameContainer);
+        createFish(gameContainer);
+        createSeaHorse(gameContainer);
+    }
+
+
+
+        private void configureButtons(Button up, Button down, Button left, Button right) {
         up.setWidth(150);
         up.setText("UP");
 
