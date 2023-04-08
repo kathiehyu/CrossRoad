@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 public class Stars extends WaterMoveable {
-    Stars(Resources r, Context context, int duration, int row, int length, int x) {
-        super(r, context, duration, row, length);
+    Stars(Resources r, Context context, int duration, int row, int length, int x, float start, float end) {
+        super(r, context, duration, row, length, start, end);
         setGraphic(r.getDrawable(R.drawable.stars), x);
 
     }

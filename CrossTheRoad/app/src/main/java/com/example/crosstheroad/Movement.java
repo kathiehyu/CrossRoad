@@ -31,12 +31,14 @@ public class Movement {
         if (validateMovement(xIn, y)) {
             x = xIn;
         } // else : don't change x
+        // Character.getChar().setX(x);
     }
 
     public void setCharY(int yIn) {
         if (validateMovement(x, yIn)) {
             y = yIn;
         }
+        // Character.getChar().setX(y);
     }
     public int getCharX() {
         return this.x;

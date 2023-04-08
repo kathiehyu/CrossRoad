@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 
 public class Gyarados extends WaterMoveable {
 
-    public Gyarados(Resources r, Context context, int duration, int row, int length, int x) {
-        super(r, context, duration, row, length);
+    public Gyarados(Resources r, Context context, int duration, int row, int length, int x, float start, float end) {
+        super(r, context, duration, row, length, start, end);
         setGraphic(r.getDrawable(R.drawable.gyarados), x);
 
     }

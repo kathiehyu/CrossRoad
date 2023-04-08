@@ -9,17 +9,22 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
-public abstract class WaterMoveable extends Moveable {
+import java.sql.SQLOutput;
 
-    WaterMoveable(Resources r, Context context, int duration, int row, int length) {
+public abstract class WaterMoveable extends Moveable {
+    private float start;
+    private float end;
+
+    WaterMoveable(Resources r, Context context, int duration, int row, int length, float start, float end) {
         super(r, context, duration, row, length);
+        this.start = start;
+        this.end = end;
     }
 
 
     public void setAnimation(int x) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(this.getGraphic(),
-                "translationX", (float) -MainActivity.getScreenX() + 500,
-                (float) MainActivity.getScreenX() + 500);
+                "translationX", start, end);
         this.animator = animator;
         System.out.println("THIS DURATION: " + Integer.toString(duration));
         animator.setDuration(duration);
@@ -35,23 +40,26 @@ public abstract class WaterMoveable extends Moveable {
                 float obstacleRightBound = getGraphic().getX() + length;
                 float midPoint = charLeftBound + Background.getTileLength() / 2;
                 if (GameActivity.getMovement().getRow() == row
-                        && (((charLeftBound > obstacleLeftBound
+                        && ((((charLeftBound > obstacleLeftBound
                         && charLeftBound < obstacleRightBound) && midPoint < obstacleRightBound))
                         || ((charRightBound > obstacleLeftBound
-                        && charRightBound < obstacleRightBound) && midPoint > obstacleLeftBound)) {
+                        && charRightBound < obstacleRightBound) && midPoint > obstacleLeftBound))) {
                     ObjectAnimator charAnimator = GameActivity.getMovement().getCharAnimator();
+                    System.out.println("FOUND COLLISION");
+                    System.out.println("character animator null? " + Boolean.toString(charAnimator == null));
                     // start animation of character?
                     if (charAnimator == null) {
+//                        charAnimator = new ObjectAnimator.ofFloat(GameActivity.getMovement().getGraphic(), "translationX", start, end);
                         GameActivity.getMovement().setCharAnimator(animator.clone());
+//                        GameActivity.getMovement().getCharAnimator().set
                         GameActivity.getMovement().getCharAnimator().start();
                     }
+                } else if (GameActivity.getMovement().getRow() == row) {
+                    // player is on a water tile
+                    // remove animator
+                    GameActivity.getMovement().setCharAnimator(null);
+                    game.setStartConditions(true);
                 }
-//                else if (GameActivity.getMovement().getRow() == row) {
-//                    // player is on a water tile
-//                    // remove animator
-//                    GameActivity.getMovement().setCharAnimator(null);
-//                    game.setStartConditions(true);
-//                }
             }
         });
         animator.setStartDelay(x);
