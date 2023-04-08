@@ -6,8 +6,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 public class Meowth extends RoadMoveable {
-    Meowth(Resources r, Context context, int duration, int row, int length, int x) {
-        super(r, context, duration, row, length);
+    Meowth(Resources r, Context context, int duration, int row, int length, int x, float start, float end) {
+        super(r, context, duration, row, length, start, end);
         setGraphic(r.getDrawable(R.drawable.meowth), x);
     }
 }

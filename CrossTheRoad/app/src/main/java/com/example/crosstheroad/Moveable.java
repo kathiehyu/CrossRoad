@@ -34,12 +34,9 @@ public abstract class Moveable {
         graphic.setImageDrawable(drawable);
         graphic.setY(Background.getTileLength() * (row - 1));
         graphic.setX(x);
-        System.out.println("SETTING GRAPHIC " + Boolean.toString(graphic != null));
         this.graphic = graphic;
-        System.out.println("SET GRAPHIC " + Boolean.toString(graphic != null));
     }
     public ImageView getGraphic() {
-        System.out.println("GETTING GRAPHIC " + Boolean.toString(graphic != null));
         return graphic;
     }
     public ObjectAnimator getAnimator() {

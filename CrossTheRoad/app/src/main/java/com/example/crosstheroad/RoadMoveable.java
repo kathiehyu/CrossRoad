@@ -10,17 +10,20 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 public abstract class RoadMoveable extends Moveable {
+    private float start;
+    private float end;
     // the higher the duration, the slower the obstacle
 
-    RoadMoveable(Resources r, Context context, int duration, int row, int length) {
+    RoadMoveable(Resources r, Context context, int duration, int row, int length, float start, float end) {
         super(r, context, duration, row , length);
+        this.start = start;
+        this.end = end;
     }
 
 
     public void setAnimation(int x) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(this.getGraphic(),
-                "translationX", (float) -MainActivity.getScreenX() + 500,
-                (float) MainActivity.getScreenX() + 500);
+                "translationX", start, end);
         this.animator = animator;
         System.out.println("THIS DURATION: " + Integer.toString(duration));
         animator.setDuration(duration);
