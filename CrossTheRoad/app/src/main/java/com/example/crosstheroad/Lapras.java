@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 public class Lapras extends WaterMoveable {
-    Lapras (Resources r, Context context, int duration, int row, int length, int x) {
-        super(r, context, duration, row, length);
+    Lapras (Resources r, Context context, int duration, int row, int length, int x, float start, float end) {
+        super(r, context, duration, row, length, start, end);
         setGraphic(r.getDrawable(R.drawable.lapras), x);
 
     }
