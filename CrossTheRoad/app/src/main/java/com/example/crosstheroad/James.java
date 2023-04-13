@@ -2,9 +2,6 @@ package com.example.crosstheroad;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.view.Gravity;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 public class James extends RoadMoveable {
 
