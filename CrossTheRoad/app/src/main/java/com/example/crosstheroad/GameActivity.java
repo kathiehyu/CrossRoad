@@ -41,7 +41,7 @@ public class GameActivity extends AppCompatActivity {
     private static Movement movement;
 
     private static Context context;
-    public static Context getContext() {return context;}
+    public Context getContext() {return context;}
 
     public static Movement getMovement() {
         return movement;
@@ -129,7 +129,8 @@ public class GameActivity extends AppCompatActivity {
         gameContainer.addView(scoreContainer);
         gameContainer.addView(Character.getChar());
 //        gameContainer.addView(buttons);
-        ConfigureButtons configureButtons = new ConfigureButtons();
+        context = this;
+        ConfigureButtons configureButtons = new ConfigureButtons(context);
         configureButtons.configure();
 
         createRoadmoveables(gameContainer);
@@ -165,10 +166,10 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    public void openGameWinScreen(){
-        Intent intent = new Intent(this, GameWinScreen.class);
-        startActivity(intent);
-    }
+//    public void openGameWinScreen(){
+//        Intent intent = new Intent(this, GameWinScreen.class);
+//        startActivity(intent);
+//    }
 
 
     public void setStartConditions(boolean loseLife) {
