@@ -1,14 +1,6 @@
 package com.example.crosstheroad;
-
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
-import android.view.Gravity;
-import android.view.animation.LinearInterpolator;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import androidx.annotation.NonNull;
 
 public class SeaHorse extends WaterMoveable {
 
