@@ -9,8 +9,18 @@ public class Movement {
 
     private ObjectAnimator charAnimator;
 
-    public ObjectAnimator getCharAnimator() {
-        return charAnimator;
+//    public ObjectAnimator getCharAnimator() {
+//        return charAnimator;
+//    }
+//
+    private WaterMoveable pokemonOn;
+
+    public WaterMoveable getPokemonOn() {
+        return pokemonOn;
+    }
+
+    public void setPokemonOn(WaterMoveable p) {
+        pokemonOn = p;
     }
 
     public void setCharAnimator(ObjectAnimator oa) {

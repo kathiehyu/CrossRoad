@@ -166,11 +166,6 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-//    public void openGameWinScreen(){
-//        Intent intent = new Intent(this, GameWinScreen.class);
-//        startActivity(intent);
-//    }
-
 
     public void setStartConditions(boolean loseLife) {
         int x = Background.getTileLength()
@@ -181,6 +176,7 @@ public class GameActivity extends AppCompatActivity {
         System.out.println("SETTING TO START CONDITIONS");
         movement.setCharX(x);
         movement.setCharY(y);
+        movement.setCharAnimator(null);
 
         gameScore = score;
         score = 0;
@@ -349,18 +345,18 @@ public class GameActivity extends AppCompatActivity {
         moveables.add(stars);
 
         //Star2
-        Stars stars2 = new Stars(getResources(), this, 15000,
-                row, 4, x, start, end);
-        gameContainer.addView(stars2.getGraphic());
-        stars2.setAnimation(3000);
-        moveables.add(stars2);
-
-        //star3
-        Stars stars3 = new Stars(getResources(), this, 15000,
-                row, 4, x, start, end);
-        gameContainer.addView(stars3.getGraphic());
-        stars3.setAnimation(6000);
-        moveables.add(stars3);
+//        Stars stars2 = new Stars(getResources(), this, 15000,
+//                row, 4, x, start, end);
+//        gameContainer.addView(stars2.getGraphic());
+//        stars2.setAnimation(6000);
+//        moveables.add(stars2);
+//
+//        //star3
+//        Stars stars3 = new Stars(getResources(), this, 15000,
+//                row, 4, x, start, end);
+//        gameContainer.addView(stars3.getGraphic());
+//        stars3.setAnimation(12000);
+//        moveables.add(stars3);
     }
 
     public void createGyarados(FrameLayout gameContainer) {
@@ -574,7 +570,7 @@ public class GameActivity extends AppCompatActivity {
             highestRow = movement.getRow();
         }
         gameScore = score;
-        // System.out.println("SCORE: " + (score));
+//         System.out.println("SCORE: " + (score));
         scoreDisplay.setText(Integer.toString(score));
         return score;
     }
