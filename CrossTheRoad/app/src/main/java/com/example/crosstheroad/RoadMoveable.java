@@ -37,13 +37,13 @@ public abstract class RoadMoveable extends Moveable {
                         + Background.getTileLength();
                 float obstacleLeftBound = getGraphic().getX();
                 float obstacleRightBound = getGraphic().getX() + length;
-                if (GameActivity.getMovement().getRow() == row
-                        && ((charLeftBound > obstacleLeftBound
-                        && charLeftBound < obstacleRightBound)
-                        || (charRightBound > obstacleLeftBound
-                        && charRightBound < obstacleRightBound))) {
-                    game.setStartConditions(true);
-                }
+//                if (GameActivity.getMovement().getRow() == row
+//                        && ((charLeftBound > obstacleLeftBound
+//                        && charLeftBound < obstacleRightBound)
+//                        || (charRightBound > obstacleLeftBound
+//                        && charRightBound < obstacleRightBound))) {
+//                    game.setStartConditions(true);
+//                }
             }
         });
         animator.setStartDelay(x);

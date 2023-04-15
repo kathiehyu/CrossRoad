@@ -18,6 +18,7 @@ public abstract class Moveable {
     protected int length;
     protected Resources r;
     protected Context context;
+    protected GameActivity gameActivityObj = GameActivity.getGameActivityObj();
     Moveable(Resources r, Context context, int duration, int row, int length) {
         this.r = r;
         this.context = context;

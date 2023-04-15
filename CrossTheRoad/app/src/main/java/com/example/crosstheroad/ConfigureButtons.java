@@ -18,6 +18,7 @@ public class ConfigureButtons extends GameActivity {
     private Movement movement = GameActivity.getMovement();
     private FrameLayout gameContainer = GameActivity.getGameContainer();
     private Context gameActivityContext;
+    private GameActivity gameActivityObj = GameActivity.getGameActivityObj();
 
     public ConfigureButtons(Context context) {
         gameActivityContext = context;
@@ -58,7 +59,7 @@ public class ConfigureButtons extends GameActivity {
                 boolean checkMoveUp = movement.moveUp();
                 if (checkMoveUp) {
                     // remove animator
-                    GameActivity.getMovement().setCharAnimator(null);
+                    gameActivityObj.getMovement().setCharAnimator(null);
                     movement.setRow(movement.getRow() - 1);
                     updateScore();
                     if (movement.getRow() == 1) {
@@ -73,7 +74,8 @@ public class ConfigureButtons extends GameActivity {
                 boolean checkMoveDown = movement.moveDown();
                 if (checkMoveDown) {
                     // remove animator
-                    GameActivity.getMovement().setCharAnimator(null);
+                    gameActivityObj.getMovement().setCharAnimator(null);
+
                     movement.setRow(movement.getRow() + 1);
                 }
             }
@@ -82,7 +84,7 @@ public class ConfigureButtons extends GameActivity {
             @Override
             public void onClick(View view) {
                 // remove animator
-                GameActivity.getMovement().setCharAnimator(null);
+                gameActivityObj.getMovement().setCharAnimator(null);
                 movement.moveLeft();
             }
         });
@@ -90,7 +92,7 @@ public class ConfigureButtons extends GameActivity {
             @Override
             public void onClick(View view) {
                 // remove animator
-                GameActivity.getMovement().setCharAnimator(null);
+                gameActivityObj.getMovement().setCharAnimator(null);
                 movement.moveRight();
             }
         });

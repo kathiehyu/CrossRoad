@@ -1,19 +1,28 @@
 package com.example.crosstheroad;
 
 import android.animation.ObjectAnimator;
+import android.view.animation.LinearInterpolator;
 
 public class Movement {
     private int x = 0;
     private int y = 0;
     private int tileLength = Background.getTileLength();
 
-    private ObjectAnimator charAnimator;
+    private static ObjectAnimator charAnimator;
 
-    public ObjectAnimator getCharAnimator() {
+    public static ObjectAnimator getCharAnimator() {
         return charAnimator;
     }
 
     public void setCharAnimator(ObjectAnimator oa) {
+//        System.out.println("start character animation");
+//        float speed = Math.abs((end - start) / duration);
+//        float charStart = charLeftBound - ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
+//        float distance = Math.abs(charStart - end);
+//        charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
+//        charAnimator.setDuration((long) (distance / speed));
+//        charAnimator.setInterpolator(new LinearInterpolator());
+//        charAnimator.start();
         charAnimator = oa;
     }
 
@@ -50,6 +59,7 @@ public class Movement {
 
 
     public boolean validateMovement(int x, int y) {
+        if ()
         return !(x + this.tileLength > MainActivity.getScreenX()
                 || y + this.tileLength >= MainActivity.getScreenY()
                 || x < 0 || y < 0);
