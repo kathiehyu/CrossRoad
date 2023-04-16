@@ -7,12 +7,13 @@ import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import java.sql.SQLOutput;
 
 public abstract class Moveable {
     protected int duration;
-    protected ImageView graphic;
+    protected RelativeLayout graphic;
     protected ObjectAnimator animator;
     protected int row;
     protected int length;
@@ -27,16 +28,18 @@ public abstract class Moveable {
     }
     public void setGraphic(Drawable drawable, int x) {
         ImageView graphic = new ImageView(context);
+        RelativeLayout container = new RelativeLayout(context);
         FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(
-                length, Background.getTileLength(), Gravity.LEFT);
+                length, Background.getTileLength());
 
         graphic.setLayoutParams(frameParams);
         graphic.setImageDrawable(drawable);
-        graphic.setY(Background.getTileLength() * (row - 1));
-        graphic.setX(x);
-        this.graphic = graphic;
+        container.addView(graphic);
+        container.setY(Background.getTileLength() * (row - 1));
+        container.setX(x);
+        this.graphic = container;
     }
-    public ImageView getGraphic() {
+    public RelativeLayout getGraphic() {
         return graphic;
     }
     public ObjectAnimator getAnimator() {
