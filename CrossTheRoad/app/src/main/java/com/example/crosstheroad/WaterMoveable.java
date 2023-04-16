@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import java.sql.SQLOutput;
 
 public abstract class WaterMoveable extends Moveable {
-    private float start;
-    private float end;
+    protected float start;
+    protected float end;
 
     WaterMoveable(Resources r, Context context, int duration, int row, int length, float start, float end) {
         super(r, context, duration, row, length);
@@ -44,10 +44,10 @@ public abstract class WaterMoveable extends Moveable {
 //                        && charRightBound < obstacleRightBound) && midPoint > obstacleLeftBound)));
 //                System.out.println("MIDPOINT? " + Boolean.toString(  midPoint > obstacleLeftBound);
 //                System.out.println("midpoint: " + midPoint + " leftbound: " + obstacleLeftBound);
-                //if (gameActivityObj.getMovement().getRow() == row) System.out.println("COLLISION? " + Boolean.toString((midPoint < obstacleRightBound && midPoint > obstacleLeftBound)));
+                if (gameActivityObj.getMovement().getRow() == row) System.out.println("COLLISION? " + Boolean.toString((midPoint < obstacleRightBound && midPoint > obstacleLeftBound)));
                 if (gameActivityObj.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
                     ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
-                    //System.out.println("FOUND COLLISION");
+                    System.out.println("FOUND COLLISION");
 //                    System.out.println("character animator null? " + Boolean.toString(charAnimator == null));
 //                    if (charRightBound > obstacleRightBound) {
 //                        System.out.println("COLLISION ON RIGHT");
@@ -65,7 +65,8 @@ public abstract class WaterMoveable extends Moveable {
                         //GameActivity.getMovement().setCharAnimator(start, end, duration, charLeftBound, obstacleLeftBound);
                         System.out.println("start character animation");
                         float speed = Math.abs((end - start) / duration);
-                        float charStart = charLeftBound - ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
+                        float charStart = charLeftBound;
+                                //- ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
                         float distance = Math.abs(charStart - end);
                         charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
                         charAnimator.setDuration((long) (distance / speed));

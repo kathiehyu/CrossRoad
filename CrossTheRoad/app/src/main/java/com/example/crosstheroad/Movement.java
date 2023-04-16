@@ -1,11 +1,14 @@
 package com.example.crosstheroad;
 
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.view.animation.LinearInterpolator;
 
+import androidx.annotation.NonNull;
+
 public class Movement {
-    private int x = 0;
-    private int y = 0;
+    private float x = 0;
+    private float y = 0;
     private int tileLength = Background.getTileLength();
 
     private static ObjectAnimator charAnimator;
@@ -24,6 +27,19 @@ public class Movement {
 //        charAnimator.setInterpolator(new LinearInterpolator());
 //        charAnimator.start();
         charAnimator = oa;
+        if (charAnimator == null){
+            return;
+        }
+        charAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
+                if (charAnimator == null){
+                    return;
+                }
+                float xPos = (float) charAnimator.getAnimatedValue();
+                x = xPos;
+            }
+        });
     }
 
     private int row;
@@ -36,41 +52,47 @@ public class Movement {
         this.row = row;
     }
 
-    public void setCharX(int xIn) {
+    public void setCharX(float xIn) {
         if (validateMovement(xIn, y)) {
             x = xIn;
         } // else : don't change x
         // Character.getChar().setX(x);
     }
 
-    public void setCharY(int yIn) {
+    public void setCharY(float yIn) {
         if (validateMovement(x, yIn)) {
             y = yIn;
         }
         // Character.getChar().setX(y);
     }
-    public int getCharX() {
+    public float getCharX() {
         return this.x;
     }
 
-    public int getCharY() {
+    public float getCharY() {
         return this.y;
     }
 
 
-    public boolean validateMovement(int x, int y) {
-        if ()
+    public boolean validateMovement(float x, float y) {
+        System.out.println("click");
         return !(x + this.tileLength > MainActivity.getScreenX()
                 || y + this.tileLength >= MainActivity.getScreenY()
                 || x < 0 || y < 0);
     }
 
+    public void updateAnimatedPos() {
+        if (charAnimator == null) {
+            return;
+        }
+
+    }
     /**
      * This method moves the character 1 tile up if not out of bound.
      * @return true if moved
      */
     public boolean moveUp() {
-        int newY = this.y - this.tileLength;
+        float newY = this.y - this.tileLength;
         if (validateMovement(this.x, newY)) {
             this.y = newY;
             return true;
@@ -83,7 +105,7 @@ public class Movement {
      * @return true if moved
      */
     public boolean moveDown() {
-        int newY = this.y + this.tileLength;
+        float newY = this.y + this.tileLength;
         if (validateMovement(this.x, newY)) {
             this.y = newY;
             return true;
@@ -96,7 +118,7 @@ public class Movement {
      * @return true if moved
      */
     public boolean moveLeft() {
-        int newX = this.x - this.tileLength;
+        float newX = this.x - this.tileLength;
         if (validateMovement(newX, this.y)) {
             this.x = newX;
             return true;
@@ -109,7 +131,7 @@ public class Movement {
      * @return true if moved
      */
     public boolean moveRight() {
-        int newX = this.x + this.tileLength;
+        float newX = this.x + this.tileLength;
         if (validateMovement(newX, this.y)) {
             this.x = newX;
             return true;

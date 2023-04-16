@@ -349,9 +349,10 @@ public class GameActivity extends AppCompatActivity {
         int x = -500;
         float start = (float) -MainActivity.getScreenX() + 500;
         float end = (float) MainActivity.getScreenX() + 500;
-        int duration = 40000;
+        int duration = 15000;
         Stars stars = new Stars(getResources(), this, duration,
                 row, 4, x, start, end);
+        stars.setNum(0);
         gameContainer.addView(stars.getGraphic());
         stars.setAnimation(0);
         moveables.add(stars);
@@ -359,6 +360,7 @@ public class GameActivity extends AppCompatActivity {
         //Star2
         Stars stars2 = new Stars(getResources(), this, duration,
                 row, 4, x, start, end);
+        stars2.setNum(1);
         gameContainer.addView(stars2.getGraphic());
         stars2.setAnimation(3000);
         moveables.add(stars2);
@@ -366,6 +368,7 @@ public class GameActivity extends AppCompatActivity {
         //star3
         Stars stars3 = new Stars(getResources(), this, duration,
                 row, 4, x, start, end);
+        stars3.setNum(2);
         gameContainer.addView(stars3.getGraphic());
         stars3.setAnimation(6000);
         moveables.add(stars3);
@@ -376,7 +379,7 @@ public class GameActivity extends AppCompatActivity {
         int x = MainActivity.getScreenX() + 500;
         float start = (float) -MainActivity.getScreenX() + 500;
         float end = (float) MainActivity.getScreenX() + 500;
-        int duration = 50000;
+        int duration = 11000;
         Gyarados gyarados = new Gyarados(getResources(), this, duration,
                 row, 2, x, start, end);
         gameContainer.addView(gyarados.getGraphic());
@@ -403,7 +406,7 @@ public class GameActivity extends AppCompatActivity {
         int x = -500;
         float start = (float) -MainActivity.getScreenX() + 500;
         float end = (float) MainActivity.getScreenX() + 500;
-        int duration = 50000;
+        int duration = 12000;
         Octopus octopus = new Octopus(getResources(), this, duration,
                 row, 3, x, start, end);
         gameContainer.addView(octopus.getGraphic());
@@ -430,7 +433,7 @@ public class GameActivity extends AppCompatActivity {
         int x = -500;
         float start = (float) MainActivity.getScreenX() + 500;
         float end = (float) -500;
-        int duration = 40000;
+        int duration = 18000;
         Lapras lapras = new Lapras(getResources(), this, duration,
                 row, 3, x, start, end);
         gameContainer.addView(lapras.getGraphic());
@@ -458,7 +461,7 @@ public class GameActivity extends AppCompatActivity {
         int x = MainActivity.getScreenX() + 500;
         float start = (float) -MainActivity.getScreenX() + 500;
         float end = (float) MainActivity.getScreenX() + 500;
-        int duration = 70000;
+        int duration = 15000;
         Fish fish = new Fish(getResources(), this, duration,
                 row, 4, x, start, end);
         gameContainer.addView(fish.getGraphic());
@@ -478,7 +481,7 @@ public class GameActivity extends AppCompatActivity {
         int x = MainActivity.getScreenX() + 500;
         float start = (float) -MainActivity.getScreenX() + 500;
         float end = (float) MainActivity.getScreenX() + 500;
-        int duration = 20000;
+        int duration = 10000;
         SeaHorse seaHorse = new SeaHorse(getResources(), this, duration,
                 row, 4, x, start, end);
         gameContainer.addView(seaHorse.getGraphic());
