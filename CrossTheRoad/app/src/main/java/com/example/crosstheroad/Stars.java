@@ -33,20 +33,17 @@ public class Stars extends WaterMoveable {
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
+                count++;
                 float charLeftBound = gameActivityObj.getMovement().getCharX();
                 float charRightBound = gameActivityObj.getMovement().getCharX()
                         + Background.getTileLength();
                 float obstacleLeftBound = getGraphic().getX();
                 float obstacleRightBound = getGraphic().getX() + length;
                 float midPoint = charLeftBound + Background.getTileLength() / 2;
-//                System.out.println("LEFT COLLISION? " + Boolean.toString(((charLeftBound > obstacleLeftBound
-//                        && charLeftBound < obstacleRightBound) && midPoint < obstacleRightBound)));
-//                System.out.println("MIDPOINT? " + Boolean.toString( midPoint < obstacleRightBound));
-//                System.out.println("RIGHT COLLISION? " + Boolean.toString(((charRightBound > obstacleLeftBound
-//                        && charRightBound < obstacleRightBound) && midPoint > obstacleLeftBound)));
-//                System.out.println("MIDPOINT? " + Boolean.toString(  midPoint > obstacleLeftBound);
-//                System.out.println("midpoint: " + midPoint + " leftbound: " + obstacleLeftBound);
-//                if (gameActivityObj.getMovement().getRow() == row) System.out.println("COLLISION? " + Boolean.toString((midPoint < obstacleRightBound && midPoint > obstacleLeftBound)));
+                if (obstacleLeftBound > MainActivity.getScreenX() || obstacleRightBound < 0) {
+                    return;
+                }
+
                 boolean collision = false;
                 if (gameActivityObj.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
                     collision = true;
@@ -54,12 +51,11 @@ public class Stars extends WaterMoveable {
                 } else {
                     list[num] = false;
                 }
+                ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
                 if (collision) {
-                    ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
 
                     // start animation of character?
                     if (charAnimator == null) {
-                        //GameActivity.getMovement().setCharAnimator(start, end, duration, charLeftBound, obstacleLeftBound);
                         System.out.println("start character animation");
                         float speed = Math.abs((end - start) / duration);
                         float charStart = charLeftBound;
@@ -73,14 +69,22 @@ public class Stars extends WaterMoveable {
                     }
 
                 }
-//                else if (gameActivityObj.getMovement().getRow() == row) {
-//                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count++);
-//                    if (list[0] == false && list[2] == false && list [1] == false) {
-//                        gameActivityObj.getMovement().setCharAnimator(null);
-//                        // player is on a water tile
-//                        gameActivityObj.setStartConditions(true);
-//                    }
-//                }
+                else if (gameActivityObj.getMovement().getRow() == row && count % 3 == 0) {
+                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count);
+                    if (list[0] == false && list[2] == false && list [1] == false) {
+                        System.out.println("obstacleleft bound: " + obstacleLeftBound + "midpoint: " + midPoint + "right: " + obstacleRightBound);
+                        System.out.println("screen: " + MainActivity.getScreenX());
+                        if (charAnimator != null) {
+                            charAnimator.pause();
+                        } else {
+                            System.out.println("char animator is null");
+                        }
+                        gameActivityObj.getMovement().setCharAnimator(charAnimator);
+                        gameActivityObj.getMovement().setCharAnimator(null);
+                        // player is on a water tile
+                        gameActivityObj.setStartConditions(true);
+                    }
+                }
             }
         });
         animator.setStartDelay(x);

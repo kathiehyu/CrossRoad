@@ -317,6 +317,7 @@ public class GameActivity extends AppCompatActivity {
         int duration = 40000;
         Lagio lagio = new Lagio(getResources(), this, duration,
                 2, 1, x, start, end);
+        lagio.setNum(0);
         gameContainer.addView(lagio.getGraphic());
         lagio.setAnimation(0);
         moveables.add(lagio);
@@ -324,6 +325,7 @@ public class GameActivity extends AppCompatActivity {
         //lagio2
         Lagio lagio2 = new Lagio(getResources(), this, duration,
                 2, 1, x, start, end);
+        lagio2.setNum(1);
         gameContainer.addView(lagio2.getGraphic());
         lagio2.setAnimation(2000);
          moveables.add(lagio2);
@@ -331,6 +333,7 @@ public class GameActivity extends AppCompatActivity {
         //lagio3
         Lagio lagio3 = new Lagio(getResources(), this, duration,
                 2, 1, x, start, end);
+        lagio3.setNum(2);
         gameContainer.addView(lagio3.getGraphic());
         lagio3.setAnimation(4000);
          moveables.add(lagio3);
@@ -338,6 +341,7 @@ public class GameActivity extends AppCompatActivity {
         //lagio4
         Lagio lagio4 = new Lagio(getResources(), this, duration,
                 2, 1, x, start, end);
+        lagio4.setNum(3);
         gameContainer.addView(lagio4.getGraphic());
         lagio4.setAnimation(6000);
         moveables.add(lagio4);
@@ -362,7 +366,7 @@ public class GameActivity extends AppCompatActivity {
                 row, 4, x, start, end);
         stars2.setNum(1);
         gameContainer.addView(stars2.getGraphic());
-        stars2.setAnimation(3000);
+        stars2.setAnimation(4000);
         moveables.add(stars2);
 
         //star3
@@ -370,7 +374,7 @@ public class GameActivity extends AppCompatActivity {
                 row, 4, x, start, end);
         stars3.setNum(2);
         gameContainer.addView(stars3.getGraphic());
-        stars3.setAnimation(6000);
+        stars3.setAnimation(8000);
         moveables.add(stars3);
     }
 

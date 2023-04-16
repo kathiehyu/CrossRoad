@@ -44,8 +44,9 @@ public class Gyarados extends WaterMoveable {
                 } else {
                     list[num] = false;
                 }
+                ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
+
                 if (collision) {
-                    ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
                     // start animation of character?
                     if (charAnimator == null) {
                         //GameActivity.getMovement().setCharAnimator(start, end, duration, charLeftBound, obstacleLeftBound);
@@ -62,14 +63,21 @@ public class Gyarados extends WaterMoveable {
                     }
 
                 }
-//                else if (gameActivityObj.getMovement().getRow() == row) {
-//                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count++);
-//                    if (list[0] == false && list[2] == false && list [1] == false) {
-//                        gameActivityObj.getMovement().setCharAnimator(null);
-//                        // player is on a water tile
-//                        gameActivityObj.setStartConditions(true);
-//                    }
-//                }
+                else if (gameActivityObj.getMovement().getRow() == row && count % 3 == 0) {
+                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count);
+                    if (list[0] == false && list[2] == false && list [1] == false) {
+                        System.out.println("obstacleleft bound: " + obstacleLeftBound + "midpoint: " + midPoint + "right: " + obstacleRightBound);
+                        if (charAnimator != null) {
+                            charAnimator.pause();
+                        } else {
+                            System.out.println("char animator is null");
+                        }
+                        gameActivityObj.getMovement().setCharAnimator(charAnimator);
+                        gameActivityObj.getMovement().setCharAnimator(null);
+                        // player is on a water tile
+                        gameActivityObj.setStartConditions(true);
+                    }
+                }
             }
         });
         animator.setStartDelay(x);

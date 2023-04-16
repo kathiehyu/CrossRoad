@@ -1,5 +1,6 @@
 package com.example.crosstheroad;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.view.Gravity;
@@ -58,6 +59,11 @@ public class ConfigureButtons extends GameActivity {
             public void onClick(View view) {
                 boolean checkMoveUp = movement.moveUp();
                 if (checkMoveUp) {
+                    ObjectAnimator obj = gameActivityObj.getMovement().getCharAnimator();
+                    if (obj != null) {
+                        obj.pause();
+                        gameActivityObj.getMovement().setCharAnimator(obj);
+                    }
                     // remove animator
                     gameActivityObj.getMovement().setCharAnimator(null);
                     movement.setRow(movement.getRow() - 1);
@@ -73,6 +79,11 @@ public class ConfigureButtons extends GameActivity {
             public void onClick(View view) {
                 boolean checkMoveDown = movement.moveDown();
                 if (checkMoveDown) {
+                    ObjectAnimator obj = gameActivityObj.getMovement().getCharAnimator();
+                    if (obj != null) {
+                        obj.pause();
+                        gameActivityObj.getMovement().setCharAnimator(obj);
+                    }
                     // remove animator
                     gameActivityObj.getMovement().setCharAnimator(null);
 
@@ -83,6 +94,11 @@ public class ConfigureButtons extends GameActivity {
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ObjectAnimator obj = gameActivityObj.getMovement().getCharAnimator();
+                if (obj != null) {
+                    obj.pause();
+                    gameActivityObj.getMovement().setCharAnimator(obj);
+                }
                 // remove animator
                 gameActivityObj.getMovement().setCharAnimator(null);
                 movement.moveLeft();
@@ -91,6 +107,11 @@ public class ConfigureButtons extends GameActivity {
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ObjectAnimator obj = gameActivityObj.getMovement().getCharAnimator();
+                if (obj != null) {
+                    obj.pause();
+                    gameActivityObj.getMovement().setCharAnimator(obj);
+                }
                 // remove animator
                 gameActivityObj.getMovement().setCharAnimator(null);
                 movement.moveRight();

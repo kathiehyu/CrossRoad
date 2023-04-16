@@ -35,6 +35,11 @@ public class Movement {
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
                 if (charAnimator == null){
                     return;
+                } else if (charAnimator.isPaused()) {
+                    System.out.println("paused object animator");
+                    //charAnimator.cancel();
+                    charAnimator = null;
+                    return;
                 }
                 float xPos = (float) charAnimator.getAnimatedValue();
                 x = xPos;
@@ -81,12 +86,6 @@ public class Movement {
                 || x < 0 || y < 0);
     }
 
-    public void updateAnimatedPos() {
-        if (charAnimator == null) {
-            return;
-        }
-
-    }
     /**
      * This method moves the character 1 tile up if not out of bound.
      * @return true if moved
