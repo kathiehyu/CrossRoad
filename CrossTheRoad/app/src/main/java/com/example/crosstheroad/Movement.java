@@ -18,14 +18,6 @@ public class Movement {
     }
 
     public void setCharAnimator(ObjectAnimator oa) {
-//        System.out.println("start character animation");
-//        float speed = Math.abs((end - start) / duration);
-//        float charStart = charLeftBound - ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
-//        float distance = Math.abs(charStart - end);
-//        charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
-//        charAnimator.setDuration((long) (distance / speed));
-//        charAnimator.setInterpolator(new LinearInterpolator());
-//        charAnimator.start();
         charAnimator = oa;
         if (charAnimator == null){
             return;
@@ -41,7 +33,15 @@ public class Movement {
                     charAnimator = null;
                     return;
                 }
+
                 float xPos = (float) charAnimator.getAnimatedValue();
+                // if character moves off screen
+                if (xPos >= MainActivity.getScreenX()) {
+                    charAnimator.pause();
+                    charAnimator = null;
+                    GameActivity.getGameActivityObj().setStartConditions(true);
+                    return;
+                }
                 x = xPos;
             }
         });
