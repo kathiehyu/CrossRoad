@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -42,10 +41,13 @@ public class GameActivity extends AppCompatActivity {
     private static Movement movement;
 
     private static Context context;
+    public Context getContext() {return context;}
 
     public static Movement getMovement() {
         return movement;
     }
+    private static FrameLayout gameContainer;
+    public static FrameLayout getGameContainer() {return gameContainer;}
 
     private LinkedList<Moveable> moveables;
 
@@ -60,7 +62,7 @@ public class GameActivity extends AppCompatActivity {
         moveables = new LinkedList<>();
 
 
-        FrameLayout gameContainer = new FrameLayout(this);
+        gameContainer = new FrameLayout(this);
         gameView = new GameView(this);
         LinearLayout scoreContainer = new LinearLayout(this);
 
@@ -99,34 +101,37 @@ public class GameActivity extends AppCompatActivity {
         scoreContainer.addView(heart);
         scoreContainer.setOrientation(LinearLayout.HORIZONTAL);
 
-        LinearLayout buttons = new LinearLayout(this);
-
-        Button up = new Button(this);
-        Button down = new Button(this);
-        Button left = new Button(this);
-        Button right = new Button(this);
-
-        configureButtons(up, down, left, right);
+//        LinearLayout buttons = new LinearLayout(this);
+//
+//        Button up = new Button(this);
+//        Button down = new Button(this);
+//        Button left = new Button(this);
+//        Button right = new Button(this);
+//
+//        configureButtons(up, down, left, right);
 
         FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(
                 ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
 
         gameContainer.setLayoutParams(frameParams);
 
-        LinearLayout.LayoutParams gridParams = new LinearLayout.LayoutParams(
-                ViewPager.LayoutParams.MATCH_PARENT, ViewPager.LayoutParams.MATCH_PARENT);
-
-        buttons.setLayoutParams(gridParams);
-        buttons.addView(up);
-        buttons.addView(down);
-        buttons.addView(left);
-        buttons.addView(right);
-        buttons.setGravity(Gravity.BOTTOM);
+//        LinearLayout.LayoutParams gridParams = new LinearLayout.LayoutParams(
+//                ViewPager.LayoutParams.MATCH_PARENT, ViewPager.LayoutParams.MATCH_PARENT);
+//
+//        buttons.setLayoutParams(gridParams);
+//        buttons.addView(up);
+//        buttons.addView(down);
+//        buttons.addView(left);
+//        buttons.addView(right);
+//        buttons.setGravity(Gravity.BOTTOM);
 
         gameContainer.addView(gameView);
         gameContainer.addView(scoreContainer);
         gameContainer.addView(Character.getChar());
-        gameContainer.addView(buttons);
+//        gameContainer.addView(buttons);
+        context = this;
+        ConfigureButtons configureButtons = new ConfigureButtons(context);
+        configureButtons.configure();
 
         createRoadmoveables(gameContainer);
 
@@ -161,10 +166,10 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    public void openGameWinScreen(){
-        Intent intent = new Intent(this, GameWinScreen.class);
-        startActivity(intent);
-    }
+//    public void openGameWinScreen(){
+//        Intent intent = new Intent(this, GameWinScreen.class);
+//        startActivity(intent);
+//    }
 
 
     public void setStartConditions(boolean loseLife) {
@@ -495,62 +500,62 @@ public class GameActivity extends AppCompatActivity {
 
 
 
-    private void configureButtons(Button up, Button down, Button left, Button right) {
-    up.setWidth(150);
-    up.setText("UP");
-
-    down.setWidth(150);
-    down.setText("DOWN");
-
-    left.setWidth(150);
-    left.setText("LEFT");
-
-    right.setWidth(150);
-    right.setText("RIGHT");
-
-    up.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            boolean checkMoveUp = movement.moveUp();
-            if (checkMoveUp) {
-                // remove animator
-                GameActivity.getMovement().setCharAnimator(null);
-                movement.setRow(movement.getRow() - 1);
-                updateScore();
-                if (movement.getRow() == 1) {
-                    openGameWinScreen();
-                }
-            }
-        }
-    });
-    down.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            boolean checkMoveDown = movement.moveDown();
-            if (checkMoveDown) {
-                // remove animator
-                GameActivity.getMovement().setCharAnimator(null);
-                movement.setRow(movement.getRow() + 1);
-            }
-        }
-    });
-    left.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            // remove animator
-            GameActivity.getMovement().setCharAnimator(null);
-            movement.moveLeft();
-        }
-    });
-    right.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            // remove animator
-            GameActivity.getMovement().setCharAnimator(null);
-            movement.moveRight();
-        }
-    });
-    }
+//    private void configureButtons(Button up, Button down, Button left, Button right) {
+//    up.setWidth(150);
+//    up.setText("UP");
+//
+//    down.setWidth(150);
+//    down.setText("DOWN");
+//
+//    left.setWidth(150);
+//    left.setText("LEFT");
+//
+//    right.setWidth(150);
+//    right.setText("RIGHT");
+//
+//    up.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            boolean checkMoveUp = movement.moveUp();
+//            if (checkMoveUp) {
+//                // remove animator
+//                GameActivity.getMovement().setCharAnimator(null);
+//                movement.setRow(movement.getRow() - 1);
+//                updateScore();
+//                if (movement.getRow() == 1) {
+//                    openGameWinScreen();
+//                }
+//            }
+//        }
+//    });
+//    down.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            boolean checkMoveDown = movement.moveDown();
+//            if (checkMoveDown) {
+//                // remove animator
+//                GameActivity.getMovement().setCharAnimator(null);
+//                movement.setRow(movement.getRow() + 1);
+//            }
+//        }
+//    });
+//    left.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            // remove animator
+//            GameActivity.getMovement().setCharAnimator(null);
+//            movement.moveLeft();
+//        }
+//    });
+//    right.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            // remove animator
+//            GameActivity.getMovement().setCharAnimator(null);
+//            movement.moveRight();
+//        }
+//    });
+//    }
     public static int updateScore() {
         if (movement.getRow() < highestRow) {
 

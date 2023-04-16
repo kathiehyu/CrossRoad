@@ -89,25 +89,10 @@ public class Configuration extends AppCompatActivity {
     }
 
     public static boolean verifyName(String test) {
-        if (test == inputName) {
-            if (inputName == null) {
-                return false;
-            } else if (inputName.isBlank()) {
-                return false;
-            }
-            return true;
+        if (test == null || test.isBlank()) {
+            return false;
         } else {
             inputName = test;
-            if (inputName == null) {
-                return false;
-            } else if (inputName.isBlank()) {
-                return false;
-            }
-            if (test == null) {
-                return false;
-            } else if (test.isBlank()) {
-                return false;
-            }
             return true;
         }
     }
