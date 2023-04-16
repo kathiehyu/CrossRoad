@@ -78,67 +78,14 @@ public abstract class WaterMoveable extends Moveable {
 //                                getGraphic().addView(temp);
                             }
                         }
-//                        game.getMovement().setCharX(Math.round(obstacleLeftBound));
-//                        game.getMovement().setCharY(Math.round(getGraphic().getY()));
 
-//                        System.out.println("BEFORE: " + charMovement.getRow());
-//                        System.out.println("SETTING GRAPHIC TO: " + Background.getTileLength() * (row - 1));
-//                        charMovement.setCharY(Background.getTileLength() * (row - 1));
-//                        charMovement.setRow(row);
-//                        System.out.println("AFTER: " + charMovement.getRow());
+                    }
+                    else if (GameActivity.getMovement().getRow() == row
+                            && (midPoint > obstacleRightBound || midPoint < obstacleLeftBound)) {
+                        game.setStartConditions(true);
                     }
 
-
-                    // animator implementation
-/*                System.out.println("MIDPOINT? " + Boolean.toString(  midPoint > obstacleLeftBound));
-//                if (GameActivity.getMovement().getRow() == row) {
-//                    System.out.println("COLLISION? " +
-//                            Boolean.toString((midPoint < obstacleRightBound && midPoint > obstacleLeftBound)));
-//                }
-//                if (GameActivity.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
-//                    ObjectAnimator charAnimator = GameActivity.getMovement().getCharAnimator();
-//                    System.out.println("FOUND COLLISION");
-//                    System.out.println("character animator null? " + Boolean.toString(charAnimator == null));
-//
-//
-//
-//
-//                    // animator implementation
-//                    if (charRightBound > obstacleRightBound) {
-//                        System.out.println("COLLISION ON RIGHT");
-////                        GameActivity.getMovement().setCharX(Math.round(obstacleLeftBound));
-//                        GameActivity.getMovement().setCharX(Math.round(obstacleRightBound - Background.getTileLength()));
-//                    } else if (charLeftBound < obstacleLeftBound) {
-//                        System.out.println("COLLISION ON LEFT");
-//                        GameActivity.getMovement().setCharX(Math.round(obstacleRightBound - Background.getTileLength()));
-////                        GameActivity.getMovement().setCharX(Math.round(obstacleLeftBound));
-//                    } else {
-//                        System.out.println("MIDDLE COLLISION");
-////                        GameActivity.getMovement().setCharX(Math.round(obstacleLeftBound));
-//                        GameActivity.getMovement().setCharX(Math.round(obstacleRightBound - Background.getTileLength()));
-////                        GameActivity.getMovement().setCharX(Math.round(charLeftBound - ((charLeftBound - obstacleLeftBound) % Background.getTileLength())));
-//                    }
-////                    GameActivity.getMovement().setCharX(Math.round(obstacleRightBound - Background.getTileLength()));
-//
-//                    // start animation of character?
-//                    if (charAnimator == null) {
-//                        float speed = Math.abs((end - start) / duration);
-//                        float charStart = charLeftBound - ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
-//                        float distance = Math.abs(charStart - end);
-//                        charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
-//                        charAnimator.setDuration((long) (distance / speed));
-//                        charAnimator.setInterpolator(new LinearInterpolator());
-//                        System.out.println("starting animation");
-////                        charAnimator.start();
-//                    }
-//
-//                }  else if (GameActivity.getMovement().getRow() == row && (midPoint < obstacleLeftBound && midPoint > obstacleRightBound)) {
-//                    System.out.println("ON WATER!! AHHH!!");
-//                    // player is on a water tile
-//                    game.setStartConditions(true);
-//                } */
                 }
-//            }
         });
         animator.setStartDelay(x);
         animator.start();

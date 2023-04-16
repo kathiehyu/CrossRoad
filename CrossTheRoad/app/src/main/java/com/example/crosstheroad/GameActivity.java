@@ -15,8 +15,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import java.util.concurrent.ThreadLocalRandom;
+
 
 import java.util.LinkedList;
+
 
 
 /**
@@ -189,6 +192,29 @@ public class GameActivity extends AppCompatActivity {
             removeLife();
         }
     }
+
+    public void beProtected(boolean yes) {
+        int x = Background.getTileLength()
+                * (MainActivity.getScreenX() / Background.getTileLength() / 2);
+        int y = Background.getTileLength()
+                * (MainActivity.getScreenY() / Background.getTileLength() - 8);
+        movement.setCharX(x);
+        movement.setCharY(y);
+        movement.setCharAnimator(null);
+        movement.setRow(9);
+    }
+    public void createTogepi(FrameLayout gameContainer){
+        int x = 0;
+        int randomX = ThreadLocalRandom.current().nextInt(1100, 2000 + 1);
+        int randomY = ThreadLocalRandom.current().nextInt(10, 14 + 1);
+        float start = (float) -MainActivity.getScreenX() + randomX;
+        float end = (float) MainActivity.getScreenX() + 500;
+        Togepi togepi = new Togepi(getResources(), this, 100000000, randomY, 1, x, start, end);
+        gameContainer.addView(togepi.getGraphic());
+        togepi.setAnimation(0);
+        moveables.add(togepi);
+    }
+
 
     public void createJessies(FrameLayout gameContainer) {
         int x = -500;
@@ -482,6 +508,7 @@ public class GameActivity extends AppCompatActivity {
         createMeowths(gameContainer);
         createWobuffets(gameContainer);
         createGrookeys(gameContainer);
+        createTogepi(gameContainer);
     }
 
     private void createWatermoveables(FrameLayout gameContainer) {
@@ -493,8 +520,6 @@ public class GameActivity extends AppCompatActivity {
         createFish(gameContainer);
         createSeaHorse(gameContainer);
     }
-
-
 
 //    private void configureButtons(Button up, Button down, Button left, Button right) {
 //    up.setWidth(150);
