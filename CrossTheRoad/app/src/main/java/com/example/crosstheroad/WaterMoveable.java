@@ -44,7 +44,6 @@ public abstract class WaterMoveable extends Moveable {
 //                        && charRightBound < obstacleRightBound) && midPoint > obstacleLeftBound)));
 //                System.out.println("MIDPOINT? " + Boolean.toString(  midPoint > obstacleLeftBound);
 //                System.out.println("midpoint: " + midPoint + " leftbound: " + obstacleLeftBound);
-                if (gameActivityObj.getMovement().getRow() == row) System.out.println("COLLISION? " + Boolean.toString((midPoint < obstacleRightBound && midPoint > obstacleLeftBound)));
                 if (gameActivityObj.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
                     ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
                     System.out.println("FOUND COLLISION");
@@ -66,7 +65,7 @@ public abstract class WaterMoveable extends Moveable {
                         System.out.println("start character animation");
                         float speed = Math.abs((end - start) / duration);
                         float charStart = charLeftBound;
-                                //- ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
+                        //- ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
                         float distance = Math.abs(charStart - end);
                         charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
                         charAnimator.setDuration((long) (distance / speed));
@@ -76,11 +75,6 @@ public abstract class WaterMoveable extends Moveable {
                     }
 
                 }
-//                else if (gameActivityObj.getMovement().getRow() == row) {
-//                    System.out.println("ON WATER!! AHHH!!");
-//                    // player is on a water tile
-//                    gameActivityObj.setStartConditions(true);
-//                }
             }
         });
         animator.setStartDelay(x);

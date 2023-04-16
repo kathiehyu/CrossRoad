@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Stars extends WaterMoveable {
-    private static Boolean[] list = new Boolean[]{true, true, true};
+    private static Boolean[] list = new Boolean[]{false, false, false};
     private int num;
     private static int count = 0;
     public void setNum(int number) {
@@ -47,27 +47,15 @@ public class Stars extends WaterMoveable {
 //                System.out.println("MIDPOINT? " + Boolean.toString(  midPoint > obstacleLeftBound);
 //                System.out.println("midpoint: " + midPoint + " leftbound: " + obstacleLeftBound);
 //                if (gameActivityObj.getMovement().getRow() == row) System.out.println("COLLISION? " + Boolean.toString((midPoint < obstacleRightBound && midPoint > obstacleLeftBound)));
-                boolean notcollision = true;
+                boolean collision = false;
                 if (gameActivityObj.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
-                    notcollision = false;
-                    list[num] = false;
-                } else {
+                    collision = true;
                     list[num] = true;
+                } else {
+                    list[num] = false;
                 }
-                if (!notcollision) {
+                if (collision) {
                     ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
-//                    System.out.println("FOUND COLLISION");
-//                    System.out.println("character animator null? " + Boolean.toString(charAnimator == null));
-//                    if (charRightBound > obstacleRightBound) {
-//                        System.out.println("COLLISION ON RIGHT");
-//                        GameActivity.getMovement().setCharX(Math.round(obstacleLeftBound));
-//                    } else if (charLeftBound < obstacleLeftBound) {
-//                        System.out.println("COLLISION ON LEFT");
-//                        GameActivity.getMovement().setCharX(Math.round(obstacleRightBound - Background.getTileLength()));
-//                    } else {
-//                        System.out.println("MIDDLE COLLISION");
-//                        GameActivity.getMovement().setCharX(Math.round(charLeftBound - ((charLeftBound - obstacleLeftBound) % Background.getTileLength())));
-//                    }
 
                     // start animation of character?
                     if (charAnimator == null) {
@@ -85,13 +73,14 @@ public class Stars extends WaterMoveable {
                     }
 
                 }
-                else if (gameActivityObj.getMovement().getRow() == row) {
-                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count++);
-                    if (list[0] == true && list[2] == true && list [1] == true) {
-                        // player is on a water tile
-                        gameActivityObj.setStartConditions(true);
-                    }
-                }
+//                else if (gameActivityObj.getMovement().getRow() == row) {
+//                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count++);
+//                    if (list[0] == false && list[2] == false && list [1] == false) {
+//                        gameActivityObj.getMovement().setCharAnimator(null);
+//                        // player is on a water tile
+//                        gameActivityObj.setStartConditions(true);
+//                    }
+//                }
             }
         });
         animator.setStartDelay(x);

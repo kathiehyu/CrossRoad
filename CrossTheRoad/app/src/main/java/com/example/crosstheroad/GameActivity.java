@@ -382,6 +382,7 @@ public class GameActivity extends AppCompatActivity {
         int duration = 11000;
         Gyarados gyarados = new Gyarados(getResources(), this, duration,
                 row, 2, x, start, end);
+        gyarados.setNum(0);
         gameContainer.addView(gyarados.getGraphic());
         gyarados.setAnimation(500);
         moveables.add(gyarados);
@@ -389,6 +390,8 @@ public class GameActivity extends AppCompatActivity {
         //Gyarados2
         Gyarados gyarados2 = new Gyarados(getResources(), this, duration,
                 row, 2, x, start, end);
+        gyarados2.setNum(1);
+
         gameContainer.addView(gyarados2.getGraphic());
         gyarados2.setAnimation(4500);
         moveables.add(gyarados2);
@@ -396,6 +399,7 @@ public class GameActivity extends AppCompatActivity {
         //Gyarados3
         Gyarados gyarados3 = new Gyarados(getResources(), this, duration,
                 row, 2, x, start, end);
+        gyarados3.setNum(2);
         gameContainer.addView(gyarados3.getGraphic());
         gyarados3.setAnimation(8500);
         moveables.add(gyarados3);
@@ -409,6 +413,7 @@ public class GameActivity extends AppCompatActivity {
         int duration = 12000;
         Octopus octopus = new Octopus(getResources(), this, duration,
                 row, 3, x, start, end);
+        octopus.setNum(0);
         gameContainer.addView(octopus.getGraphic());
         octopus.setAnimation(0);
         moveables.add(octopus);
@@ -416,6 +421,7 @@ public class GameActivity extends AppCompatActivity {
         //octopus2
         Octopus octopus2 = new Octopus(getResources(), this, duration,
                 row, 3, x, start, end);
+        octopus2.setNum(1);
         gameContainer.addView(octopus2.getGraphic());
         octopus2.setAnimation(3100);
         moveables.add(octopus2);
@@ -423,6 +429,7 @@ public class GameActivity extends AppCompatActivity {
         //octopus3
         Octopus octopus3 = new Octopus(getResources(), this, duration,
                 row, 3, x, start, end);
+        octopus3.setNum(2);
         gameContainer.addView(octopus3.getGraphic());
         octopus3.setAnimation(6200);
         moveables.add(octopus3);
@@ -436,6 +443,7 @@ public class GameActivity extends AppCompatActivity {
         int duration = 18000;
         Lapras lapras = new Lapras(getResources(), this, duration,
                 row, 3, x, start, end);
+        lapras.setNum(0);
         gameContainer.addView(lapras.getGraphic());
         lapras.setAnimation(0);
          moveables.add(lapras);
@@ -443,6 +451,7 @@ public class GameActivity extends AppCompatActivity {
         //Lapras2
         Lapras lapras2 = new Lapras(getResources(), this, duration,
                 row, 3, x, start, end);
+        lapras2.setNum(1);
         gameContainer.addView(lapras2.getGraphic());
         lapras2.setAnimation(3100);
          moveables.add(lapras2);
@@ -450,6 +459,7 @@ public class GameActivity extends AppCompatActivity {
         //Lapras3
         Lapras lapras3 = new Lapras(getResources(), this, duration,
                 row, 3, x, start, end);
+        lapras3.setNum(2);
         gameContainer.addView(lapras3.getGraphic());
         lapras3.setAnimation(6200);
          moveables.add(lapras3);
@@ -464,6 +474,7 @@ public class GameActivity extends AppCompatActivity {
         int duration = 15000;
         Fish fish = new Fish(getResources(), this, duration,
                 row, 4, x, start, end);
+        fish.setNum(0);
         gameContainer.addView(fish.getGraphic());
         fish.setAnimation(1000);
         moveables.add(fish);
@@ -471,6 +482,7 @@ public class GameActivity extends AppCompatActivity {
         //Fish2
         Fish fish2 = new Fish(getResources(), this, duration,
                 row, 4, x, start, end);
+        fish2.setNum(1);
         gameContainer.addView(fish2.getGraphic());
         fish2.setAnimation(8000);
         moveables.add(fish2);
@@ -484,6 +496,7 @@ public class GameActivity extends AppCompatActivity {
         int duration = 10000;
         SeaHorse seaHorse = new SeaHorse(getResources(), this, duration,
                 row, 4, x, start, end);
+        seaHorse.setNum(0);
         gameContainer.addView(seaHorse.getGraphic());
         seaHorse.setAnimation(0);
         moveables.add(seaHorse);
@@ -491,6 +504,7 @@ public class GameActivity extends AppCompatActivity {
         //seahorse2
         SeaHorse seaHorse2 = new SeaHorse(getResources(), this, duration,
                 row, 4, x, start, end);
+        seaHorse2.setNum(1);
         gameContainer.addView(seaHorse2.getGraphic());
         seaHorse2.setAnimation(6000);
         moveables.add(seaHorse2);
