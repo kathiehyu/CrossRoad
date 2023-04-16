@@ -56,6 +56,7 @@ public abstract class WaterMoveable extends Moveable {
                             FrameLayout parent = (FrameLayout) Character.getChar().getParent();
                             parent.removeView(Character.getChar());
                             getGraphic().addView(Character.getChar());
+                            Character.getChar().setY(getGraphic().getY());
 //                            ImageView temp = new ImageView(context);
 //                            temp.setImageDrawable(r.getDrawable(R.drawable.character_1));
 //                            getGraphic().addView(temp);
@@ -64,6 +65,7 @@ public abstract class WaterMoveable extends Moveable {
                             FrameLayout parent = (FrameLayout) Character.getChar().getParent();
                             parent.removeView(Character.getChar());
                             getGraphic().addView(Character.getChar());
+                            Character.getChar().setY(getGraphic().getY());
 //                            ImageView temp = new ImageView(context);
 //                            temp.setImageDrawable(r.getDrawable(R.drawable.character_1));
 //                            getGraphic().addView(temp);
@@ -73,6 +75,7 @@ public abstract class WaterMoveable extends Moveable {
                                 FrameLayout parent = (FrameLayout) Character.getChar().getParent();
                                 parent.removeView(Character.getChar());
                                 getGraphic().addView(Character.getChar());
+                                Character.getChar().setY(getGraphic().getY());
 //                                ImageView temp = new ImageView(context);
 //                                temp.setImageDrawable(r.getDrawable(R.drawable.character_1));
 //                                getGraphic().addView(temp);
