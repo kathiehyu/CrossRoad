@@ -16,8 +16,8 @@ import androidx.annotation.NonNull;
 import java.sql.SQLOutput;
 
 public abstract class WaterMoveable extends Moveable {
-    private float start;
-    private float end;
+    protected float start;
+    protected float end;
 
     WaterMoveable(Resources r, Context context, int duration, int row, int length, float start, float end) {
         super(r, context, duration, row, length);
@@ -25,67 +25,42 @@ public abstract class WaterMoveable extends Moveable {
         this.end = end;
     }
 
-
     public void setAnimation(int x) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(this.getGraphic(),
                 "translationX", start, end);
         this.animator = animator;
         animator.setDuration(duration);
         animator.setInterpolator(new LinearInterpolator());
-        GameActivity game = new GameActivity();
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
-//                if (game.getMovement().getPokemonOn() == WaterMoveable.this) {
-//                    game.getMovement().s
-//                }
-                float charLeftBound = GameActivity.getMovement().getCharX();
-                float charRightBound = GameActivity.getMovement().getCharX()
+                float charLeftBound = gameActivityObj.getMovement().getCharX();
+                float charRightBound = gameActivityObj.getMovement().getCharX()
                         + Background.getTileLength();
                 float obstacleLeftBound = getGraphic().getX();
                 float obstacleRightBound = getGraphic().getX() + length;
                 float midPoint = charLeftBound + Background.getTileLength() / 2;
-//                Movement charMovement = game.getMovement();
-//                if (game.getMovement().getPokemonOn() == null) {
-                    if (GameActivity.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
-//                        game.getMovement().setPokemonOn(WaterMoveable.this);
-                        System.out.println("OBSTACLE DEPTH: " + getGraphic().getY());
-                        System.out.println("CHARACTER DEPTH: " + Character.getChar().getY());
-                        if (charRightBound > obstacleRightBound && Character.getChar().getParent() instanceof FrameLayout) {
-                            System.out.println("COLLISION ON RIGHT");
-                            FrameLayout parent = (FrameLayout) Character.getChar().getParent();
-                            parent.removeView(Character.getChar());
-                            getGraphic().addView(Character.getChar());
-//                            ImageView temp = new ImageView(context);
-//                            temp.setImageDrawable(r.getDrawable(R.drawable.character_1));
-//                            getGraphic().addView(temp);
-                        } else if (charLeftBound < obstacleLeftBound && Character.getChar().getParent() instanceof FrameLayout) {
-                            System.out.println("COLLISION ON LEFT");
-                            FrameLayout parent = (FrameLayout) Character.getChar().getParent();
-                            parent.removeView(Character.getChar());
-                            getGraphic().addView(Character.getChar());
-//                            ImageView temp = new ImageView(context);
-//                            temp.setImageDrawable(r.getDrawable(R.drawable.character_1));
-//                            getGraphic().addView(temp);
-                        } else {
-                            if (Character.getChar().getParent() instanceof FrameLayout) {
-                                System.out.println("MIDDLE COLLISION");
-                                FrameLayout parent = (FrameLayout) Character.getChar().getParent();
-                                parent.removeView(Character.getChar());
-                                getGraphic().addView(Character.getChar());
-//                                ImageView temp = new ImageView(context);
-//                                temp.setImageDrawable(r.getDrawable(R.drawable.character_1));
-//                                getGraphic().addView(temp);
-                            }
-                        }
+                if (gameActivityObj.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
+                    ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
+                    System.out.println("FOUND COLLISION");
 
-                    }
-                    else if (GameActivity.getMovement().getRow() == row
-                            && (midPoint > obstacleRightBound || midPoint < obstacleLeftBound)) {
-                        game.setStartConditions(true);
+                    // start animation of character?
+                    if (charAnimator == null) {
+                        //GameActivity.getMovement().setCharAnimator(start, end, duration, charLeftBound, obstacleLeftBound);
+                        System.out.println("start character animation");
+                        float speed = Math.abs((end - start) / duration);
+                        float charStart = charLeftBound;
+                        //- ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
+                        float distance = Math.abs(charStart - end);
+                        charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
+                        charAnimator.setDuration((long) (distance / speed));
+                        charAnimator.setInterpolator(new LinearInterpolator());
+                        gameActivityObj.getMovement().setCharAnimator(charAnimator);
+                        charAnimator.start();
                     }
 
                 }
+            }
         });
         animator.setStartDelay(x);
         animator.start();

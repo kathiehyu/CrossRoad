@@ -31,6 +31,7 @@ public class Character {
                 Background.getTileLength(), Background.getTileLength());
 
         character.setLayoutParams(frameParams);
+        character.setZ(9);
 //        character = Bitmap.createScaledBitmap(character, Background.getTileLength(),
 //                Background.getTileLength(), false);
     }
