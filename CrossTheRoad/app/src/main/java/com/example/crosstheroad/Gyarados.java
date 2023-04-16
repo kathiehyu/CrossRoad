@@ -12,6 +12,7 @@ public class Gyarados extends WaterMoveable {
     private static Boolean[] list = new Boolean[]{false, false, false};
     private int num;
     private static int count = 0;
+    private static boolean countTwice = false;
     public void setNum(int number) {
         num = number;
     }
@@ -31,6 +32,7 @@ public class Gyarados extends WaterMoveable {
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
+                count++;
                 float charLeftBound = gameActivityObj.getMovement().getCharX();
                 float charRightBound = gameActivityObj.getMovement().getCharX()
                         + Background.getTileLength();
@@ -64,9 +66,16 @@ public class Gyarados extends WaterMoveable {
 
                 }
                 else if (gameActivityObj.getMovement().getRow() == row && count % 3 == 0) {
+                    System.out.println("countTwice: " + countTwice);
+                    if (countTwice == false) {
+                        countTwice = true;
+                        return;
+                    } else {
+                        countTwice = false;
+                    }
                     System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count);
                     if (list[0] == false && list[2] == false && list [1] == false) {
-                        System.out.println("obstacleleft bound: " + obstacleLeftBound + "midpoint: " + midPoint + "right: " + obstacleRightBound);
+                        System.out.println(" gyarados obstacleleft bound: " + obstacleLeftBound + "midpoint: " + midPoint + "right: " + obstacleRightBound);
                         if (charAnimator != null) {
                             charAnimator.pause();
                         } else {

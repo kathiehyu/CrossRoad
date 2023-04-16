@@ -11,6 +11,7 @@ public class Lapras extends WaterMoveable {
     private static Boolean[] list = new Boolean[]{false, false, false};
     private int num;
     private static int count = 0;
+    private static boolean countTwice = false;
     public void setNum(int number) {
         num = number;
     }
@@ -29,20 +30,17 @@ public class Lapras extends WaterMoveable {
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
+                count++;
                 float charLeftBound = gameActivityObj.getMovement().getCharX();
                 float charRightBound = gameActivityObj.getMovement().getCharX()
                         + Background.getTileLength();
                 float obstacleLeftBound = getGraphic().getX();
                 float obstacleRightBound = getGraphic().getX() + length;
                 float midPoint = charLeftBound + Background.getTileLength() / 2;
-//                System.out.println("LEFT COLLISION? " + Boolean.toString(((charLeftBound > obstacleLeftBound
-//                        && charLeftBound < obstacleRightBound) && midPoint < obstacleRightBound)));
-//                System.out.println("MIDPOINT? " + Boolean.toString( midPoint < obstacleRightBound));
-//                System.out.println("RIGHT COLLISION? " + Boolean.toString(((charRightBound > obstacleLeftBound
-//                        && charRightBound < obstacleRightBound) && midPoint > obstacleLeftBound)));
-//                System.out.println("MIDPOINT? " + Boolean.toString(  midPoint > obstacleLeftBound);
-//                System.out.println("midpoint: " + midPoint + " leftbound: " + obstacleLeftBound);
-//                if (gameActivityObj.getMovement().getRow() == row) System.out.println("COLLISION? " + Boolean.toString((midPoint < obstacleRightBound && midPoint > obstacleLeftBound)));
+                if (obstacleLeftBound > MainActivity.getScreenX() || obstacleRightBound < 0) {
+                    return;
+                }
+
                 boolean collision = false;
                 if (gameActivityObj.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
                     collision = true;
@@ -50,24 +48,11 @@ public class Lapras extends WaterMoveable {
                 } else {
                     list[num] = false;
                 }
+                ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
                 if (collision) {
-                    ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
-//                    System.out.println("FOUND COLLISION");
-//                    System.out.println("character animator null? " + Boolean.toString(charAnimator == null));
-//                    if (charRightBound > obstacleRightBound) {
-//                        System.out.println("COLLISION ON RIGHT");
-//                        GameActivity.getMovement().setCharX(Math.round(obstacleLeftBound));
-//                    } else if (charLeftBound < obstacleLeftBound) {
-//                        System.out.println("COLLISION ON LEFT");
-//                        GameActivity.getMovement().setCharX(Math.round(obstacleRightBound - Background.getTileLength()));
-//                    } else {
-//                        System.out.println("MIDDLE COLLISION");
-//                        GameActivity.getMovement().setCharX(Math.round(charLeftBound - ((charLeftBound - obstacleLeftBound) % Background.getTileLength())));
-//                    }
 
                     // start animation of character?
                     if (charAnimator == null) {
-                        //GameActivity.getMovement().setCharAnimator(start, end, duration, charLeftBound, obstacleLeftBound);
                         System.out.println("start character animation");
                         float speed = Math.abs((end - start) / duration);
                         float charStart = charLeftBound;
@@ -81,14 +66,28 @@ public class Lapras extends WaterMoveable {
                     }
 
                 }
-//                else if (gameActivityObj.getMovement().getRow() == row) {
-//                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count++);
-//                    if (list[0] == false && list[2] == false && list [1] == false) {
-//                        gameActivityObj.getMovement().setCharAnimator(null);
-//                        // player is on a water tile
-//                        gameActivityObj.setStartConditions(true);
-//                    }
-//                }
+                else if (gameActivityObj.getMovement().getRow() == row && count % 3 == 0) {
+                    if (countTwice == false) {
+                        countTwice = true;
+                        return;
+                    } else {
+                        countTwice = false;
+                    }
+                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count);
+                    if (list[0] == false && list[2] == false && list [1] == false) {
+                        System.out.println("stars obstacleleft bound: " + obstacleLeftBound + "midpoint: " + midPoint + "right: " + obstacleRightBound);
+                        System.out.println("screen: " + MainActivity.getScreenX());
+                        if (charAnimator != null) {
+                            charAnimator.pause();
+                        } else {
+                            System.out.println("char animator is null");
+                        }
+                        gameActivityObj.getMovement().setCharAnimator(charAnimator);
+                        gameActivityObj.getMovement().setCharAnimator(null);
+                        // player is on a water tile
+                        gameActivityObj.setStartConditions(true);
+                    }
+                }
             }
         });
         animator.setStartDelay(x);
@@ -97,4 +96,5 @@ public class Lapras extends WaterMoveable {
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
     }
+
 }

@@ -11,6 +11,7 @@ public class SeaHorse extends WaterMoveable {
     private static Boolean[] list = new Boolean[]{false, false, false};
     private int num;
     private static int count = 0;
+    private static boolean countTwice = false;
     public void setNum(int number) {
         num = number;
     }
@@ -30,24 +31,29 @@ public class SeaHorse extends WaterMoveable {
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
+                count++;
                 float charLeftBound = gameActivityObj.getMovement().getCharX();
                 float charRightBound = gameActivityObj.getMovement().getCharX()
                         + Background.getTileLength();
                 float obstacleLeftBound = getGraphic().getX();
                 float obstacleRightBound = getGraphic().getX() + length;
                 float midPoint = charLeftBound + Background.getTileLength() / 2;
-              boolean collision = false;
+                if (obstacleLeftBound > MainActivity.getScreenX() || obstacleRightBound < 0) {
+                    return;
+                }
+
+                boolean collision = false;
                 if (gameActivityObj.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
                     collision = true;
                     list[num] = true;
                 } else {
                     list[num] = false;
                 }
+                ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
                 if (collision) {
-                    ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
+
                     // start animation of character?
                     if (charAnimator == null) {
-                        //GameActivity.getMovement().setCharAnimator(start, end, duration, charLeftBound, obstacleLeftBound);
                         System.out.println("start character animation");
                         float speed = Math.abs((end - start) / duration);
                         float charStart = charLeftBound;
@@ -61,14 +67,28 @@ public class SeaHorse extends WaterMoveable {
                     }
 
                 }
-//                else if (gameActivityObj.getMovement().getRow() == row) {
-//                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count++);
-//                    if (list[0] == false && list[2] == false && list [1] == false) {
-//                        gameActivityObj.getMovement().setCharAnimator(null);
-//                        // player is on a water tile
-//                        gameActivityObj.setStartConditions(true);
-//                    }
-//                }
+                else if (gameActivityObj.getMovement().getRow() == row && count % 3 == 0) {
+                    if (countTwice == false) {
+                        countTwice = true;
+                        return;
+                    } else {
+                        countTwice = false;
+                    }
+                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count);
+                    if (list[0] == false && list[2] == false && list [1] == false) {
+                        System.out.println("stars obstacleleft bound: " + obstacleLeftBound + "midpoint: " + midPoint + "right: " + obstacleRightBound);
+                        System.out.println("screen: " + MainActivity.getScreenX());
+                        if (charAnimator != null) {
+                            charAnimator.pause();
+                        } else {
+                            System.out.println("char animator is null");
+                        }
+                        gameActivityObj.getMovement().setCharAnimator(charAnimator);
+                        gameActivityObj.getMovement().setCharAnimator(null);
+                        // player is on a water tile
+                        gameActivityObj.setStartConditions(true);
+                    }
+                }
             }
         });
         animator.setStartDelay(x);

@@ -11,6 +11,7 @@ public class Lagio extends WaterMoveable {
     private static Boolean[] list = new Boolean[]{false, false, false, false};
     private int num;
     private static int count = 0;
+    private static boolean countTwice = false;
     public void setNum(int number) {
         num = number;
     }
@@ -37,6 +38,10 @@ public class Lagio extends WaterMoveable {
                 float obstacleLeftBound = getGraphic().getX();
                 float obstacleRightBound = getGraphic().getX() + length;
                 float midPoint = charLeftBound + Background.getTileLength() / 2;
+                if (obstacleLeftBound > MainActivity.getScreenX() || obstacleRightBound < 0) {
+                    return;
+                }
+
                 boolean collision = false;
                 if (gameActivityObj.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
                     collision = true;
@@ -63,9 +68,15 @@ public class Lagio extends WaterMoveable {
 
                 }
                 else if (gameActivityObj.getMovement().getRow() == row && count % 4 == 0) {
+                    if (countTwice == false) {
+                        countTwice = true;
+                        return;
+                    } else {
+                        countTwice = false;
+                    }
                     System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count);
                     if (list[0] == false && list[2] == false && list [1] == false && list[3] == false) {
-                        System.out.println("obstacleleft bound: " + obstacleLeftBound + "midpoint: " + midPoint + "right: " + obstacleRightBound);
+                        System.out.println("stars obstacleleft bound: " + obstacleLeftBound + "midpoint: " + midPoint + "right: " + obstacleRightBound);
                         if (charAnimator != null) {
                             charAnimator.pause();
                         } else {
@@ -85,4 +96,5 @@ public class Lagio extends WaterMoveable {
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
     }
+
 }
