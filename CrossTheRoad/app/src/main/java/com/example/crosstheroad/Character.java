@@ -35,10 +35,6 @@ public class Character {
 //                Background.getTileLength(), false);
     }
 
-    public Character(GameActivity game) {
-    }
-            character.setZ(9);
-
 
     //    public static Bitmap getChar() {
 //        return character;

@@ -764,9 +764,6 @@ public class GameActivity extends AppCompatActivity {
         return false;
     }
 
-    public static void setScore(int newScore) {
-        score = newScore;
-    }
    public static void setScore(int newScore) {
         score = newScore;
     }
