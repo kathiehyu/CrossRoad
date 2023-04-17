@@ -208,7 +208,7 @@ public class GameActivity extends AppCompatActivity {
         int numY = numberY.get(rand.nextInt(numberY.size()));
         float start = (float) -MainActivity.getScreenX() + numX;
         float end = (float) MainActivity.getScreenX() + 500;
-        Togepi togepi = new Togepi(getResources(), this, 100000000, numY, 2, x, start, end);
+        Togepi togepi = new Togepi(getResources(), this, 100000000, numY, 2, start);
         gameContainer.addView(togepi.getGraphic());
         togepi.setAnimation(0);
         this.togepi = togepi;

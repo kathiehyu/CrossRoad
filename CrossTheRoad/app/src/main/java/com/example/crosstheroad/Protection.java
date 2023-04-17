@@ -9,9 +9,9 @@ public abstract class Protection extends Moveable {
     private float start;
     private float end;
 
-    Protection(Resources r, Context context, int duration, int row, int length, float start, float end) {
+    Protection(Resources r, Context context, int duration, int row, int length, float start) {
         super(r, context, duration, row, length);
-        this.end = end;
+        this.end = (float) MainActivity.getScreenX() + 500;
         this.start = start;
     }
 
