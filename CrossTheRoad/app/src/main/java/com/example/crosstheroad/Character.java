@@ -36,9 +36,6 @@ public class Character {
 //                Background.getTileLength(), false);
     }
 
-//    public static Bitmap getChar() {
-//        return character;
-//    }
     public static ImageView getChar() {
         return character;
     }
