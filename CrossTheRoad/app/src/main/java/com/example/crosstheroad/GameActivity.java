@@ -716,10 +716,13 @@ public class GameActivity extends AppCompatActivity {
     public static void setScore(int newScore) {
         score = newScore;
     }
+   public static void setScore(int newScore) {
+        score = newScore;
+    }
     public static int getLatestScore() {
         return score;
     }
-    
+
     public void setMovement(Movement movement) {
     }
 
@@ -728,6 +731,8 @@ public class GameActivity extends AppCompatActivity {
 
     public void setTile(int i, int i1, boolean isLog, int speed, int direction) {
     }
+     public static String getWinMessage(int score) {
+    return "you win";}
 
     public void update() {
     }
