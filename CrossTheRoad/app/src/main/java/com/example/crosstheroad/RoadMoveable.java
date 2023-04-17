@@ -5,7 +5,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.animation.LinearInterpolator;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
@@ -15,7 +14,7 @@ public abstract class RoadMoveable extends Moveable {
     // the higher the duration, the slower the obstacle
 
     RoadMoveable(Resources r, Context context, int duration, int row, int length, float start, float end) {
-        super(r, context, duration, row , length);
+        super(r, context, duration, row, length);
         this.start = start;
         this.end = end;
     }

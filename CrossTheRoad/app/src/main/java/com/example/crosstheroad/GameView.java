@@ -39,7 +39,7 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     private void update() {
-        System.out.println("location y: " +Character.getChar().getY());
+        System.out.println("location y: " + Character.getChar().getY());
     }
 
     private void draw() {
@@ -51,7 +51,6 @@ public class GameView extends SurfaceView implements Runnable {
 
             //System.out.println("trying to draw character");
             assert Character.getChar() != null;
-            // canvas.drawBitmap(Character.getChar(), movement.getCharX(), movement.getCharY(), paint);
             Character.getChar().setX(movement.getCharX());
             Character.getChar().setY(movement.getCharY());
 

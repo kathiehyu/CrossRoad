@@ -15,7 +15,6 @@ public class Stars extends WaterMoveable {
     public void setNum(int number) {
         num = number;
     }
-    GameActivity game = new GameActivity();
 
     Stars(Resources r, Context context, int duration, int row, int length, int x, float start, float end) {
         super(r, context, duration, row, length, start, end);
@@ -24,6 +23,7 @@ public class Stars extends WaterMoveable {
     }
     @Override
     public void setAnimation(int x) {
+        GameActivity game = new GameActivity();
         ObjectAnimator animator = ObjectAnimator.ofFloat(this.getGraphic(),
                 "translationX", start, end);
         this.animator = animator;
@@ -44,7 +44,8 @@ public class Stars extends WaterMoveable {
                 }
 
                 boolean collision = false;
-                if (game.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
+                if (game.getMovement().getRow() == row && (midPoint < obstacleRightBound
+                        && midPoint > obstacleLeftBound)) {
                     collision = true;
                     list[num] = true;
                 } else {
@@ -60,25 +61,23 @@ public class Stars extends WaterMoveable {
                         float charStart = charLeftBound;
                         //- ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
                         float distance = Math.abs(charStart - end);
-                        charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
+                        charAnimator = ObjectAnimator.ofFloat(Character.getChar(),
+                                "translationX", charStart, end);
                         charAnimator.setDuration((long) (distance / speed));
                         charAnimator.setInterpolator(new LinearInterpolator());
                         game.getMovement().setCharAnimator(charAnimator);
                         charAnimator.start();
                     }
 
-                }
-                else if (game.getMovement().getRow() == row && count % 3 == 0) {
-                    if (countTwice == false) {
+                } else if (game.getMovement().getRow() == row && count % 3 == 0) {
+                    System.out.println("countTwice: " + countTwice);
+                    if (!countTwice) {
                         countTwice = true;
                         return;
                     } else {
                         countTwice = false;
                     }
-                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count);
-                    if (list[0] == false && list[2] == false && list [1] == false) {
-                        System.out.println("stars obstacleleft bound: " + obstacleLeftBound + "midpoint: " + midPoint + "right: " + obstacleRightBound);
-                        System.out.println("screen: " + MainActivity.getScreenX());
+                    if (!list[0] && !list[2] && !list[1]) {
                         if (charAnimator != null) {
                             charAnimator.pause();
                         } else {

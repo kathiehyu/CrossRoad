@@ -120,7 +120,7 @@ public class ConfigureButtons extends GameActivity {
             }
         });
     }
-    public void openGameWinScreen(){
+    public void openGameWinScreen() {
         Intent intent = new Intent(gameActivityContext, GameWinScreen.class);
         gameActivityContext.startActivity(intent);
     }

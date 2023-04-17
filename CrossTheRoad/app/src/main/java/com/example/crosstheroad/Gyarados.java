@@ -41,7 +41,8 @@ public class Gyarados extends WaterMoveable {
                 float obstacleRightBound = getGraphic().getX() + length;
                 float midPoint = charLeftBound + Background.getTileLength() / 2;
                 boolean collision = false;
-                if (game.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
+                if (game.getMovement().getRow() == row
+                        && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
                     collision = true;
                     list[num] = true;
                 } else {
@@ -52,31 +53,27 @@ public class Gyarados extends WaterMoveable {
                 if (collision) {
                     // start animation of character?
                     if (charAnimator == null) {
-                        //GameActivity.getMovement().setCharAnimator(start, end, duration, charLeftBound, obstacleLeftBound);
                         System.out.println("start character animation");
                         float speed = Math.abs((end - start) / duration);
                         float charStart = charLeftBound;
-                        //- ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
                         float distance = Math.abs(charStart - end);
-                        charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
+                        charAnimator = ObjectAnimator.ofFloat(Character.getChar(),
+                                "translationX", charStart, end);
                         charAnimator.setDuration((long) (distance / speed));
                         charAnimator.setInterpolator(new LinearInterpolator());
                         game.getMovement().setCharAnimator(charAnimator);
                         charAnimator.start();
                     }
 
-                }
-                else if (game.getMovement().getRow() == row && count % 3 == 0) {
+                } else if (game.getMovement().getRow() == row && count % 3 == 0) {
                     System.out.println("countTwice: " + countTwice);
-                    if (countTwice == false) {
+                    if (!countTwice) {
                         countTwice = true;
                         return;
                     } else {
                         countTwice = false;
                     }
-                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count);
-                    if (list[0] == false && list[2] == false && list [1] == false) {
-                        System.out.println(" gyarados obstacleleft bound: " + obstacleLeftBound + "midpoint: " + midPoint + "right: " + obstacleRightBound);
+                    if (!list[0] && !list[2] && !list[1]) {
                         if (charAnimator != null) {
                             charAnimator.pause();
                         } else {

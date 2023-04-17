@@ -30,19 +30,20 @@ public abstract class WaterMoveable extends Moveable {
             float obstacleRightBound = getGraphic().getX() + length;
             float midPoint = charLeftBound + Background.getTileLength() / 2;
 
-            if (game.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
+            if (game.getMovement().getRow() == row && (midPoint < obstacleRightBound
+                    && midPoint > obstacleLeftBound)) {
                 ObjectAnimator charAnimator = game.getMovement().getCharAnimator();
                 System.out.println("FOUND COLLISION");
 
                 // start animation of character?
                 if (charAnimator == null) {
-                    //GameActivity.getMovement().setCharAnimator(start, end, duration, charLeftBound, obstacleLeftBound);
                     System.out.println("start character animation");
                     float speed = Math.abs((end - start) / duration);
                     float charStart = charLeftBound;
                     //- ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
                     float distance = Math.abs(charStart - end);
-                    charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
+                    charAnimator = ObjectAnimator.ofFloat(Character.getChar(),
+                            "translationX", charStart, end);
                     charAnimator.setDuration((long) (distance / speed));
                     charAnimator.setInterpolator(new LinearInterpolator());
                     game.getMovement().setCharAnimator(charAnimator);

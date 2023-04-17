@@ -28,7 +28,9 @@ import java.util.LinkedList;
  */
 public class GameActivity extends AppCompatActivity {
     private static GameView gameView;
-    public static GameView getGameView() {return gameView;}
+    public static GameView getGameView() {
+        return gameView;
+    }
     private static int score = 0;
 
     private static int gameScore;
@@ -48,13 +50,17 @@ public class GameActivity extends AppCompatActivity {
     private static Movement movement;
 
     private static Context context;
-    public Context getContext() {return context;}
+    public Context getContext() {
+        return context;
+    }
 
     public static Movement getMovement() {
         return movement;
     }
     private static FrameLayout gameContainer;
-    public static FrameLayout getGameContainer() {return gameContainer;}
+    public static FrameLayout getGameContainer() {
+        return gameContainer;
+    }
 
     private LinkedList<Moveable> movables;
 
@@ -109,35 +115,14 @@ public class GameActivity extends AppCompatActivity {
         scoreContainer.addView(livesDisplay);
         scoreContainer.addView(heart);
         scoreContainer.setOrientation(LinearLayout.HORIZONTAL);
-
-//        LinearLayout buttons = new LinearLayout(this);
-//
-//        Button up = new Button(this);
-//        Button down = new Button(this);
-//        Button left = new Button(this);
-//        Button right = new Button(this);
-//
-//        configureButtons(up, down, left, right);
-
         FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(
                 ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
 
         gameContainer.setLayoutParams(frameParams);
 
-//        LinearLayout.LayoutParams gridParams = new LinearLayout.LayoutParams(
-//                ViewPager.LayoutParams.MATCH_PARENT, ViewPager.LayoutParams.MATCH_PARENT);
-//
-//        buttons.setLayoutParams(gridParams);
-//        buttons.addView(up);
-//        buttons.addView(down);
-//        buttons.addView(left);
-//        buttons.addView(right);
-//        buttons.setGravity(Gravity.BOTTOM);
-
         gameContainer.addView(gameView);
         gameContainer.addView(scoreContainer);
         gameContainer.addView(Character.getChar());
-//        gameContainer.addView(buttons);
         context = this;
         ConfigureButtons configureButtons = new ConfigureButtons(context);
         configureButtons.configure();
@@ -213,11 +198,12 @@ public class GameActivity extends AppCompatActivity {
 
 
 
-    public void createTogepi(FrameLayout gameContainer){
+    public void createTogepi(FrameLayout gameContainer) {
         int x = 0;
         Random rand = new Random();
-        List<Integer> numberX = Arrays.asList(1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000);
-        List<Integer> numberY = Arrays.asList(10,11,12,13,14);
+        List<Integer> numberX = Arrays.asList(1100, 1200, 1300,
+                1400, 1500, 1600, 1700, 1800, 1900, 2000);
+        List<Integer> numberY = Arrays.asList(10, 11, 12, 13, 14);
         int numX = numberX.get(rand.nextInt(numberX.size()));
         int numY = numberY.get(rand.nextInt(numberY.size()));
         float start = (float) -MainActivity.getScreenX() + numX;
@@ -253,14 +239,16 @@ public class GameActivity extends AppCompatActivity {
         James james = new James(getResources(), this, 8000, 11, 2, x, start, end);
         gameContainer.addView(james.getGraphic());
         james.setAnimation(0);
-        james.getAnimator().setFloatValues((float)  MainActivity.getScreenX() + 500, (float) -MainActivity.getScreenX() - 500);
+        james.getAnimator().setFloatValues((float)  MainActivity.getScreenX() + 500,
+                (float) -MainActivity.getScreenX() - 500);
         movables.add(james);
 
         //James2
         James james2 = new James(getResources(), this, 8000, 11, 2, x, start, end);
         gameContainer.addView(james2.getGraphic());
         james2.setAnimation(2200);
-        james2.getAnimator().setFloatValues((float)  MainActivity.getScreenX() + 500, (float) -MainActivity.getScreenX() - 500);
+        james2.getAnimator().setFloatValues((float)  MainActivity.getScreenX() + 500,
+                (float) -MainActivity.getScreenX() - 500);
         movables.add(james2);
 
 
@@ -268,7 +256,8 @@ public class GameActivity extends AppCompatActivity {
         James james3 = new James(getResources(), this, 8000, 11, 2, x, start, end);
         gameContainer.addView(james3.getGraphic());
         james3.setAnimation(4400);
-        james3.getAnimator().setFloatValues((float)  MainActivity.getScreenX() + 500, (float) -MainActivity.getScreenX() - 500);
+        james3.getAnimator().setFloatValues((float)  MainActivity.getScreenX() + 500,
+                (float) -MainActivity.getScreenX() - 500);
         movables.add(james3);
     }
 
@@ -356,7 +345,7 @@ public class GameActivity extends AppCompatActivity {
         lagio2.setNum(1);
         gameContainer.addView(lagio2.getGraphic());
         lagio2.setAnimation(2000);
-         movables.add(lagio2);
+        movables.add(lagio2);
 
         //lagio3
         Lagio lagio3 = new Lagio(getResources(), this, duration,
@@ -364,7 +353,7 @@ public class GameActivity extends AppCompatActivity {
         lagio3.setNum(2);
         gameContainer.addView(lagio3.getGraphic());
         lagio3.setAnimation(4000);
-         movables.add(lagio3);
+        movables.add(lagio3);
 
         //lagio4
         Lagio lagio4 = new Lagio(getResources(), this, duration,
@@ -478,7 +467,7 @@ public class GameActivity extends AppCompatActivity {
         lapras.setNum(0);
         gameContainer.addView(lapras.getGraphic());
         lapras.setAnimation(0);
-         movables.add(lapras);
+        movables.add(lapras);
 
         //Lapras2
         Lapras lapras2 = new Lapras(getResources(), this, duration,
@@ -486,7 +475,7 @@ public class GameActivity extends AppCompatActivity {
         lapras2.setNum(1);
         gameContainer.addView(lapras2.getGraphic());
         lapras2.setAnimation(3100);
-         movables.add(lapras2);
+        movables.add(lapras2);
 
         //Lapras3
         Lapras lapras3 = new Lapras(getResources(), this, duration,
@@ -494,7 +483,7 @@ public class GameActivity extends AppCompatActivity {
         lapras3.setNum(2);
         gameContainer.addView(lapras3.getGraphic());
         lapras3.setAnimation(6200);
-         movables.add(lapras3);
+        movables.add(lapras3);
 
     }
 
@@ -597,7 +586,6 @@ public class GameActivity extends AppCompatActivity {
             highestRow = movement.getRow();
         }
         gameScore = score;
-//         System.out.println("SCORE: " + (score));
         scoreDisplay.setText(Integer.toString(score));
         return score;
     }

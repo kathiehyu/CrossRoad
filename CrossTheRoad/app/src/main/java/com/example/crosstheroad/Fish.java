@@ -17,7 +17,8 @@ public class Fish extends WaterMoveable {
         num = number;
     }
 
-    public Fish(Resources r, Context context, int duration, int row, int length, int x, float start, float end) {
+    public Fish(Resources r, Context context,
+                int duration, int row, int length, int x, float start, float end) {
         super(r, context, duration, row, length, start, end);
         setGraphic(r.getDrawable(R.drawable.fish), x);
     }
@@ -40,7 +41,8 @@ public class Fish extends WaterMoveable {
                 float obstacleRightBound = getGraphic().getX() + length;
                 float midPoint = charLeftBound + Background.getTileLength() / 2;
                 boolean collision = false;
-                if (game.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
+                if (game.getMovement().getRow() == row
+                        && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
                     collision = true;
                     list[num] = true;
                 } else {
@@ -50,30 +52,27 @@ public class Fish extends WaterMoveable {
                 if (collision) {
                     // start animation of character?
                     if (charAnimator == null) {
-                        //GameActivity.getMovement().setCharAnimator(start, end, duration, charLeftBound, obstacleLeftBound);
                         System.out.println("start character animation");
                         float speed = Math.abs((end - start) / duration);
                         float charStart = charLeftBound;
                         //- ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
                         float distance = Math.abs(charStart - end);
-                        charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
+                        charAnimator = ObjectAnimator.ofFloat(Character.getChar(),
+                                "translationX", charStart, end);
                         charAnimator.setDuration((long) (distance / speed));
                         charAnimator.setInterpolator(new LinearInterpolator());
                         game.getMovement().setCharAnimator(charAnimator);
                         charAnimator.start();
                     }
 
-                }else if (game.getMovement().getRow() == row && count % 3 == 0) {
-                    if (countTwice == false) {
+                } else if (game.getMovement().getRow() == row && count % 3 == 0) {
+                    if (!countTwice) {
                         countTwice = true;
                         return;
                     } else {
                         countTwice = false;
                     }
-                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count);
-                    if (list[0] == false && list[2] == false && list [1] == false) {
-                        System.out.println("stars obstacleleft bound: " + obstacleLeftBound + "midpoint: " + midPoint + "right: " + obstacleRightBound);
-                        System.out.println("screen: " + MainActivity.getScreenX());
+                    if (!list[0] && !list[2] && !list[1]) {
                         if (charAnimator != null) {
                             charAnimator.pause();
                         } else {

@@ -44,7 +44,8 @@ public class Lagio extends WaterMoveable {
                 }
 
                 boolean collision = false;
-                if (game.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
+                if (game.getMovement().getRow() == row
+                        && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
                     collision = true;
                     list[num] = true;
                 } else {
@@ -60,24 +61,23 @@ public class Lagio extends WaterMoveable {
                         float charStart = charLeftBound;
                         //- ((charLeftBound - obstacleLeftBound) % Background.getTileLength());
                         float distance = Math.abs(charStart - end);
-                        charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
+                        charAnimator = ObjectAnimator.ofFloat(Character.getChar(),
+                                "translationX", charStart, end);
                         charAnimator.setDuration((long) (distance / speed));
                         charAnimator.setInterpolator(new LinearInterpolator());
                         game.getMovement().setCharAnimator(charAnimator);
                         charAnimator.start();
                     }
 
-                }
-                else if (game.getMovement().getRow() == row && count % 4 == 0) {
-                    if (countTwice == false) {
+                } else if (game.getMovement().getRow() == row && count % 4 == 0) {
+                    System.out.println("countTwice: " + countTwice);
+                    if (!countTwice) {
                         countTwice = true;
                         return;
                     } else {
                         countTwice = false;
                     }
-                    System.out.println("0: " + list[0] + " 1: " + list[1] + " 2: " + list[2] + " count: " + count);
-                    if (list[0] == false && list[2] == false && list [1] == false && list[3] == false) {
-                        System.out.println("stars obstacleleft bound: " + obstacleLeftBound + "midpoint: " + midPoint + "right: " + obstacleRightBound);
+                    if (!list[0] && !list[2] && !list[1] && !list[3]) {
                         if (charAnimator != null) {
                             charAnimator.pause();
                         } else {

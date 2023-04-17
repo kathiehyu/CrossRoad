@@ -2,7 +2,6 @@ package com.example.crosstheroad;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.NonNull;
 
@@ -12,11 +11,6 @@ public class Movement {
     private int tileLength = Background.getTileLength();
 
     private static ObjectAnimator charAnimator;
-
-//    public ObjectAnimator getCharAnimator() {
-//        return charAnimator;
-//    }
-//
     private WaterMoveable pokemonOn;
 
     public WaterMoveable getPokemonOn() {
@@ -33,13 +27,13 @@ public class Movement {
 
     public void setCharAnimator(ObjectAnimator oa) {
         charAnimator = oa;
-        if (charAnimator == null){
+        if (charAnimator == null) {
             return;
         }
         charAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
-                if (charAnimator == null){
+                if (charAnimator == null) {
                     return;
                 } else if (charAnimator.isPaused()) {
                     System.out.println("paused object animator");
