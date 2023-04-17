@@ -42,24 +42,4 @@ public class Character {
     public static ImageView getChar() {
         return character;
     }
-      public void setPosition(int i, int i1) {
-    }
-
-    public void setMoving(boolean b) {
-    }
-
-    public void setDirection(int i) {
-    }
-
-    public int getLives() {
-        return 3;
-    }
-
-    public int getX() {
-        return character.getMaxWidth();
-    }
-
-    public int getY() {
-        return character.getMaxHeight();
-    }
 }
