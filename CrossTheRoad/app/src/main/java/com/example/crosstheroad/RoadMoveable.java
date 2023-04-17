@@ -22,6 +22,7 @@ public abstract class RoadMoveable extends Moveable {
 
 
     public void setAnimation(int x) {
+        delay = x;
         ObjectAnimator animator = ObjectAnimator.ofFloat(this.getGraphic(),
                 "translationX", start, end);
         this.animator = animator;

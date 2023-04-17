@@ -36,7 +36,7 @@ public class Character {
     }
 
 
-    
+
     public static ImageView getChar() {
         return character;
     }
