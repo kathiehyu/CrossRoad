@@ -39,7 +39,7 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     private void update() {
-        //
+        System.out.println("location y: " +Character.getChar().getY());
     }
 
     private void draw() {

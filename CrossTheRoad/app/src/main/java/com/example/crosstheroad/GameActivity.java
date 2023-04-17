@@ -23,7 +23,8 @@ import java.util.LinkedList;
  * This class will process the gameContainer's activity.
  */
 public class GameActivity extends AppCompatActivity {
-    private GameView gameView;
+    private static GameView gameView;
+    public static GameView getGameView() {return gameView;}
     private static int score = 0;
 
     private static int gameScore;
@@ -60,7 +61,6 @@ public class GameActivity extends AppCompatActivity {
         context = GameActivity.this;
         lives = GameScreen.getLives();
         moveables = new LinkedList<>();
-
 
         gameContainer = new FrameLayout(this);
         gameView = new GameView(this);
@@ -166,11 +166,6 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-//    public void openGameWinScreen(){
-//        Intent intent = new Intent(this, GameWinScreen.class);
-//        startActivity(intent);
-//    }
-
 
     public void setStartConditions(boolean loseLife) {
         int x = Background.getTileLength()
@@ -181,6 +176,7 @@ public class GameActivity extends AppCompatActivity {
         System.out.println("SETTING TO START CONDITIONS");
         movement.setCharX(x);
         movement.setCharY(y);
+        movement.setCharAnimator(null);
 
         gameScore = score;
         score = 0;
@@ -308,29 +304,34 @@ public class GameActivity extends AppCompatActivity {
         int x = -500;
         float start = (float) MainActivity.getScreenX() + 500;
         float end = (float) -500;
-        Lagio lagio = new Lagio(getResources(), this, 15000,
+        int duration = 40000;
+        Lagio lagio = new Lagio(getResources(), this, duration,
                 2, 1, x, start, end);
+        lagio.setNum(0);
         gameContainer.addView(lagio.getGraphic());
         lagio.setAnimation(0);
         moveables.add(lagio);
 
         //lagio2
-        Lagio lagio2 = new Lagio(getResources(), this, 15000,
+        Lagio lagio2 = new Lagio(getResources(), this, duration,
                 2, 1, x, start, end);
+        lagio2.setNum(1);
         gameContainer.addView(lagio2.getGraphic());
         lagio2.setAnimation(2000);
          moveables.add(lagio2);
 
         //lagio3
-        Lagio lagio3 = new Lagio(getResources(), this, 15000,
+        Lagio lagio3 = new Lagio(getResources(), this, duration,
                 2, 1, x, start, end);
+        lagio3.setNum(2);
         gameContainer.addView(lagio3.getGraphic());
         lagio3.setAnimation(4000);
          moveables.add(lagio3);
 
         //lagio4
-        Lagio lagio4 = new Lagio(getResources(), this, 15000,
+        Lagio lagio4 = new Lagio(getResources(), this, duration,
                 2, 1, x, start, end);
+        lagio4.setNum(3);
         gameContainer.addView(lagio4.getGraphic());
         lagio4.setAnimation(6000);
         moveables.add(lagio4);
@@ -342,24 +343,28 @@ public class GameActivity extends AppCompatActivity {
         int x = -500;
         float start = (float) -MainActivity.getScreenX() + 500;
         float end = (float) MainActivity.getScreenX() + 500;
-        Stars stars = new Stars(getResources(), this, 15000,
+        int duration = 15000;
+        Stars stars = new Stars(getResources(), this, duration,
                 row, 4, x, start, end);
+        stars.setNum(0);
         gameContainer.addView(stars.getGraphic());
         stars.setAnimation(0);
         moveables.add(stars);
 
         //Star2
-        Stars stars2 = new Stars(getResources(), this, 15000,
+        Stars stars2 = new Stars(getResources(), this, duration,
                 row, 4, x, start, end);
+        stars2.setNum(1);
         gameContainer.addView(stars2.getGraphic());
-        stars2.setAnimation(3000);
+        stars2.setAnimation(4000);
         moveables.add(stars2);
 
         //star3
-        Stars stars3 = new Stars(getResources(), this, 15000,
+        Stars stars3 = new Stars(getResources(), this, duration,
                 row, 4, x, start, end);
+        stars3.setNum(2);
         gameContainer.addView(stars3.getGraphic());
-        stars3.setAnimation(6000);
+        stars3.setAnimation(8000);
         moveables.add(stars3);
     }
 
@@ -368,22 +373,27 @@ public class GameActivity extends AppCompatActivity {
         int x = MainActivity.getScreenX() + 500;
         float start = (float) -MainActivity.getScreenX() + 500;
         float end = (float) MainActivity.getScreenX() + 500;
-        Gyarados gyarados = new Gyarados(getResources(), this, 11000,
+        int duration = 11000;
+        Gyarados gyarados = new Gyarados(getResources(), this, duration,
                 row, 2, x, start, end);
+        gyarados.setNum(0);
         gameContainer.addView(gyarados.getGraphic());
         gyarados.setAnimation(500);
         moveables.add(gyarados);
 
         //Gyarados2
-        Gyarados gyarados2 = new Gyarados(getResources(), this, 11000,
+        Gyarados gyarados2 = new Gyarados(getResources(), this, duration,
                 row, 2, x, start, end);
+        gyarados2.setNum(1);
+
         gameContainer.addView(gyarados2.getGraphic());
         gyarados2.setAnimation(4500);
         moveables.add(gyarados2);
 
         //Gyarados3
-        Gyarados gyarados3 = new Gyarados(getResources(), this, 11000,
+        Gyarados gyarados3 = new Gyarados(getResources(), this, duration,
                 row, 2, x, start, end);
+        gyarados3.setNum(2);
         gameContainer.addView(gyarados3.getGraphic());
         gyarados3.setAnimation(8500);
         moveables.add(gyarados3);
@@ -394,22 +404,26 @@ public class GameActivity extends AppCompatActivity {
         int x = -500;
         float start = (float) -MainActivity.getScreenX() + 500;
         float end = (float) MainActivity.getScreenX() + 500;
-        Octopus octopus = new Octopus(getResources(), this, 12000,
+        int duration = 12000;
+        Octopus octopus = new Octopus(getResources(), this, duration,
                 row, 3, x, start, end);
+        octopus.setNum(0);
         gameContainer.addView(octopus.getGraphic());
         octopus.setAnimation(0);
         moveables.add(octopus);
 
         //octopus2
-        Octopus octopus2 = new Octopus(getResources(), this, 12000,
+        Octopus octopus2 = new Octopus(getResources(), this, duration,
                 row, 3, x, start, end);
+        octopus2.setNum(1);
         gameContainer.addView(octopus2.getGraphic());
         octopus2.setAnimation(3100);
         moveables.add(octopus2);
 
         //octopus3
-        Octopus octopus3 = new Octopus(getResources(), this, 12000,
+        Octopus octopus3 = new Octopus(getResources(), this, duration,
                 row, 3, x, start, end);
+        octopus3.setNum(2);
         gameContainer.addView(octopus3.getGraphic());
         octopus3.setAnimation(6200);
         moveables.add(octopus3);
@@ -420,22 +434,26 @@ public class GameActivity extends AppCompatActivity {
         int x = -500;
         float start = (float) MainActivity.getScreenX() + 500;
         float end = (float) -500;
-        Lapras lapras = new Lapras(getResources(), this, 18000,
+        int duration = 18000;
+        Lapras lapras = new Lapras(getResources(), this, duration,
                 row, 3, x, start, end);
+        lapras.setNum(0);
         gameContainer.addView(lapras.getGraphic());
         lapras.setAnimation(0);
          moveables.add(lapras);
 
         //Lapras2
-        Lapras lapras2 = new Lapras(getResources(), this, 18000,
+        Lapras lapras2 = new Lapras(getResources(), this, duration,
                 row, 3, x, start, end);
+        lapras2.setNum(1);
         gameContainer.addView(lapras2.getGraphic());
         lapras2.setAnimation(3100);
          moveables.add(lapras2);
 
         //Lapras3
-        Lapras lapras3 = new Lapras(getResources(), this, 18000,
+        Lapras lapras3 = new Lapras(getResources(), this, duration,
                 row, 3, x, start, end);
+        lapras3.setNum(2);
         gameContainer.addView(lapras3.getGraphic());
         lapras3.setAnimation(6200);
          moveables.add(lapras3);
@@ -447,15 +465,18 @@ public class GameActivity extends AppCompatActivity {
         int x = MainActivity.getScreenX() + 500;
         float start = (float) -MainActivity.getScreenX() + 500;
         float end = (float) MainActivity.getScreenX() + 500;
-        Fish fish = new Fish(getResources(), this, 15000,
+        int duration = 15000;
+        Fish fish = new Fish(getResources(), this, duration,
                 row, 4, x, start, end);
+        fish.setNum(0);
         gameContainer.addView(fish.getGraphic());
         fish.setAnimation(1000);
         moveables.add(fish);
 
         //Fish2
-        Fish fish2 = new Fish(getResources(), this, 15000,
+        Fish fish2 = new Fish(getResources(), this, duration,
                 row, 4, x, start, end);
+        fish2.setNum(1);
         gameContainer.addView(fish2.getGraphic());
         fish2.setAnimation(8000);
         moveables.add(fish2);
@@ -466,15 +487,18 @@ public class GameActivity extends AppCompatActivity {
         int x = MainActivity.getScreenX() + 500;
         float start = (float) -MainActivity.getScreenX() + 500;
         float end = (float) MainActivity.getScreenX() + 500;
-        SeaHorse seaHorse = new SeaHorse(getResources(), this, 10000,
+        int duration = 10000;
+        SeaHorse seaHorse = new SeaHorse(getResources(), this, duration,
                 row, 4, x, start, end);
+        seaHorse.setNum(0);
         gameContainer.addView(seaHorse.getGraphic());
         seaHorse.setAnimation(0);
         moveables.add(seaHorse);
 
         //seahorse2
-        SeaHorse seaHorse2 = new SeaHorse(getResources(), this, 10000,
+        SeaHorse seaHorse2 = new SeaHorse(getResources(), this, duration,
                 row, 4, x, start, end);
+        seaHorse2.setNum(1);
         gameContainer.addView(seaHorse2.getGraphic());
         seaHorse2.setAnimation(6000);
         moveables.add(seaHorse2);
@@ -574,7 +598,7 @@ public class GameActivity extends AppCompatActivity {
             highestRow = movement.getRow();
         }
         gameScore = score;
-        // System.out.println("SCORE: " + (score));
+//         System.out.println("SCORE: " + (score));
         scoreDisplay.setText(Integer.toString(score));
         return score;
     }
