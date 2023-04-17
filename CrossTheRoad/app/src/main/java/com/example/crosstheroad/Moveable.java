@@ -16,14 +16,26 @@ public abstract class Moveable {
     protected int length;
     protected Resources r;
     protected Context context;
+    protected int delay;
+    public int getDelay() {
+        return delay;
+    }
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int x) {
+        duration  = x;
+    }
     Moveable(Resources r, Context context, int duration, int row, int length) {
         this.r = r;
         this.context = context;
-        this.duration = duration;
         this.row = row;
+        this.duration = duration;
         this.length = Background.getTileLength() * length;;
     }
     public void setGraphic(Drawable drawable, int x) {
+        delay = x;
         ImageView graphic = new ImageView(context);
         RelativeLayout container = new RelativeLayout(context);
         FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(
@@ -36,6 +48,8 @@ public abstract class Moveable {
         container.setX(x);
         this.graphic = container;
     }
+
+    public abstract void setAnimation(int x);
     public RelativeLayout getGraphic() {
         return graphic;
     }
