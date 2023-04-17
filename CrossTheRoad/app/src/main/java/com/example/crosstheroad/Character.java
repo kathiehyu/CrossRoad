@@ -31,24 +31,18 @@ public class Character {
                 Background.getTileLength(), Background.getTileLength());
 
         character.setLayoutParams(frameParams);
+        character.setZ(9);
 //        character = Bitmap.createScaledBitmap(character, Background.getTileLength(),
 //                Background.getTileLength(), false);
     }
 
-    public Character(GameActivity game) {
-    }
-            character.setZ(9);
-
-
-    //    public static Bitmap getChar() {
+//    public static Bitmap getChar() {
 //        return character;
 //    }
-    
     public static ImageView getChar() {
         return character;
     }
-
-    public void setPosition(int i, int i1) {
+      public void setPosition(int i, int i1) {
     }
 
     public void setMoving(boolean b) {
