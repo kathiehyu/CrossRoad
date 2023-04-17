@@ -33,6 +33,8 @@ public class GameActivity extends AppCompatActivity {
 
     private static int gameScore;
 
+    private Togepi togepi;
+
     public static int getGameScore() {
         return gameScore;
     }
@@ -198,16 +200,21 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void beProtected(boolean yes) {
-        int x = Background.getTileLength()
-                * (MainActivity.getScreenX() / Background.getTileLength() / 2);
-        int y = Background.getTileLength()
-                * (MainActivity.getScreenY() / Background.getTileLength() - 8);
-        movement.setCharX(x);
-        movement.setCharY(y);
-        movement.setCharAnimator(null);
-        movement.setRow(9);
-        score = 11;
+//        int x = Background.getTileLength()
+//                * (MainActivity.getScreenX() / Background.getTileLength() / 2);
+//        int y = Background.getTileLength()
+//                * (MainActivity.getScreenY() / Background.getTileLength() - 8);
+//        movement.setCharX(x);
+//        movement.setCharY(y);
+//        movement.setCharAnimator(null);
+//        movement.setRow(9);
+//        score = 11;
         slowDOwn(2000);
+//        if (togepi != null) {
+//            togepi.getGraphic().removeAllViews();
+//            togepi.getAnimator().end();
+//        }
+
     }
 
     private void slowDOwn(int delay) {
@@ -219,10 +226,6 @@ public class GameActivity extends AppCompatActivity {
             }
         }
     }
-    public void getLuckyStar(boolean yes){
-        score += 1;
-    }
-
 
     public void createTogepi(FrameLayout gameContainer){
         int x = 0;
@@ -236,24 +239,8 @@ public class GameActivity extends AppCompatActivity {
         Togepi togepi = new Togepi(getResources(), this, 100000000, numY, 1, x, start, end);
         gameContainer.addView(togepi.getGraphic());
         togepi.setAnimation(0);
+        this.togepi = togepi;
     }
-
-    public void createLuckyStar(FrameLayout gameContainer){
-        int x = 0;
-        Random rand = new Random();
-        List<Integer> numberX = Arrays.asList(1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000);
-        List<Integer> numberY = Arrays.asList(10,11,12,13,14);
-        int numX = numberX.get(rand.nextInt(numberX.size()));
-        int numY = numberY.get(rand.nextInt(numberY.size()));
-        float start = (float) -MainActivity.getScreenX() + numX;
-        float end = (float) MainActivity.getScreenX() + 500;
-
-
-        LuckyStar luckyStar1 = new LuckyStar(getResources(), this, 100000000, numY, 1, x, start, end);
-        gameContainer.addView(luckyStar1.getGraphic());
-        luckyStar1.setAnimation(0);
-    }
-
 
     public void createJessies(FrameLayout gameContainer) {
         int x = -500;
@@ -576,7 +563,6 @@ public class GameActivity extends AppCompatActivity {
         createWobuffets(gameContainer);
         createGrookeys(gameContainer);
         createTogepi(gameContainer);
-        createLuckyStar(gameContainer);
     }
 
     private void createWatermoveables(FrameLayout gameContainer) {

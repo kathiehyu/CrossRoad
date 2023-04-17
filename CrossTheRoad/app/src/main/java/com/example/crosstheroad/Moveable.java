@@ -35,7 +35,6 @@ public abstract class Moveable {
         this.length = Background.getTileLength() * length;;
     }
     public void setGraphic(Drawable drawable, int x) {
-        delay = x;
         ImageView graphic = new ImageView(context);
         RelativeLayout container = new RelativeLayout(context);
         FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(
