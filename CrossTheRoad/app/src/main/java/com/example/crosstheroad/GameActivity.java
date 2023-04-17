@@ -200,32 +200,18 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void beProtected(boolean yes) {
-//        int x = Background.getTileLength()
-//                * (MainActivity.getScreenX() / Background.getTileLength() / 2);
-//        int y = Background.getTileLength()
-//                * (MainActivity.getScreenY() / Background.getTileLength() - 8);
-//        movement.setCharX(x);
-//        movement.setCharY(y);
-//        movement.setCharAnimator(null);
-//        movement.setRow(9);
-//        score = 11;
-        slowDOwn(2000);
-//        if (togepi != null) {
-//            togepi.getGraphic().removeAllViews();
-//            togepi.getAnimator().end();
-//        }
-
+        int x = Background.getTileLength()
+                * (MainActivity.getScreenX() / Background.getTileLength() / 2);
+        int y = Background.getTileLength()
+                * (MainActivity.getScreenY() / Background.getTileLength() - 8);
+        movement.setCharX(x);
+        movement.setCharY(y);
+        movement.setCharAnimator(null);
+        movement.setRow(9);
+        score += 15;
     }
 
-    private void slowDOwn(int delay) {
-        if (movables != null) {
-            System.out.println("MOVABLES IS NOT NULL");
-            for (int i = 0; i < movables.size(); i++) {
-                movables.get(i).setDuration(movables.get(i).getDuration() + delay);
-                movables.get(i).setAnimation(movables.get(i).getDelay());
-            }
-        }
-    }
+
 
     public void createTogepi(FrameLayout gameContainer){
         int x = 0;
@@ -236,7 +222,7 @@ public class GameActivity extends AppCompatActivity {
         int numY = numberY.get(rand.nextInt(numberY.size()));
         float start = (float) -MainActivity.getScreenX() + numX;
         float end = (float) MainActivity.getScreenX() + 500;
-        Togepi togepi = new Togepi(getResources(), this, 100000000, numY, 1, x, start, end);
+        Togepi togepi = new Togepi(getResources(), this, 100000000, numY, 2, x, start, end);
         gameContainer.addView(togepi.getGraphic());
         togepi.setAnimation(0);
         this.togepi = togepi;
