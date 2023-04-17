@@ -53,7 +53,8 @@ public class Movement {
                 if (xPos >= MainActivity.getScreenX()) {
                     charAnimator.pause();
                     charAnimator = null;
-                    GameActivity.getGameActivityObj().setStartConditions(true);
+                    GameActivity game = new GameActivity();
+                    game.setStartConditions(true);
                     return;
                 }
                 x = xPos;

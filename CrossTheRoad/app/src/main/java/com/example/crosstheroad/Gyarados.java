@@ -29,24 +29,25 @@ public class Gyarados extends WaterMoveable {
         this.animator = animator;
         animator.setDuration(duration);
         animator.setInterpolator(new LinearInterpolator());
+        GameActivity game = new GameActivity();
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
                 count++;
-                float charLeftBound = gameActivityObj.getMovement().getCharX();
-                float charRightBound = gameActivityObj.getMovement().getCharX()
+                float charLeftBound = game.getMovement().getCharX();
+                float charRightBound = game.getMovement().getCharX()
                         + Background.getTileLength();
                 float obstacleLeftBound = getGraphic().getX();
                 float obstacleRightBound = getGraphic().getX() + length;
                 float midPoint = charLeftBound + Background.getTileLength() / 2;
                 boolean collision = false;
-                if (gameActivityObj.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
+                if (game.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
                     collision = true;
                     list[num] = true;
                 } else {
                     list[num] = false;
                 }
-                ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
+                ObjectAnimator charAnimator = game.getMovement().getCharAnimator();
 
                 if (collision) {
                     // start animation of character?
@@ -60,12 +61,12 @@ public class Gyarados extends WaterMoveable {
                         charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
                         charAnimator.setDuration((long) (distance / speed));
                         charAnimator.setInterpolator(new LinearInterpolator());
-                        gameActivityObj.getMovement().setCharAnimator(charAnimator);
+                        game.getMovement().setCharAnimator(charAnimator);
                         charAnimator.start();
                     }
 
                 }
-                else if (gameActivityObj.getMovement().getRow() == row && count % 3 == 0) {
+                else if (game.getMovement().getRow() == row && count % 3 == 0) {
                     System.out.println("countTwice: " + countTwice);
                     if (countTwice == false) {
                         countTwice = true;
@@ -81,10 +82,10 @@ public class Gyarados extends WaterMoveable {
                         } else {
                             System.out.println("char animator is null");
                         }
-                        gameActivityObj.getMovement().setCharAnimator(charAnimator);
-                        gameActivityObj.getMovement().setCharAnimator(null);
+                        game.getMovement().setCharAnimator(charAnimator);
+                        game.getMovement().setCharAnimator(null);
                         // player is on a water tile
-                        gameActivityObj.setStartConditions(true);
+                        game.setStartConditions(true);
                     }
                 }
             }
