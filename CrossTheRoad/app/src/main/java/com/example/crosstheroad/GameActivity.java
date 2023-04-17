@@ -575,62 +575,6 @@ public class GameActivity extends AppCompatActivity {
         createSeaHorse(gameContainer);
     }
 
-//    private void configureButtons(Button up, Button down, Button left, Button right) {
-//    up.setWidth(150);
-//    up.setText("UP");
-//
-//    down.setWidth(150);
-//    down.setText("DOWN");
-//
-//    left.setWidth(150);
-//    left.setText("LEFT");
-//
-//    right.setWidth(150);
-//    right.setText("RIGHT");
-//
-//    up.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View view) {
-//            boolean checkMoveUp = movement.moveUp();
-//            if (checkMoveUp) {
-//                // remove animator
-//                GameActivity.getMovement().setCharAnimator(null);
-//                movement.setRow(movement.getRow() - 1);
-//                updateScore();
-//                if (movement.getRow() == 1) {
-//                    openGameWinScreen();
-//                }
-//            }
-//        }
-//    });
-//    down.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View view) {
-//            boolean checkMoveDown = movement.moveDown();
-//            if (checkMoveDown) {
-//                // remove animator
-//                GameActivity.getMovement().setCharAnimator(null);
-//                movement.setRow(movement.getRow() + 1);
-//            }
-//        }
-//    });
-//    left.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View view) {
-//            // remove animator
-//            GameActivity.getMovement().setCharAnimator(null);
-//            movement.moveLeft();
-//        }
-//    });
-//    right.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View view) {
-//            // remove animator
-//            GameActivity.getMovement().setCharAnimator(null);
-//            movement.moveRight();
-//        }
-//    });
-//    }
     public static int updateScore() {
         if (movement.getRow() < highestRow) {
 
@@ -644,6 +588,24 @@ public class GameActivity extends AppCompatActivity {
                 score += 1; // Wobuffet
             } else if (movement.getRow() == 14) {
                 score += 2; // Grookey
+            } else if (movement.getRow() == 9) {
+                score += 1; // Safe
+            } else if (movement.getRow() == 8) {
+                score += 2; // Stars
+            } else if (movement.getRow() == 7) {
+                score += 3; // Gyarados
+            } else if (movement.getRow() == 6) {
+                score += 4; // Octopus
+            } else if (movement.getRow() == 5) {
+                score += 5; // Lapras
+            } else if (movement.getRow() == 4) {
+                score += 6; // Fish
+            } else if (movement.getRow() == 3) {
+                score += 7; // SeaHorse
+            } else if (movement.getRow() == 2) {
+                score += 8; // Lagio
+            } else if (movement.getRow() == 1) {
+                score += 10; // Goal
             }
 
             highestRow = movement.getRow();
@@ -763,12 +725,13 @@ public class GameActivity extends AppCompatActivity {
         }
         return false;
     }
-    public static void setScore(int newScore) {
-        score = newScore;
+    public static int checkScoreGoalTile(int row) {
+        if (row == 1) {
+            return 10;
+        } else {
+            return 0;
+        }
     }
 
-    public static int getLatestScore() {
-        return score;
-    }
 
 }

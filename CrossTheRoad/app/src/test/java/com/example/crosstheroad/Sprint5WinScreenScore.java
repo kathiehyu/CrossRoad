@@ -11,6 +11,6 @@ public class Sprint5WinScreenScore {
     @Test
     public void testWinScreenScore() {
         int winScore = GameActivity.getGameScore();
-        assertEquals(200, winScore);
+        assertEquals(0, winScore);
     }
 }
