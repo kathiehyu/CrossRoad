@@ -9,6 +9,7 @@ import android.text.method.MovementMethod;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -55,8 +56,12 @@ public abstract class WaterMoveable extends Moveable {
                             System.out.println("COLLISION ON RIGHT");
                             FrameLayout parent = (FrameLayout) Character.getChar().getParent();
                             parent.removeView(Character.getChar());
+
+                            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(Background.getTileLength(), Background.getTileLength());
+                            lp.setMargins(-10, -500, 0, 0);
+                            Character.getChar().setLayoutParams(lp);
+
                             getGraphic().addView(Character.getChar());
-                            Character.getChar().setY(getGraphic().getY());
 //                            ImageView temp = new ImageView(context);
 //                            temp.setImageDrawable(r.getDrawable(R.drawable.character_1));
 //                            getGraphic().addView(temp);
@@ -64,8 +69,12 @@ public abstract class WaterMoveable extends Moveable {
                             System.out.println("COLLISION ON LEFT");
                             FrameLayout parent = (FrameLayout) Character.getChar().getParent();
                             parent.removeView(Character.getChar());
+
+                            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(Background.getTileLength(), Background.getTileLength());
+                            lp.setMargins(-10, -500, 0, 0);
+                            Character.getChar().setLayoutParams(lp);
+
                             getGraphic().addView(Character.getChar());
-                            Character.getChar().setY(getGraphic().getY());
 //                            ImageView temp = new ImageView(context);
 //                            temp.setImageDrawable(r.getDrawable(R.drawable.character_1));
 //                            getGraphic().addView(temp);
@@ -74,13 +83,19 @@ public abstract class WaterMoveable extends Moveable {
                                 System.out.println("MIDDLE COLLISION");
                                 FrameLayout parent = (FrameLayout) Character.getChar().getParent();
                                 parent.removeView(Character.getChar());
+
+                                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(Background.getTileLength(), Background.getTileLength());
+                                lp.setMargins(-10, -500, 0, 0);
+                                Character.getChar().setLayoutParams(lp);
+
                                 getGraphic().addView(Character.getChar());
-                                Character.getChar().setY(getGraphic().getY());
 //                                ImageView temp = new ImageView(context);
 //                                temp.setImageDrawable(r.getDrawable(R.drawable.character_1));
 //                                getGraphic().addView(temp);
                             }
                         }
+                        Character.getChar().setX(getGraphic().getX());
+                        Character.getChar().setY(0);
 //                        game.getMovement().setCharX(Math.round(obstacleLeftBound));
 //                        game.getMovement().setCharY(Math.round(getGraphic().getY()));
 
