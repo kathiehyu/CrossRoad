@@ -16,9 +16,9 @@ public class Stars extends WaterMoveable {
         num = number;
     }
 
-    Stars(Resources r, Context context, int duration, int row, int length, int x, float start, float end) {
-        super(r, context, duration, row, length, start, end);
-        setGraphic(r.getDrawable(R.drawable.stars), x);
+    Stars(Resources r, Context context, int duration, int row, int length, float start) {
+        super(r, context, duration, row, length, start);
+        setGraphic(r.getDrawable(R.drawable.stars), -500);
 
     }
     @Override

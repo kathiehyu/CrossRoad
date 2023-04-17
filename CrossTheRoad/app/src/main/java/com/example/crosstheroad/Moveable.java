@@ -32,7 +32,7 @@ public abstract class Moveable {
         this.context = context;
         this.row = row;
         this.duration = duration;
-        this.length = Background.getTileLength() * length;;
+        this.length = Background.getTileLength() * length;
     }
     public void setGraphic(Drawable drawable, int x) {
         ImageView graphic = new ImageView(context);

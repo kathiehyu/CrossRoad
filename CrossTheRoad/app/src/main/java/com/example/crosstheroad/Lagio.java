@@ -16,9 +16,9 @@ public class Lagio extends WaterMoveable {
         num = number;
     }
 
-    Lagio(Resources r, Context context, int duration, int row, int length, int x, float start, float end) {
-        super(r, context, duration, row, length, start, end);
-        setGraphic(r.getDrawable(R.drawable.lagio), x);
+    Lagio(Resources r, Context context, int duration, int row, int length, float start) {
+        super(r, context, duration, row, length, start);
+        setGraphic(r.getDrawable(R.drawable.lagio), -500);
 
     }
     @Override

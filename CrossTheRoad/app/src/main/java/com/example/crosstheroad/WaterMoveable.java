@@ -10,10 +10,17 @@ public abstract class WaterMoveable extends Moveable {
     protected float start;
     protected float end;
 
-    WaterMoveable(Resources r, Context context, int duration, int row, int length, float start, float end) {
+    WaterMoveable(Resources r, Context context, int duration, int row, int length, float start) {
         super(r, context, duration, row, length);
         this.start = start;
-        this.end = end;
+        setStartEnd();
+    }
+    public void setStartEnd() {
+        if (start < 0) {
+            end = (float) MainActivity.getScreenX() + 500;
+        } else {
+            end = (float) -MainActivity.getScreenX() + 500;
+        }
     }
 
     public void setAnimation(int x) {

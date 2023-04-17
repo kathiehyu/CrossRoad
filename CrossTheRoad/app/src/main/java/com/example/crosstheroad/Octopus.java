@@ -15,9 +15,9 @@ public class Octopus extends WaterMoveable {
     public void setNum(int number) {
         num = number;
     }
-    Octopus(Resources r, Context context, int duration, int row, int length, int x, float start, float end) {
-        super(r, context, duration, row, length, start, end);
-        setGraphic(r.getDrawable(R.drawable.octopus), x);
+    Octopus(Resources r, Context context, int duration, int row, int length, float start) {
+        super(r, context, duration, row, length, start);
+        setGraphic(r.getDrawable(R.drawable.octopus), -500);
 
     }
     @Override

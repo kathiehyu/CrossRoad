@@ -16,9 +16,9 @@ public class SeaHorse extends WaterMoveable {
         num = number;
     }
 
-    public SeaHorse(Resources r, Context context, int duration, int row, int length, int x, float start, float end) {
-        super(r, context, duration, row, length, start, end);
-        setGraphic(r.getDrawable(R.drawable.seahorse), x);
+    public SeaHorse(Resources r, Context context, int duration, int row, int length, float start) {
+        super(r, context, duration, row, length, start);
+        setGraphic(r.getDrawable(R.drawable.seahorse), MainActivity.getScreenX() + 500);
 
     }
     @Override

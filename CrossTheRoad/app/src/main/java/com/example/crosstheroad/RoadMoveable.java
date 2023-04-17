@@ -13,12 +13,18 @@ public abstract class RoadMoveable extends Moveable {
     private float end;
     // the higher the duration, the slower the obstacle
 
-    RoadMoveable(Resources r, Context context, int duration, int row, int length, float start, float end) {
+    RoadMoveable(Resources r, Context context, int duration, int row, int length, float start) {
         super(r, context, duration, row, length);
         this.start = start;
-        this.end = end;
+        setStartEnd();
     }
-
+    public void setStartEnd() {
+        if (start < 0) {
+            end = (float) MainActivity.getScreenX() + 500;
+        } else {
+            end = (float) -500;
+        }
+    }
 
     public void setAnimation(int x) {
         delay = x;
