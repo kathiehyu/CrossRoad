@@ -6,7 +6,7 @@ public class Togepi extends Protection {
 
     Togepi(Resources r, Context context, int duration, int row, int length, float start) {
         super(r, context, duration, row, length, start);
-        setGraphic(r.getDrawable(R.drawable.togepi2), (int) start);
+        setGraphic(r.getDrawable(R.drawable.togepi2), 0);
     }
 }
 
