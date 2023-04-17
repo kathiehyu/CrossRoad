@@ -4,12 +4,9 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
-import java.sql.SQLOutput;
 
 public abstract class Moveable {
     protected int duration;
@@ -19,7 +16,6 @@ public abstract class Moveable {
     protected int length;
     protected Resources r;
     protected Context context;
-    protected GameActivity gameActivityObj = GameActivity.getGameActivityObj();
     Moveable(Resources r, Context context, int duration, int row, int length) {
         this.r = r;
         this.context = context;

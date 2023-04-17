@@ -7,9 +7,6 @@ import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 public class Stars extends WaterMoveable {
     private static Boolean[] list = new Boolean[]{false, false, false};
     private int num;
@@ -18,6 +15,7 @@ public class Stars extends WaterMoveable {
     public void setNum(int number) {
         num = number;
     }
+    GameActivity game = new GameActivity();
 
     Stars(Resources r, Context context, int duration, int row, int length, int x, float start, float end) {
         super(r, context, duration, row, length, start, end);
@@ -35,8 +33,8 @@ public class Stars extends WaterMoveable {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
                 count++;
-                float charLeftBound = gameActivityObj.getMovement().getCharX();
-                float charRightBound = gameActivityObj.getMovement().getCharX()
+                float charLeftBound = game.getMovement().getCharX();
+                float charRightBound = game.getMovement().getCharX()
                         + Background.getTileLength();
                 float obstacleLeftBound = getGraphic().getX();
                 float obstacleRightBound = getGraphic().getX() + length;
@@ -46,13 +44,13 @@ public class Stars extends WaterMoveable {
                 }
 
                 boolean collision = false;
-                if (gameActivityObj.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
+                if (game.getMovement().getRow() == row && (midPoint < obstacleRightBound && midPoint > obstacleLeftBound)) {
                     collision = true;
                     list[num] = true;
                 } else {
                     list[num] = false;
                 }
-                ObjectAnimator charAnimator = gameActivityObj.getMovement().getCharAnimator();
+                ObjectAnimator charAnimator = game.getMovement().getCharAnimator();
                 if (collision) {
 
                     // start animation of character?
@@ -65,12 +63,12 @@ public class Stars extends WaterMoveable {
                         charAnimator = ObjectAnimator.ofFloat(Character.getChar(), "translationX", charStart, end);
                         charAnimator.setDuration((long) (distance / speed));
                         charAnimator.setInterpolator(new LinearInterpolator());
-                        gameActivityObj.getMovement().setCharAnimator(charAnimator);
+                        game.getMovement().setCharAnimator(charAnimator);
                         charAnimator.start();
                     }
 
                 }
-                else if (gameActivityObj.getMovement().getRow() == row && count % 3 == 0) {
+                else if (game.getMovement().getRow() == row && count % 3 == 0) {
                     if (countTwice == false) {
                         countTwice = true;
                         return;
@@ -86,10 +84,10 @@ public class Stars extends WaterMoveable {
                         } else {
                             System.out.println("char animator is null");
                         }
-                        gameActivityObj.getMovement().setCharAnimator(charAnimator);
-                        gameActivityObj.getMovement().setCharAnimator(null);
+                        game.getMovement().setCharAnimator(charAnimator);
+                        game.getMovement().setCharAnimator(null);
                         // player is on a water tile
-                        gameActivityObj.setStartConditions(true);
+                        game.setStartConditions(true);
                     }
                 }
             }

@@ -30,10 +30,6 @@ import java.util.LinkedList;
  * This class will process the gameContainer's activity.
  */
 public class GameActivity extends AppCompatActivity {
-    private static GameActivity gameActivityObj;
-    public static GameActivity getGameActivityObj() {
-        return gameActivityObj;
-    }
     private static GameView gameView;
     public static GameView getGameView() {return gameView;}
     private static int score = 0;
@@ -72,8 +68,6 @@ public class GameActivity extends AppCompatActivity {
         context = GameActivity.this;
         lives = GameScreen.getLives();
         moveables = new LinkedList<>();
-
-        gameActivityObj = new GameActivity();
 
         gameContainer = new FrameLayout(this);
         gameView = new GameView(this);

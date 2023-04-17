@@ -19,9 +19,11 @@ public class ConfigureButtons extends GameActivity {
     private Movement movement = GameActivity.getMovement();
     private FrameLayout gameContainer = GameActivity.getGameContainer();
     private Context gameActivityContext;
-    private GameActivity gameActivityObj = GameActivity.getGameActivityObj();
+
+    private GameActivity game;
 
     public ConfigureButtons(Context context) {
+        game = new GameActivity();
         gameActivityContext = context;
         up = new Button(gameActivityContext);
         down = new Button(gameActivityContext);
@@ -59,13 +61,13 @@ public class ConfigureButtons extends GameActivity {
             public void onClick(View view) {
                 boolean checkMoveUp = movement.moveUp();
                 if (checkMoveUp) {
-                    ObjectAnimator obj = gameActivityObj.getMovement().getCharAnimator();
+                    ObjectAnimator obj = game.getMovement().getCharAnimator();
                     if (obj != null) {
                         obj.pause();
-                        gameActivityObj.getMovement().setCharAnimator(obj);
+                        game.getMovement().setCharAnimator(obj);
                     }
                     // remove animator
-                    gameActivityObj.getMovement().setCharAnimator(null);
+                    game.getMovement().setCharAnimator(null);
                     movement.setRow(movement.getRow() - 1);
                     updateScore();
                     if (movement.getRow() == 1) {
@@ -79,13 +81,13 @@ public class ConfigureButtons extends GameActivity {
             public void onClick(View view) {
                 boolean checkMoveDown = movement.moveDown();
                 if (checkMoveDown) {
-                    ObjectAnimator obj = gameActivityObj.getMovement().getCharAnimator();
+                    ObjectAnimator obj = game.getMovement().getCharAnimator();
                     if (obj != null) {
                         obj.pause();
-                        gameActivityObj.getMovement().setCharAnimator(obj);
+                        game.getMovement().setCharAnimator(obj);
                     }
                     // remove animator
-                    gameActivityObj.getMovement().setCharAnimator(null);
+                    game.getMovement().setCharAnimator(null);
 
                     movement.setRow(movement.getRow() + 1);
                 }
@@ -94,26 +96,26 @@ public class ConfigureButtons extends GameActivity {
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ObjectAnimator obj = gameActivityObj.getMovement().getCharAnimator();
+                ObjectAnimator obj = game.getMovement().getCharAnimator();
                 if (obj != null) {
                     obj.pause();
-                    gameActivityObj.getMovement().setCharAnimator(obj);
+                    game.getMovement().setCharAnimator(obj);
                 }
                 // remove animator
-                gameActivityObj.getMovement().setCharAnimator(null);
+                game.getMovement().setCharAnimator(null);
                 movement.moveLeft();
             }
         });
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ObjectAnimator obj = gameActivityObj.getMovement().getCharAnimator();
+                ObjectAnimator obj = game.getMovement().getCharAnimator();
                 if (obj != null) {
                     obj.pause();
-                    gameActivityObj.getMovement().setCharAnimator(obj);
+                    game.getMovement().setCharAnimator(obj);
                 }
                 // remove animator
-                gameActivityObj.getMovement().setCharAnimator(null);
+                game.getMovement().setCharAnimator(null);
                 movement.moveRight();
             }
         });
