@@ -15,6 +15,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 
@@ -208,17 +212,43 @@ public class GameActivity extends AppCompatActivity {
         movement.setCharY(y);
         movement.setCharAnimator(null);
         movement.setRow(9);
+        score = 11;
     }
+    public void getLuckyStar(boolean yes){
+        score += 1;
+    }
+
+
     public void createTogepi(FrameLayout gameContainer){
         int x = 0;
-        int randomX = ThreadLocalRandom.current().nextInt(1100, 2000 + 1);
-        int randomY = ThreadLocalRandom.current().nextInt(10, 14 + 1);
-        float start = (float) -MainActivity.getScreenX() + randomX;
+        Random rand = new Random();
+        List<Integer> numberX = Arrays.asList(1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000);
+        List<Integer> numberY = Arrays.asList(10,11,12,13,14);
+        int numX = numberX.get(rand.nextInt(numberX.size()));
+        int numY = numberY.get(rand.nextInt(numberY.size()));
+        float start = (float) -MainActivity.getScreenX() + numX;
         float end = (float) MainActivity.getScreenX() + 500;
-        Togepi togepi = new Togepi(getResources(), this, 100000000, randomY, 1, x, start, end);
+        Togepi togepi = new Togepi(getResources(), this, 100000000, numY, 1, x, start, end);
         gameContainer.addView(togepi.getGraphic());
         togepi.setAnimation(0);
         moveables.add(togepi);
+    }
+
+    public void createLuckyStar(FrameLayout gameContainer){
+        int x = 0;
+        Random rand = new Random();
+        List<Integer> numberX = Arrays.asList(1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000);
+        List<Integer> numberY = Arrays.asList(10,11,12,13,14);
+        int numX = numberX.get(rand.nextInt(numberX.size()));
+        int numY = numberY.get(rand.nextInt(numberY.size()));
+        float start = (float) -MainActivity.getScreenX() + numX;
+        float end = (float) MainActivity.getScreenX() + 500;
+
+
+        LuckyStar luckyStar1 = new LuckyStar(getResources(), this, 100000000, numY, 1, x, start, end);
+        gameContainer.addView(luckyStar1.getGraphic());
+        luckyStar1.setAnimation(0);
+        moveables.add(luckyStar1);
     }
 
 
@@ -543,6 +573,7 @@ public class GameActivity extends AppCompatActivity {
         createWobuffets(gameContainer);
         createGrookeys(gameContainer);
         createTogepi(gameContainer);
+        createLuckyStar(gameContainer);
     }
 
     private void createWatermoveables(FrameLayout gameContainer) {
