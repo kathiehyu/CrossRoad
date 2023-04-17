@@ -34,11 +34,16 @@ public class Character {
 //        character = Bitmap.createScaledBitmap(character, Background.getTileLength(),
 //                Background.getTileLength(), false);
     }
-        character.setZ(9);
 
-//    public static Bitmap getChar() {
+    public Character(GameActivity game) {
+    }
+            character.setZ(9);
+
+
+    //    public static Bitmap getChar() {
 //        return character;
 //    }
+    
     public static ImageView getChar() {
         return character;
     }
@@ -53,11 +58,14 @@ public class Character {
     }
 
     public int getLives() {
+        return 3;
     }
 
     public int getX() {
+        return character.getMaxWidth();
     }
 
     public int getY() {
+        return character.getMaxHeight();
     }
 }
