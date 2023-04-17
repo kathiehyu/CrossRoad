@@ -13,6 +13,20 @@ public class Movement {
 
     private static ObjectAnimator charAnimator;
 
+//    public ObjectAnimator getCharAnimator() {
+//        return charAnimator;
+//    }
+//
+    private WaterMoveable pokemonOn;
+
+    public WaterMoveable getPokemonOn() {
+        return pokemonOn;
+    }
+
+    public void setPokemonOn(WaterMoveable p) {
+        pokemonOn = p;
+    }
+
     public static ObjectAnimator getCharAnimator() {
         return charAnimator;
     }
@@ -39,7 +53,8 @@ public class Movement {
                 if (xPos >= MainActivity.getScreenX()) {
                     charAnimator.pause();
                     charAnimator = null;
-                    GameActivity.getGameActivityObj().setStartConditions(true);
+                    GameActivity game = new GameActivity();
+                    game.setStartConditions(true);
                     return;
                 }
                 x = xPos;
