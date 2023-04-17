@@ -719,5 +719,17 @@ public class GameActivity extends AppCompatActivity {
     public static int getLatestScore() {
         return score;
     }
+    
+    public void setMovement(Movement movement) {
+    }
+
+    public boolean checkCollisions() {
+    return true;}
+
+    public void setTile(int i, int i1, boolean isLog, int speed, int direction) {
+    }
+
+    public void update() {
+    }
 
 }
