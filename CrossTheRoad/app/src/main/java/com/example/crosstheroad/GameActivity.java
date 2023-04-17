@@ -188,17 +188,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void beProtected(boolean yes) {
-//        int x = Background.getTileLength()
-//                * (MainActivity.getScreenX() / Background.getTileLength() / 2);
-//        int y = Background.getTileLength()
-//                * (MainActivity.getScreenY() / Background.getTileLength() - 8);
-//        movement.setCharX(x);
-//        movement.setCharY(y);
-//        movement.setCharAnimator(null);
-//        movement.setRow(9);
-//        score += 15;
+
         slowDOwn(100);
-//        togepi.getAnimator().end();
     }
 
     private void slowDOwn(int delay) {
