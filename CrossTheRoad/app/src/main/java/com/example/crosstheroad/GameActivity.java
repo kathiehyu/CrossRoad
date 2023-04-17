@@ -35,7 +35,7 @@ public class GameActivity extends AppCompatActivity {
 
     private static int gameScore;
 
-    private Togepi togepi;
+    private static Togepi togepi;
 
     public static int getGameScore() {
         return gameScore;
@@ -62,7 +62,7 @@ public class GameActivity extends AppCompatActivity {
         return gameContainer;
     }
 
-    private LinkedList<Moveable> movables;
+    private static LinkedList<Moveable> movables;
 
     @SuppressLint({"MissingInflatedId", "ResourceType"})
     @Override
@@ -171,6 +171,9 @@ public class GameActivity extends AppCompatActivity {
         movement.setCharX(x);
         movement.setCharY(y);
         movement.setCharAnimator(null);
+        if (togepi != null) {
+            togepi.getAnimator().end();
+        }
 
         gameScore = score;
         score = 0;
@@ -185,18 +188,29 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void beProtected(boolean yes) {
-        int x = Background.getTileLength()
-                * (MainActivity.getScreenX() / Background.getTileLength() / 2);
-        int y = Background.getTileLength()
-                * (MainActivity.getScreenY() / Background.getTileLength() - 8);
-        movement.setCharX(x);
-        movement.setCharY(y);
-        movement.setCharAnimator(null);
-        movement.setRow(9);
-        score += 15;
+//        int x = Background.getTileLength()
+//                * (MainActivity.getScreenX() / Background.getTileLength() / 2);
+//        int y = Background.getTileLength()
+//                * (MainActivity.getScreenY() / Background.getTileLength() - 8);
+//        movement.setCharX(x);
+//        movement.setCharY(y);
+//        movement.setCharAnimator(null);
+//        movement.setRow(9);
+//        score += 15;
+        slowDOwn(100);
+//        togepi.getAnimator().end();
     }
 
-
+    private void slowDOwn(int delay) {
+        if (movables != null) {
+            System.out.println("MOVABLES IS NOT NULL");
+            for (int i = 0; i < movables.size(); i++) {
+                movables.get(i).setDuration(movables.get(i).getDuration() + delay);
+                movables.get(i).getAnimator().end();
+                movables.get(i).setAnimation(movables.get(i).getDelay());
+            }
+        }
+    }
 
     public void createTogepi(FrameLayout gameContainer) {
         int x = 0;
@@ -208,7 +222,7 @@ public class GameActivity extends AppCompatActivity {
         int numY = numberY.get(rand.nextInt(numberY.size()));
         float start = (float) -MainActivity.getScreenX() + numX;
         float end = (float) MainActivity.getScreenX() + 500;
-        Togepi togepi = new Togepi(getResources(), this, 100000000, numY, 2, x, start, end);
+        Togepi togepi = new Togepi(getResources(), this, 100000000, numY, 2, start);
         gameContainer.addView(togepi.getGraphic());
         togepi.setAnimation(0);
         this.togepi = togepi;

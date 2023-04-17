@@ -44,7 +44,7 @@ public class Movement {
 
                 float xPos = (float) charAnimator.getAnimatedValue();
                 // if character moves off screen
-                if (xPos >= MainActivity.getScreenX()) {
+                if (xPos >= MainActivity.getScreenX() || xPos < 0) {
                     charAnimator.pause();
                     charAnimator = null;
                     GameActivity game = new GameActivity();

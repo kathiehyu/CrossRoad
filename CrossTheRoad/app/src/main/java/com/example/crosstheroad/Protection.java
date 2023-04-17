@@ -7,17 +7,14 @@ import android.view.animation.LinearInterpolator;
 import androidx.annotation.NonNull;
 public abstract class Protection extends Moveable {
     private float start;
-    private float end;
-
-    Protection(Resources r, Context context, int duration, int row, int length, float start, float end) {
+    Protection(Resources r, Context context, int duration, int row, int length, float start) {
         super(r, context, duration, row, length);
-        this.end = end;
         this.start = start;
     }
 
     public void setAnimation(int x) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(this.getGraphic(),
-                "translationX", start, end);
+                "translationX", start, start);
         this.animator = animator;
         System.out.println("THIS DURATION: " + Integer.toString(duration));
         animator.setDuration(duration);
